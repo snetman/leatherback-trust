@@ -1,0 +1,5 @@
+{
+  buttons: ['html','bold','italic','link'],
+  plugins: ['fullscreen'],
+  toolbarFixedBox: true
+}

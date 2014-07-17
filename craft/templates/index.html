@@ -1,0 +1,98 @@
+{% extends "_layout" %}
+{# {% set title = 'Page title here' %} #}
+{% set bodyClass = 'home l-1col' %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+<div class="l-main">
+
+  <section class="breaking-news">
+    <div class="breaking-inner">
+      <p class="headline">Alert headline is here lorem ipsum</p>
+      <p class="body">Lorem sit amet consecutat velorem dolor. Adipiscing elit ventorum.</p>
+      <p class="call-to-action"><a href="#">Read it now</a></p>
+    </div>
+    <!--/.breaking-inner-->
+  </section>
+
+  <figure class="block-hero">
+    <div class="b-image" style="background-image: url(/public/images/turtle-robinson-widescreen.jpg);" />
+    <figcaption class="b-body patterned">
+      <h4 class="cap-title">Headline for image caption here lorem ipsum dolor</h4>
+      <p>If there is some additional information, then it will be set like this in some descriptive text that will accompany the caption like so. <a href="#">Learn more</a></p>
+    </figcaption>
+  </figure>
+  <!--/.hero-->
+
+  <section class="mission">
+      <h1>The Leatherback Trust is a non-profit organization dedicated to saving the leatherback sea turtle. Our mission is to promote the conservation of leatherbacks and other turtles at risk of extinction. <a class="more-link" href="#MissionMore"><span class="showtext">More</span><span class="hidetext is-hidden">Less</span></a></h1>
+
+      <div id="MissionMore" class="more-content is-hidden">
+        <p>Leatherback turtles are critically endangered worldwide. Populations of Eastern Pacific leatherbacks declined 90% since 1990. The Leatherback Trust (TLT) aims to reverse this trend by tackling the <a href="#">5 most deadly threats</a> to leatherbacks and other sea turtles. Our scientists <a href="#">conduct research</a> at nesting beaches and at sea, collecting critical data to support conservation interventions. We <a href="#">partner with communities</a> to <a href="#">protect nesting beaches</a> and work with governments to <a href="#">inform sustainable development and fisheries management priorities</a>.</p>
+      </div>
+
+  </section>
+  <!--/.mission-->
+
+  <section class="news">
+    <header class="sechead">
+      <h2 class="sechead-title">News & events</h2>
+      <ul class="sechead-actions">
+        <li><a href="#">View all</a></li>
+      </ul>
+    </header>
+    <div class="a-cards">
+      <a href="news-article" class="a-card has-image">
+        <article>
+          <header>
+            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecutat velum</h3>
+          </header>
+          <div class="a-body">
+            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <figure class="a-image" style="background-image: url(/public/images/George-Frame-Grab-480x253.jpg);">
+          </figure>
+          <footer>
+            <time class="a-pubdate a-pubdate-overlay" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">25</span></time>
+          </footer>
+        </article>
+      </a>
+      <a href="news-article" class="a-card has-image">
+        <article>
+          <header>
+            <h3 class="a-title">News post headline here</h3>
+          </header>
+          <div class="a-body">
+            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <figure class="a-image" style="background-image: url(/public/images/leatherback-nesting-600.jpg);">
+          </figure>
+          <footer>
+            <time class="a-pubdate a-pubdate-overlay" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">9</span></time>
+          </footer>
+        </article>
+      </a>
+      <a href="news-article" class="a-card">
+        <article>
+          <header>
+            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecua ulum cresp veritamu</h3>
+          </header>
+          <div class="a-body">
+            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <footer>
+            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">Apr</span> <span class="a-pubday">28</span></time>
+          </footer>
+        </article>
+      </a>
+    </div>
+  </section>
+  <!--/.news-->
+
+</div>
+<!--/.l-main-->
+{% endblock %}
+
+{% block aside %}{% endblock %}
+{% block footer %}{% endblock %}
