@@ -5,14 +5,14 @@
     <div class="lc">
 
       <div class="menu-inner">
-        <h1 class="identity"><a id="Logo" href="homepage">The Leatherback Trust</a></h1>
+        <h1 class="identity"><a id="Logo" href="{{ siteUrl }}">The Leatherback Trust</a></h1>
 
         <ul class="main-nav">
-          <li id="nav-home"><a href="homepage">Home</a></li>
-          <li id="nav-why"><a href="#">Why Leatherbacks<br>&amp; Sea Turtles Matter</a></li>
-          <li id="nav-threats"><a href="#">Threats</a></li>
-          <li id="nav-conservation"><a href="#">Conservation</a></li>
-          <li id="nav-donate"><a href="#">Donate</a></li>
+          <li id="nav-home"><a href="homepage">{{ "Home" | translate }}</a></li>
+          <li id="nav-why"><a href="#">{{ "Why Leatherbacks <br>&amp; Sea Turtles Matter" | translate | raw }}</a></li>
+          <li id="nav-threats"><a href="#">{{ "Threats" | translate }}</a></li>
+          <li id="nav-conservation"><a href="#">{{ "Conservation" | translate }}</a></li>
+          <li id="nav-donate"><a href="#">{{ "Donate" | translate }}</a></li>
         </ul>
       </div>
       <!--/.menu-inner-->
@@ -23,9 +23,9 @@
     <nav class="secondary">
       <div class="lc">
         <ul class="sec-nav">
-          <li id="nav-about"><a href="#">About</a></li>
-          <li id="nav-news"><a href="news-landing">News &amp; Events</a></li>
-          <li id="nav-contribute"><a href="#">Contribute</a></li>
+          <li id="nav-about"><a href="#">{{ "About" | translate }}</a></li>
+          <li id="nav-news"><a href="news-landing">{{ "News & Events" | translate | raw }}</a></li>
+          <li id="nav-contribute"><a href="#">{{ "Contribute" | translate }}</a></li>
        </ul>
         <ul class="social-nav">
           <li class="site-search">
@@ -40,10 +40,10 @@
     </nav>
 
     <a id="MenuOpenBtn" href="#Header">
-      <span class="icon-menu"></span><span class="label">Menu</span>
+      <span class="icon-menu"></span><span class="label">{{ "Menu" | translate }}</span>
     </a>
     <a id="MenuCloseBtn" href="#">
-      <span class="icon-x"></span><span class="label">Close</span>
+      <span class="icon-x"></span><span class="label">{{ "Close" | translate }}</span>
     </a>
   </div>
   <!--/#Menu-->
