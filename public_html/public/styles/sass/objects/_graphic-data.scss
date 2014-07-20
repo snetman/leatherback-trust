@@ -1,0 +1,954 @@
+//
+// Graphic Data page
+//
+
+//
+// General objects
+//
+
+.exhibit {
+  margin-bottom: $space-quad;
+}
+
+.exhibit-body {
+  max-width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table caption {
+  margin-bottom: $space-half;
+  font-weight: $font-weight-headline;
+  text-align: left;
+
+  .js .is-fancydisplay {
+    display: none;
+  }
+}
+
+// Keys
+
+// General styles for keys
+
+.key {
+  display: none;
+  @include zero;
+  clear: both;
+  list-style-type: none;
+  font-size: $font-size-small;
+  > li {
+    display: inline-block;
+    margin-bottom: $space-quarter;
+    margin-right: .75em;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .js .is-fancydisplay & {
+    display: block;
+  }
+
+  [class*='square-'] {
+    display: inline-block;
+    vertical-align: baseline;
+    width: .75em;
+    height: .75em;
+    margin-right: .25em;
+    background-color: $tlt-dark-gray;
+  }
+  .square-leatherback {
+    background-color: $tlt-dark-gray;
+  }
+  .square-oliveridley {
+    background-color: $tlt-yellow-bright;
+  }
+  .square-green {
+    background-color: $tlt-green-bright;
+  }
+  [class*='turtle-'] {
+    display: inline-block;
+    vertical-align: top;
+    height: 1.375em;
+    width: 1.375em;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+  }
+  .turtle-leatherback {
+    background-image: url(../images/tlt-turtle-leatherback.png);
+  }
+  .turtle-oliveridley {
+    background-image: url(../images/tlt-turtle-oliveridley.png);
+  }
+  .turtle-green {
+    background-image: url(../images/tlt-turtle-green.png);
+  }
+  [class*='egg-'] {
+    display: inline-block;
+    vertical-align: baseline;
+    border-radius: 50%;
+    width: .8em;
+    height: .8em;
+    margin-right: .25em;
+    background-color: $tlt-dark-gray;
+  }
+}
+
+//
+// Turtles and nests in decline
+//
+
+/*
+Markup:
+<table id="TurtlesOverTime">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Leatherback</th>
+      <th>Olive Ridley</th>
+      <th>East Pacific Green</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="tline" data-year="1988">
+      <th class="tline-year">1988</th>
+      <td class="tline-count" data-species="leatherback">500</td>
+      <td class="tline-count" data-species="oliveridley">500</td>
+      <td class="tline-count" data-species="green">500</td>
+      <th class="tline-count" data-species="all">1,500</th>
+    </tr>
+  </tbody>
+</table>
+*/
+
+#TurtlesAndNestsInDecline {
+  .node-wrapper,
+  .key,
+  #DataSelect {
+    display: none;
+  }
+}
+
+.js #TurtlesAndNestsInDecline.is-fancydisplay {
+
+  // Hide the tables and show the nodes
+
+  .table-wrapper {
+    display: none;
+  }
+  .node-wrapper,
+  .key,
+  #DataSelect {
+    display: block;
+  }
+
+  // Data select
+
+  $dropselectheight: 40px;
+
+  .exhibit-body {
+    overflow: visible;
+    position: relative;
+    padding-top: 2 * $dropselectheight;
+    @include breakpoint($bp-large) {
+      //padding-top: 3 * $dropselectheight;
+    }
+  }
+
+  #DataSelect {
+    @include clearfix;
+    margin-top: -2 * $dropselectheight;
+    margin-bottom: $dropselectheight;
+    .drop-select:first-child {
+      margin-bottom: $dropselectheight/4;
+    }
+
+    @include breakpoint($bp-med) {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin: 0;
+      .drop-select {
+        float: left;
+        width: span(6);
+        margin-right: 10px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    @include breakpoint($bp-large) {
+      .drop-select {
+        width: span(4);
+      }
+    }
+    @include breakpoint($bp-large-2) {
+      .drop-select {
+        width: span(3);
+      }
+    }
+  }
+
+  .drop-select {
+    @include zero;
+    list-style: none;
+    border: 1px solid $tlt-blue;
+    background-color: $white;
+    li {
+      background-color: $white;
+      &.is-active {
+        background-color: $white;
+        font-weight: $font-weight-headline;
+      }
+    }
+    a {
+      position: relative;
+      display: block;
+      height: $dropselectheight;
+      text-decoration: none;
+      line-height: $dropselectheight/2;
+      padding: ($dropselectheight/4 - 1) ($dropselectheight/4);
+      &:hover {
+        text-decoration: underline;
+        //@include transform(translate3d(10px,0,0));
+      }
+      // The pointer
+      .pointer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: $dropselectheight - 2;
+        height: $dropselectheight - 2;
+        line-height: $dropselectheight - 2;
+        text-align: center;
+        color: $tlt-blue;
+        @include transform(rotate(90deg));
+        @include transition(all .25s ease);
+      }
+    }
+
+    // States
+
+    li {
+      display: none;
+      .pointer {
+        display: none;
+      }
+      &.is-active {
+        display: block;
+        .pointer {
+          display: block;
+        }
+        a:hover {
+          text-decoration: none;
+          background-color: $white;
+        }
+      }
+    }
+    &.is-open {
+      position: relative;
+      padding-top: $dropselectheight;
+      li {
+        display: block;
+        &.is-active {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          width: 100%;
+          border-bottom: 1px solid $tlt-blue;
+          .pointer {
+            @include transform(rotate(-90deg));
+          }
+        }
+      }
+    }
+  }
+
+  // The node wrapper
+
+  .node-wrapper {
+    @include clearfix;
+    clear: both;
+    width: 100%;
+  }
+
+  // The nodes
+
+  .node {
+    display: block;
+    position: relative;
+    float: left;
+    &:hover {
+      opacity: .5;
+    }
+    // Transitions
+    @include transition(all .5s ease);
+    // Species-specific colors
+    &[data-species="leatherback"] {
+      background-color: $tlt-dark-gray;
+      color: $white;
+    }
+    &[data-species="oliveridley"] {
+      background-color: $tlt-yellow-bright;
+      color: $white;
+    }
+    &[data-species="green"] {
+      background-color: $tlt-green-bright;
+      color: $white;
+    }
+    &[data-species="all"] {
+      background-color: $tlt-blue;
+      color: $tlt-dark-gray;
+    }
+  }
+  .node-inner {
+    position: relative;
+    display: block;
+    border: 1px solid $tlt-blue-bkg;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    width: 100%;
+    @include transition(all .5s ease);
+  }
+  .node-count {
+    display: block;
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    top: 50%;
+    margin-top: -.7em;
+    margin-left: -.2em;
+    font-size: $font-size-small;
+    font-weight: $font-weight-body;
+    // Transitions
+    @include transition(color .3s);
+    // Transforms
+    @include transform(rotate(-90deg));
+    // States
+    &.hide-me {
+      color: transparent;
+    }
+  }
+
+  .node-tooltip {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 160px;
+    margin-left: -80px;
+    padding: 0;
+    font-size: $font-size-small;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: lowercase;
+    background-color: $tlt-dark-gray;
+    color: $white;
+    -webkit-font-smoothing: antialiased; // Prevent the text jump
+    .tooltip-inner {
+      padding: $space-half $space-half $space;
+    }
+    .tooltip-stat {
+      display: block;
+      font-size: pem(21, 16); // 21
+      font-weight: $font-weight-headline;
+    }
+    .pointer {
+      display: block;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: inherit;
+      top: -10px;
+      left: 50%;
+      margin-left: -10px;
+      opacity: 1;
+      @include transform(rotate(45deg));
+      @include transition(all .25s);
+    }
+    // Breakpoints
+    @include breakpoint($bp-med) {
+      width: 180px;
+      margin-left: -90px;
+    }
+    // States
+    opacity: 0;
+    @include transition(opacity .35s .2s, left .5s .5s ease);
+    &.is-active {
+      opacity: 1;
+      @include transition(opacity .25s, left .5s ease);
+    }
+    &.is-adjusted {
+      .pointer {
+        opacity: 0;
+      }
+    }
+  }
+
+  // Key
+  .key {
+    @include clearfix;
+    position: relative;
+    border-top: 1px solid $tlt-blue;
+    margin-top: $space;
+    padding-top: $space-half;
+    font-size: $font-size-norm;
+    > em {
+      font-style: normal;
+      &:nth-child(1) {
+        float: left;
+      }
+      &:nth-child(2) {
+        float: right;
+      }
+    }
+  }
+}
+
+// Vertically center the nodes
+
+.js.flexbox #TurtlesAndNestsInDecline.is-fancydisplay {
+  .node-wrapper {
+    @include flexbox;
+    @include align-items(center);
+  }
+  .node {
+    float: none;
+    min-height: 1px;
+    @include flex(none);
+  }
+}
+
+// End fancy display for #TurtlesAndNestsInDecline exhibit
+
+//
+// Nesting Snapshot
+//
+
+#NestingSnapshot {
+  .nest {
+    display: none;
+  }
+  .map-wrapper {
+    display: none;
+  }
+}
+
+.js #NestingSnapshot.is-fancydisplay {
+
+  // Default styles for map embeds
+
+  .map-wrapper {
+    display: block;
+    position: relative;
+    border: 1px solid $tlt-blue;
+    margin-bottom: $space;
+    padding-top: 75%;
+    margin-top: -1px;
+  }
+  .map-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  // Nesting table
+  /*
+  Markup:
+   <table id="NestsByLocation">
+    <thead>
+      <tr>
+        <th>Location</th>
+        <th>Leatherback</th>
+        <th>Olive Ridley</th>
+        <th>East Pacific Green</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="loc">
+        <th class="loc-name">Playa Ventanas</th>
+        <td class="loc-nest-leatherback" data-total="5">5</td>
+        <td class="loc-nest-oliveridley" data-total="4">4</td>
+        <td class="loc-nest-green" data-total="5">5</td>
+      </tr>
+    </tbody>
+  </table>
+  */
+  #NestsByLocation {
+    // Base styles on the table
+    display: block;
+    width: 100%;
+    border-width: 0;
+    margin-bottom: 0;
+    thead {
+      display: none;
+    }
+    tbody {
+      @include clearfix;
+      display: block;
+      width: 100%;
+    }
+    tr, th, td {
+      display: block;
+      @include zero;
+      border-width: 0;
+    }
+    .loc {
+      @include clearfix;
+      border: 1px solid $tlt-blue;
+      padding: $space-half;
+      background-color: $white;
+      + .loc {
+        margin-top: -1px;
+      }
+    }
+    $numsize: .75em;
+    $dotsize: 2.3;
+    .loc-number {
+      margin-top: .2em;
+      float: left;
+      margin-right: .75em;
+      display: block;
+      border-radius: 50%;
+      height: $numsize * $dotsize;
+      width: $numsize * $dotsize;
+      font-size: $numsize;
+      line-height: $numsize * $dotsize * .9;
+      text-align: center;
+      background-color: $tlt-dark-gray !important;
+      color: $white;
+    }
+    .loc-name {
+      margin-bottom: $space-half;
+    }
+    $turtlesize: 30px;
+    .loc-nests {
+      .number {
+        display: none;
+      }
+      .nest {
+        display: block;
+        float: left;
+        margin-bottom: $space-quarter;
+        width: $turtlesize;
+        height: $turtlesize;
+        background-image: url(../images/tlt-turtle-leatherback.png);
+        background-size: $turtlesize auto;
+        background-repeat: repeat-x;
+      }
+      // Species-specifit styles
+      &[data-species="leatherback"] .nest {
+        background-image: url(../images/tlt-turtle-leatherback.png);
+      }
+      &[data-species="oliveridley"] .nest {
+        background-image: url(../images/tlt-turtle-oliveridley.png);
+      }
+      &[data-species="green"] .nest {
+        background-image: url(../images/tlt-turtle-green.png);
+      }
+    }
+    .loc-nests[data-total-nests="0"] {
+      .nest {
+        display: none;
+      }
+    }
+  }
+  // End #NestByLocation
+
+  // Breakpoints
+
+  @include breakpoint($bp-med) {
+    .loc {
+      padding: $space-half $space !important;
+    }
+    .map-wrapper {
+      padding-top: 56.25%;
+    }
+  }
+  @include breakpoint($bp-large-2) {
+    #NestsByLocation {
+      float: left;
+      width: 50%;
+    }
+    .loc {
+      padding-bottom: $space !important;
+    }
+    .loc-name {
+      margin-bottom: $space !important;
+    }
+    .map-wrapper {
+      float: left;
+      width: 50%;
+      margin-left: -1px;
+      margin-top: 0;
+      padding-top: 50%;
+    }
+  }
+  @include breakpoint($bp-xl) {
+    #NestsByLocation {
+      width: 33.3333333333%;
+    }
+    .map-wrapper {
+      width: 66.6666666666%;
+      padding-top: 66.6666666666% * .75;
+    }
+  }
+
+  // States
+
+}
+
+// styles
+
+// Nestdata popup
+
+/*
+Markup:
+<div class="nestdata-popup">
+  <a class="leaflet-popup-close-button" href="#close">×</a>
+  <div class="leaflet-popup-content-wrapper">
+    <div class="leaflet-popup-content">
+      <p>This is Playas Ventanas</p>
+    </div>
+  </div>
+  <div class="leaflet-popup-tip-container">
+    <div class="leaflet-popup-tip"></div>
+  </div>
+</div>
+*/
+
+.nestdata-popup {
+  color: red;
+  font-size: 16px;
+  font-size: 1rem;
+  .leaflet-popup-content-wrapper {
+    background-color: $tlt-dark-gray;
+    border-radius: 0;
+    border: none;
+  }
+  .leaflet-popup-content {
+    color: $white;
+    font-size: $font-size-small;
+    font-weight: $font-weight-headline;
+    font-family: $font-primary;
+    margin: $space-half $space;
+  }
+  .leaflet-popup-tip {
+    background-color: $tlt-dark-gray;
+    border: none;
+  }
+}
+
+
+// End fancy styles for nesting snapshop
+
+
+//
+// Hatchery Snapshot
+//
+
+/* Markup:
+
+<table id="HatcheryBays" class="is-fancydisplay">
+  <thead>
+    <tr>
+      <th>Bay</th>
+      <th>Species</th>
+      <th>Eggs</th>
+      <th>Hatchlings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="hbay" data-species="leatherback" data-total-eggs="80" data-total-hatchlings="0">
+      <th class="hbay-label">1</th>
+      <td class="hbay-species">Leatherback</td>
+      <td class="hbay-eggs">80</td>
+      <td class="hbay-hatchlings">0</td>
+    </tr>
+    <tr class="hbay" data-species="none" data-total-eggs="0" data-total-hatchlings="0">
+      <th class="hbay-label">3</th>
+      <td class="hbay-species">—</td>
+      <td class="hbay-eggs">—</td>
+      <td class="hbay-hatchlings">—</td>
+    </tr>
+  </tbody>
+</table>
+*/
+
+.js .is-fancydisplay #HatcheryBays {
+
+// Base styles on the table
+display: block;
+width: 100%;
+border-width: 0;
+thead {
+  display: none;
+}
+tbody {
+  @include clearfix;
+  display: block;
+  width: 100%;
+}
+tr, th, td {
+  display: block;
+  @include zero;
+  border-width: 0;
+}
+
+// The bays
+
+.hbay {
+  float: left;
+  border: 1px solid $tlt-blue;
+  padding: $space-quarter $space-half $space-half;
+  text-align: center;
+  background-color: $white;
+}
+
+.hbay-label {
+  margin-bottom: $space-half;
+  font-weight: $font-weight-body;
+  text-align: center;
+}
+
+.hbay-species {
+  display: none;
+}
+
+.hbay-eggs {
+  display: inline-block;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  padding-top: .7em;
+  font-weight: $font-weight-headline;
+  line-height: 1;
+  text-align: center;
+  background-color: $tlt-dark-gray;
+  color: $white;
+  margin-bottom: $space-half;
+}
+
+$turtlesize: 45px;
+
+.hbay-hatchlings {
+  font-weight: $font-weight-headline;
+  text-align: center;
+  min-width: $turtlesize;
+  padding-top: $turtlesize;
+  background: {
+    position: center top;
+    repeat: no-repeat;
+    size: $turtlesize auto;
+  }
+}
+
+// Species-specific styles
+
+.hbay[data-species="leatherback"] {
+  .hbay-eggs {
+    background-color: $tlt-dark-gray;
+  }
+  .hbay-hatchlings {
+    background-image: url(../images/tlt-turtle-leatherback.png);
+    color: $tlt-dark-gray;
+  }
+}
+.hbay[data-species="oliveridley"] {
+  .hbay-eggs {
+    background-color: $tlt-yellow-bright;
+  }
+  .hbay-hatchlings {
+    background-image: url(../images/tlt-turtle-oliveridley.png);
+    color: $tlt-yellow-bright;
+  }
+}
+.hbay[data-species="green"] {
+  .hbay-eggs {
+    background-color: $tlt-green-bright;
+  }
+  .hbay-hatchlings {
+    background-image: url(../images/tlt-turtle-green.png);
+    color: $tlt-green-bright;
+  }
+}
+
+// Retina images
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi) {
+    /* Retina-specific stuff here */
+    .hbay .hbay-hatchlings {
+      background-size: $turtlesize auto;
+    }
+    .hbay[data-species="leatherback"] {
+      .hbay-hatchlings {
+        background-image: url(../images/tlt-turtle-leatherback2x.png);
+      }
+    }
+    .hbay[data-species="oliveridley"] {
+      .hbay-hatchlings {
+        background-image: url(../images/tlt-turtle-oliveridley2x.png);
+      }
+    }
+    .hbay[data-species="green"] {
+      .hbay-hatchlings {
+        background-image: url(../images/tlt-turtle-green2x.png);
+      }
+    }
+}
+
+// Zero-count egg and hatchling styles
+
+.hbay[data-total-eggs="0"] {
+  .hbay-eggs {
+    background-color: $tlt-gray;
+  }
+}
+.hbay[data-total-hatchlings="0"] {
+  .hbay-hatchlings {
+    background-position: center (-2 * $turtlesize);
+    color: $tlt-gray;
+  }
+}
+
+// Empty bay styles
+
+.hbay[data-species="none"] {
+  background-color: transparent;
+  .hbay-eggs {
+    width: 0;
+    text-indent: 100%;
+    text-wrap: nowrap;
+    overflow: hidden;
+    background-color: transparent;
+    color: transparent;
+  }
+  .hbay-hatchlings {
+    width: 0;
+    text-indent: 100%;
+    text-wrap: nowrap;
+    overflow: hidden;
+    background-image: none;
+    color: transparent;
+  }
+}
+
+//
+// Layout
+//
+
+@include breakpoint(0 $bp-small) {
+  // Rows of 4
+  .hbay {
+    width: 25%;
+    margin-left: -1px;
+    margin-top: -1px;
+  }
+  .hbay:nth-child(4n+5) {
+    clear: both;
+  }
+  .hbay:nth-child(4n+1) {
+    margin-left: 0; // No left margin on the first column
+  }
+  .hbay:nth-child(-n+4) {
+    margin-top: 0; // No top margin on the first row
+  }
+}
+@include breakpoint($bp-small $bp-med) {
+  // Rows of 6
+  .hbay {
+    width: 16.6666666667%;
+    margin-left: -1px;
+    margin-top: -1px;
+  }
+  .hbay:nth-child(6n+7) {
+    clear: both;
+  }
+  .hbay:nth-child(6n+1) {
+    margin-left: 0; // No left margin on the first column
+  }
+  .hbay:nth-child(-n+6) {
+    margin-top: 0; // No top margin on the first row
+  }
+}
+@include breakpoint($bp-med $bp-large) {
+  // Rows of 8
+  .hbay {
+    width: 12.5%;
+    margin-left: -1px;
+    margin-top: -1px;
+  }
+  .hbay:nth-child(8n+9) {
+    clear: both;
+  }
+  .hbay:nth-child(8n+1) {
+    margin-left: 0; // No left margin on the first column
+  }
+  .hbay:nth-child(-n+8) {
+    margin-top: 0; // No top margin on the first row
+  }
+}
+@include breakpoint($bp-large $bp-large-2) {
+  // Rows of 10
+  .hbay {
+    width: 10%;
+    margin-left: -1px;
+    margin-top: -1px;
+  }
+  .hbay:nth-child(10n+11) {
+    clear: both;
+  }
+  .hbay:nth-child(10n+1) {
+    margin-left: 0; // No left margin on the first column
+  }
+  .hbay:nth-child(-n+10) {
+    margin-top: 0; // No top margin on the first row
+  }
+}
+@include breakpoint($bp-large-2 $bp-xl) {
+  // Rows of 12
+  .hbay {
+    width: 8.3333333333%;
+    margin-left: -1px;
+    margin-top: -1px;
+  }
+  .hbay:nth-child(12n+13) {
+    clear: both;
+  }
+  .hbay:nth-child(12n+1) {
+    margin-left: 0; // No left margin on the first column
+  }
+  .hbay:nth-child(-n+12) {
+    margin-top: 0; // No top margin on the first row
+  }
+}
+@include breakpoint($bp-xl) {
+  // Rows of 16
+  .hbay {
+    width: 6.25%;
+    margin-left: -1px;
+    margin-top: -1px;
+  }
+  .hbay:nth-child(16n+17) {
+    clear: both;
+  }
+  .hbay:nth-child(16n+1) {
+    margin-left: 0; // No left margin on the first column
+  }
+  .hbay:nth-child(-n+16) {
+    margin-top: 0; // No top margin on the first row
+  }
+}
+
+}
+
+// End fancy display styles for hatchery

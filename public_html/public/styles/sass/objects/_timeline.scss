@@ -1,0 +1,85 @@
+/* =======================================================
+    Timeline
+   ======================================================= */
+
+//
+//  Container
+//
+
+.timeline {
+  border-left: $border-width-large solid $gray-light-3;
+  margin-left: 0;
+  padding-bottom: 3em;
+  padding-left: 0;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -1.47em;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background: $gray-light-3;
+    border: 5px solid $gray-light-3;
+  }
+}
+
+//
+//  Timeline item
+//
+
+.timeline > li {
+  @include zero;
+  padding-left: 1em;
+  margin-bottom: 3em;
+  position: relative;
+  list-style: none;
+
+  a {
+    display: block;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -0.95em;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background: #fff;
+    border: $border-width-large solid $gray-light-3;
+  }
+
+  &.now:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -.95em;
+    width: 12px;
+    height: 12px;
+    margin-left: 8px;
+    margin-top: 8px;
+    border-radius: 12px;
+    background: $blue;
+    z-index: 1;
+  }
+}
+
+//
+//  Timeline content
+//
+
+.timeline .tl-content {
+  font-weight: $font-weight-headline;
+}
+//
+//  Timestamp
+//
+
+.timeline .stamp {
+  font-size: $font-size-small;
+  color: $gray;
+}

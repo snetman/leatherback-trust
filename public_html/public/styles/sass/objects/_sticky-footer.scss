@@ -1,0 +1,36 @@
+/* =======================================================
+    Styles used for sticky footer
+   ======================================================= */
+
+/* TODO: work this into markup for existing page wrappers */
+/* TODO: add markup example */
+
+$sticky-footer-height: 60px;
+
+html, body {
+  height: 100%;
+}
+
+.wrap {
+  @include zero;
+
+  @include breakpoint($bp-med) {
+    min-height: 100%;
+    padding-bottom: $sticky-footer-height; // Padding on wrapper is the same height as the footer
+  }
+}
+.push {
+  @include breakpoint($bp-med) {
+    height: $sticky-footer-height; // .push is same height as the footers are
+    margin-top: -1*$sticky-footer-height;
+  }
+}
+
+.site-footer {
+  @include breakpoint($bp-med) {
+    padding-top: $space-half+$space-quarter;
+    padding-bottom: 0;
+    height: $sticky-footer-height;
+    margin-top: -1*$sticky-footer-height;
+  }
+}

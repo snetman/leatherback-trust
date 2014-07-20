@@ -1,0 +1,93 @@
+/* =======================================================
+    Toggle
+   ======================================================= */
+
+/*
+Markup:
+
+<div class="toggle">
+  <a class="is-active" href="#">My Practice</a>
+  <a href="#">Me</a>
+</div>
+*/
+
+// Variables
+
+$toggle-border-color: $border-color;
+$toggle-border-color-hover: $border-color;
+$toggle-border-color-active: $border-color;
+
+$toggle-background-color: transparent;
+$toggle-background-color-hover: rgba(255,255,255,.15);
+$toggle-background-color-active: $white;
+
+$toggle-color: $body-color;
+$toggle-color-hover: $body-color;
+$toggle-color-active: $body-color;
+
+$toggle-font-size: $font-size-small;
+$toggle-font-weight: $font-weight-body;
+
+// Styles
+
+.toggle {
+  display: table-row;
+
+  > a {
+    display: table-cell;
+    position: relative;
+    z-index: 1;
+    border: 2px solid $toggle-border-color;
+    text-decoration: none;
+    &:nth-child(2n) {
+      position: relative;
+      left: -2px;
+    }
+    &:first-child {
+      @include border-left-radius($btn-border-radius);
+    }
+    &:last-child {
+      @include border-right-radius($btn-border-radius);
+    }
+    padding: {
+      left: $space-quarter;
+      right: $space-quarter;
+    }
+    min-width: 44px;
+    font-size: $toggle-font-size;
+    font-weight: $toggle-font-weight;
+    line-height: 2em;
+    text-align: center;
+    text-decoration: none;
+    background-color: $toggle-background-color;
+    color: $toggle-color;
+
+    &.is-active {
+      background-color: $toggle-background-color-active;
+      color: $toggle-color-active;
+      z-index: 2;
+      border-color: $toggle-border-color-active;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: $toggle-background-color-hover;
+      border-color: $toggle-border-color-hover;
+      color: $toggle-color-hover;
+      z-index: 3;
+    }
+
+  }
+}
+
+// Mode toggle styles
+// These can also be applied via the "is-active" class above
+
+.practitioner-mode-on #modelink-practitioner,
+.practitioner-mode-off #modelink-user {
+  background-color: $toggle-background-color-active;
+  color: $toggle-color-active;
+  z-index: 2;
+  border-color: $toggle-border-color-active;
+  pointer-events: none;
+}

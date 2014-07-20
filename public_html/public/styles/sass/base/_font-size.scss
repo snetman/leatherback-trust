@@ -1,0 +1,42 @@
+/* =======================================================
+    Default font sizes
+   ======================================================= */
+
+/*
+html {
+  font-size: 16px;
+  @include breakpoint($bp-med) {
+    font-size: 14px;
+  }
+  @include breakpoint($bp-large) {
+    font-size: 16px;
+  }
+}
+*/
+
+html {
+  font-size: 18px;
+
+  // Wide desktop to huge desktop
+  // 1200px to 1600px
+  @include breakpoint(max-width $bp-xl) {
+    font-size: 18px;
+  }
+
+  // Desktop to wide desktop
+  // 960px to 1200px
+  @include breakpoint(max-width $bp-large-2) {
+    font-size: 18px;
+  }
+
+  // Tablet to desktop
+  // 748px to 960px
+  @include breakpoint(max-width $bp-large) {
+    font-size: 16px;
+  }
+
+  // Mobile up to 748px
+  @include breakpoint(max-width $bp-med) {
+    font-size: 16px;
+  }
+}

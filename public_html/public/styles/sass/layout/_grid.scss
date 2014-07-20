@@ -1,0 +1,262 @@
+/* =======================================================
+    Grid
+   ======================================================= */
+
+// Grid containers
+
+.g {
+  clear: both;
+  @include clearfix;
+  @include zero;
+  > li,
+  > div {
+    @include zero;
+    margin-bottom: $space;
+  }
+  > li {
+    list-style: none;
+  }
+
+  /* TODO: Add grid heder and grid footer things */
+
+  .gi {
+    width: 100%;
+    @include zero;
+    margin-bottom: $space;
+  }
+
+  .gi-compact {
+    margin-bottom: $space-half;
+  }
+
+  .gi-flush {
+    margin-bottom: 0;
+  }
+
+  .gi-bordered {
+    border-top: $border-width $border-style $border-color;
+    padding-top: $space-half;
+  }
+}
+
+//
+// Generic grid classes
+//
+
+.gi-half {
+  @include breakpoint($bp-med) {
+    float: left;
+    width: span(6 of 12);
+    margin-right: gutter(12);
+  }
+}
+
+.gi-third {
+  @include breakpoint($bp-med) {
+    float: left;
+    width: span(4 of 12);
+    margin-right: gutter(12);
+  }
+}
+
+.gi-fourth {
+  @include breakpoint($bp-med) {
+    float: left;
+    width: span(3 of 12);
+    margin-right: gutter(12);
+  }
+}
+
+.gi-full {
+  @include breakpoint($bp-med) {
+    float: left;
+    width: span(12 of 12);
+    margin-right: 0;
+  }
+}
+
+.gi-last {
+  @include breakpoint($bp-med) {
+    float: right;
+    margin-right: 0;
+  }
+}
+
+//
+//  2-up grid
+//
+
+.g-2up {
+
+  @include breakpoint($bp-med) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(6);
+      margin-bottom: $space;
+    }
+  }
+}
+
+.g-2up-max {
+
+  @include breakpoint($bp-large-2) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(6);
+      margin-bottom: $space;
+    }
+  }
+}
+
+//
+//  3-up grid
+//
+
+.g-3up {
+
+  @include breakpoint($bp-med) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(4);
+      margin-bottom: $space;
+    }
+  }
+
+}
+
+//
+//  3-up max grid
+//
+
+.g-3up-max {
+
+  @include breakpoint($bp-med $bp-large) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(4);
+      margin-bottom: $space;
+    }
+  }
+
+  @include breakpoint($bp-large) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(4);
+      margin-bottom: $space;
+    }
+  }
+
+}
+
+//
+//  4-up grid
+//
+
+.g-4up {
+
+  @include breakpoint($bp-med) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(3);
+      margin-bottom: $space;
+    }
+  }
+
+}
+
+//
+//  4-up max grid
+//
+
+.g-4up-max {
+
+  @include breakpoint($bp-med $bp-large) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(6);
+      margin-bottom: $space;
+    }
+  }
+
+  @include breakpoint($bp-large $bp-large-2) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(4);
+      margin-bottom: $space;
+    }
+  }
+
+  @include breakpoint($bp-large-2) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(3);
+      margin-bottom: $space;
+    }
+  }
+
+}
+
+//
+//  6-up max grid
+//
+
+.g-6up-max {
+
+  @include breakpoint($bp-med $bp-large) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(4);
+      margin-bottom: $space;
+    }
+  }
+
+  @include breakpoint($bp-large $bp-large-2) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(3);
+      margin-bottom: $space;
+    }
+  }
+
+  @include breakpoint($bp-large-2) {
+    .gi,
+    > div,
+    > li {
+      @include gallery(2);
+      margin-bottom: $space;
+    }
+  }
+
+}
+
+//
+//  2-1 grid
+//
+
+.g-2-1 {
+
+  @include breakpoint($bp-med) {
+    .gi,
+    > div,
+    > li {
+      @include span(8);
+      margin-bottom: $space;
+      &:nth-child(even) {
+        @include span(4);
+        @include last;
+      }
+    }
+  }
+
+}

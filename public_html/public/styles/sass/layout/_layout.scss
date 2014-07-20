@@ -1,0 +1,214 @@
+/* =======================================================
+    Layouts
+   ======================================================= */
+
+// Layout container
+
+.lc {
+  @include container;
+  position: relative;
+  // clear: both;
+  max-width: $grid-max;
+  margin: 0 auto;
+  padding: 0 $grid-padding;
+
+  @include breakpoint($bp-med) {
+    padding: {
+      left: $grid-padding-med;
+      right: $grid-padding-med;
+    }
+  }
+
+  @include breakpoint($bp-large) {
+    padding: {
+      left: $grid-padding-large;
+      right: $grid-padding-large;
+    }
+  }
+}
+
+// Main containers
+
+#Content {
+  @include clearfix;
+  overflow: hidden;
+  padding-top: $space-and-half;
+
+  // Homepage
+
+  .home & {
+    padding-top: 0;
+    margin-top: -1px; // Pull the image and/or alert over the nav rule
+  }
+}
+
+//
+//  Templates
+//
+
+.l-header,
+.l-main,
+.l-aside,
+.l-footer {
+  @include clearfix;
+  width: 100%;
+}
+
+.l-footer {
+  clear: both;
+}
+
+// One column layout
+
+.l-1col {
+  .l-header,
+  .l-main,
+  .l-aside,
+  .l-footer {
+    margin-bottom: $space;
+  }
+
+  &.l-1col-narrow {
+    .l-header,
+    .l-main,
+    .l-aside {
+      @include breakpoint($bp-med) {
+        max-width: span(10);
+        margin-left: auto;
+        margin-right: auto;
+      }
+      @include breakpoint($bp-large-2) {
+        max-width: span(8);
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+}
+
+.l-1col-full {
+  .l-main {
+    @include full;
+  }
+}
+
+// Two Column Layout
+// Standard two column layout with main and sidebar column, main first in source
+
+.l-2col {
+
+  .l-header,
+  .l-main,
+  .l-aside,
+  .l-footer {
+    margin-bottom: $space;
+  }
+
+  @include breakpoint($bp-med) {
+    .l-main {
+      @include span(9);
+    }
+    .l-aside {
+      @include span(last 3);
+    }
+  }
+
+  @include breakpoint($bp-xl) {
+    .l-main {
+      @include span(8);
+    }
+    .l-aside {
+      @include span(last 4);
+    }
+  }
+
+  &.l-2col-right {
+    @include breakpoint($bp-med) {
+      .l-main {
+        margin-right: 0; // remove the standard margin
+        @include span(last 9);
+      }
+      .l-aside {
+        @include span(3);
+      }
+    }
+
+    @include breakpoint($bp-xl) {
+      .l-main {
+        @include span(last 8);
+      }
+      .l-aside {
+        @include span(4);
+      }
+    }
+  }
+}
+
+// Reversed Two Column Layout
+// Two column layout with aside first in source and on left
+
+.l-2col-rev {
+
+  .l-header,
+  .l-main,
+  .l-aside,
+  .l-footer {
+    margin-bottom: $space;
+  }
+
+  @include breakpoint($bp-med) {
+    .l-main {
+      @include span(last 8);
+    }
+
+    .l-aside {
+      @include span(4);
+    }
+  }
+
+  @include breakpoint($bp-large-2) {
+    .l-main {
+      @include span(last 7);
+    }
+  }
+
+  @include breakpoint($bp-xl) {
+    .l-main {
+      @include span(last 8);
+    }
+    .l-aside {
+      @include span(3);
+    }
+  }
+
+}
+
+// Three Column Layout
+// Source order is: left, center, right
+
+.l-3col {
+
+  .l-header,
+  .l-left,
+  .l-center,
+  .l-right,
+  .l-footer {
+    margin-bottom: $space;
+  }
+
+  @include breakpoint($bp-med) {
+    .l-left {
+      @include span(4);
+    }
+
+    .l-center {
+      @include span(4);
+    }
+
+    .l-right {
+      @include span(last 4);
+    }
+  }
+
+}

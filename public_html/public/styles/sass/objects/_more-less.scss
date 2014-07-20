@@ -1,0 +1,39 @@
+/* =======================================================
+    More/less content
+   ======================================================= */
+
+/*
+State styles:
+.is-hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+*/
+
+/*
+Tried to write these so they let me delicately fade in new stuff
+*/
+
+// The visible state
+
+.more-content {
+  opacity: 1;
+  max-height: none;
+  @include transform(translate3d(0,0,0));
+  @include transition(opacity 200ms linear, transform 350ms ease);
+}
+
+// The hidden state
+
+.more-content.is-hidden {
+  // override standard styles
+  display: block !important;
+  visibility: visible !important;
+  // new hidden styles
+  margin-top: 0 !important;
+  opacity: 0;
+  height: 0;
+  max-height: 0;
+  overflow: hidden;
+  @include transform(translate3d(0,-$space,0));
+}

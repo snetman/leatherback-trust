@@ -1,0 +1,41 @@
+//
+// Patterned
+//
+
+.patterned {
+  background: {
+    color: $tlt-blue-bkg;
+    image: url('../images/tlt-pattern-topo-blue.png');
+    position: 50% 50%;
+    repeat: repeat;
+  }
+}
+
+// Theming
+
+.theme-green {
+  .patterned {
+    background: {
+      color: $tlt-green-bkg;
+      image: url('../images/tlt-pattern-topo-green.png');
+    }
+  }
+}
+
+.theme-gray {
+  .patterned {
+    background: {
+      color: $tlt-gray-bkg;
+      image: url('../images/tlt-pattern-topo-gray.png');
+    }
+  }
+}
+
+.theme-yellow {
+  .patterned {
+    background: {
+      color: $tlt-yellow-bkg;
+      image: url('../images/tlt-pattern-topo-yellow.png');
+    }
+  }
+}

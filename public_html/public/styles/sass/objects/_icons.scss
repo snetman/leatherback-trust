@@ -1,0 +1,71 @@
+/* =======================================================
+    Icons
+   ======================================================= */
+
+//
+// Base styles
+//
+
+@mixin icon() {
+  @include hide-text;
+  display: inline-block;
+  vertical-align: middle;
+  background-image: url(../images/tlt-icons-blue.svg);
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
+
+  .no-svg & {
+    background-image: url(../images/tlt-icons-blue.png);
+  }
+}
+
+// Icons
+
+.icon-search {
+  @include icon;
+  background-position: 0 0;
+  a:hover & {
+    background-position: 0 -20px;
+  }
+}
+
+.icon-tw {
+  @include icon;
+  background-position: -20px 0;
+  a:hover & {
+    background-position: -20px -20px;
+  }
+}
+
+.icon-fb {
+  @include icon;
+  background-position: -40px 0;
+  a:hover & {
+    background-position: -40px -20px;
+  }
+}
+
+.icon-yt {
+  @include icon;
+  background-position: -60px 0;
+  a:hover & {
+    background-position: -60px -20px;
+  }
+}
+
+.icon-x {
+  @include icon;
+  background-position: -80px 0;
+  a:hover & {
+    background-position: -80px -20px;
+  }
+}
+
+.icon-menu {
+  @include icon;
+  background-position: -100px 0;
+  a:hover & {
+    background-position: -100px -20px;
+  }
+}

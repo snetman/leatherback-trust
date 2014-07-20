@@ -1,0 +1,20 @@
+/* =======================================================
+    Links
+   ======================================================= */
+
+a {
+	color: $link-color;
+	text-decoration: underline;
+	outline: 0;
+
+	&:hover {
+		color: $link-color-hover;
+    text-decoration: none;
+	}
+
+	&:focus {
+  	color: $link-color-focus;
+	}
+}
+
+// End links

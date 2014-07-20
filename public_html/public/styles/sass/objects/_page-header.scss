@@ -1,0 +1,92 @@
+/* =======================================================
+    Page header
+   ======================================================= */
+
+/*
+Markup:
+
+<header class="page-header">
+  <div class="page-header-main">
+    <h1>Article title here lorem ipsum dolor sit amet</h1>
+  </div>
+  <div class="page-header-aside">
+    <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">Apr</span> <span class="a-pubday">28</span></time>
+  </div>
+</header>
+<!--/.page-header-->
+*/
+
+.page-header {
+  @include clearfix;
+  position : relative;
+  margin-bottom: $space;
+  padding: 0;
+
+  .page-header-title {
+    @include zero;
+    //outline: 1px solid red;
+  }
+
+  .page-header-aside {
+    padding-top: $space-half;
+    //outline: 1px solid green;
+  }
+
+  @include breakpoint($bp-med) {
+
+    .page-header-aside {
+      padding-top: 0;
+    }
+
+    // Without flexbox
+
+    .flexbox & {
+      .page-header-title {
+        padding-right: $space-triple;
+      }
+      .page-header-aside {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+
+    // With flexbox
+
+    .flexboxes & {
+      @include flexbox;
+      @include align-items(flex-start);
+
+      .page-header-title {
+        @include flex(1);
+        margin-right: $space;
+      }
+    }
+  }
+
+  // Compact
+
+  &-compact {
+    margin-bottom: $space-half;
+  }
+
+  // Flush
+
+  &-flush {
+    margin-bottom: 0;
+  }
+
+  // Divided
+
+  &-divided {
+    border-bottom: $border-width $border-style $border-color;
+    padding-bottom: $space-half;
+  }
+
+  // Inside layout headers
+
+  .l-header & {
+    margin-bottom: 0;
+  }
+
+}

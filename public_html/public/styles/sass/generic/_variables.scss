@@ -1,0 +1,254 @@
+//
+// Variables
+//
+
+//
+// Colors
+//
+
+$tlt-dark-gray: #4d555e;
+$tlt-blue: #c0e3ec;
+$tlt-green: #d6e8c2;
+$tlt-gray: #dad7cf;
+$tlt-yellow: #ffe4aa;
+
+$tlt-blue-bkg: #eff8fa;
+$tlt-green-bkg: #f5f9f0;
+$tlt-gray-bkg: #f4f3f1;
+$tlt-yellow-bkg: #fff8ea;
+
+$tlt-green-bright: #7ac143;
+$tlt-yellow-bright: #ffc425;
+
+$tlt-white-bkg: rgba(255,255,255,.2);
+$tlt-white-bkg-frosted: rgba(255,255,255,.7);
+
+$black: #000;
+$gray-dark: #333;
+$gray-medium: #666;
+$gray: #808080;
+$gray-light: #f9f9f9;
+$gray-light-2: #eee;
+$gray-light-3: #ddd;
+$gray-light-4: #ccc;
+$white: #fff;
+
+$blue: rgb(0,122,255);
+$yellow: rgb(255,230,0);
+
+// General type
+
+$body-color: $tlt-dark-gray;
+$headline-color: $tlt-dark-gray;
+
+// Status
+
+$error: #f00;
+$success: #5ddd00;
+$danger: #f30;
+$info: #9cf;
+
+// Brand
+
+$brand-facebook: #03539e;
+$brand-twitter: #35ccff;
+$brand-linkedin: #217bc1;
+
+// Links
+
+$link-color: inherit;
+$link-color-hover: inherit;
+$link-color-visited: $link-color;
+$link-color-focus: $link-color-hover;
+
+// Overlays
+
+$overlay-dark: rgba(0,0,0,.2);
+$overlay-light: rgba(255,255,255,.8);
+
+//
+// Typography
+//
+
+$font-primary: "ff-tisa-web-pro", Georgia, serif;
+$font-secondary: $font-primary;
+$font-weight-headline: 700;
+$font-weight-body: 400;
+
+$font-size-norm: 1em;
+$font-size-slightly-larger: 1.0625em;
+$font-size-slightly-smaller: 0.875em;
+$font-size-small: .875em;
+$font-size-large: 1.5em;
+$font-size-tiny: .75em;
+$font-size-xsmall: .625em;
+$font-size-huge: 3em;
+
+$line-height-base: 1.375;
+$line-height-small: 1.125;
+$line-height-flush: 1;
+
+$max-measure: 40em;
+
+//
+// Sizes
+//
+
+$space: 1.375em; // This should be set to equal the base line-height
+$space-and-half: $space*1.5;
+$space-double: $space*2;
+$space-triple: $space*3;
+$space-quad: $space*4;
+$space-half: $space/2;
+$space-quarter: $space/4;
+$pad: 1.375em;
+$pad-and-half: $pad*1.5;
+$pad-double: $pad*2;
+$pad-triple: $pad*3;
+$pad-half: $pad/2;
+$pad-quarter:$pad/4;
+
+//
+// Standard Borders
+//
+
+$border-color: $tlt-blue;
+$border-style: solid;
+$border-width: 1px;
+$border-width-medium: 2px;
+$border-width-large: 4px;
+
+//
+// Forms
+//
+
+$form-input-height-base: 36px; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+$form-input-padding: $pad-half*.8 $pad-half $pad-half;
+
+$form-border-radius: 5px;
+$form-border-color: $border-color;
+$form-border-style: $border-style;
+$form-border-width: $border-width;
+
+// Colors
+
+$form-label-color: $body-color;
+$form-input-color: $body-color;
+$form-input-background-color: $white;
+$form-input-background-color-disabled: transparent;
+$form-help-color: $tlt-dark-gray;
+
+//
+// Buttons
+//
+
+$btn-padding: $pad-half*.8 $pad-half $pad-half;
+$btn-padding-small: $pad-quarter;
+$btn-padding-large: $btn-padding;
+
+$btn-border-radius: 5px;
+$btn-border-style: $border-style;
+$btn-border-width: $border-width;
+
+$btn-font-family: $font-secondary;
+$btn-font-weight: $font-weight-headline;
+
+// Colors
+
+$btn-background-color: $tlt-blue;
+$btn-background-color-hover: $white;
+$btn-background-color-active: $white;
+$btn-color: $tlt-dark-gray;
+$btn-color-hover: $btn-color;
+$btn-border-color: $tlt-blue;
+$btn-border-color-hover: $tlt-blue;
+
+$btn-primary-background-color: $blue;
+$btn-primary-background-color-hover: $white;
+$btn-primary-background-color-active: darken($btn-primary-background-color-hover, 5);
+$btn-primary-color: $white;
+$btn-primary-color-hover: $blue;
+$btn-primary-border-color: $btn-primary-background-color;
+$btn-primary-border-color-hover: $btn-primary-border-color;
+
+$btn-success-background-color: #0f0;
+$btn-success-background-color-hover: lighten($btn-success-background-color, 20);
+$btn-success-background-color-active: darken($btn-success-background-color-hover, 5);
+$btn-success-color: $white;
+$btn-success-color-hover: $btn-success-color;
+$btn-success-border-color: $btn-border-color;
+$btn-success-border-color-hover: $btn-success-border-color;
+
+$btn-danger-background-color: #f00;
+$btn-danger-background-color-hover: lighten($btn-danger-background-color, 20);
+$btn-danger-background-color-active: darken($btn-danger-background-color-hover, 5);
+$btn-danger-color: $white;
+$btn-danger-color-hover: $btn-danger-color;
+$btn-danger-border-color: $btn-border-color;
+$btn-danger-border-color-hover: $btn-danger-border-color;
+
+$btn-link-background-color: transparent;
+$btn-link-background-color-hover: $btn-link-background-color;
+$btn-link-background-color-active: $btn-link-background-color-hover;
+$btn-link-color: $link-color;
+$btn-link-color-hover: $link-color-hover;
+$btn-link-border-color: transparent;
+$btn-link-border-color-hover: $btn-link-border-color;
+
+$btn-outline-background-color: transparent;
+$btn-outline-background-color-hover: $blue;
+$btn-outline-background-color-active: darken($btn-outline-background-color-hover, 5);
+$btn-outline-color: $blue;
+$btn-outline-color-hover: $white;
+$btn-outline-border-color: $blue;
+$btn-outline-border-color-hover: $btn-outline-border-color;
+
+//
+// Breakpoints
+//
+
+// http://breakpoint-sass.com/
+$breakpoint-to-ems: true;
+
+$bp-small: 480px;
+//$bp-small-2: 29.75em;
+//$bp-small-3: 39.8em;
+$bp-med: 748px; // 46.8em
+//$bp-med-2: 48em;
+$bp-large: 960px; // 60em;
+$bp-large-2: 1200px;
+$bp-xl: 1400px;
+//$bp-xxl: 89em;
+//$bp-xxxl: 93em;
+
+//
+// Grid
+//
+
+// Susy grid
+
+$grid-max: 1400px;
+
+$susy: (
+  columns: 12,
+  gutters: .5,
+  gutter-position: after,
+  global-box-sizing: border-box
+);
+
+/*
+$susy: (
+  debug: (
+    image: show,
+    color: $blue,
+    output: overlay,
+    toggle: top right,
+  )
+);
+*/
+
+$grid-padding: 10px;
+$grid-padding-med: 30px;
+$grid-padding-large: 60px;
+
+// End variables

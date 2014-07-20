@@ -1,0 +1,531 @@
+/* =======================================================
+    Site header
+   ======================================================= */
+
+.site-header {
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  @include breakpoint($bp-med) {
+    padding-bottom: 0;
+    padding-top: pem(120);
+  }
+
+  //
+  // Identity and logo
+  //
+
+  .identity {
+    @include zero;
+    margin-left: -2px;
+    margin-bottom: 10px;
+
+    @include breakpoint($bp-med) {
+      float: left;
+      margin-bottom: 0;
+      margin-left: -3px; // optical adjust for circular logo
+    }
+  }
+
+  #Logo {
+    @include hide-text;
+    display: block;
+    width: 230px;
+    height: 40px;
+    background: {
+      color: transparent;
+      image: url(../images/tlt-logos-hor.svg);
+      position: 0 0;
+      repeat: no-repeat;
+    }
+
+    .no-svg & {
+      background-image: url(../images/tlt-logos-hor.png);
+    }
+
+    @include breakpoint($bp-med) {
+      width: 200px;
+      height: 80px;
+      background-image: url(../images/tlt-logo-blue.png);
+      background-size: contain;
+
+      .no-svg & {
+        background-image: url(../images/tlt-logo-blue.png);
+      }
+    }
+
+    @include breakpoint($bp-large) {
+      width: 224px;
+      height: 89px;
+      background-size: contain;
+    }
+  }
+
+  // Menu close and open buttons
+
+  #MenuCloseBtn,
+  #MenuOpenBtn {
+    display: block;
+    position: absolute;
+    top: pem(11);
+    right: pem(10);
+    border-radius: 5px;
+    width: 38px;
+    height: 38px;
+    text-decoration: none;
+
+    .label {
+      display: none;
+    }
+
+    [class*="icon-"] {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -10px;
+      margin-left: -10px;
+    }
+
+    @include breakpoint($bp-med) {
+      display: none;
+    }
+  }
+
+  #MenuOpenBtn {
+    border: 1px solid $tlt-blue;
+    background-color: $tlt-blue;
+    &:hover, &:active {
+      background-color: transparent !important;
+    }
+  }
+
+  #MenuCloseBtn {
+    border: 1px solid lighten($tlt-dark-gray, 5);
+    background-color: lighten($tlt-dark-gray, 5);
+    &:hover, &:active {
+      background-color: transparent;
+    }
+  }
+
+  //
+  // Menu
+  //
+
+  #Menu {
+    //background-color: $tlt-dark-gray;
+
+    @include breakpoint($bp-med) {
+      //border-bottom: 1px solid $tlt-blue;
+      //background-color: transparent;
+    }
+  }
+
+  // Inner
+
+  .menu-inner {
+    @include breakpoint($bp-med) {
+      @include clearfix;
+      border-bottom: 1px solid $tlt-blue;
+    }
+  }
+
+  //
+  // Main navigation
+  //
+
+  .main-nav {
+
+    @include zero;
+    list-style: none;
+    border-bottom: 1px solid $tlt-blue;
+    border-top: 1px solid $tlt-blue;
+    margin-bottom: pem(5);
+    padding: {
+      top: pem(8);
+      bottom: pem(10);
+    }
+
+    a {
+      display: block;
+      padding: pem(5) 0;
+      font-weight: $font-weight-headline;
+      text-decoration: none;
+      color: $tlt-blue;
+      @include transition(all .2s linear);
+      &:hover, &:active {
+        color: $white !important;
+      }
+    }
+
+    @include breakpoint($bp-med) {
+      float: right;
+      border-bottom-width: 0;
+      border-top-width: 0;
+      padding: {
+        top: pem(29);
+        bottom: 0;
+      }
+      margin-bottom: -1px; // Make sure main nav borders sit on top of menu-inner border
+      > li {
+        float: left;
+        &:not(:last-child) {
+          margin-right: pem(6, 18);
+        }
+      }
+      a {
+        border-bottom: 1px solid transparent;
+        padding: {
+          top: pem(20, 18); // Push the one-line items down by one line
+          bottom: pem(23, 18);
+          left: pem(4,18);
+          right: pem(4,18);
+        }
+        font-size: pem(18);
+        font-weight: $font-weight-body;
+        line-height: pem(20, 18);
+        color: $tlt-dark-gray !important;
+        &:hover, &:active {
+          // border-bottom-color: $tlt-dark-gray;
+          color: $tlt-dark-gray !important;
+          text-decoration: underline;
+        }
+      }
+
+      // Individual nav items
+
+      #nav-home {
+        display: none;
+      }
+      #nav-why a {
+        padding-top: 0; // Don't push the two-line nav item down
+      }
+    }
+
+    @include breakpoint($bp-large) {
+      > li:not(:last-child) {
+        margin-right: pem(18, 18);
+      }
+    }
+
+    @include breakpoint($bp-large-2) {
+      > li:not(:last-child) {
+        margin-right: pem(32, 18);
+      }
+    }
+  }
+
+  //
+  // Secondary menu
+  //
+
+  .secondary {
+
+    @include breakpoint($bp-med) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      background-color: $tlt-dark-gray;
+    }
+  }
+
+  // Secondary nav
+
+  .sec-nav {
+    @include zero;
+    list-style: none;
+    margin-bottom: pem(5);
+
+    a {
+      display: block;
+      padding: pem(5) 0;
+      color: $tlt-blue;
+      text-decoration: none;
+      @include transition(color .2s);
+      &:hover {
+        color: $white !important;
+      }
+    }
+
+    @include breakpoint($bp-med) {
+      margin-bottom: 0;
+      > li {
+        float: left;
+        margin-right: 1.25em;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      a {
+        padding: .5em 0 .75em;
+      }
+    }
+  }
+
+  // Social nav
+
+  .social-nav {
+    @include zero;
+    list-style: none;
+
+    li {
+      float: left;
+      margin-right: .6em; // spread out the icons a bit more to help hit them reliably
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    a {
+      display: block;
+      height: 2.5em;
+      width: 2.5em;
+      padding: .3em 0 0 0;
+      text-decoration: none;
+    }
+
+    @include breakpoint($bp-med) {
+      float: right;
+      margin-right: -1em;
+
+      li {
+        margin-right: 0;
+        &.site-search {
+          margin-right: 1.2em;
+        }
+      }
+
+    }
+  }
+
+  // Site search
+
+  .site-search {
+    position: relative;
+    border-bottom: 1px solid $tlt-blue;
+    margin-bottom: pem(10);
+    margin-right: 0;
+    width: 100%;
+
+    form {
+      @include zero;
+      position: relative;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      @include zero;
+      position: relative;
+      z-index: 2;
+      border-width: 0;
+      border-radius: 0;
+      padding-left: 1.5em;
+      padding-right: 1.5em;
+      padding-bottom: 5px;
+      outline: none;
+      background-color: transparent;
+      color: $white;
+    }
+
+    .icon-search {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      margin-top: -10px;
+      z-index: 1;
+    }
+
+    @include breakpoint($bp-med) {
+      border-bottom-width: 0;
+      margin-bottom: 0;
+      width: auto;
+      height: 2.5em;
+
+      .form-control {
+        float: right;
+        padding-left: 0;
+        width: 44px;
+        border-bottom: 1px solid transparent;
+        color: $tlt-dark-gray;
+        @include transition(width 0 .3s, border-color .2s, color .2s);
+        &:focus {
+          position: absolute;
+          top: 0;
+          right: 0;
+          z-index: 1;
+          background-color: $tlt-dark-gray;
+          border-bottom-color: $white !important;
+          padding-right: 1.5em;
+          width: 280px;
+          color: $white;
+          @include transition(width .3s ease, border-color .1s, color .1s);
+        }
+      }
+
+      .icon-search {
+        left: auto;
+        right: 0;
+      }
+    }
+
+    @include breakpoint($bp-large) {
+      .form-control:focus {
+        width: 360px;
+      }
+    }
+  }
+
+}
+
+//
+// States
+//
+
+@include breakpoint(0 $bp-med) {
+
+  // Transitions
+  #Header {
+    @include transition(background-color .35s linear);
+  }
+  .menu-closed #Header {
+     @include transition(background-color .2s linear);
+  }
+
+  // No javascript
+
+  .no-js {
+    #Header {
+      max-height: 61px;
+      overflow: hidden;
+      background-color: transparent;
+      #MenuCloseBtn {
+        display: none;
+      }
+      #MenuOpenBtn {
+        display: block;
+      }
+    }
+    #Header:target {
+      max-height: none;
+      background-color: $tlt-dark-gray;
+      #MenuCloseBtn {
+        display: block;
+      }
+      #MenuOpenBtn {
+        display: none;
+      }
+      #Logo {
+        background-position: 0 -40px;
+      }
+    }
+  }
+
+  // Javascript
+
+  .js {
+    // Menu closed
+    &.menu-closed {
+      #Header {
+        max-height: 61px; // Logo height + top/bottom margins + 1px border
+        overflow: hidden;
+        background-color: transparent;
+      }
+      #MenuCloseBtn {
+        display: none;
+      }
+      #MenuOpenBtn {
+        display: block;
+      }
+    }
+
+    // Menu open
+    &.menu-open {
+      #Header {
+        max-height: none;
+        position: absolute;
+        top: -61px;
+        left: 0;
+        z-index: 999;
+        width: 100%;
+        min-height: 100vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        background-color: $tlt-dark-gray;
+      }
+      #Logo {
+        background-position: 0 -40px;
+      }
+      #MenuCloseBtn {
+        display: block;
+      }
+      #MenuOpenBtn {
+        display: none;
+      }
+      body {
+        margin-top: 61px;
+      }
+    }
+
+  }
+}
+
+//
+// You are here
+//
+
+// Main nav
+
+.sec-why #nav-why,
+.sec-threats #nav-threats,
+.sec-conservation #nav-conservation,
+.sec-donate #nav-donate {
+  a {
+    color: $white;
+  }
+
+  @include breakpoint($bp-med) {
+    a {
+      color: $tlt-dark-gray;
+      border-color: $tlt-dark-gray;
+    }
+  }
+
+}
+
+// Secondary nav
+
+.sec-about #nav-about,
+.sec-news #nav-news,
+.sec-contribute #nav-contribute {
+  a {
+    color: $white;
+  }
+}
+
+//
+// Theming
+//
+
+.theme-green {
+  // Site search
+  .site-header .site-search {
+    border-color: $tlt-green !important;
+  }
+}
+
+.theme-gray {
+  // Site search
+  .site-header .site-search {
+    border-color: $tlt-gray !important;
+  }
+}
+
+.theme-yellow {
+  // Site search
+  .site-header .site-search {
+    border-color: $tlt-yellow !important;
+  }
+}

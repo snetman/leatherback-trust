@@ -1,0 +1,30 @@
+/* =======================================================
+    Page header
+   ======================================================= */
+
+/*
+Markup:
+
+<div class="page-intro">
+  <p>Text here</p>
+</div>
+*/
+
+.page-intro {
+  //font-size: $font-size-large;
+  margin-bottom: $space;
+
+  > p {
+    margin-bottom: $space;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+}
+
+/*
+.page-header + .page-intro {
+  margin-top: $space;
+}
+*/

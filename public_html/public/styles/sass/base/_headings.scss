@@ -1,0 +1,194 @@
+/* =======================================================
+    Headings
+   ======================================================= */
+
+/*Further Reading: http:/csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css/ */
+
+// Common settings
+
+h1,h2,h3,h4,h5,h6 {
+  margin-top: 0;
+  margin-bottom: $space;
+  font-family: $font-primary;
+  font-weight: $font-weight-headline;
+  color: $headline-color;
+}
+
+// Basic heading hierarchy
+
+h1, .as-h1 {
+  font-size: pem(24, 16); // 24
+  font-weight: $font-weight-body;
+  line-height: 1.25;  // 30
+  margin-bottom: pem(22, 24); // 22
+}
+
+h2, .as-h2 {
+  font-size: pem(21, 16); // 21
+  font-weight: $font-weight-body;
+  line-height: 1.19; // 25
+  margin-bottom: pem(22, 21); // 22
+}
+
+h3, .as-h3 {
+  font-size: pem(18, 16); // 18
+  line-height: 1.25; // 22.5
+  margin-bottom: pem(11, 18); // 11
+}
+
+h4, .as-h4 {
+  font-size:1em; // 16
+  line-height: $line-height-base;  // 22
+  margin-bottom: 0;
+}
+
+h5, .as-h5 {
+  font-size: pem(13, 16); // 13
+  font-weight: $font-weight-body;
+  line-height: 22/13;  // 22
+  margin-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: pem(2,15);
+}
+
+h6, .as-h6 {
+  font-size:1em; // 16
+  font-style: italic;
+  font-weight: $font-weight-body;
+  line-height: $line-height-base;  // 22
+  margin-bottom: 0;
+}
+
+// Display heads
+
+.display {
+  font-size: pem(36, 16); // 36
+  line-height: 44/36; // 44
+  margin-bottom: pem(22, 36); // 22
+}
+
+// Eyebrow heads
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: $space-quarter;
+  padding: .3em $space-half .4em;
+  font-size: 11px;
+  font-size: .6875rem; // 11
+  font-weight: $font-weight-headline;
+  letter-spacing: 0;
+  line-height: 22/11;  // 22
+  text-transform: uppercase;
+  background-color: $tlt-blue;
+  &-strong {
+    background-color: $tlt-dark-gray !important;
+    color: $tlt-blue;
+  }
+}
+
+// Type system for tablets and above
+
+@include breakpoint($bp-med) {
+  h1, .as-h1 {
+    font-size: pem(32, 16); // 32
+    font-weight: $font-weight-body;
+    line-height: 44/32;  // 44
+    margin-bottom: pem(22, 32); // 22
+  }
+
+  h2, .as-h2 {
+    font-size: pem(24, 16); // 24
+    font-weight: $font-weight-body;
+    line-height: 33/24;  // 33
+    margin-bottom: pem(22, 24); // 20
+  }
+
+  // Display head
+
+  .display {
+    font-size: pem(64, 16); // 72
+    line-height: 1.25; // 80
+    margin-bottom: pem(22, 64); // 44
+  }
+
+}
+
+// Extra large headings
+
+.giga{
+  font-size: 80px;
+  font-size: 5rem; // 80
+  line-height: 1.2; // 96
+}
+.mega{
+  font-size:64px;
+  font-size:4rem; // 64
+  line-height:1.125; // 72
+}
+.kilo{
+  font-size:48px;
+  font-size:3rem; // 48
+  line-height:1; // 48
+}
+
+// Extra small headings
+
+.milli {
+  font-size: 12px;
+  font-size: 0.75rem; // 12
+  line-height: 1.5; // 18
+}
+
+// Heading groups
+
+hgroup {
+  * {
+    margin-top: $space-half;
+  }
+  *:first-child {
+    margin: 0;
+  }
+}
+
+// Small text in headings
+
+h1, h2, h3, h4, h5, h6 {
+  small {
+    display: block;
+    font-family: $font-secondary;
+    font-size: .75em;
+    font-weight: $font-weight-body;
+    color: $body-color;
+  }
+}
+
+//
+// Theming
+//
+
+.theme-green {
+  .eyebrow {
+    background-color: $tlt-green;
+    &-strong {
+      color: $tlt-green;
+    }
+  }
+}
+.theme-gray {
+  .eyebrow {
+    background-color: $tlt-gray;
+    &-strong {
+      color: $tlt-gray;
+    }
+  }
+}
+.theme-yellow {
+  .eyebrow {
+    background-color: $tlt-yellow;
+    &-strong {
+      color: $tlt-yellow;
+    }
+  }
+}
+
+// End headings

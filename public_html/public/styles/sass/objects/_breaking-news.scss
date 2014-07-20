@@ -1,0 +1,65 @@
+//
+// Breaking news
+//
+
+.breaking-news {
+  color: $tlt-blue;
+  overflow: hidden;
+
+  .breaking-inner {
+    padding: $space-half $space-half 1.5*$space-half;
+    background-color: $tlt-dark-gray;
+  }
+
+  .headline,
+  .body,
+  .call-to-action {
+    display: inline;
+    p {
+      @include zero;
+      max-width: none;
+      display: inline;
+    }
+  }
+  .headline p {
+    font-weight: $font-weight-headline;
+    color: $white;
+    &:after {
+      content: '-';
+      display: inline;
+      color: transparent;
+    }
+  }
+  .call-to-action {
+    a {
+      color: $white;
+      &:hover {
+        color: $tlt-blue;
+      }
+    }
+  }
+
+  @include breakpoint($bp-med) {
+    margin-bottom: $space;
+    .breaking-inner {
+      padding: .7*$space $space $space;
+    }
+  }
+
+  // Fancy states if we have javascript
+
+  .js & {
+    .breaking-inner {
+      opacity: 0;
+      @include transform(translate3d(-100%,0,0));
+      @include transition(transform 350ms ease 200ms, opacity 200ms linear 250ms);
+    }
+    //@include transition(width .5s ease);
+  }
+  .js.ready & {
+    .breaking-inner {
+      opacity: 1;
+      @include transform(translate3d(0,0,0));
+    }
+  }
+}

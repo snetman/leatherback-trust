@@ -1,0 +1,30 @@
+/* =======================================================
+    Columns
+   ======================================================= */
+
+@mixin cols($number:2) {
+  @include column-count($number);
+  @include column-gap(gutter(12));
+}
+
+.cols-2 {
+  @include cols(2);
+}
+
+.cols-2med {
+  @include breakpoint($bp-med) {
+    @include cols(2);
+  }
+}
+
+.cols-4max {
+  @include breakpoint($bp-med) {
+    @include cols(2);
+  }
+  @include breakpoint($bp-large) {
+    @include cols(3);
+  }
+  @include breakpoint($bp-large-2) {
+    @include cols(4);
+  }
+}

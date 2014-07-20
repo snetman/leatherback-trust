@@ -1,0 +1,19 @@
+//
+//  Publications
+//
+
+.pub {
+  @include clearfix;
+  position: relative;
+  .authors,
+  .year,
+  .cite,
+  .link,
+  p {
+    @include zero;
+  }
+  .authors {
+    font-weight: $font-weight-headline;
+    color: $headline-color;
+  }
+}

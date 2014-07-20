@@ -1,0 +1,50 @@
+/* =======================================================
+    Lists
+   ======================================================= */
+
+ul {
+	list-style: disc;
+	margin: 0 0 $space 1.2em;
+
+	ul {
+		margin-bottom: 0;
+	}
+}
+
+ol {
+  list-style: decimal;
+	margin: 0 0 $space 1em;
+
+	ol {
+  	margin-bottom: 0;
+    li {
+      list-style-type: upper-alpha; // A. , B. , C.
+      li {
+        list-style-type: lower-roman; // i. , ii. , iii.
+        li {
+          list-style-type: lower-alpha; // a. , b. , c.
+        }
+      }
+    }
+	}
+}
+
+/*  Definition lists
+   ======================================================= */
+
+dl {
+	overflow: hidden;
+	margin: 0 0 $space;
+}
+
+dt {
+	font-weight: $font-weight-headline;
+  margin-top: $space;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+dd {
+	margin-left: 0;
+}

@@ -1,0 +1,172 @@
+/* =======================================================
+    Fader
+   ======================================================= */
+   
+// Markup pattern for basic fader or slider below. The slider takes an "effect: slide" parameter in it's init function 
+
+/*
+<div id="Fader" class="fader">
+	<div class="wrapper">
+    <div class="slide">
+      <img src="http://farm6.staticflickr.com/5222/5688982542_14104a549a_b.jpg"/>
+      <div class="caption">
+        <p>Caption for image 1 here lorem ipsum dolor sit amet consecutat velorem dolor.</p>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="http://farm6.staticflickr.com/5110/5689029162_72c4aeeeed_b.jpg"/>
+      <div class="caption">
+        <p>Caption for image 2 here amet consecutat velorem dolor. Lorem ipsum dolor sit amet consec. Adipiscing elit vestibulum est dolorem valia sed wintorum.</p>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="http://farm6.staticflickr.com/5303/5689048144_388d4f13b4_b.jpg"/>
+      <div class="caption">
+        <p>Caption for image 3 here adipiscing elit ventorum dolor.</p>
+      </div>
+    </div>
+	</div><!-- / .wrapper -->
+  <div class="fader_controls">
+		<div class="pager prev" data-target="prev">&lsaquo;</div>
+		<div class="pager next" data-target="next">&rsaquo;</div>
+ 		<ul class="pager-list"></ul>
+  </div>
+</div><!-- / #Fader -->
+*/
+
+// Base fader styles
+
+.fader {
+  position: relative;
+  padding-top: 75%; // Preserve 4:3 aspect ratio
+  overflow: hidden;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform-style: preserve-3d;
+	&.widescreen {
+  	padding-top: 56.25%; // Preserve 16:9 aspect ratio
+	}
+}
+
+.fader {
+	
+	// The slides
+	
+  .slide{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 1;
+    opacity: 0;
+    img {
+      height: auto;
+    }
+  }
+  
+  // The captions
+  
+  .caption {
+    position: absolute;
+    bottom: 0;
+    padding: $space-half;
+    width: 100%;
+    font-size: $font-size-slightly-smaller;
+    line-height: 1.2;
+    background-color: $overlay-dark;
+    color: $white;
+    p { margin: 0; }
+  }
+  
+  // Prev/next buttons
+  
+  .prev,
+  .next{
+    position: absolute;
+    height: 80px;
+    line-height: 55px;
+    width: 50px;
+    font-size: 100px;
+    text-align: center;
+    color: #fff;
+    top: 50%;
+    left: 0;
+    z-index: 4;
+    margin-top: -25px;
+    cursor: pointer;
+    opacity: .7;
+    transition: all 150ms;
+  }
+  
+  .prev:hover,
+  .next:hover{
+    opacity: 1;
+  }
+
+  .next{
+    left: auto;
+    right: 0;
+  }
+  
+  // The position dots
+
+  .pager-list{
+  	position: absolute;
+  	top: $space-half;
+  	right: $space-half;
+  	text-align: center;
+  	z-index: 4;
+  	padding: 0;
+  
+    li {
+      float: left;
+      border-radius: $space-half;
+      margin: 0 0 0 $space-quarter;
+      width: $space-half;
+      height: $space-half;
+      @include hide-text;
+      line-height: 1;
+      background: #fff;
+      opacity: .7;
+      cursor: pointer;
+      transition: all 150ms;
+      
+      &:hover, &.active {
+        opacity: 1;
+      }
+    }
+  }
+} 
+
+/*  Styles for the carousel version
+   ======================================================= */
+/*
+.carousel{
+	margin-top: 100px;
+	padding-top: 200px;
+	background: #000;
+	overflow: hidden;
+	position: relative;
+}
+
+.carousel .wrapper{
+	position: absolute;
+	top: 0;
+	width: 1000%;
+	left: 50%;
+	height: 100%;
+	margin-left: -500%;
+	text-align: center;
+	white-space: nowrap;
+	font-size: 0;
+	
+	-webkit-backface-visibility: hidden;
+	-webkit-transform-style: preserve-3d;
+}
+
+.carousel .slide{
+	height: 200px;
+	
+	-webkit-backface-visibility: hidden;
+	-webkit-transform-style: preserve-3d;
+}
+*/

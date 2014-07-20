@@ -1,0 +1,59 @@
+/* =======================================================
+    Text elements
+   ======================================================= */
+
+p {
+	margin-bottom: $space;
+  margin-top: 0;
+  max-width: $max-measure;
+  line-height: $line-height-base;
+}
+
+// Blockquote
+
+blockquote {
+  font-style: italic;
+  border-left: $border-width $border-style $border-color;
+  margin-bottom: $space;
+  padding: {
+    left: $pad;
+    right: $pad;
+  }
+}
+
+// Horizontal rule
+
+hr {
+  clear: both;
+  display: block;
+  margin: $space-double 0;
+  padding: 0;
+  height: 2px;
+  border: 0;
+  border-top: 1px solid $tlt-blue;
+  &.compact {
+    margin: $space 0;
+  }
+}
+
+// Code
+
+code {
+  font: 12px/1 'Courier New', Courier, monospace;
+}
+
+// Abbreviation
+
+abbr {
+  border-bottom: 1px dotted $gray;
+  cursor: help;
+}
+
+// Italics, bold
+
+em { font-style: italic; }
+strong { font-weight: $font-weight-headline; }
+
+// Sub- and superscript
+
+sub, sup { line-height: 0; }

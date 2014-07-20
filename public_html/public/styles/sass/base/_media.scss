@@ -1,0 +1,27 @@
+/* =======================================================
+    Media elements
+   ======================================================= */
+
+// Flexible media for rwd
+
+img, video, object {
+	max-width: 100%;
+	height: auto;
+}
+
+iframe {
+	margin-bottom: $space;
+}
+
+figure {
+	margin: 0 0 $space;
+	img {
+		display: block;
+	}
+}
+
+figcaption {
+	@include zero;
+	margin-top: $space-half;
+	font-style: normal;
+}

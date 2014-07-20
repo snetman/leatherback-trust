@@ -1,0 +1,163 @@
+/* =======================================================
+    History
+   ======================================================= */
+
+.tlt-history {
+  @include clearfix;
+  background: transparent url(../images/tlt-history-blue.png) 50% top repeat-y;
+  margin-bottom: $space;
+
+  > dt {
+    clear: both;
+    padding: $space 0 $space-double;
+    text-align: center;
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  > dd {
+    margin-bottom: $space;
+    background: transparent url(../images/tlt-history-blue.png) left 50% repeat-x;
+  }
+
+  @include breakpoint($bp-med) {
+    > dd {
+      &:nth-child(even) {
+        clear: both;
+        float: left;
+        width: 50%;
+        padding-right: $space;
+      }
+      &:nth-child(odd) {
+        float: right;
+        width: 50%;
+        padding-left: $space;
+      }
+    }
+  }
+
+  @include breakpoint($bp-large) {
+    > dd:nth-child(even) {
+      padding-right: $space-double;
+    }
+    > dd:nth-child(odd) {
+      padding-left: $space-double;
+    }
+
+  }
+}
+
+//
+// The years
+//
+
+.tlt-history-year {
+  @include zero;
+  display: inline-block;
+  background-color: $tlt-blue;
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  padding-top: 1.125em;
+  line-height: 1;
+  text-align: center;
+}
+
+
+//
+// The nodes
+//
+
+.tlt-history-node {
+  @include clearfix;
+  @include zero;
+  position: relative;
+  border: 1px solid $tlt-blue;
+  background-color: $tlt-blue-bkg;
+
+  img {
+    display: block;
+  }
+
+  p {
+    @include zero;
+    margin-bottom: $space-half;
+    max-width: none;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .node-date {
+    @extend .a-pubdate;
+    position: absolute;
+    top: $space-half;
+    left: $space-half;
+    z-index: 2;
+  }
+
+  .node-body {
+    @include zero;
+    position: relative;
+    min-height: 4em + $space; // Make sure I'm at least as tall as the date circle
+    padding: $space-half $space-half $space span(3.5 of 12);
+    background-color: $tlt-white-bkg;
+  }
+
+  // Breakpoints
+
+  @include breakpoint($bp-large-2) {
+    .node-body {
+      padding-left: span(3 of 12);
+    }
+  }
+
+}
+
+//
+// Theming
+//
+
+.theme-gray {
+  .tlt-history,
+  .tlt-history > dd {
+    background-image: url(../images/tlt-history-gray.png);
+  }
+  .tlt-history-year {
+    background-color: $tlt-gray;
+  }
+  .tlt-history-node {
+    border-color: $tlt-gray;
+    background-color: $tlt-gray-bkg;
+  }
+}
+.theme-green {
+  .tlt-history,
+  .tlt-history > dd {
+    background-image: url(../images/tlt-history-green.png);
+  }
+  .tlt-history-year {
+    background-color: $tlt-green;
+  }
+  .tlt-history-node {
+    border-color: $tlt-green;
+    background-color: $tlt-green-bkg;
+  }
+}
+.theme-yellow {
+  .tlt-history,
+  .tlt-history > dd {
+    background-image: url(../images/tlt-history-yellow.png);
+  }
+  .tlt-history-year {
+    background-color: $tlt-yellow;
+  }
+  .tlt-history-node {
+    border-color: $tlt-yellow;
+    background-color: $tlt-yellow-bkg;
+  }
+}

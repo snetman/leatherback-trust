@@ -1,0 +1,39 @@
+/* =======================================================
+    Text areas
+   ======================================================= */
+
+// Intro
+
+.intro {
+	font-size: $font-size-slightly-larger;
+	font-weight: $font-weight-headline;
+}
+
+// Pullquote
+
+.pullquote {
+	font-family: $font-primary;
+	font-size: $font-size-large;
+}
+
+//Text Passages
+
+.text {
+
+	a {
+		text-decoration: underline;
+	}
+
+  table {
+    margin-bottom: $space;
+  }
+
+}
+
+// Small text
+
+.smalltext {
+  font-size: 14px;
+  font-size: .875rem;
+  line-height: $line-height-small;
+}

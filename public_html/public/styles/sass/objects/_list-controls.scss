@@ -1,0 +1,68 @@
+/* =======================================================
+    List controls
+   ======================================================= */
+
+/*
+Markup:
+
+<div class="list-controls list-controls-flush">
+  <div class="form-group">
+    <label class="label-small">Filter&nbsp;by</label>
+    <select class="form-control input-small">
+      <option selected>All</option>
+      <option>Expired</option>
+      <option>Completed</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="label-small">Order&nbsp;by</label>
+    <select class="form-control input-small">
+      <option selected>Activity date</option>
+      <option>Name</option>
+    </select>
+  </div>
+</div>
+<!--/.list-controls-->
+*/
+
+.list-controls {
+  border: $border-width $border-style $border-color;
+  margin-bottom: $space;
+  padding: $space-half;
+  background-color: $gray-light-2;
+
+  @include breakpoint($bp-med) {
+
+    padding: $space-quarter $space-half;
+    > div {
+      display: inline-block;
+      margin-right: $space-half;
+      text-align: left;
+      vertical-align: bottom;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+  }
+
+  &-flush {
+    margin-bottom: 0;
+    border-bottom-width: 0;
+  }
+
+  &-compact {
+    margin-bottom: $space-half;
+  }
+
+  &-right {
+    text-align: right;
+    > div {
+      margin-right: 0;
+      margin-left: $space-half;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}

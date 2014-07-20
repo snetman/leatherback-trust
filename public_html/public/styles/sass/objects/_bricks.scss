@@ -1,0 +1,91 @@
+/* =======================================================
+    Bricks
+   ======================================================= */
+
+//
+//  Brick stack
+//
+
+.brick-stack {
+
+  margin-bottom: $space-and-half;
+
+  > h2 {
+    margin-bottom: $space-half;
+  }
+
+  // The bricks
+
+  > div {
+    position: relative;
+    border: $border-width $border-style $border-color;
+    margin: 0;
+    padding: {
+      top: $space-half+$space-quarter;
+      right: $space-double;
+      bottom: $space-half+$space-quarter;
+      left: $space-half;
+    }
+    background-color: $gray-light;
+
+    & + div {
+      border-top-width: 0;
+    }
+
+    // If there's a brick header...
+
+    > h2,
+    > h3,
+    > .title {
+      margin: 0 0 $space-half;
+    }
+
+    // Change form control backgrounds if they are nested here for contrast
+    .form-control {
+      background-color: $white;
+    }
+  }
+
+
+}
+
+// Add brick
+
+.add-brick {
+
+  display: block;
+  padding-top: $space-half;
+
+}
+
+// Delete brick
+
+.delete-brick {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-left: $border-width $border-style $border-color;
+  height: 100%;
+  width: $space-and-half;
+  font-size: $font-size-large;
+  text-align: center;
+  text-decoration: none;
+  background-color: darken($gray-light,4);
+  color: $gray;
+
+  .x {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 100%;
+    margin-top: -.875em;
+    text-align: center;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $white;
+    color: $danger;
+  }
+}

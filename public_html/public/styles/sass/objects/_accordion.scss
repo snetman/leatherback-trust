@@ -1,0 +1,38 @@
+/* =======================================================
+    Accordion
+   ======================================================= */
+
+.accordion {
+	margin-bottom: $space;
+}
+
+// The handle
+
+.acc-handle {
+	background: $gray-dark;
+	color: $white;
+	font-family: $font-primary;
+	font-weight: $font-weight-headline;
+	display: block;
+	position: relative;
+	padding: $pad-half;
+	border-bottom: $border-width $border-style $gray-medium;
+
+	&:after {
+		content:"+";
+		float: right;
+	}
+
+	&:hover {
+		color: $white;
+		background: darken($gray-dark,5);
+	}
+
+	&.active {
+		background: lighten($gray-dark,5);
+
+		&:after {
+			content:"-";
+		}
+	}
+}

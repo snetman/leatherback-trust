@@ -1,0 +1,68 @@
+/* =======================================================
+    Tags
+   ======================================================= */
+
+//
+// Tags
+//
+
+$countsize: .6em;
+
+.tag {
+
+	display: block;
+	.count {
+		position: relative;
+		top: -2px;
+		display: inline-block;
+		margin-left: .5em;
+		min-width: $countsize*3;
+		padding: $countsize*.5 $countsize*.5 $countsize;
+		border-radius: $countsize*3;
+		vertical-align: middle;
+		font-size: $countsize;
+		line-height: 1;
+		text-align: center;
+		background-color: $tlt-blue;
+		color: $tlt-dark-gray;
+	}
+}
+
+//
+// Tag lists
+//
+
+.tag-list {
+	@include zero;
+	margin-bottom: $space;
+	list-style: none;
+	> li {
+		margin-top: .2em;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	&.tag-list-flush {
+		margin-bottom: 0;
+	}
+}
+
+//
+// Theming
+//
+
+.theme-green {
+	.tag .count {
+		background-color: $tlt-green;
+	}
+}
+.theme-gray {
+	.tag .count {
+		background-color: $tlt-gray;
+	}
+}
+.theme-yellow {
+	.tag .count {
+		background-color: $tlt-yellow;
+	}
+}

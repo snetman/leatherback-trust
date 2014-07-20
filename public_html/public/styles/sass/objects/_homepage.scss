@@ -1,0 +1,110 @@
+/* =======================================================
+    Homepage
+   ======================================================= */
+
+.home {
+
+  //
+  // Breaking news
+  //
+
+  .breaking-news {
+    margin-bottom: $space-half+$space-quarter;
+  }
+
+  //
+  // The hero
+  //
+
+  .block-hero {
+    margin-bottom: $space;
+
+    .b-image {
+      width: 100%;
+      padding-top: 75%;
+      background: {
+        image: url(../images/robinson-turtle-widescreen.jpg);
+        position: center center;
+        size: cover;
+        repeat: no-repeat;
+      }
+    }
+
+    @include breakpoint($bp-med) {
+      margin-bottom: $space-double;
+      .b-image {
+        padding-top: 56.25%;
+      }
+    }
+    /*
+    @include breakpoint($bp-large) {
+      .b-image {
+        outline: 2px solid red;
+        padding-top: 50%;
+      }
+    }
+    */
+    @include breakpoint($bp-large-2) {
+      .b-image {
+        padding-top: 50%;
+        // outline: 2px solid green;
+      }
+    }
+    /*
+    @include breakpoint($bp-xl) {
+      .b-image {
+        padding-top: 33.3333333%;
+        outline: 2px solid blue;
+      }
+    }
+    */
+  }
+
+  //
+  // The mission
+  //
+
+  .mission {
+    margin-bottom: $space-double;
+    > h1 {
+      @include zero;
+    }
+    @include breakpoint($bp-med) {
+      margin-bottom: $space-triple;
+    }
+    @include breakpoint($bp-large-2) {
+      @include pad(1,1);
+    }
+  }
+
+  #MissionMore {
+    margin-top: $space;
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    @include breakpoint($bp-med) {
+      @include column-count(2);
+      @include column-gap(gutter(12));
+    }
+  }
+
+  @include breakpoint($bp-large-2) {
+    .image {
+      padding-top: 50%;
+    }
+  }
+
+  //
+  // News
+  //
+
+  .news .sechead {
+    //margin-bottom: 0;
+  }
+
+  .news-cards {
+    //margin-top: -1px;
+  }
+
+}

@@ -1,0 +1,75 @@
+/* =======================================================
+    Sheets
+   ======================================================= */
+
+/*
+Markup:
+
+<div class="sheet sheet-small">
+  <header>
+    <h1>Sheet title</h1>
+  </header>
+  <div class="body">
+    Body here...
+  </div>
+  <!--/.body-->
+  <footer>
+    <p>Optional footer stuff here</p>
+  </footer>
+</div>
+<!--/.sheet-->
+*/
+
+.sheet {
+  @include clearfix;
+  margin: 0 auto;
+  $sheet-padding: $space-half $space;
+  max-width: pem(640);
+  background-color: $white;
+  box-shadow: 0 8px 16px rgba(0,0,0,.5);
+
+  // Sheet sizes
+
+  &-small {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  // The header
+
+  header {
+    margin-bottom: $space-half;
+    padding: $sheet-padding;
+    background: $gray-dark;
+    color: $white;
+
+    > h1 {
+      @include zero;
+      color: $white;
+    }
+  }
+
+  // The content
+
+  .body {
+    padding: $sheet-padding;
+    margin-top: $space-half + $space-quarter;
+
+    > p {
+      margin-top: 0;
+    }
+  }
+
+  // The footer
+
+  footer {
+    padding: $sheet-padding;
+    background: $gray-light-2;
+
+    > p {
+      @include zero;
+      font-size: $font-size-small;
+    }
+  }
+
+}

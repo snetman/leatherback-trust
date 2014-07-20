@@ -1,0 +1,65 @@
+//
+//  Person
+//
+
+.person {
+
+  .photo {
+    img {
+      display: block;
+      border-radius: 50%;
+    }
+  }
+
+  .name {
+    @include zero;
+  }
+
+  .title {
+    @include zero;
+    font-style: italic;
+  }
+
+  // Layout
+
+  @include clearfix;
+
+  .photo {
+    float: left;
+    width: span(3 of 12);
+    margin-right: gutter(12);
+  }
+  .body {
+    float: left;
+    width: span(8);
+  }
+
+  @include breakpoint($bp-med) {
+    .photo {
+      float: none;
+      width: 100%;
+      margin-bottom: $space-half;
+    }
+    .body {
+      float: none;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  // If we have flexbox
+
+  .flexbox & {
+    @include breakpoint(0 $bp-med) {
+      @include flexbox;
+      @include align-items(center);
+      .photo {
+        float: none;
+      }
+      .body {
+        float: none;
+        width: auto;
+      }
+    }
+  }
+}

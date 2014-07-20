@@ -8,27 +8,27 @@ return array(
   "Why Leatherbacks <br>&amp; Sea Turtles Matter" => "Porque Leatherbacks <br>&amp; Sea Turtles Matter",
   "Threats" => "Amenazas",
   "Conservation" => "Conservación",
-  "Donate" => "Done",
+  "Donate" => "Donar",
 
   // Secondary nav
-  "About" => "About",
+  "About" => "Acerca",
   "News & Events" => "Noticias y Events",
-  "Contribute" => "Contribute",
+  "Contribute" => "Contribuir",
 
   // Footer nav
   "Contact" => "Contacto",
-  "Site Terms" => "Site Terms",
-  "Privacy" => "Privacy",
-  "Back to top" => "a Top",
+  "Site Terms" => "Condiciones",
+  "Privacy" => "Privacidad",
+  "Back to top" => "Volver al comienzo",
 
   // Mobile nav, but hidden via css
-  "Menu" => "Menu",
-  "Close" => "Ciuda",
+  "Menu" => "Menú",
+  "Close" => "Cerrar",
 
   // Action links
-  "View all" => "a todo",
+  "View all" => "Ver todo",
   "More" => "Mas",
-  "Less" => "Less",
-  "Top" => "Top",
+  "Less" => "Menos",
+  "Top" => "Comienzo",
 
 );

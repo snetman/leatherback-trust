@@ -1,0 +1,551 @@
+/* =======================================================
+    Navigation
+   ======================================================= */
+
+// Base styles
+
+.nav {
+  > ul {
+    @include zero;
+    list-style: none;
+    line-height: $line-height-small;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+//
+// Sub navigation
+//
+
+.list-nav {
+  > ul {
+    margin-bottom: $space;
+    li {
+      margin-top: $space-half;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    a {
+      display: block;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  &.list-nav-flush {
+    margin-bottom: 0;
+  }
+}
+
+//
+// Section navigation
+//
+
+$navitemheight: 2.5em;
+
+.section-nav {
+  border-bottom: 1px solid $tlt-blue;
+  margin-top: -$space-and-half;
+  margin-bottom: $space-and-half;
+
+  ul {
+    @include clearfix;
+  }
+
+  li {
+    position: relative;
+    top: 1px;
+    z-index: 1;
+    float: left;
+    border-bottom: 1px solid $tlt-blue;
+    height: $navitemheight;
+  }
+
+  .inthissection {
+    padding: .5em .25em 0 0;
+    .eyebrow {
+      position: relative;
+      top: -1px;
+      margin: 0;
+    }
+  }
+
+  a {
+    display: block;
+    background-color: transparent;
+    height: $navitemheight;
+    padding: .5em .5em 0;
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+
+  #MoreNav,
+  #LessNav {
+    font-weight: $font-weight-headline;
+  }
+
+  // You are here
+
+  .current {
+    border-color: $tlt-dark-gray !important;
+    a {
+      pointer-events: none;
+    }
+  }
+
+  // Breakpoints
+
+  @include breakpoint($bp-med) {
+    .inthissection {
+      padding: .625em .5em 0 0;
+    }
+    a {
+      padding: .625em .5em 0;
+    }
+  }
+}
+
+// States
+
+.no-js .section-nav {
+  #MoreNav {
+    width: auto;
+    height: $navitemheight;
+    opacity: 1;
+    @include transition(width 0, height 0, opacity .2s);
+  }
+  #LessNav {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+  }
+  &:target {
+    #MoreNav {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+    }
+    #LessNav {
+      width: auto;
+      height: $navitemheight;
+      opacity: 1;
+      @include transition(width 0, height 0, opacity .2s);
+    }
+  }
+
+  @include breakpoint(0 $bp-med) {
+    ul li:nth-child(n+6) {
+      display: none;
+    }
+    &:target {
+      ul li:nth-child(n+6) {
+        display: block;
+      }
+    }
+  }
+
+  @include breakpoint($bp-med $bp-large-2) {
+    ul li:nth-child(n+7) {
+      display: none;
+    }
+    &:target {
+      ul li:nth-child(n+7) {
+        display: block;
+      }
+    }
+  }
+
+  @include breakpoint($bp-large-2) {
+    ul li:nth-child(n+8) {
+      display: none;
+    }
+    &:target {
+      ul li:nth-child(n+8) {
+        display: block;
+      }
+    }
+
+  }
+}
+
+.js .section-nav {
+
+  // Full nav showing
+
+  #MoreNav {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+  }
+  #LessNav {
+    width: auto;
+    height: $navitemheight;
+    opacity: 1;
+    @include transition(width 0, height 0, opacity .2s);
+  }
+  @include breakpoint(0 $bp-med) {
+    ul li:nth-child(n+6) {
+      width: auto;
+      height: $navitemheight;
+      opacity: 1;
+      @include transition(width 0, height 0, opacity .2s);
+    }
+  }
+  @include breakpoint($bp-med $bp-large-2) {
+    ul li:nth-child(n+7) {
+      width: auto;
+      height: $navitemheight;
+      opacity: 1;
+      @include transition(width 0, height 0, opacity .2s);
+    }
+  }
+  @include breakpoint($bp-large-2) {
+    ul li:nth-child(n+8) {
+      width: auto;
+      height: $navitemheight;
+      opacity: 1;
+      @include transition(width 0, height 0, opacity .2s);
+    }
+  }
+
+  // Full nav hidden
+
+  &.hide-more {
+
+    #MoreNav {
+      width: auto;
+      height: $navitemheight;
+      opacity: 1;
+      @include transition(width 0, height 0, opacity .2s);
+    }
+    #LessNav {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+    }
+    @include breakpoint(0 $bp-med) {
+      ul li:nth-child(n+6) {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+      }
+    }
+    @include breakpoint($bp-med $bp-large-2) {
+      ul li:nth-child(n+7) {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+      }
+    }
+    @include breakpoint($bp-large-2) {
+      ul li:nth-child(n+8) {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+      }
+    }
+
+  }
+}
+
+//
+// Theming
+//
+
+.theme-gray {
+  .section-nav,
+  .section-nav li {
+    border-color: $tlt-gray;
+  }
+}
+.theme-green {
+  .section-nav,
+  .section-nav li {
+    border-color: $tlt-green;
+  }
+}
+.theme-yellow {
+  .section-nav,
+  .section-nav li {
+    border-color: $tlt-yellow;
+  }
+}
+
+//
+//  Action nav
+//
+
+.action-nav {
+  > ul li {
+    display: inline-block;
+  }
+}
+
+//
+// Jump nav
+//
+
+.jump-nav {
+  > ul {
+    border: 1px solid $gray-light-3;
+  }
+
+  li {
+    border-bottom: 1px solid $gray-light-3;
+    &:last-child {
+      border-bottom-width: 0;
+    }
+  }
+
+  a {
+    position: relative;
+    display: block;
+    padding: $space-half;
+    background-color: $gray-light;
+    color: $body-color;
+
+    &:hover,
+    &:active {
+      background-color: $white;
+
+      .pointer {
+        display: block;
+      }
+    }
+  }
+
+  .pointer {
+    position: absolute;
+    right: 0;//.5em;
+    top: 50%;
+    margin-top: -16px;
+    color: $gray-light-4;
+
+    // State
+    display: none;
+  }
+
+  // You are here
+
+  .sec-nav-item & #sec-nav-item a,
+  .current > a,
+  .current {
+    background-color: $gray-light-2;
+    pointer-events: none;
+
+    .pointer {
+      display: block;
+    }
+  }
+}
+
+
+//
+// Collapsing nav
+// Used to collapse section and jump navs for RWD
+//
+
+/*
+Markup:
+
+  <nav class="nav jump-nav collapse-nav">
+    <h4 class="title">Optional title:</h4>
+    <ul>
+      <li><a href="#">Menu <b class="pointer" aria-hidden="true">&darr;</b></a></li>
+      <li><a href="#">Nav items continue from here...<a></li>
+    </ul>
+  </nav>
+*/
+
+.collapse-nav {
+  //@include breakpoint(0 $bp-med) {
+
+    > ul > li:first-child .pointer {
+      display: block;
+    }
+
+    &.is-collapsed {
+      > ul > li {
+        display: none;
+      }
+      > ul > li:first-child {
+        display: block;
+        border-bottom-width: 0;
+      }
+    }
+
+  //}
+
+  @include breakpoint($bp-med) {
+   //> ul > li:first-child {
+      //display: none;
+    //}
+    position: relative;
+
+    li {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+}
+
+//
+//  Inline nav
+//
+
+.inline-nav {
+
+  .separator {
+    display: none;
+  }
+
+  @include breakpoint(0 $bp-med) {
+    > ul li {
+      &:not(:first-child) {
+        margin-top: 1em;
+      }
+    }
+  }
+
+  @include breakpoint($bp-med) {
+    > ul li {
+      display: inline-block;
+      margin-right: .25em;
+      &:last-child .separator {
+        display: none;
+      }
+    }
+
+    .separator {
+      display: inline-block;
+      margin-left: .5em;
+      opacity: .5;
+    }
+  }
+}
+
+//
+// Brick nav
+//
+
+.brick-nav {
+  display: table;
+  width: 100%;
+  margin-bottom: $space;
+  border-collapse: collapse;
+  border: 1px solid $tlt-blue;
+
+  > ul {
+    display: table-row;
+  }
+
+  li {
+    display: table-cell;
+    border: 1px solid $tlt-blue;
+  }
+
+  a {
+    display: block;
+    padding: $space-half;
+    font-weight: $font-weight-headline;
+    text-align: center;
+    text-decoration: none;
+    @include transition(all .2s);
+    background-color: $tlt-white-bkg; // Very subtle lift off the background
+  }
+  a:hover {
+    background-color: $white !important;
+  }
+
+  .arrow {
+    display: inline-block;
+  }
+
+  .brick-left a {
+    text-align: left;
+  }
+  .brick-right a {
+    text-align: right;
+  }
+
+  // States
+
+  .is-disabled,
+  .is-disabled a {
+    background-color: transparent;
+    color: $tlt-blue;
+    pointer-events: none;
+  }
+  .is-current a {
+    background-color: $white;
+    background-color: rgba(255,255,255,.6);
+  }
+
+  @include breakpoint($bp-med) {
+    a {
+      padding: $space;
+    }
+    .brick-left .arrow {
+      margin-right: .5em;
+    }
+    .brick-right .arrow {
+      margin-left: .5em;
+    }
+  }
+
+  //
+  // Theming
+  //
+
+  .theme-green & {
+    ul,
+    li {
+      border-color: $tlt-green;
+    }
+    .is-disabled a {
+      color: $tlt-green;
+    }
+  }
+  .theme-gray & {
+    ul,
+    li {
+      border-color: $tlt-gray;
+    }
+    .is-disabled a {
+      color: $tlt-gray;
+    }
+  }
+  .theme-yellow & {
+    ul,
+    li {
+      border-color: $tlt-yellow;
+    }
+    .is-disabled a {
+      color: $tlt-yellow;
+    }
+  }
+
+}

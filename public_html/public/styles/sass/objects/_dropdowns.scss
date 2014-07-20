@@ -1,0 +1,97 @@
+/* =======================================================
+    Dropdowns
+   ======================================================= */
+
+/*
+Markup:
+
+<div class="dropdown">
+  <a href="#" class="btn">&darr;</a>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
+*/
+
+.drop {
+
+  position: relative;
+
+  // The toggle
+
+  > a {
+
+  }
+
+  // The dropdown menu
+
+  .drop-menu {
+    @include zero;
+
+    // Positioning
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: pem(4);
+    z-index: 999;
+
+    &.drop-right {
+      left: auto;
+      right: $space-quarter;
+    }
+
+    // Look and feel
+
+    border: 1px solid $border-color;
+    border-radius: $space-quarter;
+    padding: $space-quarter 0;
+    min-width: 8em;
+    max-width: 10em;
+    background-color: $white;
+    box-shadow: 0 4px 8px rgba(0,0,0,.2);
+
+    > li {
+      display: block;
+      &.current {
+        > a {
+          background-color: $gray-light-2;
+          color: $headline-color;
+          // pointer-events: none;
+        }
+      }
+      &.divider {
+        height: $border-width;
+        background-color: $border-color;
+        margin: $space-quarter 0;
+        overflow: hidden;
+      }
+
+      > a {
+        display: block;
+        padding: $space-quarter $space-half;
+        background-color: $white;
+        color: $body-color;
+        text-align: left;
+        text-decoration: none;
+        &:hover {
+          background-color: $gray-light;
+          color: $link-color-hover;
+        }
+      }
+    }
+
+    @include breakpoint($bp-med) {
+      min-width: 16em;
+      max-width: 24em;
+
+      // Enforce the right-hand drop on desktop
+      left: auto;
+      right: 0;
+    }
+  }
+}

@@ -1,0 +1,303 @@
+/* =======================================================
+    Buttons
+   ======================================================= */
+
+//
+// Standard buttons
+//
+
+.btn {
+  display: inline-block;
+  border: $btn-border-width $btn-border-style $btn-border-color;
+  border-radius: $btn-border-radius;
+  margin-bottom: 0;
+  padding: $btn-padding;
+  font-weight: $btn-font-weight;
+  line-height: $line-height-base;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: $btn-background-color;
+  background-image: none;
+  color: $btn-color;
+  @include transition(all .2s);
+
+  &:hover,
+  &:active {
+    background-color: $btn-background-color-hover !important;
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    background-color: transparent !important;
+    color: $btn-border-color;
+    pointer-events: none;
+  }
+
+  //
+  // Theming
+  //
+
+  .theme-green & {
+    background-color: $tlt-green;
+    border-color: $tlt-green;
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      color: $tlt-green;
+    }
+  }
+  .theme-gray & {
+    background-color: $tlt-gray;
+    border-color: $tlt-gray;
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      color: $tlt-gray;
+    }
+  }
+  .theme-yellow & {
+    background-color: $tlt-yellow;
+    border-color: $tlt-yellow;
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      color: $tlt-yellow;
+    }
+  }
+}
+
+// Alternate buttons
+
+.btn-secondary {
+  background-color: transparent !important;
+}
+
+.btn-primary {
+  background-color: $tlt-dark-gray !important;
+  color: $tlt-blue;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $tlt-blue !important;
+    border-color: $tlt-blue;
+    color: $white;
+  }
+
+  //
+  // Theming
+  //
+
+  .theme-green & {
+    color: $tlt-green;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $tlt-green !important;
+      border-color: $tlt-green;
+      color: $white;
+    }
+  }
+  .theme-gray & {
+    color: $tlt-gray;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $tlt-gray !important;
+      border-color: $tlt-gray;
+      color: $white;
+    }
+  }
+  .theme-yellow & {
+    color: $tlt-yellow;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $tlt-yellow !important;
+      border-color: $tlt-yellow;
+      color: $white;
+    }
+  }
+}
+/*
+.btn-primary {
+  background-color: $btn-primary-background-color;
+  border-color: $btn-primary-border-color;
+  color: $btn-primary-color;
+  &:hover,
+  &:focus {
+    background-color: $btn-primary-background-color-hover;
+    border-color: $btn-primary-border-color-hover;
+    color: $btn-primary-color-hover;
+  }
+  &:active,
+  &.active {
+    background-color: $btn-primary-background-color-active;
+  }
+}
+
+.btn-success {
+  background-color: $btn-success-background-color;
+  border-color: $btn-success-border-color;
+  color: $btn-success-color;
+  &:hover,
+  &:focus {
+    background-color: $btn-success-background-color-hover;
+    border-color: $btn-success-border-color-hover;
+    color: $btn-success-color-hover;
+  }
+  &:active,
+  &.active {
+    background-color: $btn-success-background-color-active;
+  }
+}
+
+.btn-danger {
+  background-color: $btn-danger-background-color;
+  border-color: $btn-danger-border-color;
+  color: $btn-danger-color;
+  &:hover,
+  &:focus {
+    background-color: $btn-danger-background-color-hover;
+    border-color: $btn-danger-border-color-hover;
+    color: $btn-danger-color-hover;
+  }
+  &:active,
+  &.active {
+    background-color: $btn-danger-background-color-active;
+  }
+}
+
+.btn-outline {
+  background-color: $btn-outline-background-color;
+  border-color: $btn-outline-border-color;
+  color: $btn-outline-color;
+  &:hover,
+  &:focus {
+    background-color: $btn-outline-background-color-hover;
+    border-color: $btn-outline-border-color-hover;
+    color: $btn-outline-color-hover;
+  }
+  &:active,
+  &.active {
+    background-color: $btn-outline-background-color-active;
+  }
+}
+
+//
+// Link buttons
+//
+
+.btn-link {
+  border-radius: 0;
+  font-weight: normal;
+  cursor: pointer;
+  background-color: $btn-link-background-color;
+  border-color: $btn-link-border-color;
+  color: $btn-link-color;
+
+  &:active {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $btn-link-border-color-hover;
+  }
+  &:hover,
+  &:focus {
+    color: $btn-link-color-hover;
+    background-color: $btn-link-background-color-hover;
+  }
+}
+
+// Alternate action buttons
+
+.btn-alt {
+  @extend .btn-link;
+  padding: {
+    left: 0 !important;
+    right: 0 !important;
+  }
+  .link {
+    text-decoration: underline;
+  }
+  .nolink {
+    color: $body-color;
+    text-decoration: none;
+  }
+  &:hover {
+    .link {
+      text-decoration: none;
+    }
+  }
+}
+*/
+
+//
+// Sized buttons
+//
+
+// Full button
+
+.btn-full {
+  display: block;
+}
+
+// Small button
+
+.btn-small {
+  padding: $btn-padding-small;
+  padding-bottom: $btn-padding-small * 1.5;
+  font-size: $font-size-small;
+}
+
+// Large button
+
+.btn-large {
+  padding: $btn-padding-large;
+	font-size: $font-size-large;
+}
+
+//
+// Button group
+//
+
+.btn-group {
+  margin-bottom: $space;
+  .btn {
+    vertical-align: middle;
+    margin-bottom: $space-quarter;
+    margin-right: $space-quarter;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.btn-group-full {
+  @include flexbox;
+  width: 100%;
+  .btn {
+    @include flex(1);
+  }
+}
+
+.btn-group-flush {
+  margin-bottom: 0;
+  .btn {
+    margin-bottom: 0;
+  }
+}
+
+.btn-group-compact {
+  width: auto;
+}
+
+// End buttons

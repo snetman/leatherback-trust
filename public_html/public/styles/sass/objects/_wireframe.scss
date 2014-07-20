@@ -1,0 +1,43 @@
+/* =======================================================
+    Wireframe objects
+   ======================================================= */
+
+[class*='wire'] {
+  display: block;
+	background-color: $gray-light-2;
+	color: $black;
+  border: 1px solid $gray;
+	padding: $space-double $space;
+  //font-weight: $font-weight-headline;
+	text-align: center;
+  clear: both;
+
+  + [class*='wire'] {
+    margin-top: $space-half;
+  }
+}
+
+.wire-thin {
+  padding-top: $space-quarter;
+  padding-bottom: $space-quarter;
+}
+
+.wire-small {
+  padding-top: $space;
+  padding-bottom: $space;
+}
+
+.wire-medium {
+  padding-top: $space-quad;
+  padding-bottom: $space-quad;
+}
+
+.wire-large {
+  padding-top: $space*8;
+  padding-bottom: $space*8;
+}
+
+.wire-huge {
+  padding-top: $space*12;
+  padding-bottom: $space*12;
+}

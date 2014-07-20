@@ -1,0 +1,115 @@
+/* =======================================================
+    Alerts
+   ======================================================= */
+
+//
+//  Base styles
+//
+
+.alert {
+  position: relative;
+  margin-bottom: $space;
+  padding: .75em ($space-double+$space-half) .8em .75em;
+  overflow: hidden;
+
+  > p {
+    @include zero;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+  }
+
+  a {
+    color: $white;
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+  }
+
+  // The body
+
+  .alert-body {
+    background-color: rgba(255,255,255,.75);
+    padding: .75em 1em .8em .75em;
+    margin: .75em (-1*($space-double+$space-half)) -.8em -.75em;
+
+    > p {
+      @include zero;
+      margin-top: 1.2em;
+      font-size: $font-size-small;
+      line-height: $line-height-small;
+      color: $body-color;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  // Dismiss
+
+  .dismiss {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: $space-and-half;
+    font-size: $font-size-large;
+    text-align: center;
+    text-decoration: none;
+    background-color: $black;
+    color: $gray;
+
+    .x {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 100%;
+      margin-top: -.875em;
+      text-align: center;
+    }
+
+    &:hover,
+    &:active {
+      background-color: $gray-dark;
+      color: $white;
+    }
+  }
+
+}
+
+//
+//  Success alert
+//
+
+.alert-success {
+  background-color: $success;
+  color: $white;
+
+  .dismiss {
+    background-color: darken($success, 10);
+    color: lighten($success, 40);
+    &:hover {
+      background-color: darken($success, 5);
+      color: $white;
+    }
+  }
+}
+
+//
+//  Info alert
+//
+
+.alert-info {
+  background-color: $info;
+  color: $white;
+
+  .dismiss {
+    background-color: darken($info, 10);
+    color: lighten($info, 40);
+    &:hover {
+      background-color: darken($info, 5);
+      color: $white;
+    }
+  }
+}

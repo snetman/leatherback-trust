@@ -1,0 +1,53 @@
+/* =======================================================
+    Project hub
+   ======================================================= */
+
+.hub {
+
+//
+//  Slat lists
+//
+  .slat-list {
+
+    > li {
+      padding-top: .25em;
+      padding-bottom: .25em;
+    }
+
+    // New items
+
+    .new {
+      position: relative;
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 100%;
+        top: .75em;
+        border-radius: .625em;
+        margin-right: .375em;
+        height: .625em;
+        width: .625em;
+        background-color: $blue;
+        color: $blue;
+      }
+    }
+
+  }
+
+  //
+  //  Dates in the lists
+  //
+
+  .date {
+    display: block;
+    font-size: $font-size-small;
+    color: $gray;
+  }
+
+  .hub-footer {
+    padding: $space;
+    background: $gray-light-2;
+  }
+
+}

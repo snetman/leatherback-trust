@@ -1,0 +1,32 @@
+//
+// Landing page objects
+//
+
+// The header
+
+.landing-header {
+	@include zero;
+  margin-top: -$space-and-half;
+	padding-top: 2.625em; // 2x the cap-height of display heads at this size
+	border-bottom: 1px solid $tlt-dark-gray;
+
+	@include breakpoint($bp-med) {
+		padding-top: 4.25em; // 2x the cap-height of display heads
+	}
+
+	@include breakpoint($bp-large-2) {
+		padding-top: 6.375em; // 3x the cap-height of display heads
+	}
+}
+
+//
+// Theming
+//
+
+/*
+.theme-green {
+	.landing-header {
+		border-color: $tlt-green;
+	}
+}
+*/

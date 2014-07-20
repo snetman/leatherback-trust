@@ -1,0 +1,111 @@
+/* =======================================================
+    Tabs
+   ======================================================= */
+
+.tabs {
+	// overflow: hidden;
+	margin-bottom: $space;
+
+	// The tabs themselves
+
+	$tab-offset: $space-half; // Distance between edges of tab container and tabs
+	$tab-background-color: $gray-light-2;
+	$tab-background-color-hover: $gray-light;
+	$tab-background-color-active: $white;
+	$tab-border-color: $border-color;
+	$tab-border-width: $border-width;
+	$tab-border-style: $border-style;
+	$tab-color: $body-color;
+	$tab-color-hover: $link-color-hover;
+	$tab-underline: none;
+	$tab-underline-hover: none;
+	$tab-font-weight: $font-weight-headline;
+
+	> ul {
+		//display: table;
+		//width: 100%;
+		position: relative;
+		z-index: 2;
+		@include flexbox;
+		@include zero;
+		margin-left: $tab-offset;
+		margin-right: $tab-offset;
+		list-style: none;
+
+		li {
+			//display: table-cell;
+			text-align: center;
+			border: $tab-border-width $tab-border-style $tab-border-color;
+			border-right-width: 0;
+			&:last-child {
+				border-right: $tab-border-width $tab-border-style $tab-border-color;
+			}
+
+			&.is-active {
+				border-bottom-color: $tab-background-color-active;
+			}
+		}
+
+		a {
+			display: block;
+			padding: $pad-half;
+			background: $tab-background-color;
+			@include incognitolink;
+			color: $tab-color;
+			font-weight: $tab-font-weight;
+			text-decoration: $tab-underline;
+
+			&:hover, &:focus {
+				background: $tab-background-color-hover;
+				color: $tab-color-hover;
+				text-decoration: $tab-underline-hover;
+			}
+
+			&.is-active {
+				background: $white;
+				pointer-events: none;
+			}
+		}
+	}
+
+	// The tab content
+
+	> div,
+	.tab-content {
+		position: relative;
+		top: -1*$tab-border-width;
+		border-top: $tab-border-width $tab-border-style $tab-border-color;
+		padding: $space-and-half 0;
+	}
+
+	// Other styles of tabs
+
+	&-bordered {
+		> div,
+		.tab-content {
+			border: $tab-border-width $tab-border-style $tab-border-color;
+			padding: $space;
+		}
+	}
+
+	&-full {
+		> ul li {
+			@include flex(1);
+		}
+	}
+
+	// Sized tabs
+
+	&-small {
+		> ul a {
+			font-size: $font-size-small;
+			padding: $space-quarter $space-half;
+		}
+		> div,
+		.tab-content {
+			padding-top: $space;
+			padding-bottom: $space;
+		}
+	}
+
+}

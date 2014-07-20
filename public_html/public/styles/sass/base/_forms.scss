@@ -1,0 +1,467 @@
+/* =======================================================
+    Forms
+   ======================================================= */
+
+//
+//  Base styles
+//
+
+form {
+  margin-bottom: $space;
+}
+
+/*  Normalize non-controls
+   ======================================================= */
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  // Chrome and Firefox set a `min-width: -webkit-min-content;` on fieldsets,
+  // so we reset that to ensure it behaves more like a standard block element.
+  // See https://github.com/twbs/bootstrap/issues/12359.
+  min-width: 0;
+}
+
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: $space;
+  font-size: $font-size-large;
+  line-height: inherit;
+  color: $headline-color;
+  border: 0;
+  border-bottom: $border-width $border-style $border-color;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: $space-quarter;
+  font-weight: $font-weight-headline;
+  color: $form-label-color;
+}
+
+/*  Normalize form controls
+   ======================================================= */
+
+// While most of our form styles require extra classes, some basic normalization
+// is required to ensure optimum display with or without those classes to better
+// address browser inconsistencies.
+
+// Override content-box in Normalize (* isn't specific enough)
+input[type="search"] {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+// Position radios and checkboxes better
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 4px 0 0;
+  margin-top: 1px \9; /* IE8-9 */
+  line-height: normal;
+}
+
+// Set the height of file controls to match text inputs
+input[type="file"] {
+  display: block;
+}
+
+// Make range inputs behave like textual form controls
+input[type="range"] {
+  display: block;
+  width: 100%;
+}
+
+// Make multiple select elements height not fixed
+select[multiple],
+select[size] {
+  height: auto;
+}
+
+// Focus for file, radio, and checkbox
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  // Focus styles here
+}
+
+// Adjust output element
+output {
+  display: block;
+  padding-top: $space-quarter;
+  font-size: $font-size-norm;
+  line-height: $line-height-base;
+  color: $form-input-color;
+}
+
+
+/*  Common form controls
+   ======================================================= */
+
+// Shared size and type resets for form controls. Apply `.form-control` to any
+// of the following form controls:
+//
+// select
+// textarea
+// input[type="text"]
+// input[type="password"]
+// input[type="datetime"]
+// input[type="datetime-local"]
+// input[type="date"]
+// input[type="month"]
+// input[type="time"]
+// input[type="week"]
+// input[type="number"]
+// input[type="email"]
+// input[type="url"]
+// input[type="search"]
+// input[type="tel"]
+// input[type="color"]
+
+.form-control {
+  display: block;
+  width: 100%;
+  //height: $form-input-height-base;
+  padding: $form-input-padding;
+  font-size: $font-size-norm;
+  line-height: $line-height-base;
+  color: $form-input-color;
+  background-color: $form-input-background-color;
+  background-color: rgba(255,255,255,.6);
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: $form-border-width $form-border-style $form-border-color;
+  border-radius: $form-border-radius;
+  outline: none;
+  @include transition(background-color .2s, border-color .2s);
+
+  // Focus
+
+  &:focus {
+    background-color: $white;
+    border-color: $tlt-dark-gray !important;
+  }
+
+/*  Disabled and read-only inputs
+   ======================================================= */
+
+  // HTML5 says that controls under a fieldset > legend:first-child won't be
+  // disabled if the fieldset is disabled. Due to implementation difficulty, we
+  // don't honor that edge case; we style them as disabled anyway.
+  &[disabled],
+  &[readonly],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    background-color: $form-input-background-color-disabled;
+    opacity: 1; // iOS fix for unreadable disabled content
+  }
+}
+
+// Reset height for textarea
+
+textarea.form-control {
+  height: auto;
+}
+
+/*  Search inputs in iOS
+   ======================================================= */
+
+// This overrides the extra rounded corners on search inputs in iOS so that our
+// `.form-control` class can properly style them. Note that this cannot simply
+// be added to `.form-control` as it's not specific enough. For details, see
+// https://github.com/twbs/bootstrap/issues/11586.
+
+input[type="search"] {
+  -webkit-appearance: none;
+}
+
+
+/*  Special styles for iOS date input
+   ======================================================= */
+//
+// In Mobile Safari, date inputs require a pixel line-height that matches the
+// given height of the input.
+
+input[type="date"] {
+  line-height: $form-input-height-base;
+}
+
+
+/*  Form groups
+   ======================================================= */
+
+// Designed to help with the organization and spacing of vertical forms. For
+// horizontal forms, use the predefined grid classes.
+
+.form-group {
+  margin-bottom: $space-half + $space-quarter;
+}
+
+/*  Checkboxes and radios
+   ======================================================= */
+
+// Indent the labels to position radios/checkboxes as hanging controls.
+
+.radio,
+.checkbox {
+  display: block;
+  min-height: $form-input-height-base; // clear the floating input if there is no label text
+  margin-top: $space-half;
+  margin-bottom: $space-half;
+  padding-left: $pad;
+  label {
+    display: inline;
+    font-weight: normal;
+    cursor: pointer;
+  }
+}
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  float: left;
+  margin-left: -$pad;
+}
+.radio + .radio,
+.checkbox + .checkbox {
+  margin-top: -$space-quarter; // Move up sibling radios or checkboxes for tighter spacing
+}
+
+// Radios and checkboxes on same line
+.radio-inline,
+.checkbox-inline {
+  display: inline-block;
+  padding-left: $pad;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: pointer;
+}
+.radio-inline + .radio-inline,
+.checkbox-inline + .checkbox-inline {
+  margin-top: 0;
+  margin-left: $space-half; // space out consecutive inline controls
+}
+
+// Apply same disabled cursor tweak as for inputs
+//
+// Note: Neither radios nor checkboxes can be readonly.
+input[type="radio"],
+input[type="checkbox"],
+.radio,
+.radio-inline,
+.checkbox,
+.checkbox-inline {
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+  }
+}
+
+
+/*  Form control sizing
+   ======================================================= */
+
+// Build on `.form-control` with modifier classes to decrease or increase the
+// height and font-size of form controls.
+
+.input-small {
+  height: auto;
+  padding: $form-input-padding;
+  font-size: $font-size-small;
+  line-height: $line-height-small;
+}
+
+.input-large {
+  height: auto;
+  padding: $form-input-padding;
+  font-size: $font-size-large;
+  line-height: $line-height-base;
+}
+
+// For inputs you want to explicitly size in html
+
+.input-sized {
+  width: auto;
+}
+
+
+/*  Form control feedback states
+   ======================================================= */
+
+// Apply contextual and semantic states to individual form controls.
+
+.has-feedback {
+  // Enable absolute positioning
+  position: relative;
+
+  // Ensure icons don't overlap text
+  .form-control {
+    padding-right: $form-input-height-base * 1.25;
+  }
+
+  // Feedback icon (requires .glyphicon classes)
+  /*
+  .form-control-feedback {
+    position: absolute;
+    top: (@line-height-computed + 5); // Height of the `label` and its margin
+    right: 0;
+    display: block;
+    width: @input-height-base;
+    height: @input-height-base;
+    line-height: @input-height-base;
+    text-align: center;
+  }
+  */
+}
+
+// Feedback states
+.has-success {
+  border-color: $success;
+}
+.has-error {
+  border-color: $error;
+}
+
+
+/*  Static form control text
+   ======================================================= */
+
+// Apply class to a `p` element to make any string of text align with labels in
+// a horizontal form layout.
+
+.form-control-static {
+  margin-top: 0;
+  margin-bottom: 0; // Remove default margin from `p`
+}
+
+
+/*  Form help
+   ======================================================= */
+
+// Apply to any element you wish to create light text for placement immediately
+// below a form control. Use for general help, formatting, or instructional text.
+
+.help-block {
+  clear: both;
+  display: block; // account for any element using help-block
+  margin: 0;
+  font-size: $font-size-small;
+  color: $form-help-color;
+}
+
+
+/*  Inline forms
+   ======================================================= */
+
+// Make forms appear inline(-block) by adding the `.form-inline` class. Inline
+// forms begin stacked on extra small (mobile) devices and then go inline when
+// viewports reach <768px.
+//
+// Requires wrapping inputs and labels with `.form-group` for proper display of
+// default HTML form controls and our custom form controls (e.g., input groups).
+
+.form-inline {
+
+  @include breakpoint($bp-med) {
+    // Inline-block all the things for "inline"
+    .form-group {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: {
+        left: $space-quarter;
+        right: $space-half;
+      }
+      vertical-align: middle;
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    // In navbar-form, allow folks to *not* use `.form-group`
+    .form-control {
+      display: inline-block;
+      width: auto; // Prevent labels from stacking above inputs in `.form-group`
+      vertical-align: middle;
+    }
+    // Input groups need that 100% width though
+    .input-group > .form-control {
+      width: 100%;
+    }
+
+    .control-label {
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
+
+    // Remove default margin on radios/checkboxes that were used for stacking, and
+    // then undo the floating of radios and checkboxes to match (which also avoids
+    // a bug in WebKit: https://github.com/twbs/bootstrap/issues/1969).
+    .radio,
+    .checkbox {
+      display: inline-block;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: 0;
+      vertical-align: middle;
+    }
+    .radio input[type="radio"],
+    .checkbox input[type="checkbox"] {
+      float: none;
+      margin-left: 0;
+    }
+
+    // Validation states
+    //
+    // Reposition the icon because it's now within a grid column and columns have
+    // `position: relative;` on them. Also accounts for the grid gutter padding.
+    .has-feedback .form-control-feedback {
+      top: 0;
+    }
+  }
+
+}
+
+
+//
+//  Select group
+//
+
+.select-group {
+  @include clearfix;
+
+  > .form-control {
+    float: right;
+    width: 65%;
+  }
+
+  > select.form-control {
+    float: left;
+    max-width: 33%;
+  }
+}
+
+//
+// Theming
+//
+
+.theme-green {
+  .form-control {
+    border-color: $tlt-green;
+  }
+}
+.theme-gray {
+  .form-control {
+    border-color: $tlt-gray;
+  }
+}
+.theme-yellow {
+  .form-control {
+    border-color: $tlt-yellow;
+  }
+}

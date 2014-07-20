@@ -1,0 +1,681 @@
+/* =======================================================
+    Blocks
+   ======================================================= */
+
+//
+//  Media block
+//
+
+.block-media {
+  position: relative;
+  @include flexbox;
+  margin-bottom: $space;
+
+  .b-figure {
+    margin-right: $space-half;
+  }
+
+  .b-body {
+    @include flex(1); // Rest are flex 0 by default, so they won't expand, but this will
+  }
+
+  .b-actions {
+    margin-left: $space-half;
+  }
+
+  .headline {
+    margin-bottom: 0;
+  }
+
+  // Figure is 1/3rd width
+
+  .b-figure-third {
+    width: span(3 of 12);
+    margin-right: gutter(12);
+    @include breakpoint($bp-med) {
+      width: span(4 of 12);
+    }
+    &.figure-right {
+      @include order(2);
+      margin-right: 0;
+      margin-left: gutter(12);
+    }
+  }
+
+  // Figure is 1/2th width
+  .b-figure-half {
+    width: span(6 of 12);
+    margin-right: gutter(12);
+    &.figure-right {
+      @include order(2);
+      margin-right: 0;
+      margin-left: gutter(12);
+    }
+  }
+}
+
+// Third size image
+.block-media-switch {
+  .b-figure {
+    width: span(3 of 12);
+    margin-right: gutter(12);
+  }
+  @include breakpoint($bp-med) {
+    .b-figure {
+      width: span(4 of 12);
+    }
+  }
+}
+
+//
+// Compact blocks
+//
+
+.block-compact {
+  margin-bottom: $space-half;
+}
+
+//
+// Flush blocks
+//
+
+.block-flush {
+  margin-bottom: 0;
+}
+
+//
+// Hero block
+// A large image and optional caption at the top of a page
+
+.block-hero {
+  @include clearfix;
+  margin-bottom: $space;
+
+  .b-figure {
+    @include zero;
+    display: block;
+    img {
+      display: block;
+    }
+  }
+
+  .b-body {
+    @include zero;
+    border-bottom: 1px solid $tlt-blue;
+    padding: $space-half;
+    .cap-title {
+      margin-bottom: 0;
+      float: left;
+      margin-right: .5em;
+    }
+    p {
+      @include zero;
+      margin-bottom: $space-half;
+      max-width: none;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // On wider layouts put the body in hero position
+
+  @include breakpoint($bp-med) {
+    .b-body {
+      @include span(last 9);
+      position: relative;
+      margin-top: -3.5em;
+      padding: 1.1em 1.3em 1.3em;
+      .credit {
+        position: absolute;
+        top: 4px;
+        right: 0;
+        margin-top: 0;
+        font-size: 10px;
+        color: mix($body-color,$white,40%);
+      }
+    }
+  }
+  @include breakpoint($bp-large) {
+    .b-body {
+      @include span(last 8);
+    }
+  }
+  @include breakpoint($bp-xl) {
+    .b-body {
+      @include span(last 6);
+    }
+  }
+
+  // On narrow layouts, still make the hero use the full width
+
+  .l-1col-narrow & {
+    @include breakpoint($bp-med) {
+      margin-left: -1 * span(1 wide of 10);
+      margin-right: -1 * span(1 wide of 10);
+    }
+    @include breakpoint($bp-large-2) {
+      margin-left: -1 * span(2 wide of 8);
+      margin-right: -1 * span(2 wide of 8);
+    }
+  }
+}
+
+//
+// Text block
+// Standard text block with options for divider below, and above
+
+.block-text {
+  //
+}
+
+//
+// Image block
+// Standard full-width image
+
+.block-image {
+  margin: 0 0 $space;
+  clear: both;
+
+  .b-figure {
+    @include zero;
+    display: block;
+    img {
+      display: block;
+    }
+  }
+
+  .b-body {
+    @include zero;
+    border-bottom: 1px solid $tlt-blue;
+    padding: .75em 1em 1em;
+    .cap-title {
+      margin-bottom: 0;
+      float: left;
+      margin-right: .5em;
+    }
+    p {
+      @include zero;
+      margin-bottom: $space-half;
+      max-width: none;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Other types
+
+  &[class*='inset-'] {
+    .b-body {
+      border-bottom-width: 0;
+      padding: .75em 0 0;
+      .cap-title {
+        float: none;
+        margin: 0;
+        font-size: $font-size-small;
+      }
+      p {
+        font-size: $font-size-small;
+      }
+    }
+  }
+
+  &.inset-left {
+    @include breakpoint($bp-med) {
+      @include span(4 of 12);
+      margin: .4em gutter(12) $space 0;
+    }
+  }
+
+  &.inset-right {
+    @include breakpoint($bp-med) {
+      @include span(last 4 of 12);
+      margin: .4em 0 $space gutter(12);
+    }
+  }
+
+  &.inset-far-left {
+    @include breakpoint($bp-med) {
+      @include span(4 of 12);
+      margin: {
+        top: .4em;
+        left: -1 * span(1 wide of 10);
+        bottom: $space;
+        right: gutter(12);
+      }
+    }
+    @include breakpoint($bp-large-2) {
+      margin: {
+        left: -1 * span(2 wide of 8);
+      }
+    }
+  }
+
+  &.inset-far-right {
+    @include breakpoint($bp-med) {
+      @include span(last 4 of 12);
+      margin: {
+        top: .4em;
+        right: -1 * span(1 wide of 10);
+        bottom: $space;
+        left: gutter(12);
+      }
+    }
+    @include breakpoint($bp-large-2) {
+      margin: {
+        right: -1 * span(2 wide of 8);
+      }
+    }
+  }
+
+  // On narrow layouts, jumbo images can still take the full width
+
+  .l-1col-narrow &.jumbo {
+    @include breakpoint($bp-med) {
+      margin-left: -1 * span(1 wide of 10);
+      margin-right: -1 * span(1 wide of 10);
+    }
+    @include breakpoint($bp-large-2) {
+      margin-left: -1 * span(2 wide of 8);
+      margin-right: -1 * span(2 wide of 8);
+    }
+  }
+
+}
+
+//
+// Gallery block
+// An image gallery
+
+//
+// Comparison block
+// 2-up image block
+
+.block-compare {
+  margin: 0 0 $space;
+  clear: both;
+
+  .b-figures {
+    @include clearfix;
+  }
+
+  .b-figure {
+    @include zero;
+    display: block;
+    float: left;
+    width: 50%;
+    &:nth-child(1) {
+      padding-right: 1px;
+    }
+    &:nth-child(2) {
+      padding-left: 1px;
+    }
+    img {
+      display: block;
+    }
+  }
+
+  .b-body {
+    @include zero;
+    clear: both;
+    border-bottom: 1px solid $tlt-blue;
+    padding: .75em 1em 1em;
+    .cap-title {
+      margin-bottom: 0;
+      float: left;
+      margin-right: .5em;
+    }
+    p {
+      @include zero;
+      margin-bottom: $space-half;
+      max-width: none;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Types
+
+  // On narrow layouts, jumbo images can still take the full width
+
+  .l-1col-narrow &.jumbo {
+    @include breakpoint($bp-med) {
+      margin-left: -1 * span(1 wide of 10);
+      margin-right: -1 * span(1 wide of 10);
+    }
+    @include breakpoint($bp-large-2) {
+      margin-left: -1 * span(2 wide of 8);
+      margin-right: -1 * span(2 wide of 8);
+    }
+  }
+
+}
+
+//
+// Pullquote block
+// for inserting a big quote with options for left, right, center placement placement
+
+.block-pullquote {
+  @include clearfix;
+  margin: $space-double 0;
+  clear: both;
+  .b-quote {
+    border-bottom: 1px solid $tlt-blue;
+    padding-bottom: $space-half + $space-quarter;
+    p {
+      @include zero;
+      font-style: italic;
+    }
+  }
+  .b-source {
+    float: left;
+    border-top: 1px solid $tlt-dark-gray;
+    margin-top: -1px;
+    padding-top: $space-quarter*1.5;
+   p {
+      @include zero;
+    }
+    .name {
+      font-weight: $font-weight-headline;
+    }
+    .title {
+      font-style: italic;
+    }
+  }
+}
+
+//
+// Table block
+// Insert a data table
+
+//
+// Stat block
+// block for displaying a key stat/number
+
+.block-stat {
+  clear: both;
+  margin: $space-double 0;
+  .b-number {
+    padding: 0 .9em 1em;
+    p {
+      @include zero;
+      font-weight: $font-weight-headline;
+      line-height: 1;
+    }
+  }
+  .b-body {
+    border-top: 1px solid $tlt-blue;
+    padding: .75em 1em 1em;
+    p {
+      @include zero;
+      &.source {
+        font-size: $font-size-small;
+        margin-top: $space-half;
+      }
+    }
+  }
+
+  @include breakpoint($bp-med) {
+    .b-number {
+      padding: 0 1em 0 0;
+      margin-top: pem(-8);
+    }
+    .noflexbox & {
+      @include clearfix;
+      .b-number {
+        float: left;
+      }
+      .b-body {
+        border-top-width: 0;
+      }
+    }
+    .flexbox & {
+      @include flexbox;
+      @include align-items(center);
+      .b-body {
+        @include flex(1);
+        border-left: 1px solid $tlt-blue;
+        border-top-width: 0;
+      }
+    }
+  }
+}
+
+//
+// Donate block
+// block for displaying a key stat/number
+
+.block-donate {
+  clear: both;
+  margin: $space-double 0;
+  .b-price {
+    padding: 0 .9em 1em;
+    p {
+      @include zero;
+      font-weight: $font-weight-headline;
+      line-height: 1;
+    }
+  }
+  .b-body {
+    border-top: 1px solid $tlt-blue;
+    padding: .75em 1em 1em;
+    p {
+      @include zero;
+      margin-top: $space-half;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  @include breakpoint($bp-med) {
+    .b-price {
+      padding: 0 1em 0 0;
+      margin-top: pem(-8);
+    }
+    .b-body {
+      .b-description {
+        float: left;
+        width: 65%;
+      }
+      .b-action {
+        float: right;
+        width: 30%;
+        margin-top: 0;
+        text-align: right;
+      }
+    }
+    .noflexbox & {
+      @include clearfix;
+      .b-number {
+        float: left;
+      }
+      .b-body {
+        border-top-width: 0;
+      }
+    }
+    .flexbox & {
+      @include flexbox;
+      @include align-items(center);
+      .b-body {
+        @include flex(1);
+        border-left: 1px solid $tlt-blue;
+        border-top-width: 0;
+      }
+    }
+  }
+}
+
+
+//
+// Common elements
+//
+
+.photo-credit {
+  font-size: .625em !important;
+  line-height: 1.2;
+  margin-top: -$space-quarter !important;
+}
+
+
+//
+// Block list
+//
+
+.block-list {
+  margin-bottom: $space;
+  .headline {
+    @include zero;
+    margin-bottom: $space-quarter;
+  }
+  > ul {
+    margin-bottom: 0;
+  }
+  .b-footer {
+    margin-top: $space-half;
+  }
+}
+
+//
+// Block featured
+//
+
+.block-featured {
+  margin-bottom: $space;
+  .b-figure {
+    img {
+      display: block;
+      @include zero;
+    }
+  }
+  .b-body {
+    padding: $space-half;
+    background-color: $gray-light;
+  }
+  @include breakpoint($bp-med) {
+    .noflexbox & {
+      @include clearfix;
+      .b-figure {
+        float: left;
+        width: 50%;
+      }
+      .b-body {
+        float: right;
+        width: 50%;
+        padding: $space;
+      }
+    }
+    .flexbox & {
+      @include flexbox;
+      @include align-items(stretch);
+      .b-figure {
+        max-width: 50%;
+      }
+      .b-body {
+        padding: $space;
+      }
+    }
+  }
+}
+
+//
+// Author block
+//
+
+/*
+<div class="block-author">
+  <div class="b-figure">
+    <img src="{{ "50x50" | placeholder | asset_url }}" width="60" height="60" />
+  </div>
+  <div class="b-body">
+    <p class="name">First Lastname</p>
+    <p class="handle"><a href="#">@lastname</a></p>
+  </div>
+</div>
+*/
+
+.block-author {
+  .b-figure {
+    float: left;
+    margin-left: pem(-2);
+    margin-right: $space-half;
+    width: 4em;
+    height: 4em;
+    border: 1px solid $tlt-blue;
+    border-radius: 4em;
+    overflow: hidden;
+  }
+  .name,
+  .handle {
+    @include zero;
+  }
+  .name {
+    padding-top: .5em;
+    font-weight: $font-weight-headline;
+    a {
+      @include incognitolink;
+    }
+  }
+  .handle {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    a {
+      @include incognitolink;
+    }
+  }
+}
+
+//
+// Divider block
+//
+
+.block-divider {
+  clear: both;
+  display: block;
+  margin: $space-double 0;
+  padding: 0;
+  height: 2px;
+  border: 0;
+  border-top: 1px solid $tlt-blue;
+  text-align: center;
+  &.stealth {
+    border-width: 0;
+    margin: $space-and-half 0;
+  }
+}
+
+//
+// Theming
+//
+
+.theme-gray {
+  .block-author .b-figure,
+  .b-body,
+  .block-pullquote .b-quote,
+  .block-stat .b-body,
+  .block-divider {
+    border-color: $tlt-gray;
+  }
+}
+.theme-green {
+  .block-author .b-figure,
+  .b-body,
+  .block-pullquote .b-quote,
+  .block-stat .b-body,
+  .block-divider {
+    border-color: $tlt-green;
+  }
+}
+.theme-yellow {
+  .block-author .b-figure,
+  .b-body,
+  .block-pullquote .b-quote,
+  .block-stat .b-body,
+  .block-divider {
+    border-color: $tlt-yellow;
+  }
+}
+
+// End blocks

@@ -1,0 +1,60 @@
+/* =======================================================
+    Tables
+   ======================================================= */
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 1px solid $tlt-blue;
+	width: 100%;
+  margin-bottom: $space;
+}
+th,
+td {
+  padding: .375em .25em .5em;
+  border: 1px solid $tlt-blue;
+  text-align: left;
+}
+th {
+  background: $tlt-blue;
+	font-weight: $font-weight-headline;
+}
+tbody th,
+tfoot th {
+  background-color: transparent !important;
+}
+
+//
+// Theming
+//
+
+.theme-gray {
+  table,
+  th,
+  td {
+    border-color: $tlt-gray;
+  }
+  th {
+    background-color: $tlt-gray;
+  }
+}
+.theme-green {
+  table,
+  th,
+  td {
+    border-color: $tlt-green;
+  }
+  th {
+    background-color: $tlt-green;
+  }
+}
+.theme-yellow {
+  table,
+  th,
+  td {
+    border-color: $tlt-yellow;
+  }
+  th {
+    background-color: $tlt-yellow;
+  }
+}

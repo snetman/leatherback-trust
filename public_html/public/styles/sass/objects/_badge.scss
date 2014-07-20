@@ -1,0 +1,15 @@
+/* =======================================================
+    Badge
+   ======================================================= */
+
+.badge {
+  display: inline-block;
+  padding: {
+    left: $space-quarter;
+    right: $space-quarter;
+  }
+  background-color: green;
+  color: $white;
+  font-size: $font-size-small;
+  font-weight: 700;
+}

@@ -1,0 +1,271 @@
+/* =======================================================
+    Theme
+   ======================================================= */
+
+//
+// Green
+//
+
+.theme-green {
+
+  // Body
+
+  background-color: $tlt-green-bkg;
+
+  // Site header
+
+  .site-header {
+
+    // Logo
+
+    #Logo {
+      @include breakpoint(0 $bp-med) {
+        background-position: -230px 0;
+      }
+
+      @include breakpoint($bp-med) {
+        background-image: url(../images/tlt-logo-green.svg);
+        .no-svg & {
+          background-image: url(../images/tlt-logo-green.png);
+        }
+      }
+    }
+
+    .main-nav {
+      border-color: $tlt-green;
+      a {
+        color: $tlt-green;
+      }
+    }
+
+    // Social + secondary nav
+
+    .social-nav a,
+    .sec-nav a {
+      color: $tlt-green;
+    }
+
+    // Menu inner
+
+    .menu-inner {
+      border-bottom-color: $tlt-green;
+    }
+
+    // Menu open btn
+
+    #MenuOpenBtn {
+      border-color: $tlt-green;
+      background-color: $tlt-green;
+    }
+
+  }
+  // End .site-header
+
+  // Header states
+  .js.menu-open & #Logo {
+    background-position: -230px -40px;
+  }
+
+  // Icons
+
+  [class*='icon-'] {
+    background-image: url(../images/tlt-icons-green.svg);
+    .no-svg & {
+      background-image: url(../images/tlt-icons-green.png);
+    }
+  }
+
+  // Rules
+
+  hr {
+    border-color: $tlt-green;
+  }
+
+  // Homepage objects
+
+  .breaking-news,
+  .breaking-news .call-to-action a:hover {
+    color: $tlt-green;
+  }
+
+}
+// End .theme-green
+
+//
+// Gray
+//
+
+.theme-gray {
+
+  // Body
+
+  background-color: $tlt-gray-bkg;
+
+  // Site header
+
+  .site-header {
+
+    // Logo
+
+    #Logo {
+      @include breakpoint(0 $bp-med) {
+        background-position: -460px 0;
+      }
+
+      @include breakpoint($bp-med) {
+        background-image: url(../images/tlt-logo-gray.svg);
+        .no-svg & {
+          background-image: url(../images/tlt-logo-gray.png);
+        }
+      }
+    }
+
+    .main-nav {
+      border-color: $tlt-gray;
+      a {
+        color: $tlt-gray;
+      }
+    }
+
+    // Social + secondary nav
+
+    .social-nav a,
+    .sec-nav a {
+      color: $tlt-gray;
+    }
+
+    // Menu inner
+
+    .menu-inner {
+      border-bottom-color: $tlt-gray;
+    }
+
+    // Menu open btn
+
+    #MenuOpenBtn {
+      border-color: $tlt-gray;
+      background-color: $tlt-gray;
+    }
+
+  }
+  // End .site-header
+
+  // Header states
+  .js.menu-open & #Logo {
+    background-position: -460px -40px;
+  }
+
+  // Icons
+
+  [class*='icon-'] {
+    background-image: url(../images/tlt-icons-gray.svg);
+    .no-svg & {
+      background-image: url(../images/tlt-icons-gray.png);
+    }
+  }
+
+  // Rules
+
+  hr {
+    border-color: $tlt-gray;
+  }
+
+  // Homepage objects
+
+  .breaking-news,
+  .breaking-news .call-to-action a:hover {
+    color: $tlt-gray;
+  }
+
+}
+// End .theme-gray
+
+
+//
+// yellow
+//
+
+.theme-yellow {
+
+  // Body
+
+  background-color: $tlt-yellow-bkg;
+
+  // Site header
+
+  .site-header {
+
+    // Logo
+
+    #Logo {
+      @include breakpoint(0 $bp-med) {
+        background-position: -690px 0;
+      }
+
+      @include breakpoint($bp-med) {
+        background-image: url(../images/tlt-logo-yellow.svg);
+        .no-svg & {
+          background-image: url(../images/tlt-logo-yellow.png);
+        }
+      }
+    }
+
+    .main-nav {
+      border-color: $tlt-yellow;
+      a {
+        color: $tlt-yellow;
+      }
+    }
+
+    // Social + secondary nav
+
+    .social-nav a,
+    .sec-nav a {
+      color: $tlt-yellow;
+    }
+
+    // Menu inner
+
+    .menu-inner {
+      border-bottom-color: $tlt-yellow;
+    }
+
+    // Menu open btn
+
+    #MenuOpenBtn {
+      border-color: $tlt-yellow;
+      background-color: $tlt-yellow;
+    }
+
+  }
+  // End .site-header
+
+  // Header states
+  .js.menu-open & #Logo {
+    background-position: -690px -40px;
+  }
+
+  // Icons
+
+  [class*='icon-'] {
+    background-image: url(../images/tlt-icons-yellow.svg);
+    .no-svg & {
+      background-image: url(../images/tlt-icons-yellow.png);
+    }
+  }
+
+  // Rules
+
+  hr {
+    border-color: $tlt-yellow;
+  }
+
+  // Homepage objects
+
+  .breaking-news,
+  .breaking-news .call-to-action a:hover {
+    color: $tlt-yellow;
+  }
+
+}
+// End .theme-yellow

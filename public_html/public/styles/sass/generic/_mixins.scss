@@ -1,0 +1,123 @@
+/* =======================================================
+    Mixins
+   ======================================================= */
+
+// Clearfix
+
+@mixin clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin zero {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin incognitolink {
+  color: inherit;
+  text-decoration: none;
+  &:hover,
+  &:active {
+    text-decoration: underline;
+    color: $link-color-hover;
+  }
+}
+
+// Hide text for text replacement
+
+@mixin hide-text {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+@mixin hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+@mixin visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+// Pixels to ems
+
+@function pem($px, $base: 16) {
+    @return ($px / $base) + em;
+}
+
+// CSS Transition
+// Usage: @include transition(width,0.3s,ease-out);
+/*
+@mixin transition($transition-property, $transition-time, $method, $transition-delay: 0s) {
+	-webkit-transition: $transition-property $transition-time $method $transition-delay;
+	-moz-transition: $transition-property $transition-time $method $transition-delay;
+	-ms-transition: $transition-property $transition-time $method $transition-delay;
+	-o-transition: $transition-property $transition-time $method $transition-delay;
+	transition: $transition-property $transition-time $method $transition-delay;
+}
+*/
+
+// Rem Unit font sizes with relative fallback http:/seesparkbox.com/foundry/scss_rem_mixin_now_with_a_better_fallback
+// Usage: @include font-size(1, large);
+
+@mixin font-size( $decimal-size, $keyword: null ) {
+  @if $keyword{ font-size: $keyword; }
+  @else { font-size: $decimal-size * $base-font-multiplier * 16px;}
+  font-size: $decimal-size * 1rem;
+}
+
+//
+//  Flexbox
+//
+// See: http://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+// The order of properties for values is flex-grow: 0 flex-shrink: 1 flex-basis: auto
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin align-items($value) {
+  -webkit-box-align-items: $value;
+  -moz-box-align-items: $value;
+  -webkit-align-items: $value;
+  -ms-align-items: $value;
+  align-items: $value;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;
+  -moz-box-ordinal-group: $val;
+  -ms-flex-order: $val;
+  -webkit-order: $val;
+  order: $val;
+}

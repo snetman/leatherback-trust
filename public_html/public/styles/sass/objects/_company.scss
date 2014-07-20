@@ -1,0 +1,48 @@
+//
+//  Company
+//
+
+.company {
+  @include clearfix;
+  position: relative;
+  .logo {
+    float: left;
+    width: span(4);
+    margin-right: gutter(12);
+
+    img {
+      display: block;
+      //border-radius: 100%;
+    }
+  }
+  .body {
+    float: left;
+    width: span(8);
+  }
+  .name {
+    @include zero;
+  }
+  .location {
+    @include zero;
+    font-style: italic;
+  }
+  .url {
+    @include zero;
+    font-family: $font-secondary;
+    font-size: $font-size-small;
+  }
+
+  @include breakpoint($bp-med) {
+    .logo {
+      float: none;
+      width: 100%;
+      margin-bottom: $space-half;
+    }
+    .body {
+      float: none;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+}

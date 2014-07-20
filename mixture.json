@@ -1,0 +1,23 @@
+{
+  "customRuby": true,
+  "convertHtmlOutput": null,
+  "debug": false,
+  "domain": null,
+  "followLeader": false,
+  "lintScripts": false,
+  "modelSource": null,
+  "preprocessorLocations": "public_html/public",
+  "preprocessorScriptOutput": "public_html/public/scripts",
+  "preprocessorStyleOutput": "public_html/public/styles",
+  "projectDescription": "Leatherback Trust full site",
+  "projectName": "leatherback-trust",
+  "publishedId": null,
+  "serverHostname": null,
+  "serverPort": null,
+  "simpleModePartnerServer": null,
+  "templateDefaultLayout": "layout",
+  "templateDefaultPage": "index",
+  "templateDirectory": "templates",
+  "type": "simple",
+  "useCompass": true
+}

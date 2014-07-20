@@ -1,0 +1,303 @@
+/* =======================================================
+    States
+   ======================================================= */
+/* TODO: Don't forget to check non-js view of mobile menu when design is in */
+//
+// Mobile view
+//
+
+@include breakpoint(0 $bp-med) {
+
+// If we don't have js
+
+.no-js {
+
+  // Layout
+
+  #Top {
+    display: block;
+    margin-bottom: $space;
+  }
+
+  .site-header-inner {
+    position: relative;
+    padding-top: $space-half;
+    padding-bottom: $space-half;
+  }
+
+  #Logo {
+    margin: 0 0 $space-half $space-half;
+    width: 50px;
+  }
+
+  #MenuOpenBtn,
+  #MenuCloseBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  #Menu {
+    margin: $space-half;
+  }
+
+  // Menu is closed
+
+  #Top {
+    max-height: 74px; // logo height + top- + bottom-margin
+    overflow: hidden;
+  }
+
+  #Menu {
+    // display: none;
+  }
+
+  #MenuCloseBtn {
+    display: none;
+  }
+
+  // Menu is open
+
+  #Top:target {
+
+    max-height: none;
+
+    #Menu {
+      display: block;
+    }
+
+    #MenuOpenBtn {
+      display: none;
+    }
+
+    #MenuCloseBtn {
+      display: block;
+    }
+
+  }
+
+}
+/* End no-js */
+
+$off-canvas-width: 85%;
+$gap-width: 100% - $off-canvas-width;
+$off-canvas-offset: $off-canvas-width - $gap-width;
+
+// If we do have js
+
+.js {
+
+  // General layout
+
+  // Menu closed (no transforms)
+
+  #Content {
+    padding-top: $space-half;
+  }
+  .site-footer {
+    padding-bottom: $space-half;
+  }
+
+  #Top {
+    position: absolute;
+    left: $off-canvas-width;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 100;
+    background-color: $gray-light-2;
+
+    .lc {
+      @include zero;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  #Logo {
+    position: relative;
+    width: $gap-width;
+    padding: 5px;
+    z-index: 3;
+  }
+
+  #MenuOpenBtn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    // height: 100vh;
+    width: $gap-width;
+    padding-top: $gap-width; // Make sure image appears below logo
+    z-index: 2;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  #MenuCloseBtn {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: $gap-width;
+    bottom: 0;
+    right: $gap-width;
+    z-index: 1;
+    img {
+      float: right;
+      margin: 0;
+      width: $gap-width;
+    }
+  }
+
+  #Menu {
+    position: relative;
+    z-index: 3;
+    clear: none;
+    margin: {
+      left: $gap-width;
+      right: $gap-width;
+    }
+    padding: {
+      left: $space-quarter;
+      right: $space-quarter;
+    }
+  }
+
+  #inner-wrap {
+    padding-right: $gap-width;
+  }
+
+  // Menu open (no transforms)
+
+  &.menu-open {
+    #Top {
+      //@include transition(left, .3s, ease);
+    }
+    #MenuOpenBtn {
+      opacity: 0;
+      @include transition(opacity, .3s, ease);
+    }
+    #MenuCloseBtn {
+      opacity: 1;
+      @include transition(opacity, .3s, ease);
+    }
+    #inner-wrap {
+      left: -$off-canvas-offset;
+      @include transition(all, .2s, ease);
+    }
+  }
+
+  // Menu closed (transforms)
+
+  &.csstransforms3d {
+    #Top {
+      left: 0;
+      @include transform(translate3d($off-canvas-width,0,0));
+      @include backface-visibility(hidden);
+    }
+    #inner-wrap {
+      @include transform(translate3d(0,0,0));
+      @include backface-visibility(hidden);
+      -ms-transition: -ms-transform .2s ease;
+      -moz-transition: -moz-transform .2s ease;
+      -webkit-transition: -webkit-transform .2s ease;
+      transition: transform .2s ease;
+    }
+    #Content, .site-footer {
+      @include transition(opacity, .6s, ease);
+      opacity: 1;
+    }
+  }
+
+  // Menu open (transforms)
+
+  &.csstransforms3d.menu-open {
+    #Top {
+      // nada
+    }
+    #inner-wrap {
+      left: 0;
+      @include transform(translate3d(-$off-canvas-offset,0,0));
+      -ms-transition: -ms-transform .2s ease;
+      -moz-transition: -moz-transform .2s ease;
+      -webkit-transition: -webkit-transform .2s ease;
+      transition: transform .2s ease;
+    }
+    #Content, .site-footer {
+      @include transition(opacity, .2s, ease);
+      opacity: .3;
+    }
+  }
+
+}
+/* End js */
+}
+/* End mobile view */
+
+//
+// Non-mobile view
+//
+
+@include breakpoint($bp-med) {
+
+// If we don't have js, or if we do, view is the same
+
+.no-js, .js {
+
+  // Layout
+  /*
+  #Logo {
+    position: relative;
+    @include zero;
+    @include span(3);
+  }
+  */
+
+  #MenuOpenBtn,
+  #MenuCloseBtn {
+    display: none;
+  }
+}
+/* End no-js */
+}
+
+@include breakpoint($bp-large-2) {
+
+// If we don't have js, or if we do, view is the same
+
+.no-js, .js {
+
+  // Layout
+/*
+  #Logo {
+    @include span(2.75);
+    @include post(.25);
+  }
+*/
+}
+
+}
+
+@include breakpoint($bp-xl) {
+
+// If we don't have js, or if we do, view is the same
+
+.no-js, .js {
+
+  // Layout
+/*
+  #Logo {
+    @include span(2.5);
+    @include post(.5);
+  }
+*/
+}
+
+}
+
+/* End non-mobile view */

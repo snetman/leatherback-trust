@@ -1,0 +1,56 @@
+/* =======================================================
+    Search
+   ======================================================= */
+
+//
+// Search form
+//
+
+.search-form {
+  @include zero;
+
+  //@include breakpoint($bp-med) {
+    .ui {
+      @include flexbox;
+      @include align-items(center);
+    }
+    .form-group {
+      @include flex(1);
+      @include zero;
+      margin-right: $space-quarter;
+    }
+  //}
+
+  // Result count
+
+  .result-count {
+    display: block;
+    @include zero;
+    margin-bottom: $space-quarter;
+  }
+
+}
+
+//
+// Search results
+//
+
+.search-results {
+  @extend .slat-list;
+
+  // The result title
+
+  h3 {
+    margin-bottom: 0;
+  }
+
+  // The url
+
+  .url {
+    margin-top: -$space;
+    font-size: $font-size-small;
+    font-family: $font-secondary;
+    line-height: $line-height-small;
+  }
+
+}

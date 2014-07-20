@@ -1,0 +1,113 @@
+/* =======================================================
+    Site footer
+   ======================================================= */
+
+.site-footer {
+	border-top: 1px solid $tlt-blue;
+	margin-top: $space;
+	margin-bottom: 0;
+	padding-top: $space;
+	padding-bottom: $space + $space-quarter;
+
+	a {
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+
+// Footer nav
+.footer-nav {
+	margin-bottom: $space-and-half;
+	font-size: $font-size-small;
+	li {
+		margin-bottom: 1em;
+	}
+}
+
+// Language select
+.language-select {
+	font-size: $font-size-small;
+	a {
+		display: inline-block;
+		margin-right: 1em;
+	}
+}
+
+//
+// Breakpoints
+//
+
+@include breakpoint($bp-med) {
+
+	.site-footer {
+		margin-top: $space-triple;
+		padding-top: $space-half;
+		padding-bottom: $space-half + $space-quarter;
+	}
+
+	.no-flexbox {
+		.footer-nav {
+			@include zero;
+			float: left;
+			width: 75%;
+			li {
+				@include zero;
+				display: inline-block;
+				margin-right: 1em;
+			}
+		}
+		.language-select {
+			float: right;
+			width: 24%;
+			text-align: right;
+			a {
+				@include zero;
+				margin-left: 1em;
+			}
+		}
+	}
+
+	.flexbox {
+		.site-footer .lc {
+			@include flexbox;
+			@include align-items(center);
+		}
+		.footer-nav {
+			@include flex(1);
+			@include zero;
+			li {
+				@include zero;
+				display: inline-block;
+				margin-right: 1em;
+			}
+		}
+		.language-select a {
+			@include zero;
+			margin-left: 1em;
+		}
+
+	}
+}
+
+//
+// Theming
+//
+
+.theme-green {
+	.site-footer {
+		border-color: $tlt-green;
+	}
+}
+.theme-gray {
+	.site-footer {
+		border-color: $tlt-gray;
+	}
+}
+.theme-yellow {
+	.site-footer {
+		border-color: $tlt-yellow;
+	}
+}
