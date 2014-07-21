@@ -9,9 +9,34 @@
         <li>&copy; 2014 The Leatherback Trust</li>
       </ul>
     </nav>
+
+    {# Determine which locale we're in, what the other is, and write the link text properly #}
+    {% set thisLocale = craft.locale %}
+    {% if thisLocale == 'en_us' %}
+      {% set thatLocale = 'es' %}
+      {% set thatLink = 'Español' %}
+    {% else %}
+      {% set thatLocale = 'en_us' %}
+      {% set thatLink = 'English' %}
+    {% endif %}
+
+    {# Find the current entry in the other locale #}
+    {% set thatEntry = craft.entries.id(entry.id).locale(thatLocale).first %}
+
+    {# If that entry exists and is localized to the other locale, set the url. Otherwise, set a link to the homepage #}
+    {% if thatEntry %}
+      {% if thatEntry.locale == thatLocale %}
+        {% set thatUrl = thatEntry.getUrl() %}
+      {% else %}
+        {% set thatUrl = craft.config.siteUrl[locale] %}
+      {% endif %}
+    {% else %}
+      {% set thatUrl = craft.config.siteUrl[locale] %}
+    {% endif %}
+
+    {# Write out the language link #}
     <div class="language-select">
-      <a class="is-active" href="#">English</a>
-      <a href="#">Español</a>
+      <a href="{{ thatUrl }}">{{ thatLink }}</a>
     </div>
     <!--/.language-select-->
   </div>
