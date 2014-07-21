@@ -26,14 +26,17 @@
 
   {% set asset = entry.heroImage.first() %}
   <figure class="block-hero">
-    <div class="b-image" style="background-image: url({{ asset.getUrl('heroImage') }});" />
+    <img class="b-figure" src="{{ asset.getUrl('heroImage') }}" />
     {% if entry.heroCaption %}
     <figcaption class="b-body patterned">
-      {% if entry.heroCaptionTitle %}
-      <h4 class="cap-title">{{ entry.heroCaptionTitle }}</h4>
-      {% endif %}
-      {{ entry.heroCaption }}
+        {% if entry.heroCaptionTitle %}
+        <h4 class="cap-title">{{ entry.heroCaptionTitle }}</h4>
+        {% endif %}
+        {{ entry.heroCaption }}
     </figcaption>
+    {% endif %}
+    {% if asset.photoCredit %}
+    <p class="photo-credit">Image by {{ asset.photoCredit }}</p>
     {% endif %}
   </figure>
   <!--/.hero-->

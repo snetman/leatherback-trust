@@ -1,0 +1,76 @@
+{# Image block #}
+{% if block.image | length %}
+{% set asset = block.image.first() %}
+<figure class="block-image {{ block.imageType }}">
+
+{% switch block.imageType %}
+
+  {% case "jumbo" %}
+    <img class="b-figure" src="{{ asset.getUrl('heroImage') }}" />
+    {% if block.caption or asset.photoCredit %}
+    <figcaption class="b-body patterned">
+      {% if block.caption %}
+        {% if block.captionTitle %}
+        <h4 class="cap-title">{{ block.captionTitle }}</h4>
+        {% endif %}
+        {{ block.caption }}
+      {% endif %}
+      {% if asset.photoCredit %}
+        <p class="photo-credit">Image by {{ asset.photoCredit }}</p>
+      {% endif %}
+    </figcaption>
+    {% endif %}
+
+  {% case "inset-right" %}
+    <img class="b-figure" src="{{ asset.getUrl('insetImage') }}" />
+    {% if block.caption or asset.photoCredit %}
+    <figcaption class="b-body">
+      {% if block.caption %}
+        {% if block.captionTitle %}
+        <h4 class="cap-title">{{ block.captionTitle }}</h4>
+        {% endif %}
+        {{ block.caption }}
+      {% endif %}
+      {% if asset.photoCredit %}
+        <p class="photo-credit">Image by {{ asset.photoCredit }}</p>
+      {% endif %}
+    </figcaption>
+    {% endif %}
+
+  {% case "inset-left" %}
+    <img class="b-figure" src="{{ asset.getUrl('insetImage') }}" />
+    {% if block.caption or asset.photoCredit %}
+    <figcaption class="b-body">
+      {% if block.caption %}
+        {% if block.captionTitle %}
+        <h4 class="cap-title">{{ block.captionTitle }}</h4>
+        {% endif %}
+        {{ block.caption }}
+      {% endif %}
+      {% if asset.photoCredit %}
+        <p class="photo-credit">Image by {{ asset.photoCredit }}</p>
+      {% endif %}
+    </figcaption>
+    {% endif %}
+
+  {% default %}
+    <img class="b-figure" src="{{ asset.getUrl('standardImage') }}" />
+    {% if block.caption or asset.photoCredit %}
+    <figcaption class="b-body patterned">
+      {% if block.caption %}
+        {% if block.captionTitle %}
+        <h4 class="cap-title">{{ block.captionTitle }}</h4>
+        {% endif %}
+        {{ block.caption }}
+      {% endif %}
+      {% if asset.photoCredit %}
+        <p class="photo-credit">Image by {{ asset.photoCredit }}</p>
+      {% endif %}
+    </figcaption>
+    {% endif %}
+
+{% endswitch %}
+
+</figure>
+<!--/.block-image-->
+{% endif %}

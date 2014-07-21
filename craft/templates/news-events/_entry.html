@@ -1,0 +1,149 @@
+{% extends "_layout" %}
+{% set title = entry.title %}
+{% set bodyClass = 'sec-news l-2col l-2col-right theme-gray' %}
+
+{% block header %}
+{% if entry.heroImage | length %}
+<div class="l-header">
+  {% set asset = entry.heroImage.first() %}
+  <figure class="block-hero">
+    <img class="b-figure" src="{{ asset.getUrl('heroImage') }}" />
+    {% if entry.heroCaption %}
+    <figcaption class="b-body patterned">
+        {% if entry.heroCaptionTitle %}
+        <h4 class="cap-title">{{ entry.heroCaptionTitle }}</h4>
+        {% endif %}
+        {{ entry.heroCaption }}
+    </figcaption>
+    {% endif %}
+    {% if asset.photoCredit %}
+    <p class="photo-credit">Image by {{ asset.photoCredit }}</p>
+    {% endif %}
+  </figure>
+  <!--/.hero-->
+</div>
+<!--/.l-header-->
+{% endif %}
+{% endblock %}
+
+{% block main %}
+<div class="l-main">
+  <article class="a-full">
+    <header>
+      <time class="a-pubdate" datetime="{{ entry.postDate.w3cDate() }}"><span class="a-pubmonth">{{ entry.postDate.format('M') }}</span> <span class="a-pubday">{{ entry.postDate.day() }}</span></time>
+      <h1 class="a-title">{{ entry.title }}</h1>
+    </header>
+
+    {% include 'includes/story-blocks/_story-blocks.html' %}
+
+  </article>
+</div>
+<!--/.l-main-->
+{% endblock %}
+
+{% block aside %}
+<div class="l-aside metadata">
+  <div class="meta-authors">
+    <div class="block-author">
+      <div class="b-figure">
+        <img src="avatar.jpg" />
+      </div>
+      <div class="b-body">
+        <h4 class="name">First Lastname</h4>
+        <p class="handle"><a href="#">@lastname</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="meta-tags">
+    <h4>Tagged:</h4>
+    <ul class="tag-list tag-list-flush">
+      <li><a class="tag" href="#">Results &amp; progress</a></li>
+      <li><a class="tag" href="#">Turtle news</a></li>
+      <li><a class="tag" href="#">Media mentions</a></li>
+    </ul>
+  </div>
+  <div class="meta-share">
+    <ul class="share-list">
+      <li><a href="#"><span class="iconshare-email">Email this</span></a>
+      <li><a href="#"><span class="iconshare-tw">Share on Twitter</span></a></a></li>
+      <li><a href="#"><span class="iconshare-fb">Share on Facebook</span></a></a></li>
+    </ul>
+  </div>
+</div>
+<!--/.l-aside-->
+{% endblock %}
+
+{% block footer %}
+<div class="l-footer">
+
+  {# Set parameters for prev/next elements list #}
+  {% set params = craft.entries.section('newsAndEvents').order('postDate asc') %}
+
+  {# Get the prev/next elements #}
+  {% set prevEntry = entry.getPrev(params) %}
+  {% set nextEntry = entry.getNext(params) %}
+
+  {# Only output the buttons that actually exist #}
+  {% if prevEntry or nextEntry %}
+  <nav class="nav brick-nav">
+    <ul>
+      {% if prevEntry %}<li class="brick-left"><a href="{{ prevEntry.url }}"><span class="arrow">&larr;</span> Prev</a></li>{% endif %}
+      {% if nextEntry %}<li class="brick-right"><a href="{{ nextEntry.url }}">Next <span class="arrow">&rarr;</span></a></li>{% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+
+  <section class="news">
+    <header class="sechead">
+      <h2 class="sechead-title">Related news</h2>
+      <ul class="sechead-actions">
+        <li><a href="#">All news</a></li>
+      </ul>
+    </header>
+    <div class="a-cards">
+      <a href="news-article" class="a-card">
+        <article>
+          <header>
+            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecutat velum</h3>
+          </header>
+          <div class="a-body">
+            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <footer>
+            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">25</span></time>
+          </footer>
+        </article>
+      </a>
+      <a href="news-article" class="a-card">
+        <article>
+          <header>
+            <h3 class="a-title">News post headline here</h3>
+          </header>
+          <div class="a-body">
+            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <footer>
+            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">9</span></time>
+          </footer>
+        </article>
+      </a>
+      <a href="news-article" class="a-card">
+        <article>
+          <header>
+            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecua ulum cresp veritamu</h3>
+          </header>
+          <div class="a-body">
+            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <footer>
+            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">Apr</span> <span class="a-pubday">28</span></time>
+          </footer>
+        </article>
+      </a>
+    </div>
+  </section>
+  <!--/.related-articles-->
+
+</div>
+<!--/.l-footer-->
+{% endblock %}

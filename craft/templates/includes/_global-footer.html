@@ -15,25 +15,31 @@
     {% if thisLocale == 'en_us' %}
       {% set thatLocale = 'es' %}
       {% set thatLink = 'Español' %}
+      {% set thatUrl = craft.config.siteUrl[thatLocale] %}
     {% else %}
       {% set thatLocale = 'en_us' %}
       {% set thatLink = 'English' %}
+      {% set thatUrl = craft.config.siteUrl[thatLocale] %}
     {% endif %}
-
-    {# Find the current entry in the other locale #}
-    {% set thatEntry = craft.entries.id(entry.id).locale(thatLocale).first %}
-
+    {# This code was not working for me so I'm commenting all out for now until I can revisit #}
     {# If that entry exists and is localized to the other locale, set the url. Otherwise, set a link to the homepage #}
-    {% if thatEntry %}
+    {#
+    {% if entry %}
+      {% set thatEntry = craft.entries.id(entry.id).locale(thatLocale).first %}
       {% if thatEntry.locale == thatLocale %}
         {% set thatUrl = thatEntry.getUrl() %}
+        <h2>Yes a localized entry</h2>
       {% else %}
-        {% set thatUrl = craft.config.siteUrl[locale] %}
+        {% set thatUrl = craft.config.siteUrl[thatLocale] %}
       {% endif %}
     {% else %}
-      {% set thatUrl = craft.config.siteUrl[locale] %}
-    {% endif %}
+      {% set thatUrl = craft.config.siteUrl[thatLocale] %}
+      <h2>Nope not an entry</h2>
 
+      <h2>{{ craft.request.path }}</h2>
+      {% set thatUrl = craft.config.siteUrl[thatLocale] + craft.request.path %}
+    {% endif %}
+    #}
     {# Write out the language link #}
     <div class="language-select">
       <a href="{{ thatUrl }}">{{ thatLink }}</a>

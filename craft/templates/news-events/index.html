@@ -1,0 +1,19 @@
+{% extends "_layout" %}
+{% set title = "News & Events"|translate|raw  %}
+{% set bodyClass = 'sec-news l-1col theme-gray' %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+  {% for entry in craft.entries.section('newsAndEvents').find() %}
+    <article>
+      <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+      <p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
+      {{ entry.teaser }}
+      <p><a href="{{ entry.url }}">Continue reading</a></p>
+    </article>
+  {% endfor %}
+{% endblock %}
+
+{% block aside %}{% endblock %}
+{% block footer %}{% endblock %}

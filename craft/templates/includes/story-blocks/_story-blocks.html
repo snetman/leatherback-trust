@@ -1,0 +1,26 @@
+{# Story blocks #}
+{% for block in entry.storyBlocks %}
+
+  {% switch block.type %}
+
+    {% case "textBlock" %}
+      {% include 'includes/story-blocks/_block-text.html' %}
+
+    {% case "imageBlock" %}
+      {% include 'includes/story-blocks/_block-image.html' %}
+
+    {% case "dividerBlock" %}
+      {% include 'includes/story-blocks/_block-divider.html' %}
+
+    {% case "pullquoteBlock" %}
+      {% include 'includes/story-blocks/_block-pullquote.html' %}
+
+    {% case "statBlock" %}
+      {% include 'includes/story-blocks/_block-stat.html' %}
+
+    {% case "compareBlock" %}
+      {% include 'includes/story-blocks/_block-compare.html' %}
+
+  {% endswitch %}
+
+{% endfor %}

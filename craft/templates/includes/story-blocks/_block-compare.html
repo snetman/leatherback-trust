@@ -1,0 +1,37 @@
+{# Comparison block #}
+{% set assetLeft = block.imageLeft.first() %}
+{% set assetRight = block.imageRight.first() %}
+{% set creditLeft = '' %}
+{% set creditRight = '' %}
+{% if assetLeft.photoCredit %}
+  {% set creditLeft = assetLeft.photoCredit %}
+{% endif %}
+{% if assetRight.photoCredit %}
+  {% set creditRight = assetRight.photoCredit %}
+{% endif %}
+<figure class="block-compare">
+  <div class="b-figures">
+    <div class="b-figure">
+      <img src="{{ assetLeft.getUrl('comparisonImage') }}" />
+    </div>
+    <div class="b-figure">
+      <img src="{{ assetRight.getUrl('comparisonImage') }}" />
+    </div>
+  </div>
+  <!--/.b-figures-->
+
+  {% if block.caption or creditLeft|length or creditRight|length %}
+  <figcaption class="b-body patterned">
+    {% if block.caption %}
+      {% if block.captionTitle %}
+      <h4 class="cap-title">{{ block.captionTitle }}</h4>
+      {% endif %}
+      {{ block.caption }}
+    {% endif %}
+    {% if creditLeft|length or creditRight|length %}
+      <p class="photo-credit">Image by{% if creditLeft|length %} {{ creditLeft }} (left){% endif %}{% if creditRight|length %} {{ creditRight }} (right){% endif %}</p>
+    {% endif %}
+  </figcaption>
+  {% endif %}
+</figure>
+<!--/.block-compare-->

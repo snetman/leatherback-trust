@@ -1,0 +1,13 @@
+{# Pullquote block #}
+<div class="block-pullquote">
+  <div class="b-quote">
+    <p class="as-h2">{{ block.quote }}</p>
+  </div>
+  <div class="b-source">
+    <p class="name">{{ block.sourceName }}</p>
+    {% if block.sourceTitle %}
+    <p class="title">{{ block.sourceTitle }}</p>
+    {% endif %}
+  </div>
+</div>
+<!--/.block-pullquote-->

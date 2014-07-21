@@ -1,0 +1,15 @@
+{# Stat block #}
+<div class="block-stat">
+  <div class="b-number">
+    <p class="display">{{ block.number }}</p>
+  </div>
+  <div class="b-body patterned">
+    {{ block.description }}
+    {% if block.source %}
+    <div class="source">
+      {{ block.source }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+<!--/.block-stat-->
