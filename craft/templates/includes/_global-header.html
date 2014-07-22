@@ -32,9 +32,15 @@
             <form action="search-results"><input class="form-control" type="search" /></form>
             <span class="icon-search"></span>
           </li>
-          <li><a href="#"><span class="icon-tw">Tw</span></a></li>
-          <li><a href="#"><span class="icon-fb">Fb</span></a></li>
-          <li><a href="#"><span class="icon-yt">Yt</span></a></li>
+          {% if socialProfiles.twitterHandle %}
+          <li><a href="http://twitter.com/{{ socialProfiles.twitterHandle }}"><span class="icon-tw">Tw</span></a></li>
+          {% endif %}
+          {% if socialProfiles.facebookUrl %}
+          <li><a href="{{ socialProfiles.facebookUrl }}"><span class="icon-fb">Fb</span></a></li>
+          {% endif %}
+          {% if socialProfiles.youtubeUrl %}
+          <li><a href="{{ socialProfiles.youtubeUrl }}"><span class="icon-yt">Yt</span></a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>

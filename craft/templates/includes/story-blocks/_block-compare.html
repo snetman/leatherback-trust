@@ -29,7 +29,7 @@
       {{ block.caption }}
     {% endif %}
     {% if creditLeft|length or creditRight|length %}
-      <p class="photo-credit">Image by{% if creditLeft|length %} {{ creditLeft }} (left){% endif %}{% if creditRight|length %} {{ creditRight }} (right){% endif %}</p>
+      <p class="photo-credit">{{ "Image by" | translate }}{% if creditLeft|length %} {{ creditLeft }} (left){% endif %}{% if creditRight|length %} {{ creditRight }} (right){% endif %}</p>
     {% endif %}
   </figcaption>
   {% endif %}

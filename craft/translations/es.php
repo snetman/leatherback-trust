@@ -31,4 +31,10 @@ return array(
   "Less" => "Menos",
   "Top" => "Comienzo",
 
+  // Tags
+  "Tagged" => "Etiquetado",
+
+  // Blocks
+  "Image by" => "Imagen por",
+
 );

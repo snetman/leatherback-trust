@@ -17,7 +17,7 @@
     </figcaption>
     {% endif %}
     {% if asset.photoCredit %}
-    <p class="photo-credit">Image by {{ asset.photoCredit }}</p>
+    <p class="photo-credit">{{ "Image by" | translate }} {{ asset.photoCredit }}</p>
     {% endif %}
   </figure>
   <!--/.hero-->
@@ -45,30 +45,29 @@
 <div class="l-aside metadata">
   <div class="meta-authors">
     <div class="block-author">
+    {% if entry.displayAuthor | length %}
+      {% set postAuthor = entry.displayAuthor.first() %}
+    {% else %}
+      {% set postAuthor = entry.author %}
+    {% endif %}
       <div class="b-figure">
-        <img src="avatar.jpg" />
+        <img alt="{{ postAuthor.fullName }}" src="{{ postAuthor.photoUrl }}" />
       </div>
       <div class="b-body">
-        <h4 class="name">First Lastname</h4>
-        <p class="handle"><a href="#">@lastname</a></p>
+        <h4 class="name">{{ postAuthor.fullName }}</h4>
+        {% if postAuthor.twitterHandle %}
+        <p class="handle"><a href="http://www.twitter.com/{{ postAuthor.twitterHandle }}">{{ postAuthor.twitterHandle }}</a></p>
+        {% endif %}
       </div>
     </div>
   </div>
-  <div class="meta-tags">
-    <h4>Tagged:</h4>
-    <ul class="tag-list tag-list-flush">
-      <li><a class="tag" href="#">Results &amp; progress</a></li>
-      <li><a class="tag" href="#">Turtle news</a></li>
-      <li><a class="tag" href="#">Media mentions</a></li>
-    </ul>
-  </div>
-  <div class="meta-share">
-    <ul class="share-list">
-      <li><a href="#"><span class="iconshare-email">Email this</span></a>
-      <li><a href="#"><span class="iconshare-tw">Share on Twitter</span></a></a></li>
-      <li><a href="#"><span class="iconshare-fb">Share on Facebook</span></a></a></li>
-    </ul>
-  </div>
+
+  {# Tags #}
+  {% include 'includes/_tag-list.html' %}
+
+  {# Sharing options #}
+  {% include 'includes/_sharing-options.html' %}
+
 </div>
 <!--/.l-aside-->
 {% endblock %}
