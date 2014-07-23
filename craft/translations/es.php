@@ -12,7 +12,7 @@ return array(
 
   // Secondary nav
   "About" => "Acerca",
-  "News & Events" => "Noticias y Events",
+  "News & Events" => "Noticias y Eventos",
   "Contribute" => "Contribuir",
 
   // Footer nav
@@ -25,14 +25,23 @@ return array(
   "Menu" => "Menú",
   "Close" => "Cerrar",
 
+  // News section text
+  "Featured News" => "Noticias Destacadas",
+  "Featured Event" => "Evento Destacado",
+  "Recent news & events" => "Noticias y eventos recientes",
+  "Popular tags" => "Tags populares",
+  "Tagged" => "Etiquetado",
+
   // Action links
   "View all" => "Ver todo",
   "More" => "Mas",
   "Less" => "Menos",
   "Top" => "Comienzo",
 
-  // Tags
-  "Tagged" => "Etiquetado",
+  // Sharing link title text
+  "Email this" => "Envía este",
+  "Tweet this" => "Tweet este",
+  "Share this" => "Compartir este",
 
   // Blocks
   "Image by" => "Imagen por",

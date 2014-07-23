@@ -1,19 +1,137 @@
 {% extends "_layout" %}
 {% set title = "News & Events"|translate|raw  %}
-{% set bodyClass = 'sec-news l-1col theme-gray' %}
+{% set bodyClass = 'sec-news l-2col theme-gray' %}
 
-{% block header %}{% endblock %}
+{% block header %}
+<div class="l-header">
 
-{% block main %}
-  {% for entry in craft.entries.section('newsAndEvents').find() %}
-    <article>
-      <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
-      <p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
-      {{ entry.teaser }}
-      <p><a href="{{ entry.url }}">Continue reading</a></p>
-    </article>
+  <h1 class="display">{{ "News & Events"|translate|raw }}</h1>
+
+  {% for entry in entry.featuredItem %}
+  {% switch entry.type %}
+
+    {% case "news" %}
+    <a href="{{ entry.url }}" class="a-slat is-featured">
+      <article>
+        <header>
+          <h4 class="eyebrow">{{ "Featured News" | translate }}</h4>
+          <h2 class="a-title">{{ entry.title }}</h2>
+        </header>
+        <div class="a-body">
+          {{ entry.teaser }}
+        </div>
+        {% if entry.teaserImage | length %}
+          {% set asset = entry.teaserImage.first() %}
+          <figure class="a-image" style="background-image: url({{ asset.getUrl('newsFeatured') }});">
+          </figure>
+        {% endif %}
+        <footer>
+          <time class="a-pubdate{% if entry.teaserImage | length %} a-pubdate-overlay{% endif %}" datetime="{{ entry.postDate.w3cDate() }}"><span class="a-pubmonth">{{ entry.postDate.format('M') }}</span> <span class="a-pubday">{{ entry.postDate.day() }}</span></time>
+        </footer>
+      </article>
+    </a>
+
+    {% case "event" %}
+    <a href="{{ entry.url }}" class="a-slat is-featured">
+      <article>
+        <header>
+          <h4 class="eyebrow">{{ "Featured Event" | translate }}</h4>
+          <h2 class="a-title">{{ entry.title }}</h2>
+        </header>
+        <div class="a-body">
+          {{ entry.teaser }}
+        </div>
+        {% if entry.teaserImage | length %}
+          {% set asset = entry.teaserImage.first() %}
+          <figure class="a-image" style="background-image: url({{ asset.getUrl('newsFeatured') }});">
+          </figure>
+        {% endif %}
+      </article>
+    </a>
+
+  {% endswitch %}
   {% endfor %}
+</div>
+<!--/.l-header-->
 {% endblock %}
 
-{% block aside %}{% endblock %}
+{% block main %}
+
+{# {% set entries = craft.entries.section('newsAndEvents').find() %} #}
+<div class="l-main">
+  <header class="sechead">
+    <h2 class="sechead-title">{{ "Recent news & events" | translate }}</h2>
+  </header>
+
+  {% paginate craft.entries.section('newsAndEvents').limit(10) as entriesOnPage %}
+
+    <div class="a-slats">
+      {% for entry in entriesOnPage %}
+      <a href="{{ entry.url }}" class="a-slat">
+        <article>
+          <header>
+            <h3 class="a-title">{% if entry.shortTitle %}{{ entry.shortTitle }}{% else %}{{ entry.title }}{% endif %}</h3>
+          </header>
+          <div class="a-body">
+            {{ entry.teaser }}
+          </div>
+          {% if entry.teaserImage | length %}
+            {% set asset = entry.teaserImage.first() %}
+            <figure class="a-image" style="background-image: url({{ asset.getUrl('newsTeaser') }});">
+            </figure>
+          {% endif %}
+          {% if entry.type == 'news' %}
+          <footer>
+            <time class="a-pubdate{% if entry.teaserImage | length %} a-pubdate-overlay{% endif %}" datetime="{{ entry.postDate.w3cDate() }}"><span class="a-pubmonth">{{ entry.postDate.format('M') }}</span> <span class="a-pubday">{{ entry.postDate.day() }}</span></time>
+          </footer>
+          {% endif %}
+        </article>
+      </a>
+      {% endfor %}
+    </div>
+
+    {% if paginate.prevUrl or paginate.nextUrl %}
+    <nav class="nav brick-nav">
+      <ul>
+        {% if paginate.nextUrl %}<li class="brick-left"><a href="{{ paginate.nextUrl }}"><span class="arrow">&larr;</span> Prev</a></li>{% endif %}
+        {% if paginate.prevUrl %}<li class="brick-right"><a href="{{ paginate.prevUrl }}">Next <span class="arrow">&rarr;</span></a></li>{% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+
+  {% endpaginate %}
+
+</div>
+<!--/.l-main-->
+{% endblock %}
+
+{% block aside %}
+<div class="l-aside">
+  <header class="sechead">
+    <h2 class="sechead-title">{{ "Popular tags" | translate }}</h2>
+  </header>
+
+  <ul class="tag-list">
+  {% set entries = craft.entries.section('newsAndEvents').limit(null) %}
+    {% for tag in craft.tags.locale(craft.locale).relatedTo(entries) %}
+      <li><a class="tag" href="#">{{ tag.name }} <span class="count">8</span></a></li>
+    {% endfor %}
+    {#
+    <li><a class="tag" href="#">Tag name here <span class="count">8</span></a></li>
+    <li><a class="tag" href="#">Tag name <span class="count">12</span></a></li>
+    <li><a class="tag" href="#">Tag name <span class="count">22</span></a></li>
+    <li><a class="tag" href="#">Tag name here <span class="count">16</span></a></li>
+    <li><a class="tag" href="#">Tag name <span class="count">4</span></a></li>
+    <li><a class="tag" href="#">Tag name here <span class="count">9</span></a></li>
+    <li><a class="tag" href="#">Tag name here <span class="count">20</span></a></li>
+    <li><a class="tag" href="#">Tag name <span class="count">15</span></a></li>
+    <li><a class="tag" href="#">Tag name here <span class="count">3</span></a></li>
+    <li><a class="tag" href="#">Tag name <span class="count">1</span></a></li>
+    #}
+  </ul>
+  <p><a href="news-tags">{{ "View all" | translate }}</a></p>
+</div>
+  <!--/.l-aside-->
+{% endblock %}
+
 {% block footer %}{% endblock %}

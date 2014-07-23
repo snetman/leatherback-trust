@@ -1,4 +1,5 @@
 {
   buttons: ['html','link'],
+  allowedTags: ['p', 'a'],
   toolbarFixedBox: true
 }

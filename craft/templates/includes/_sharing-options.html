@@ -1,8 +1,43 @@
 {# Sharing options #}
-<div class="meta-share">
-  <ul class="share-list">
-    <li><a href="#"><span class="iconshare-email">Email this</span></a>
-    <li><a href="#"><span class="iconshare-tw">Share on Twitter</span></a></a></li>
-    <li><a href="#"><span class="iconshare-fb">Share on Facebook</span></a></a></li>
-  </ul>
-</div>
+
+{% set sharingMethods = sharing.methods %}
+
+{% if sharingMethods | length %}
+
+  {% set shareTitle = entry.title %}
+  {% if entry.shortTitle %}
+    {% set shareTitle = entry.shortTitle %}
+  {% else %}
+    {% if shareTitle|length > 60 %}
+      {% set shareTitle = entry.title|slice(0,60) ~ '…' %}
+    {% endif %}
+  {% endif %}
+
+  {% set shareTeaser = '' %}
+  {% if entry.teaser %}
+    {% set shareTeaser = entry.teaser %}
+  {% endif %}
+
+  {% set shareImage = '' %}
+  {% if entry.teaserImage | length %}
+    {% set shareImage = entry.teaserImage.first().url %}
+  {% endif %}
+
+  <div class="meta-share">
+    <ul class="share-list">
+    {% if sharingMethods.contains('email') %}
+      <li><a href="mailto:?subject={{ shareTitle }}&amp;body={{ craft.request.url }}" title="{{ 'Email this' | translate }}"><span class="iconshare-email">{{ 'Email this' | translate }}</span></a>
+    {% endif %}
+    {% if sharingMethods.contains('twitter') %}
+      <li><a href="http://twitter.com/intent/tweet?{{ {'text': shareTitle, 'url': craft.request.url}|url_encode }}" title="{{ 'Tweet this' | translate }}"><span class="iconshare-tw">{{ 'Tweet this' | translate }}</span></a></li>
+    {% endif %}
+    {% if sharingMethods.contains('facebook') %}
+      <li><a href="http://www.facebook.com/sharer.php?s=100&p[title]={{ shareTitle | url_encode }}&p[url]={{ craft.request.url | url_encode }}&p[summary]={{ shareTeaser | url_encode }}&p[images][0]={{ shareImage }}" title="{{ 'Share this' | translate }}"><span class="iconshare-fb">{{ 'Share this' | translate }}</span></a></li>
+      {#
+      Simpler, url-only Facebook share
+      <li><a href="https://www.facebook.com/sharer/sharer.php?{{ {'u': craft.request.url}|url_encode }}" title="{{ 'Share this' | translate }}"><span class="iconshare-fb">{{ 'Share this' | translate }}</span></a></li>
+      #}
+    {% endif %}
+    </ul>
+  </div>
+{% endif %}

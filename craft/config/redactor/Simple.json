@@ -1,4 +1,5 @@
 {
 	buttons: ['bold', 'italic'],
+  allowedTags: ['p', 'strong', 'em'],
 	toolbarFixedBox: true
 }
