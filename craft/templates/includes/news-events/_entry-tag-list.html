@@ -1,0 +1,13 @@
+{# Tags #}
+{% set tags = entry.newsTags.order('name') %}
+
+{% if tags | length %}
+<div class="meta-tags">
+  <h4>{{ "Tagged" | translate }}:</h4>
+  <ul class="tag-list tag-list-flush">
+  {% for tag in tags %}
+    <li><a class="tag" href="{{ siteUrl }}news-events/tags/{{ tag.name | url_encode }}">{{ tag.name }}</a></li>
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
