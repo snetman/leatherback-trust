@@ -12,7 +12,9 @@ namespace Craft;
  */
 
 /**
+ * Class UserSessionService
  *
+ * @package craft.app.services
  */
 class UserSessionService extends \CWebUser
 {

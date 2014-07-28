@@ -12,7 +12,9 @@ namespace Craft;
  */
 
 /**
- * Asset source base class
+ * Asset source base class.
+ *
+ * @package craft.app.assetsourcetypes
  */
 abstract class BaseAssetSourceType extends BaseSavableComponentType
 {

@@ -25,18 +25,25 @@ return array(
   "Menu" => "Menú",
   "Close" => "Cerrar",
 
+  // Generic section headers
+  "In this section" => "En esta sección",
+  "Overview" => "Overview",
+
   // News section text
   "Featured News" => "Noticias Destacadas",
   "Featured Event" => "Evento Destacado",
   "Recent news & events" => "Noticias y eventos recientes",
   "Popular tags" => "Tags populares",
+  "Recent tags" => "Tags receintes",
   "Tagged" => "Etiquetado",
+  "Tags" => "Tags",
 
   // Action links
-  "View all" => "Ver todo",
-  "More" => "Mas",
+  "More" => "Más",
   "Less" => "Menos",
+  "Learn more" => "Aprender más",
   "Top" => "Comienzo",
+  "View all" => "Ver todo",
 
   // Sharing link title text
   "Email this" => "Envía este",

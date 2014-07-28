@@ -13,6 +13,8 @@ namespace Craft;
 
 /**
  * Delete Stale Template Caches Task
+ *
+ * @package craft.app.tasks
  */
 class DeleteStaleTemplateCachesTask extends BaseTask
 {

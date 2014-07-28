@@ -70,19 +70,26 @@ h6, .as-h6 {
 // Eyebrow heads
 
 .eyebrow {
-  display: inline-block;
+  display: block;
   margin-bottom: $space-quarter;
-  padding: .3em $space-half .4em;
-  font-size: 11px;
-  font-size: .6875rem; // 11
-  font-weight: $font-weight-headline;
-  letter-spacing: 0;
-  line-height: 22/11;  // 22
-  text-transform: uppercase;
-  background-color: $tlt-blue;
+  em {
+    display: inline-block;
+    padding: .3em $space-half .4em;
+    font-size: 11px;
+    font-size: .6875rem; // 11
+    font-style: normal;
+    font-weight: $font-weight-headline;
+    letter-spacing: 0;
+    line-height: 22/11;  // 22
+    text-transform: uppercase;
+    background-color: $tlt-blue;
+  }
   &-strong {
     background-color: $tlt-dark-gray !important;
     color: $tlt-blue;
+  }
+  &.tucked {
+    margin-bottom: -$space-quarter; // Used for eyebrows above display headings
   }
 }
 
@@ -109,6 +116,12 @@ h6, .as-h6 {
     font-size: pem(64, 16); // 72
     line-height: 1.25; // 80
     margin-bottom: pem(22, 64); // 44
+  }
+
+  // Tucked eyebrow
+
+  .eyebrow.tucked {
+    margin-bottom: -$space-half;
   }
 
 }
@@ -150,9 +163,12 @@ hgroup {
   }
 }
 
-// Small text in headings
+// Small text in headings and flush headings
 
 h1, h2, h3, h4, h5, h6 {
+  &.flush {
+    margin-bottom: 0;
+  }
   small {
     display: block;
     font-family: $font-secondary;
@@ -168,25 +184,37 @@ h1, h2, h3, h4, h5, h6 {
 
 .theme-green {
   .eyebrow {
-    background-color: $tlt-green;
+    em {
+      background-color: $tlt-green;
+    }
     &-strong {
+      em {
       color: $tlt-green;
+      }
     }
   }
 }
 .theme-gray {
   .eyebrow {
-    background-color: $tlt-gray;
+    em {
+      background-color: $tlt-gray;
+    }
     &-strong {
+      em {
       color: $tlt-gray;
+      }
     }
   }
 }
 .theme-yellow {
   .eyebrow {
-    background-color: $tlt-yellow;
+    em {
+      background-color: $tlt-yellow;
+    }
     &-strong {
+      em {
       color: $tlt-yellow;
+      }
     }
   }
 }

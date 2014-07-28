@@ -1,0 +1,72 @@
+{% extends "_layout" %}
+{% set title = 'Tag name here'  %}
+{% set bodyClass = 'sec-news l-2col theme-gray' %}
+
+{% set tag = craft.tags.name(tag).first() %}
+
+{% if not tag %}
+    {% exit 404 %}
+{% endif %}
+
+{% block header %}
+<div class="l-header">
+  <h4 class="eyebrow tucked"><em>{{ "Tagged" | translate }}:</em></h4>
+  <h1 class="display flush">{{ tag.name }}</h1>
+</div>
+<!--/.l-header-->
+{% endblock %}
+
+{% block main %}
+
+<div class="l-main">
+
+  {% paginate craft.entries.section('newsAndEvents').relatedTo(tag).limit(10) as entriesOnPage %}
+
+    <div class="a-slats">
+      {% for entry in entriesOnPage %}
+      <a href="{{ entry.url }}" class="a-slat">
+        <article>
+          <header>
+            <h3 class="a-title">{% if entry.shortTitle %}{{ entry.shortTitle }}{% else %}{{ entry.title }}{% endif %}</h3>
+          </header>
+          <div class="a-body">
+            {{ entry.teaser }}
+          </div>
+          {% if entry.teaserImage | length %}
+            {% set asset = entry.teaserImage.first() %}
+            <figure class="a-image" style="background-image: url({{ asset.getUrl('newsTeaser') }});">
+            </figure>
+          {% endif %}
+          {% if entry.type == 'news' %}
+          <footer>
+            <time class="a-pubdate{% if entry.teaserImage | length %} a-pubdate-overlay{% endif %}" datetime="{{ entry.postDate.w3cDate() }}"><span class="a-pubmonth">{{ entry.postDate.format('M') }}</span> <span class="a-pubday">{{ entry.postDate.day() }}</span></time>
+          </footer>
+          {% endif %}
+        </article>
+      </a>
+      {% endfor %}
+    </div>
+
+    {% if paginate.prevUrl or paginate.nextUrl %}
+    <nav class="nav brick-nav">
+      <ul>
+        {% if paginate.nextUrl %}<li class="brick-left"><a href="{{ paginate.nextUrl }}"><span class="arrow">&larr;</span> Prev</a></li>{% endif %}
+        {% if paginate.prevUrl %}<li class="brick-right"><a href="{{ paginate.prevUrl }}">Next <span class="arrow">&rarr;</span></a></li>{% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+
+  {% endpaginate %}
+
+</div>
+<!--/.l-main-->
+{% endblock %}
+
+{% block aside %}
+<div class="l-aside">
+  {% include 'includes/_recent-tags.html' %}
+</div>
+<!--/.l-aside-->
+{% endblock %}
+
+{% block footer %}{% endblock %}

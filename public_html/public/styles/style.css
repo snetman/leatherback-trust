@@ -645,11 +645,15 @@ h6, .as-h6 {
 }
 
 .eyebrow {
-  display: inline-block;
+  display: block;
   margin-bottom: 0.34375em;
+}
+.eyebrow em {
+  display: inline-block;
   padding: 0.3em 0.6875em 0.4em;
   font-size: 11px;
   font-size: .6875rem;
+  font-style: normal;
   font-weight: 700;
   letter-spacing: 0;
   line-height: 22/11;
@@ -659,6 +663,9 @@ h6, .as-h6 {
 .eyebrow-strong {
   background-color: #4d555e !important;
   color: #c0e3ec;
+}
+.eyebrow.tucked {
+  margin-bottom: -0.34375em;
 }
 
 @media (min-width: 46.75em) {
@@ -680,6 +687,10 @@ h6, .as-h6 {
     font-size: 4em;
     line-height: 1.25;
     margin-bottom: 0.34375em;
+  }
+
+  .eyebrow.tucked {
+    margin-bottom: -0.6875em;
   }
 }
 .giga {
@@ -713,6 +724,9 @@ hgroup *:first-child {
   margin: 0;
 }
 
+h1.flush, h2.flush, h3.flush, h4.flush, h5.flush, h6.flush {
+  margin-bottom: 0;
+}
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   display: block;
   font-family: "ff-tisa-web-pro", Georgia, serif;
@@ -721,24 +735,24 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   color: #4d555e;
 }
 
-.theme-green .eyebrow {
+.theme-green .eyebrow em {
   background-color: #d6e8c2;
 }
-.theme-green .eyebrow-strong {
+.theme-green .eyebrow-strong em {
   color: #d6e8c2;
 }
 
-.theme-gray .eyebrow {
+.theme-gray .eyebrow em {
   background-color: #dad7cf;
 }
-.theme-gray .eyebrow-strong {
+.theme-gray .eyebrow-strong em {
   color: #dad7cf;
 }
 
-.theme-yellow .eyebrow {
+.theme-yellow .eyebrow em {
   background-color: #ffe4aa;
 }
-.theme-yellow .eyebrow-strong {
+.theme-yellow .eyebrow-strong em {
   color: #ffe4aa;
 }
 

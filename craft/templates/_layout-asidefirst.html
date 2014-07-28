@@ -1,0 +1,19 @@
+{% include 'includes/_html-head.html' %}
+
+<body{% if bodyClass is defined %} class="{{ bodyClass }}"{% endif %}>
+
+{% include 'includes/_global-header.html' %}
+
+<section id="Content">
+  <div class="lc">
+  {% block header %}{% endblock %}
+  {% block aside %}{% endblock %}
+  {% block main %}{% endblock %}
+  {% block footer %}{% endblock %}
+  </div>
+  <!--/.lc-->
+</section>
+
+{% include 'includes/_global-footer.html' %}
+
+{% include 'includes/_html-foot.html' %}

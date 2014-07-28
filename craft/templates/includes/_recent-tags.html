@@ -1,0 +1,24 @@
+<header class="sechead">
+  <h2 class="sechead-title">{{ "Recent tags" | translate }}</h2>
+</header>
+
+{# grab the entries in the specific locale #}
+{% set entries = craft.entries.find({section: 'newsAndEvents', locale: craft.locale}) %}
+
+{# Grab the related tags for those entries in the current locale #}
+{% set tags = craft.tags.relatedTo({
+  sourceElement: entries,
+  sourceLocale: craft.locale
+}).order('dateCreated desc').limit(10) %}
+
+{% if tags | length %}
+  <ul class="tag-list">
+  {% for tag in tags %}
+    <li><a class="tag" href="{{ siteUrl }}news-events/tags/{{ tag.name | url_encode }}">{{ tag.name }}</a></li>
+  {% endfor %}
+  </ul>
+{% endif %}
+
+{#  <li><a class="tag" href="#">Tag name here <span class="count">8</span></a></li>  #}
+
+<p><a href="{{ siteUrl }}news-events/tags">{{ "View all" | translate }}</a></p>

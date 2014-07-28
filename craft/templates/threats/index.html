@@ -1,0 +1,66 @@
+{% extends "_layout-asidefirst" %}
+{% set title = "Threats"|translate  %}
+{% set bodyClass = 'sec-threats l-2col-rev theme-green' %}
+
+{% set secEntries = craft.entries.section('threats').level(1) %}
+
+{% block header %}
+<div class="l-header">
+  {% if secEntries|length %}
+  <nav id="SectionNav" class="nav section-nav hide-more">
+    <ul>
+      <li class="inthissection"><span class="eyebrow">{{ "In this section" | translate }}:</span></li>
+      <li class="current"><a href="{{ siteUrl }}/threats">Overview</a></li>
+      {% for secEntry in secEntries %}
+      <li{% if secEntry.id == entry.id %} class="current"{% endif %}><a href="{{ secEntry.url }}">{{ secEntry.title }}</a></li>
+      {% endfor %}
+      <li id="LessNav"><a id="LessNavLink" href="#">&times; {{ "Less" | translate }}</a></li>
+      <li id="MoreNav"><a id="MoreNavLink" href="#SectionNav">{{ "More" | translate }}&hellip;</a></li>
+    </ul>
+  </nav>
+  {% endif %}
+  <header class="landing-header patterned">
+    <h1 class="display">{{ title }}</h1>
+  </header>
+</div>
+<!--/.l-header-->
+{% endblock %}
+
+{% block main %}
+
+<div class="l-main">
+
+  <header class="sechead">
+    <h2 class="sechead-title">{{ "In this section" | translate }}:</h2>
+  </header>
+
+  <ul class="a-spots">
+  {% for entry in secEntries %}
+    <li>
+      <article class="a-spot">
+      <figure class="a-image">
+        {% set icon = entry.threatIcon.first() %}
+        <a href="{{ entry.url }}"><img src="{{ icon.url }}" /></a>
+      </figure>
+      <div class="a-body">
+        <h3 class="a-title">{{ entry.link }}</h3>
+        {{ entry.teaser }}
+        <p><a class="btn btn-secondary btn-link" href="{{ entry.url }}">{{ "Learn more" | translate }}</a></p>
+      </div>
+      </article>
+    </li>
+  {% endfor %}
+  </ul>
+
+</div>
+<!--/.l-main-->
+{% endblock %}
+
+{% block aside %}
+<div class="l-aside">
+  {{ entry.sectionOpener }}
+</div>
+<!--/.l-aside-->
+{% endblock %}
+
+{% block footer %}{% endblock %}
