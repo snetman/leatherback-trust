@@ -5,7 +5,7 @@
 {% block header %}
 <div class="l-header">
   <div class="page-header">
-    <h1 class="page-header-title">{{ "Tags"|translate|raw }}</h1>
+    <h1 class="page-header-title">{{ "News & Events"|translate }} {{ "Tags"|translate }}</h1>
   </div>
   <!--/.page-header-->
 </div>
@@ -15,95 +15,41 @@
 {% block main %}
 <div class="l-main">
 
-  <nav id="AlphaNavTop" class="nav brick-nav">
-    <ul>
-      <li><a class="animate-scroll" href="#A">A–E</a></li>
-      <li><a class="animate-scroll" href="#F">F–J</a></li>
-      <li><a class="animate-scroll" href="#K">K–O</a></li>
-      <li><a class="animate-scroll" href="#P">P–T</a></li>
-      <li><a class="animate-scroll" href="#U">U–Z</a></li>
-    </ul>
-  </nav>
+{# grab the entries in the specific locale #}
+{% set entries = craft.entries.find({section: 'newsAndEvents', locale: craft.locale}) %}
 
-  <header id="A" class="sechead">
-    <h2 class="sechead-title">A–E</h2>
+{# Grab the related tags for those entries in the current locale #}
+{% set allTags = craft.tags.relatedTo({
+  sourceElement: entries,
+  sourceLocale: craft.locale
+}).order('name').limit(null) %}
+
+{% set allTagsGrouped = allTags|group('name | first') %}
+
+<nav id="AlphaNavTop" class="nav brick-nav">
+  <ul>
+  {% for letter in allTagsGrouped|keys %}
+    <li><a class="animate-scroll" href="#{{ letter }}">{{ letter }}</a></li>
+  {% endfor %}
+  </ul>
+</nav>
+
+{% for letter, tags in allTagsGrouped %}
+
+  <header id="{{ letter | upper }}" class="sechead">
+    <h2 class="sechead-title">{{ letter | upper }}</h2>
     <ul class="sechead-actions">
       <li><a class="animate-scroll" href="#AlphaNavTop">Top</a></li>
     </ul>
   </header>
 
   <ul class="tag-list cols-4max">
-    <li><a class="tag" href="#">Tag name here <span class="count">8</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">12</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">22</span></a></li>
-    <li><a class="tag" href="#">Tag name here <span class="count">16</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">4</span></a></li>
-    <li><a class="tag" href="#">Tag name here <span class="count">9</span></a></li>
-    <li><a class="tag" href="#">Tag name here <span class="count">20</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">15</span></a></li>
-    <li><a class="tag" href="#">Tag name here <span class="count">3</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">1</span></a></li>
+  {% for tag in tags %}
+    <li><a class="tag" href="{{ siteUrl }}news-events/tags/{{ tag.name | url_encode }}">{{ tag.name }}</a></li>
+  {% endfor %}
   </ul>
 
-  <header id="F" class="sechead">
-    <h2 class="sechead-title">F–J</h2>
-    <ul class="sechead-actions">
-      <li><a class="animate-scroll" href="#AlphaNavTop">Top</a></li>
-    </ul>
-  </header>
-
-  <ul class="tag-list cols-4max">
-    <li><a class="tag" href="#">Tag name here <span class="count">8</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">12</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">22</span></a></li>
-    <li><a class="tag" href="#">Tag name here <span class="count">16</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">4</span></a></li>
-  </ul>
-
-  <header id="K" class="sechead">
-    <h2 class="sechead-title">K–O</h2>
-    <ul class="sechead-actions">
-      <li><a class="animate-scroll" href="#AlphaNavTop">Top</a></li>
-    </ul>
-  </header>
-
-  <ul class="tag-list cols-4max">
-    <li><a class="tag" href="#">Tag name here <span class="count">8</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">12</span></a></li>
-  </ul>
-
-
-  <header id="P" class="sechead">
-    <h2 class="sechead-title">P–T</h2>
-    <ul class="sechead-actions">
-      <li><a class="animate-scroll" href="#AlphaNavTop">Top</a></li>
-    </ul>
-  </header>
-
-  <ul class="tag-list cols-4max">
-    <li><a class="tag" href="#">Tag name here <span class="count">8</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">12</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">22</span></a></li>
-    <li><a class="tag" href="#">Tag name here <span class="count">16</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">4</span></a></li>
-    <li><a class="tag" href="#">Tag name here <span class="count">9</span></a></li>
-    <li><a class="tag" href="#">Tag name here <span class="count">20</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">15</span></a></li>
-    <li><a class="tag" href="#">Tag name here <span class="count">3</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">1</span></a></li>
-  </ul>
-
-  <header id="U" class="sechead">
-    <h2 class="sechead-title">U–Z</h2>
-    <ul class="sechead-actions">
-      <li><a class="animate-scroll" href="#AlphaNavTop">Top</a></li>
-    </ul>
-  </header>
-
-  <ul class="tag-list cols-4max">
-    <li><a class="tag" href="#">Tag name here <span class="count">8</span></a></li>
-    <li><a class="tag" href="#">Tag name <span class="count">12</span></a></li>
-  </ul>
+{% endfor %}
 
 </div>
 <!--/.l-main-->

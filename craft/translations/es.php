@@ -28,6 +28,7 @@ return array(
   // Generic section headers
   "In this section" => "En esta sección",
   "Overview" => "Overview",
+  "Related" => "Conexo",
 
   // News section text
   "Featured News" => "Noticias Destacadas",
@@ -37,6 +38,12 @@ return array(
   "Recent tags" => "Tags receintes",
   "Tagged" => "Etiquetado",
   "Tags" => "Tags",
+  "When" => "Cuando",
+  "Where" => "Donde",
+  "From" => "Desde",
+  "To" => "a",
+  "All day" => "Todo el día",
+  "F j, Y" => "j F Y",
 
   // Action links
   "More" => "Más",
@@ -44,6 +51,7 @@ return array(
   "Learn more" => "Aprender más",
   "Top" => "Comienzo",
   "View all" => "Ver todo",
+  "View map" => "Ver mapa",
 
   // Sharing link title text
   "Email this" => "Envía este",

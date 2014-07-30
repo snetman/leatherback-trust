@@ -69,7 +69,7 @@
   }
 
   &.l-1col-narrow {
-    .l-header,
+    // .l-header,
     .l-main,
     .l-aside {
       @include breakpoint($bp-med) {

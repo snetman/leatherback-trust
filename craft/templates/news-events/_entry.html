@@ -30,7 +30,9 @@
 <div class="l-main">
   <article class="a-full">
     <header>
-      <time class="a-pubdate" datetime="{{ entry.postDate.w3cDate() }}"><span class="a-pubmonth">{{ entry.postDate.format('M') }}</span> <span class="a-pubday">{{ entry.postDate.day() }}</span></time>
+      {% if entry.type == 'news' %}
+      <time class="a-pubdate" datetime="{{ entry.postDate.w3cDate() }}">{% include 'includes/news-events/_circle-date.html' %}</time>
+      {% endif %}
       <h1 class="a-title">{{ entry.title }}</h1>
     </header>
 
@@ -43,6 +45,8 @@
 
 {% block aside %}
 <div class="l-aside metadata">
+
+  {% if entry.type == 'news' %}
   <div class="meta-authors">
     <div class="block-author">
     {% if entry.displayAuthor | length %}
@@ -61,6 +65,63 @@
       </div>
     </div>
   </div>
+  {% endif %}
+
+  {% if entry.type == 'event' %}
+  <div class="meta-event">
+    <dl class="flush">
+      <dt>{{ "When" | translate }}:</dt>
+      <dd>
+        {# If there's an end entered #}
+        {% if entry.eventEnd %}
+
+          {# Event starts and ends on different days #}
+          {% if entry.eventStart.day() != entry.eventEnd.day() %}
+
+            {% if entry.allDay %}
+              <em>{{ "From" | translate }}</em><br>{{ entry.eventStart|date('F j, Y'|t) }}<br><em>{{ "To" | translate }}</em><br>{{ entry.eventEnd|date('F j, Y'|t) }}
+            {% else %}
+              <em>{{ "From" | translate }}</em><br>{{ entry.eventStart|date('F j, Y'|t) }}<br>{{ entry.eventStart.localeTime() }}<br><em>{{ "To" | translate }}</em><br>{{ entry.eventEnd|date('F j, Y'|t) }}<br>{{ entry.eventEnd.localeTime() }}
+            {% endif %}
+
+          {% else %}
+          {# Event starts and ends on same day #}
+
+            {% if entry.allDay %}
+              {{ entry.eventStart|date('F j, Y'|t) }}<br>{{ "All day" | translate }}
+            {% else %}
+              {{ entry.eventStart|date('F j, Y'|t) }}<br>{{ entry.eventStart.localeTime() }}–{{ entry.eventEnd.localeTime() }}
+            {% endif %}
+
+          {% endif %}
+
+        {% else %}
+        {# Only event start #}
+
+            {% if entry.allDay %}
+              {{ entry.eventStart|date('F j, Y'|t) }}<br>{{ "All day" | translate }}
+            {% else %}
+              {{ entry.eventStart|date('F j, Y'|t) }}<br>{{ entry.eventStart.localeTime() }}
+            {% endif %}
+
+        {% endif %}
+      </dd>
+
+      {% if entry.showLocation %}
+      <dt>{{ "Where" | translate }}:</dt>
+      <dd>
+        {% if entry.locationName %}{{ entry.locationName}}<br>{% endif %}
+        {% if entry.locationStreetAddress %}{{ entry.locationStreetAddress}}{% endif %}
+        {% if entry.locationStreetAddress2 %}<br>{{ entry.locationStreetAddress2}}{% endif %}
+        {% if entry.locationCity %}<br>{{ entry.locationCity}}{% endif %}{% if entry.locationState %}, {{ entry.locationState}}{% endif %}{% if entry.locationPostcode %} {{ entry.locationPostcode}}{% endif %}
+        {% if entry.locationCountry %}<br>{{ entry.locationCountry}}{% endif %}
+      </dd>
+      {% set fullLocation = [entry.locationStreetAddress, entry.locationStreetAddress2, entry.locationCity, entry.locationState, entry.locationPostcode, entry.locationCountry]|join(', ') %}
+      <dd><a href="http://maps.google.com/maps?q={{ fullLocation | url_encode }}">{{ "View map" | translate }}</a></dd>
+      {% endif %}
+    </dl>
+  </div>
+  {% endif %}
 
   {# Tags #}
   {% include 'includes/news-events/_entry-tag-list.html' %}
@@ -84,7 +145,7 @@
 
   {# Only output the buttons that actually exist #}
   {% if prevEntry or nextEntry %}
-  <nav class="nav brick-nav">
+  <nav class="nav brick-nav brick-nav-full">
     <ul>
       {% if prevEntry %}<li class="brick-left"><a href="{{ prevEntry.url }}"><span class="arrow">&larr;</span> Prev</a></li>{% endif %}
       {% if nextEntry %}<li class="brick-right"><a href="{{ nextEntry.url }}">Next <span class="arrow">&rarr;</span></a></li>{% endif %}
@@ -92,56 +153,49 @@
   </nav>
   {% endif %}
 
-  <section class="news">
-    <header class="sechead">
-      <h2 class="sechead-title">Related news</h2>
-      <ul class="sechead-actions">
-        <li><a href="#">All news</a></li>
-      </ul>
-    </header>
-    <div class="a-cards">
-      <a href="news-article" class="a-card">
-        <article>
-          <header>
-            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecutat velum</h3>
-          </header>
-          <div class="a-body">
-            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <footer>
-            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">25</span></time>
-          </footer>
-        </article>
-      </a>
-      <a href="news-article" class="a-card">
-        <article>
-          <header>
-            <h3 class="a-title">News post headline here</h3>
-          </header>
-          <div class="a-body">
-            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <footer>
-            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">9</span></time>
-          </footer>
-        </article>
-      </a>
-      <a href="news-article" class="a-card">
-        <article>
-          <header>
-            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecua ulum cresp veritamu</h3>
-          </header>
-          <div class="a-body">
-            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <footer>
-            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">Apr</span> <span class="a-pubday">28</span></time>
-          </footer>
-        </article>
-      </a>
-    </div>
-  </section>
-  <!--/.related-articles-->
+  {# Set the tags for this entry #}
+  {% set tags = entry.newsTags %}
+
+  {% if tags|length %}
+
+    {# grab the three most recent entries related to those tags #}
+    {% set relatedEntries = craft.entries.section('newsAndEvents').relatedTo({
+      targetElement: tags,
+      sourceLocale: craft.locale
+    }).order('postDate desc').id('not ' ~ entry.id).limit(3) %}
+
+    {% if relatedEntries|length %}
+      <section class="news">
+        <header class="sechead">
+          <h2 class="sechead-title">Related {{ "News & Events" | translate | lower}}</h2>
+          <ul class="sechead-actions">
+            <li><a href="{{ siteUrl }}news-events">{{ "View all" | translate }}</a></li>
+          </ul>
+        </header>
+        <div class="a-cards">
+        {% for entry in relatedEntries %}
+          <a href="{{ entry.url }}" class="a-card">
+            <article>
+              <header>
+                <h3 class="a-title">{{ entry.shortTitle}}</h3>
+              </header>
+              <div class="a-body">
+                {{ entry.teaser }}
+              </div>
+              {% if entry.type == 'news' %}
+              <footer>
+                <time class="a-pubdate" datetime="{{ entry.postDate.w3cDate() }}">{% include 'includes/news-events/_circle-date.html' %}</time>
+              </footer>
+              {% endif %}
+            </article>
+          </a>
+        {% endfor %}
+        </div>
+      </section>
+      <!--/.related-articles-->
+    {% endif %}
+
+  {% endif %}
 
 </div>
 <!--/.l-footer-->

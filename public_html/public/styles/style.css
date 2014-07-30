@@ -842,6 +842,9 @@ dl {
   overflow: hidden;
   margin: 0 0 1.375em;
 }
+dl.flush {
+  margin-bottom: 0;
+}
 
 dt {
   font-weight: 700;
@@ -1850,7 +1853,6 @@ tfoot th {
   margin-bottom: 1.375em;
 }
 @media (min-width: 46.75em) {
-  .l-1col.l-1col-narrow .l-header,
   .l-1col.l-1col-narrow .l-main,
   .l-1col.l-1col-narrow .l-aside {
     max-width: 82.85714%;
@@ -1859,7 +1861,6 @@ tfoot th {
   }
 }
 @media (min-width: 75em) {
-  .l-1col.l-1col-narrow .l-header,
   .l-1col.l-1col-narrow .l-main,
   .l-1col.l-1col-narrow .l-aside {
     max-width: 65.71429%;
@@ -6170,21 +6171,26 @@ Markup:
 }
 
 .brick-nav {
-  display: table;
+  *zoom: 1;
   width: 100%;
   margin-bottom: 1.375em;
-  border-collapse: collapse;
-  border: 1px solid #c0e3ec;
 }
-.brick-nav > ul {
-  display: table-row;
+.brick-nav:before, .brick-nav:after {
+  display: table;
+  content: "";
+}
+.brick-nav:after {
+  clear: both;
 }
 .brick-nav li {
-  display: table-cell;
-  border: 1px solid #c0e3ec;
+  float: left;
+  margin-bottom: -1px;
+  margin-right: -1px;
 }
 .brick-nav a {
   display: block;
+  border: 1px solid #c0e3ec;
+  min-width: 44px;
   padding: 0.6875em;
   font-weight: 700;
   text-align: center;
@@ -6228,22 +6234,43 @@ Markup:
     margin-left: .5em;
   }
 }
+.brick-nav-full {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+.brick-nav-full > ul {
+  display: table-row;
+}
+.brick-nav-full li {
+  float: none;
+  display: table-cell;
+  border: 1px solid #c0e3ec;
+  margin-bottom: 0;
+  margin-right: 0;
+}
+.brick-nav-full a {
+  border-width: 0;
+}
 .theme-green .brick-nav ul,
-.theme-green .brick-nav li {
+.theme-green .brick-nav li,
+.theme-green .brick-nav a {
   border-color: #d6e8c2;
 }
 .theme-green .brick-nav .is-disabled a {
   color: #d6e8c2;
 }
 .theme-gray .brick-nav ul,
-.theme-gray .brick-nav li {
+.theme-gray .brick-nav li,
+.theme-gray .brick-nav a {
   border-color: #dad7cf;
 }
 .theme-gray .brick-nav .is-disabled a {
   color: #dad7cf;
 }
 .theme-yellow .brick-nav ul,
-.theme-yellow .brick-nav li {
+.theme-yellow .brick-nav li,
+.theme-yellow .brick-nav a {
   border-color: #ffe4aa;
 }
 .theme-yellow .brick-nav .is-disabled a {

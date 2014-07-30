@@ -3,22 +3,11 @@
 {% set bodyClass = 'sec-threats l-2col-rev theme-green' %}
 
 {% set secEntries = craft.entries.section('threats').level(1) %}
+{% set secPath = 'threats' %}
 
 {% block header %}
 <div class="l-header">
-  {% if secEntries|length %}
-  <nav id="SectionNav" class="nav section-nav hide-more">
-    <ul>
-      <li class="inthissection"><span class="eyebrow">{{ "In this section" | translate }}:</span></li>
-      <li class="current"><a href="{{ siteUrl }}/threats">Overview</a></li>
-      {% for secEntry in secEntries %}
-      <li{% if secEntry.id == entry.id %} class="current"{% endif %}><a href="{{ secEntry.url }}">{{ secEntry.title }}</a></li>
-      {% endfor %}
-      <li id="LessNav"><a id="LessNavLink" href="#">&times; {{ "Less" | translate }}</a></li>
-      <li id="MoreNav"><a id="MoreNavLink" href="#SectionNav">{{ "More" | translate }}&hellip;</a></li>
-    </ul>
-  </nav>
-  {% endif %}
+  {% include 'includes/_section-nav.html' %}
   <header class="landing-header patterned">
     <h1 class="display">{{ title }}</h1>
   </header>
@@ -40,7 +29,7 @@
       <article class="a-spot">
       <figure class="a-image">
         {% set icon = entry.threatIcon.first() %}
-        <a href="{{ entry.url }}"><img src="{{ icon.url }}" /></a>
+        <a href="{{ entry.url }}"><img src="{{ icon.getUrl('threatIcon') }}" /></a>
       </figure>
       <div class="a-body">
         <h3 class="a-title">{{ entry.link }}</h3>

@@ -452,23 +452,20 @@ Markup:
 //
 
 .brick-nav {
-  display: table;
+  @include clearfix;
   width: 100%;
   margin-bottom: $space;
-  border-collapse: collapse;
-  border: 1px solid $tlt-blue;
-
-  > ul {
-    display: table-row;
-  }
 
   li {
-    display: table-cell;
-    border: 1px solid $tlt-blue;
+    float: left;
+    margin-bottom: -1px;
+    margin-right: -1px;
   }
 
   a {
     display: block;
+    border: 1px solid $tlt-blue;
+    min-width: 44px;
     padding: $space-half;
     font-weight: $font-weight-headline;
     text-align: center;
@@ -516,13 +513,40 @@ Markup:
     }
   }
 
+  // Classes to force bricks to
+
+  // Full width bricks
+
+  &-full {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+
+    > ul {
+      display: table-row;
+    }
+
+    li {
+      float: none;
+      display: table-cell;
+      border: 1px solid $tlt-blue;
+      margin-bottom: 0;
+      margin-right: 0;
+    }
+
+    a {
+      border-width: 0;
+    }
+  }
+
   //
   // Theming
   //
 
   .theme-green & {
     ul,
-    li {
+    li,
+    a {
       border-color: $tlt-green;
     }
     .is-disabled a {
@@ -531,7 +555,8 @@ Markup:
   }
   .theme-gray & {
     ul,
-    li {
+    li,
+    a {
       border-color: $tlt-gray;
     }
     .is-disabled a {
@@ -540,7 +565,8 @@ Markup:
   }
   .theme-yellow & {
     ul,
-    li {
+    li,
+    a {
       border-color: $tlt-yellow;
     }
     .is-disabled a {
@@ -549,3 +575,5 @@ Markup:
   }
 
 }
+
+// Block-style bricks

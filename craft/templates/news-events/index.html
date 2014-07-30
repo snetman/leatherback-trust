@@ -26,7 +26,7 @@
           </figure>
         {% endif %}
         <footer>
-          <time class="a-pubdate" datetime="{{ entry.postDate.w3cDate() }}"><span class="a-pubmonth">{{ entry.postDate.format('M') }}</span> <span class="a-pubday">{{ entry.postDate.day() }}</span></time>
+          <time class="a-pubdate" datetime="{{ entry.postDate.w3cDate() }}">{% include 'includes/news-events/_circle-date.html' %}</time>
         </footer>
       </article>
     </a>
@@ -57,7 +57,6 @@
 
 {% block main %}
 
-{# {% set entries = craft.entries.section('newsAndEvents').find() %} #}
 <div class="l-main">
   <header class="sechead">
     <h2 class="sechead-title">{{ "Recent news & events" | translate }}</h2>
@@ -82,7 +81,7 @@
           {% endif %}
           {% if entry.type == 'news' %}
           <footer>
-            <time class="a-pubdate{% if entry.teaserImage | length %} a-pubdate-overlay{% endif %}" datetime="{{ entry.postDate.w3cDate() }}"><span class="a-pubmonth">{{ entry.postDate.format('M') }}</span> <span class="a-pubday">{{ entry.postDate.day() }}</span></time>
+            <time class="a-pubdate{% if entry.teaserImage | length %} a-pubdate-overlay{% endif %}" datetime="{{ entry.postDate.w3cDate() }}">{% include 'includes/news-events/_circle-date.html' %}</time>
           </footer>
           {% endif %}
         </article>
@@ -91,7 +90,7 @@
     </div>
 
     {% if paginate.prevUrl or paginate.nextUrl %}
-    <nav class="nav brick-nav">
+    <nav class="nav brick-nav brick-nav-full">
       <ul>
         {% if paginate.nextUrl %}<li class="brick-left"><a href="{{ paginate.nextUrl }}"><span class="arrow">&larr;</span> Prev</a></li>{% endif %}
         {% if paginate.prevUrl %}<li class="brick-right"><a href="{{ paginate.prevUrl }}">Next <span class="arrow">&rarr;</span></a></li>{% endif %}

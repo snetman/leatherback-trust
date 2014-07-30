@@ -35,6 +35,9 @@ ol {
 dl {
 	overflow: hidden;
 	margin: 0 0 $space;
+  &.flush {
+    margin-bottom: 0;
+  }
 }
 
 dt {
