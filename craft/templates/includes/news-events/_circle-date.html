@@ -1,1 +1,4 @@
-<span class="a-pubmonth">{{ entry.postDate|date('M') }}</span> <span class="a-pubday">{{ entry.postDate.day() }}</span>
+<time class="{{ classes }}" datetime="{{ entry.postDate.w3cDate() }}">
+  <span class="a-pubmonth">{{ entry.postDate|date('M') }}</span>
+  <span class="a-pubday">{{ entry.postDate.day() }}</span>
+</time>

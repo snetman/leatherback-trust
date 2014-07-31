@@ -1,0 +1,33 @@
+{% set entries = entry.related %}
+
+{% if entries|length %}
+
+<section class="news">
+  <header class="sechead">
+    <h2 class="sechead-title">See also</h2>
+  </header>
+  <div class="a-cards">
+  {% for entry in entries %}
+    <a href="{{ entry.url }}" class="a-card">
+      <article>
+        <header>
+          <div class="eyebrow"><em>{{ entry.section|translate }}</em></div>
+          <h3 class="a-title">{% if entry.shortTitle %}{{ entry.shortTitle }}{% else %}{{ entry.title }}{% endif %}</h3>
+        </header>
+        {% if entry.teaser %}
+        <div class="a-body">
+          {{ entry.teaser }}
+        </div>
+        {% endif %}
+        {% if entry.type == 'news' %}
+        <footer>
+          {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate'} %}
+        </footer>
+        {% endif %}
+      </article>
+    </a>
+  {% endfor %}
+  </div>
+</section>
+<!--/.related-articles-->
+{% endif %}

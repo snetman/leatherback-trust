@@ -17,6 +17,12 @@ return array(
     'password' => 'root',
     'database' => 'av01875leatherback',
   ),
+  'leatherback.dev' => array(
+    'server' => 'localhost',
+    'user' => 'root',
+    'password' => 'root',
+    'database' => 'av01875leatherback',
+  ),
   'staging.leatherback.org' => array(
     'server' => 'localhost',
     'user' => 'av01875',

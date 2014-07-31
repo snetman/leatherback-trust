@@ -31,12 +31,19 @@
   <article class="a-full">
     <header>
       {% if entry.type == 'news' %}
-      <time class="a-pubdate" datetime="{{ entry.postDate.w3cDate() }}">{% include 'includes/news-events/_circle-date.html' %}</time>
+      {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate'} %}
       {% endif %}
       <h1 class="a-title">{{ entry.title }}</h1>
     </header>
 
     {% include 'includes/story-blocks/_story-blocks.html' %}
+
+    {% if entry.type == 'event' %}
+      {% if entry.rsvpUrl and entry.eventStart|date('Y-m-d') > now|date('Y-m-d') %}
+      <div class="block-divider"></div>
+      <p><a href="{{ entry.rsvpUrl }}" class="btn">{{ entry.rsvpButton|translate }}</a></p>
+      {% endif %}
+    {% endif %}
 
   </article>
 </div>
@@ -169,7 +176,7 @@
         <header class="sechead">
           <h2 class="sechead-title">Related {{ "News & Events" | translate | lower}}</h2>
           <ul class="sechead-actions">
-            <li><a href="{{ siteUrl }}news-events">{{ "View all" | translate }}</a></li>
+            <li><a href="url('news-events')">{{ "View all" | translate }}</a></li>
           </ul>
         </header>
         <div class="a-cards">
@@ -184,7 +191,7 @@
               </div>
               {% if entry.type == 'news' %}
               <footer>
-                <time class="a-pubdate" datetime="{{ entry.postDate.w3cDate() }}">{% include 'includes/news-events/_circle-date.html' %}</time>
+                {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate'} %}
               </footer>
               {% endif %}
             </article>

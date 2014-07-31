@@ -29,12 +29,12 @@
       <article class="a-spot">
       <figure class="a-image">
         {% set icon = entry.threatIcon.first() %}
-        <a href="{{ entry.url }}"><img src="{{ icon.getUrl('threatIcon') }}" /></a>
+        <a href="{{ entry.url }}"><img class="img-bordered" src="{{ icon.getUrl('threatIcon') }}" /></a>
       </figure>
       <div class="a-body">
         <h3 class="a-title">{{ entry.link }}</h3>
         {{ entry.teaser }}
-        <p><a class="btn btn-secondary btn-link" href="{{ entry.url }}">{{ "Learn more" | translate }}</a></p>
+        <p><a class="" href="{{ entry.url }}">{{ "Learn more" | translate }}</a></p>
       </div>
       </article>
     </li>

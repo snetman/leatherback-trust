@@ -17,6 +17,11 @@
 
   <h1 class="display">{{ title }}</h1>
 
+  <figure class="threat-icon">
+    {% set icon = entry.threatIcon.first() %}
+    <img class="img-bordered" src="{{ icon.getUrl('threatIcon') }}" />
+  </figure>
+
   {% include 'includes/story-blocks/_story-blocks.html' %}
 
 </div>
@@ -53,53 +58,8 @@
   </nav>
   {% endif %}
 
-  <section class="news">
-    <header class="sechead">
-      <h2 class="sechead-title">See also</h2>
-    </header>
-    <div class="a-cards">
-      <a href="news-article" class="a-card">
-        <article>
-          <header>
-            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecutat velum</h3>
-          </header>
-          <div class="a-body">
-            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <footer>
-            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">25</span></time>
-          </footer>
-        </article>
-      </a>
-      <a href="news-article" class="a-card">
-        <article>
-          <header>
-            <h3 class="a-title">News post headline here</h3>
-          </header>
-          <div class="a-body">
-            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <footer>
-            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">9</span></time>
-          </footer>
-        </article>
-      </a>
-      <a href="news-article" class="a-card">
-        <article>
-          <header>
-            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecua ulum cresp veritamu</h3>
-          </header>
-          <div class="a-body">
-            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <footer>
-            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">Apr</span> <span class="a-pubday">28</span></time>
-          </footer>
-        </article>
-      </a>
-    </div>
-  </section>
-  <!--/.related-articles-->
+  {# Related content #}
+  {% include 'includes/_related-content.html' %}
 
 </div>
 <!--/.l-footer-->

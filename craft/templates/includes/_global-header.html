@@ -10,7 +10,7 @@
         <ul class="main-nav">
           <li id="nav-home"><a href="{{ siteUrl }}">{{ "Home" | translate }}</a></li>
           <li id="nav-why"><a href="#">{{ "Why Leatherbacks <br>&amp; Sea Turtles Matter" | translate | raw }}</a></li>
-          <li id="nav-threats"><a href="{{ siteUrl }}threats">{{ "Threats" | translate }}</a></li>
+          <li id="nav-threats"><a href="{{ url('threats') }}">{{ "Threats" | translate }}</a></li>
           <li id="nav-conservation"><a href="#">{{ "Conservation" | translate }}</a></li>
           <li id="nav-donate"><a href="#">{{ "Donate" | translate }}</a></li>
         </ul>
@@ -24,7 +24,7 @@
       <div class="lc">
         <ul class="sec-nav">
           <li id="nav-about"><a href="#">{{ "About" | translate }}</a></li>
-          <li id="nav-news"><a href="{{ siteUrl }}news-events">{{ "News & Events" | translate | raw }}</a></li>
+          <li id="nav-news"><a href="{{ url('news-events') }}">{{ "News & Events" | translate | raw }}</a></li>
           <li id="nav-contribute"><a href="#">{{ "Contribute" | translate }}</a></li>
        </ul>
         <ul class="social-nav">

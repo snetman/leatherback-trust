@@ -9,6 +9,13 @@ img, video, object {
 	height: auto;
 }
 
+// Bordered images
+
+.img-bordered {
+	border-radius: 100%;
+	border: 1px solid $tlt-dark-gray;
+}
+
 iframe {
 	margin-bottom: $space;
 }

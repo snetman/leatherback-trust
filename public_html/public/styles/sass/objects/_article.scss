@@ -351,6 +351,15 @@ $cardimageheight-large-2: 200px;
   display: block;
   @include clearfix;
 
+  // The title
+
+  .a-title a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   // The image
 
   .a-image {

@@ -1,0 +1,16 @@
+//
+// Threat icon
+//
+
+.threat-icon {
+  @include span(3 of 12);
+  margin-bottom: $space-half;
+
+  @include breakpoint($bp-med) {
+    @include span(2 of 10);
+  }
+
+  @include breakpoint($bp-large-2) {
+    @include span(1.5 of 8);
+  }
+}

@@ -24,6 +24,7 @@
   {% endif %}
 
   <div class="meta-share">
+    {# <h4>{{ 'Share this' | translate }}:</h4> #}
     <ul class="share-list">
     {% if sharingMethods.contains('email') %}
       <li><a href="mailto:?subject={{ shareTitle }}&amp;body={{ craft.request.url }}" title="{{ 'Email this' | translate }}"><span class="iconshare-email">{{ 'Email this' | translate }}</span></a>

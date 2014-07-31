@@ -11,8 +11,8 @@
 
 {% block header %}
 <div class="l-header">
-  <h4 class="eyebrow tucked"><em>{{ "Tagged" | translate }}:</em></h4>
-  <h1 class="display flush">{{ tag.name }}</h1>
+  <h4 class="eyebrow flush"><em>{{ "Tagged" | translate }}:</em></h4>
+  <h1 class="flush">{{ tag.name }}</h1>
 </div>
 <!--/.l-header-->
 {% endblock %}
@@ -40,7 +40,11 @@
           {% endif %}
           {% if entry.type == 'news' %}
           <footer>
-            <time class="a-pubdate{% if entry.teaserImage | length %} a-pubdate-overlay{% endif %}" datetime="{{ entry.postDate.w3cDate() }}">{% include 'includes/news-events/_circle-date.html' %}</time>
+            {% if entry.teaserImage|length %}
+              {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate a-pubdate-overlay'} %}
+            {% else %}
+              {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate'} %}
+            {% endif %}
           </footer>
           {% endif %}
         </article>

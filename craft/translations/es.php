@@ -52,6 +52,8 @@ return array(
   "Top" => "Comienzo",
   "View all" => "Ver todo",
   "View map" => "Ver mapa",
+  "RSVP" => "Responda",
+  "Register" => "Registrar",
 
   // Sharing link title text
   "Email this" => "Envía este",

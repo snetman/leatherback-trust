@@ -19,18 +19,33 @@ return array(
         'cacheDuration' => 'PT1S',
 
         'siteUrl' => array(
-            'en_us' => 'http://localhost:8888/',
-            'es'    => 'http://localhost:8888/es/',
+            'en_us' => 'http://localhost/',
+            'es'    => 'http://localhost/es/',
         ),
 
         'environmentVariables' => array(
             'basePath'  => '/Users/snetman/sites/leatherback-trust/public_html/',
-            'baseUrl' => 'http://localhost:8888/',
+            'baseUrl' => 'http://localhost/',
+        )
+    ),
+
+    // Local 2
+    'leatherback.dev' => array(
+        'devMode' => true,
+        'cacheDuration' => 'PT1S',
+
+        'siteUrl' => array(
+            'en_us' => 'http://leatherback.dev/',
+            'es'    => 'http://leatherback.dev/es/',
+        ),
+
+        'environmentVariables' => array(
+            'basePath'  => '/Users/snetman/sites/leatherback-trust/public_html/',
+            'baseUrl' => 'http://leatherback.dev/',
         )
     ),
 
     // Staging
-    // I can use 'staging' here instead of a url because of a setting in my index.php file
     'staging.leatherback.org' => array(
         'cooldownDuration' => 0,
 
@@ -46,7 +61,6 @@ return array(
     ),
 
     // Production
-    // I can use 'production' here instead of a url because of a setting in my index.php file
     '216.243.143.149' => array(
         'cooldownDuration' => 0,
 

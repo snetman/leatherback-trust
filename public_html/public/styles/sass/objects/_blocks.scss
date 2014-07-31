@@ -243,7 +243,7 @@
     }
   }
 
-  &.inset-far-left {
+  .l-1col-narrow &.inset-far-left {
     @include breakpoint($bp-med) {
       @include span(4 of 12);
       margin: {
@@ -260,7 +260,7 @@
     }
   }
 
-  &.inset-far-right {
+  .l-1col-narrow &.inset-far-right {
     @include breakpoint($bp-med) {
       @include span(last 4 of 12);
       margin: {
@@ -523,6 +523,146 @@
   }
 }
 
+//
+// Map block
+//
+
+.block-map {
+  clear: both;
+  margin: $space-double 0;
+
+  .b-map-wrapper {
+    display: block;
+    position: relative;
+    border: 1px solid $tlt-blue;
+    margin: 0;
+    padding-top: 75%;
+    // Aspect ratios
+    &.aspect-1-1 {
+      padding-top: 100%;
+    }
+    &.aspect-4-3 {
+      padding-top: 75%;
+    }
+    &.aspect-16-9 {
+      padding-top: 56.25%;
+    }
+    &.aspect-2-1 {
+      padding-top: 50%;
+    }
+  }
+
+  .b-map-embed {
+    display: none;
+  }
+
+  .b-body {
+    @include zero;
+    border-bottom: 1px solid $tlt-blue;
+    padding: .75em 1em 1em;
+    .cap-title {
+      margin-bottom: 0;
+      float: left;
+      margin-right: .5em;
+    }
+    p {
+      @include zero;
+      margin-bottom: $space-half;
+      max-width: none;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Other types
+
+  &[class*='inset-'] {
+    .b-body {
+      border-bottom-width: 0;
+      padding: .75em 0 0;
+      .cap-title {
+        float: none;
+        margin: 0;
+        font-size: $font-size-small;
+      }
+      p {
+        font-size: $font-size-small;
+      }
+    }
+  }
+
+  &.inset-left {
+    @include breakpoint($bp-med) {
+      @include span(4 of 12);
+      margin: .4em gutter(12) $space 0;
+    }
+  }
+
+  &.inset-right {
+    @include breakpoint($bp-med) {
+      @include span(last 4 of 12);
+      margin: .4em 0 $space gutter(12);
+    }
+  }
+
+  .l-1col-narrow &.inset-far-left {
+    @include breakpoint($bp-med) {
+      @include span(4 of 12);
+      margin: {
+        top: .4em;
+        left: -1 * span(1 wide of 10);
+        bottom: $space;
+        right: gutter(12);
+      }
+    }
+    @include breakpoint($bp-large-2) {
+      margin: {
+        left: -1 * span(2 wide of 8);
+      }
+    }
+  }
+
+  .l-1col-narrow &.inset-far-right {
+    @include breakpoint($bp-med) {
+      @include span(last 4 of 12);
+      margin: {
+        top: .4em;
+        right: -1 * span(1 wide of 10);
+        bottom: $space;
+        left: gutter(12);
+      }
+    }
+    @include breakpoint($bp-large-2) {
+      margin: {
+        right: -1 * span(2 wide of 8);
+      }
+    }
+  }
+
+  // On narrow layouts, jumbo images can still take the full width
+
+  .l-1col-narrow &.jumbo {
+    @include breakpoint($bp-med) {
+      margin-left: -1 * span(1 wide of 10);
+      margin-right: -1 * span(1 wide of 10);
+    }
+    @include breakpoint($bp-large-2) {
+      margin-left: -1 * span(2 wide of 8);
+      margin-right: -1 * span(2 wide of 8);
+    }
+  }
+
+}
+
+.js .block-map .b-map-embed {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 //
 // Common elements
@@ -670,7 +810,8 @@
   .b-body,
   .block-pullquote .b-quote,
   .block-stat .b-body,
-  .block-divider {
+  .block-divider,
+  .b-map-wrapper {
     border-color: $tlt-gray;
   }
 }
@@ -679,7 +820,8 @@
   .b-body,
   .block-pullquote .b-quote,
   .block-stat .b-body,
-  .block-divider {
+  .block-divider,
+  .b-map-wrapper {
     border-color: $tlt-green;
   }
 }
@@ -688,7 +830,8 @@
   .b-body,
   .block-pullquote .b-quote,
   .block-stat .b-body,
-  .block-divider {
+  .block-divider,
+  .b-map-wrapper {
     border-color: $tlt-yellow;
   }
 }
