@@ -448,7 +448,7 @@
         position: absolute;
         top: -61px;
         left: 0;
-        z-index: 9999;
+        z-index: 9999; // Make sure this header is on top of everything, including map controls
         width: 100%;
         min-height: 100vh;
         overflow-y: auto;
