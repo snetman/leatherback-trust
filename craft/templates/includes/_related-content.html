@@ -4,7 +4,7 @@
 
 <section class="news">
   <header class="sechead">
-    <h2 class="sechead-title">See also</h2>
+    <h2 class="sechead-title">{{ "See also" | translate }}</h2>
   </header>
   <div class="a-cards">
   {% for entry in entries %}
@@ -21,7 +21,7 @@
         {% endif %}
         {% if entry.type == 'news' %}
         <footer>
-          {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate'} %}
+          {% include 'includes/_circle-date.html' with {'classes':'a-pubdate'} %}
         </footer>
         {% endif %}
       </article>

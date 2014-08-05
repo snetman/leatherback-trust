@@ -11,8 +11,7 @@ Markup:
 */
 
 .page-intro {
-  //font-size: $font-size-large;
-  margin-bottom: $space;
+  margin-bottom: $space-double;
 
   > p {
     margin-bottom: $space;
@@ -22,9 +21,3 @@ Markup:
   }
 
 }
-
-/*
-.page-header + .page-intro {
-  margin-top: $space;
-}
-*/

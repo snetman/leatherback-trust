@@ -31,7 +31,7 @@
   <article class="a-full">
     <header>
       {% if entry.type == 'news' %}
-      {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate'} %}
+      {% include 'includes/_circle-date.html' with {'classes':'a-pubdate'} %}
       {% endif %}
       <h1 class="a-title">{{ entry.title }}</h1>
     </header>
@@ -62,7 +62,7 @@
       {% set postAuthor = entry.author %}
     {% endif %}
       <div class="b-figure">
-        <img alt="{{ postAuthor.fullName }}" src="{{ postAuthor.photoUrl }}" />
+        <img class="img-bordered img-round" alt="{{ postAuthor.fullName }}" src="{{ postAuthor.photoUrl }}" />
       </div>
       <div class="b-body">
         <h4 class="name">{{ postAuthor.fullName }}</h4>
@@ -191,7 +191,7 @@
               </div>
               {% if entry.type == 'news' %}
               <footer>
-                {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate'} %}
+                {% include 'includes/_circle-date.html' with {'classes':'a-pubdate'} %}
               </footer>
               {% endif %}
             </article>

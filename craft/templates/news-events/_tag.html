@@ -41,9 +41,9 @@
           {% if entry.type == 'news' %}
           <footer>
             {% if entry.teaserImage|length %}
-              {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate a-pubdate-overlay'} %}
+              {% include 'includes/_circle-date.html' with {'classes':'a-pubdate a-pubdate-overlay'} %}
             {% else %}
-              {% include 'includes/news-events/_circle-date.html' with {'classes':'a-pubdate'} %}
+              {% include 'includes/_circle-date.html' with {'classes':'a-pubdate'} %}
             {% endif %}
           </footer>
           {% endif %}

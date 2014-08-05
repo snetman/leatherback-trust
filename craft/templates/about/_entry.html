@@ -1,0 +1,222 @@
+{% extends "_layout" %}
+{% set title = entry.title %}
+
+{% if entry.type == "interior" %}
+  {% set bodyClass = 'sec-about l-1col l-1col-narrow theme-yellow' %}
+{% else %}
+  {% set bodyClass = 'sec-about l-1col theme-yellow' %}
+{% endif %}
+
+{# Set the entries to use for building the section nav here #}
+  {% set secEntries = craft.entries.section('about').level(1) %}
+{# Set the path to use for some checks in the section nav here #}
+  {% set secPath = 'about' %}
+
+{% block header %}
+<div class="l-header">
+  {% include 'includes/_section-nav.html' %}
+</div>
+<!--/.l-header-->
+{% endblock %}
+
+{% block main %}
+<div class="l-main">
+
+  {% if entry.heroImage | length %}
+    {% set asset = entry.heroImage.first() %}
+    <figure class="block-hero">
+      <img class="b-figure" src="{{ asset.getUrl('heroImage') }}" />
+      {% if entry.heroCaption %}
+      <figcaption class="b-body patterned">
+          {% if entry.heroCaptionTitle %}
+          <h4 class="cap-title">{{ entry.heroCaptionTitle }}</h4>
+          {% endif %}
+          {{ entry.heroCaption }}
+      </figcaption>
+      {% endif %}
+      {% if asset.photoCredit %}
+      <p class="photo-credit">{{ "Image by" | translate }} {{ asset.photoCredit }}</p>
+      {% endif %}
+    </figure>
+    <!--/.hero-->
+  {% endif %}
+
+  <h1{% if entry.type != "interior" %} class="display"{% endif %}>{{ title }}</h1>
+
+  <div class="page-intro cols-2med">
+  {% if entry.pageIntro %}
+    {{ entry.pageIntro }}
+  {% endif %}
+  </div>
+
+  {% switch entry.type %}
+
+    {% case "teamListing" %}
+
+      {% set categories = craft.categories.group('peopleCats') %}
+
+      {% for cat in categories %}
+
+        {# Get the entries related to this category #}
+        {% set entries = craft.entries.relatedTo(cat).order('nameLast asc') %}
+
+        {% if entries | length %}
+        <header id="{{ cat.title|replace({' ':''}) }}" class="sechead">
+          <h2 class="sechead-title">{{ cat.title }}</h2>
+          <ul class="sechead-actions">
+            <li><a class="animate-scroll" href="#Header">Top</a></li>
+          </ul>
+        </header>
+        <ul class="g g-6up-max">
+          {% for entry in entries %}
+          <li>
+            <div class="person">
+
+              {% set asset = entry.headshot.first() %}
+              <div class="photo">
+                <img class="img-bordered img-round" src="{{ asset.getUrl('personHeadshot') }}" />
+              </div>
+              <div class="body">
+                <h3 class="name as-h4">{{ entry.nameFirst }} {{ entry.nameLast }}{% if entry.nameSuffix %}, {{ entry.nameSuffix }}{% endif %}</h3>
+                {% switch cat.title %}
+                  {% case "Staff" %}
+                    {% if entry.jobTitle %}
+                      <p class="title">{{ entry.jobTitle }}</p>
+                    {% endif %}
+                  {% case "Board of Directors" %}
+                    {% if entry.boardRole %}
+                      <p class="title">{{ entry.boardRole }}</p>
+                    {% endif %}
+                  {% case "Contributing Scientists" %}
+                    {% if entry.affiliation %}
+                      <p class="title">{{ entry.affiliation }}</p>
+                    {% endif %}
+                  {% default %}
+                    {% if entry.affiliation %}
+                      <p class="title">{{ entry.affiliation }}</p>
+                    {% endif %}
+                {% endswitch %}
+              </div>
+            </div>
+          </li>
+          <!--/.person-->
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+      {% endfor %}
+
+    {% case "partnersListing" %}
+
+      <ul class="g g-6up-max">
+
+      {% set categories = craft.categories.group('partnerCats') %}
+
+      {% for cat in categories %}
+
+        {# Get the entries related to this category #}
+        {% set entries = craft.entries.relatedTo(cat).order('title asc') %}
+
+        {% if entries | length %}
+
+          {% for entry in entries %}
+          <li>
+            <div class="organization">
+
+              {% set asset = entry.logo.first() %}
+              <div class="photo">
+                <img class="img-bordered" src="{{ asset.getUrl('orgLogo') }}" />
+              </div>
+              <div class="body">
+                <h3 class="name as-h4">{{ entry.title }}</h3>
+                {% if entry.websiteUrl %}
+                  <p class="website">
+                    <a title="{{ 'Visit site' | translate }}" href="{{ entry.websiteUrl }}">{% if entry.websitePrettyUrl %}{{ entry.websitePrettyUrl }}{% else %}{{ "Visit site" | translate }}{% endif %}</a>
+                  </p>
+                {% endif %}
+              </div>
+            </div>
+          </li>
+          <!--/.person-->
+          {% endfor %}
+
+        {% endif %}
+
+      {% endfor %}
+
+      </ul>
+
+    {% case "historyTimeline" %}
+
+      <dl class="tlt-history">
+        {% set entries = craft.entries.section('historyOfTlt').order('postDate desc') %}
+        {% set entriesByYear = entries|group('postDate.year') %}
+
+        <dt>
+          <h2 class="tlt-history-year">{{ "Now" | translate }}</h2>
+        </dt>
+
+        {% for year, entriesInYear in entriesByYear %}
+
+          {% for entry in entriesInYear %}
+
+            <dd>
+              <figure class="tlt-history-node">
+                {% if entry.histImage|length %}
+                  {% set asset = entry.histImage.first() %}
+                  <img alt="{{ asset.altText }}" src="{{ asset.url }}" />
+                {% endif %}
+                <figcaption class="node-body">
+                    {% include 'includes/_circle-date.html' with {'classes':'node-date'} %}
+                    <h4>{{ entry.title }}</h4>
+                    {{ entry.histBody }}
+                    {% if entry.histImage|length %}
+                      {% set asset = entry.histImage.first() %}
+                      {% if asset.photoCredit %}
+                        <p class="photo-credit">{{ "Image by" | translate }} {{ asset.photoCredit }}</p>
+                      {% endif %}
+                    {% endif %}
+                </figcaption>
+              </figure>
+            </dd>
+
+          {% endfor %}
+
+          <dt>
+            <h2 class="tlt-history-year">{{ year }}</h2>
+          </dt>
+
+        {% endfor %}
+
+      </dl>
+      <!--/.tlt-history-->
+
+    {% default %}
+
+      {% include 'includes/story-blocks/_story-blocks.html' %}
+
+  {% endswitch %}
+
+</div>
+<!--/.l-main-->
+{% endblock %}
+
+{% block aside %}
+<div class="l-aside metadata">
+
+  {# Sharing options #}
+  {% include 'includes/_sharing-options.html' %}
+
+</div>
+<!--/.l-aside-->
+{% endblock %}
+
+{% block footer %}
+{% if entry.related|length %}
+<div class="l-footer">
+  {# Related content #}
+  {% include 'includes/_related-content.html' %}
+</div>
+{% endif %}
+<!--/.l-footer-->
+{% endblock %}

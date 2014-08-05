@@ -29,6 +29,7 @@ return array(
   "In this section" => "En esta sección",
   "Overview" => "Overview",
   "Related" => "Conexo",
+  "See also" => "Véase también",
 
   // News section text
   "Featured News" => "Noticias Destacadas",
@@ -45,6 +46,10 @@ return array(
   "All day" => "Todo el día",
   "F j, Y" => "j F Y",
 
+  // About section text
+  "Now" => "Ahora",
+  "Start" => "Comienza",
+
   // Action links
   "More" => "Más",
   "Less" => "Menos",
@@ -54,6 +59,7 @@ return array(
   "View map" => "Ver mapa",
   "RSVP" => "Responda",
   "Register" => "Registrar",
+  "Visit site" => "Ver sitio",
 
   // Sharing link title text
   "Email this" => "Envía este",

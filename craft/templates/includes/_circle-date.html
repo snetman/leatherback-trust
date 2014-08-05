@@ -1,3 +1,7 @@
+{#
+  Use this by including like this:
+  {% include 'path/to/me/_circle-date.html' with {'classes':'a-pubdate, a-pubdate-overlay, node-date'} %}
+#}
 <time class="{{ classes }}" datetime="{{ entry.postDate.w3cDate() }}">
   <span class="a-pubmonth">{{ entry.postDate|date('M') }}</span>
   <span class="a-pubday">{{ entry.postDate.day() }}</span>

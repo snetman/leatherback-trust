@@ -1,0 +1,40 @@
+{% extends "_layout" %}
+{% set title = "About"|translate %}
+{% set bodyClass = 'sec-about l-1col l-1col-narrow theme-yellow' %}
+
+{# Set the entries to use for building the section nav here #}
+  {% set secEntries = craft.entries.section('about').level(1) %}
+{# Set the path to use for some checks in the section nav here #}
+  {% set secPath = 'about' %}
+
+{% block header %}
+<div class="l-header">
+  {% include 'includes/_section-nav.html' %}
+  <header class="landing-header patterned">
+    <h1 class="display">{{ title }}</h1>
+  </header>
+</div>
+<!--/.l-header-->
+{% endblock %}
+
+{% block main %}
+<div class="l-main">
+
+  {% include 'includes/story-blocks/_story-blocks.html' %}
+
+</div>
+<!--/.l-main-->
+{% endblock %}
+
+{% block aside %}
+<div class="l-aside metadata">
+
+  {# Sharing options #}
+  {% include 'includes/_sharing-options.html' %}
+
+</div>
+<!--/.l-aside-->
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

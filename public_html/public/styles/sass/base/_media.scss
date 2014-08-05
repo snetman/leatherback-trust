@@ -12,8 +12,44 @@ img, video, object {
 // Bordered images
 
 .img-bordered {
+	border: 2px solid $tlt-blue;
+
+	// Theming
+	.theme-green & {
+		border-color: $tlt-green;
+	}
+	.theme-gray & {
+		border-color: $tlt-gray;
+	}
+	.theme-yellow & {
+		border-color: $tlt-yellow;
+	}
+}
+
+// Round images
+
+.img-round {
+	display: block;
 	border-radius: 100%;
-	border: 1px solid $tlt-dark-gray;
+	overflow: hidden;
+}
+
+// Bordered images
+
+.img-chip {
+	border-radius: 100%;
+	box-shadow: 2px 2px 0 $tlt-blue;
+
+	// Theming
+	.theme-green & {
+		box-shadow: 2px 2px 0 $tlt-green;
+	}
+	.theme-gray & {
+		box-shadow: 2px 2px 0 $tlt-gray;
+	}
+	.theme-yellow & {
+		box-shadow: 2px 2px 0 $tlt-yellow;
+	}
 }
 
 iframe {

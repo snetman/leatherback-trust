@@ -4,7 +4,9 @@
     <li class="inthissection"><span class="eyebrow"><em>{{ "In this section" | translate }}:</em></span></li>
     <li{% if entry.url == [siteUrl, secPath]|join %} class="current"{% endif %}><a href="{{ siteUrl }}{{ secPath }}">Overview</a></li>
     {% for secEntry in secEntries %}
-    <li{% if secEntry.id == entry.id %} class="current"{% endif %}><a href="{{ secEntry.url }}">{{ secEntry.title }}</a></li>
+    <li{% if secEntry.id == entry.id %} class="current"{% endif %}>
+      <a href="{{ secEntry.url }}">{% if secEntry.shortTitle %}{{ secEntry.shortTitle }}{% else %}{{ secEntry.title }}{% endif %}</a>
+    </li>
     {% endfor %}
     <li id="LessNav"><a id="LessNavLink" href="#">&times; {{ "Less" | translate }}</a></li>
     <li id="MoreNav"><a id="MoreNavLink" href="#SectionNav">{{ "More" | translate }}&hellip;</a></li>

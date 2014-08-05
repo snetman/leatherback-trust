@@ -19,7 +19,7 @@
 
   <figure class="threat-icon">
     {% set icon = entry.threatIcon.first() %}
-    <img class="img-bordered" src="{{ icon.getUrl('threatIcon') }}" />
+    <img class="img-bordered img-round" src="{{ icon.getUrl('threatIcon') }}" />
   </figure>
 
   {% include 'includes/story-blocks/_story-blocks.html' %}
@@ -40,23 +40,6 @@
 
 {% block footer %}
 <div class="l-footer">
-
-  {# Set parameters for prev/next elements list #}
-  {% set params = craft.entries.section('newsAndEvents').order('postDate asc') %}
-
-  {# Get the prev/next elements #}
-  {% set prevEntry = entry.getPrev(params) %}
-  {% set nextEntry = entry.getNext(params) %}
-
-  {# Only output the buttons that actually exist #}
-  {% if prevEntry or nextEntry %}
-  <nav class="nav brick-nav brick-nav-full">
-    <ul>
-      {% if prevEntry %}<li class="brick-left"><a href="{{ prevEntry.url }}"><span class="arrow">&larr;</span> Prev</a></li>{% endif %}
-      {% if nextEntry %}<li class="brick-right"><a href="{{ nextEntry.url }}">Next <span class="arrow">&rarr;</span></a></li>{% endif %}
-    </ul>
-  </nav>
-  {% endif %}
 
   {# Related content #}
   {% include 'includes/_related-content.html' %}
