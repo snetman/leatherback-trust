@@ -55,53 +55,87 @@
     <header class="sechead">
       <h2 class="sechead-title">{{ "News & Events" | translate | capitalize }}</h2>
       <ul class="sechead-actions">
-        <li><a href="url('news-events')">{{ "View all" | translate }}</a></li>
+        <li><a href="{{ url('news-events') }}">{{ "View all" | translate }}</a></li>
       </ul>
     </header>
+
     <div class="a-cards">
-      <a href="news-article" class="a-card has-image">
+    {% set entriesRemaining = 3 %}
+
+    {% if entry.stickyNewsItem|length %}
+
+      {% set entry = entry.stickyNewsItem.first() %}
+
+        {% if entry.teaserImage|length %}
+          {% set asset = entry.teaserImage.first() %}
+        {% else %}
+          {% set asset = "" %}
+        {% endif %}
+
+        <a href="{{ entry.url }}" class="a-card{% if asset|length %} has-image{% endif %}">
+          <article>
+            <header>
+              <h3 class="a-title">{{ entry.shortTitle }}</h3>
+            </header>
+            <div class="a-body">
+              {{ entry.teaser }}
+            </div>
+            {% if asset|length %}
+              <figure class="a-image" style="background-image: url({{ asset.getUrl('newsTeaser') }});">
+              </figure>
+            {% endif %}
+            {% if entry.type == 'news' %}
+              <footer>
+                {% if asset|length %}
+                  {% include 'includes/_circle-date.html' with {'classes':'a-pubdate a-pubdate-overlay'} %}
+                {% else %}
+                  {% include 'includes/_circle-date.html' with {'classes':'a-pubdate'} %}
+                {% endif %}
+              </footer>
+            {% endif %}
+          </article>
+        </a>
+
+      {% set entriesRemaining = 2 %}
+
+    {% endif %}
+
+    {% set entries = craft.entries.section('newsAndEvents').limit(entriesRemaining) %}
+
+    {% for entry in entries %}
+
+      {% if entry.teaserImage|length %}
+        {% set asset = entry.teaserImage.first() %}
+      {% else %}
+        {% set asset = "" %}
+      {% endif %}
+
+      <a href="{{ entry.url }}" class="a-card{% if asset|length %} has-image{% endif %}">
         <article>
           <header>
-            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecutat velum</h3>
+            <h3 class="a-title">{{ entry.shortTitle }}</h3>
           </header>
           <div class="a-body">
-            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            {{ entry.teaser }}
           </div>
-          <figure class="a-image" style="background-image: url(/public/images/George-Frame-Grab-480x253.jpg);">
-          </figure>
-          <footer>
-            <time class="a-pubdate a-pubdate-overlay" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">25</span></time>
-          </footer>
+          {% if asset|length %}
+            <figure class="a-image" style="background-image: url({{ asset.getUrl('newsTeaser') }});">
+            </figure>
+          {% endif %}
+          {% if entry.type == 'news' %}
+            <footer>
+              {% if asset|length %}
+                {% include 'includes/_circle-date.html' with {'classes':'a-pubdate a-pubdate-overlay'} %}
+              {% else %}
+                {% include 'includes/_circle-date.html' with {'classes':'a-pubdate'} %}
+              {% endif %}
+            </footer>
+          {% endif %}
         </article>
       </a>
-      <a href="news-article" class="a-card has-image">
-        <article>
-          <header>
-            <h3 class="a-title">News post headline here</h3>
-          </header>
-          <div class="a-body">
-            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <figure class="a-image" style="background-image: url(/public/images/leatherback-nesting-600.jpg);">
-          </figure>
-          <footer>
-            <time class="a-pubdate a-pubdate-overlay" datetime="2013-02-20"><span class="a-pubmonth">May</span> <span class="a-pubday">9</span></time>
-          </footer>
-        </article>
-      </a>
-      <a href="news-article" class="a-card">
-        <article>
-          <header>
-            <h3 class="a-title">News post headline here lorem ipsum dolor sit amet consecua ulum cresp veritamu</h3>
-          </header>
-          <div class="a-body">
-            <p class="lede">News lede here lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <footer>
-            <time class="a-pubdate" datetime="2013-02-20"><span class="a-pubmonth">Apr</span> <span class="a-pubday">28</span></time>
-          </footer>
-        </article>
-      </a>
+
+    {% endfor %}
+
     </div>
   </section>
   <!--/.news-->

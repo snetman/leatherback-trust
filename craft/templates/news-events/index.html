@@ -69,30 +69,36 @@
 
     <div class="a-slats">
       {% for entry in entriesOnPage %}
-      <a href="{{ entry.url }}" class="a-slat">
-        <article>
-          <header>
-            <h3 class="a-title">{% if entry.shortTitle %}{{ entry.shortTitle }}{% else %}{{ entry.title }}{% endif %}</h3>
-          </header>
-          <div class="a-body">
-            {{ entry.teaser }}
-          </div>
-          {% if entry.teaserImage | length %}
-            {% set asset = entry.teaserImage.first() %}
-            <figure class="a-image" style="background-image: url({{ asset.getUrl('newsTeaser') }});">
-            </figure>
-          {% endif %}
-          {% if entry.type == 'news' %}
-          <footer>
-            {% if entry.teaserImage|length %}
-              {% include 'includes/_circle-date.html' with {'classes':'a-pubdate a-pubdate-overlay'} %}
-            {% else %}
-              {% include 'includes/_circle-date.html' with {'classes':'a-pubdate'} %}
+
+        {% if entry.teaserImage|length %}
+          {% set asset = entry.teaserImage.first() %}
+        {% else %}
+          {% set asset = "" %}
+        {% endif %}
+
+        <a href="{{ entry.url }}" class="a-slat">
+          <article>
+            <header>
+              <h3 class="a-title">{% if entry.shortTitle %}{{ entry.shortTitle }}{% else %}{{ entry.title }}{% endif %}</h3>
+            </header>
+            <div class="a-body">
+              {{ entry.teaser }}
+            </div>
+            {% if asset|length %}
+              <figure class="a-image" style="background-image: url({{ asset.getUrl('newsTeaser') }});">
+              </figure>
             {% endif %}
-          </footer>
-          {% endif %}
-        </article>
-      </a>
+            {% if entry.type == 'news' %}
+            <footer>
+              {% if asset|length %}
+                {% include 'includes/_circle-date.html' with {'classes':'a-pubdate a-pubdate-overlay'} %}
+              {% else %}
+                {% include 'includes/_circle-date.html' with {'classes':'a-pubdate'} %}
+              {% endif %}
+            </footer>
+            {% endif %}
+          </article>
+        </a>
       {% endfor %}
     </div>
 
