@@ -1,9 +1,12 @@
-{% if secEntries|length %}
+{% set curSec = craft.request.getSegment(1) %}
+{% set curSecEntries = craft.entries.section(secHandle).level(1) %}
+
+{% if curSecEntries|length %}
 <nav id="SectionNav" class="nav section-nav hide-more">
   <ul>
     <li class="inthissection"><span class="eyebrow"><em>{{ "In this section" | translate }}:</em></span></li>
-    <li{% if entry.url == [siteUrl, secPath]|join %} class="current"{% endif %}><a href="{{ siteUrl }}{{ secPath }}">Overview</a></li>
-    {% for secEntry in secEntries %}
+    <li{% if curSec == entry.uri %} class="current"{% endif %}><a href="{{ siteUrl }}{{ curSec }}">Overview</a></li>
+    {% for secEntry in curSecEntries %}
     <li{% if secEntry.id == entry.id %} class="current"{% endif %}>
       <a href="{{ secEntry.url }}">{% if secEntry.shortTitle %}{{ secEntry.shortTitle }}{% else %}{{ secEntry.title }}{% endif %}</a>
     </li>

@@ -1,0 +1,32 @@
+{% import "_includes/forms" as forms %}
+
+<label>Map Default View</label>
+{% include "squarebitmaps/map" %}
+
+{% for error in settings.getErrors() %}
+	{{ dump(error) }}
+{% endfor %}
+
+{{ forms.textField({
+	label: "Container Height"|t,
+    instructions: "The height of the map container in px"|t,
+	id: 'showHeight',
+	name: 'showHeight',
+	value: settings.showHeight,
+	errors: settings.getErrors('showHeight'),
+	size : '10'
+}) }}
+
+{#
+{{ forms.checkboxField({
+	label: "Show Address Input"|t,
+	name: 'showAddress',
+	checked: settings.showAddress
+}) }}
+
+{{ forms.checkboxField({
+	label: "Show Center Pin Link"|t,
+	name: 'showPinCenter',
+	checked: settings.showPinCenter
+}) }}
+#}

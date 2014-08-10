@@ -1,0 +1,60 @@
+{% extends "_layout-asidefirst" %}
+{% set title = "Why Leatherbacks & Sea Turtles Matter"|translate  %}
+{% set bodyClass = 'sec-why l-2col-rev' %}
+
+{% block header %}
+<div class="l-header">
+  {% include 'includes/_section-nav.html' with {'secHandle':'whyLeatherbacks'} %}
+  <header class="landing-header patterned">
+    <h1 class="display">{{ "Why Leatherbacks <br>&amp; Sea Turtles Matter" | translate | raw }}</h1>
+  </header>
+</div>
+<!--/.l-header-->
+{% endblock %}
+
+{% block main %}
+
+<div class="l-main">
+
+  <header class="sechead">
+    <h2 class="sechead-title">{{ "In this section" | translate }}:</h2>
+  </header>
+
+  {% set entries = craft.entries.section('whyLeatherbacks') %}
+
+  <ul class="a-spots">
+  {% for entry in entries %}
+    {% if entry.teaserImage|length %}
+      {% set asset = entry.teaserImage.first() %}
+    {% else %}
+      {% set asset = "" %}
+    {% endif %}
+    <li>
+      <article class="a-spot">
+      {% if asset|length %}
+        <figure class="a-image">
+          <a href="{{ entry.url }}"><img class="img-bordered img-round" src="{{ asset.getUrl('spotTeaser') }}" /></a>
+        </figure>
+      {% endif %}
+        <div class="a-body">
+          <h3 class="a-title">{{ entry.link }}</h3>
+          {{ entry.teaser }}
+          <p><a class="" href="{{ entry.url }}">{{ "Learn more" | translate }}</a></p>
+        </div>
+      </article>
+    </li>
+  {% endfor %}
+  </ul>
+
+</div>
+<!--/.l-main-->
+{% endblock %}
+
+{% block aside %}
+<div class="l-aside">
+  {{ entry.pageIntro }}
+</div>
+<!--/.l-aside-->
+{% endblock %}
+
+{% block footer %}{% endblock %}

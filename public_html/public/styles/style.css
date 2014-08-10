@@ -2819,9 +2819,20 @@ tfoot th {
   }
 }
 
+.block-text {
+  margin-bottom: 2.75em;
+}
+.block-text:last-child {
+  margin-bottom: 0 !important;
+}
+
 .block-image {
-  margin: 0 0 1.375em;
   clear: both;
+  margin: 0 0 2.75em;
+  margin-bottom: 2.75em;
+}
+.block-image:last-child {
+  margin-bottom: 0 !important;
 }
 .block-image .b-figure {
   margin: 0;
@@ -2851,6 +2862,10 @@ tfoot th {
 .block-image .b-body p:last-child {
   margin-bottom: 0;
 }
+.block-image[class*='inset-'] {
+  margin-top: .4em;
+  margin-bottom: 1.375em;
+}
 .block-image[class*='inset-'] .b-body {
   border-bottom-width: 0;
   padding: .75em 0 0;
@@ -2863,19 +2878,26 @@ tfoot th {
 .block-image[class*='inset-'] .b-body p {
   font-size: 0.875em;
 }
+@media (min-width: 0) and (max-width: 46.75em) {
+  .block-image[class*='inset-'] {
+    margin-top: -1.375em;
+  }
+}
 @media (min-width: 46.75em) {
   .block-image.inset-left {
     width: 31.42857%;
     float: left;
     margin-right: 2.85714%;
-    margin: 0.4em 2.85714% 1.375em 0;
+    margin-right: 2.85714%;
+    margin-left: 0;
   }
 }
 @media (min-width: 46.75em) {
   .block-image.inset-right {
     width: 31.42857%;
     float: right;
-    margin: 0.4em 0 1.375em 2.85714%;
+    margin-right: 0;
+    margin-left: 2.85714%;
   }
 }
 @media (min-width: 46.75em) {
@@ -2883,9 +2905,7 @@ tfoot th {
     width: 31.42857%;
     float: left;
     margin-right: 2.85714%;
-    margin-top: .4em;
     margin-left: -10.34483%;
-    margin-bottom: 1.375em;
     margin-right: 2.85714%;
   }
 }
@@ -2898,9 +2918,7 @@ tfoot th {
   .l-1col-narrow .block-image.inset-far-right {
     width: 31.42857%;
     float: right;
-    margin-top: .4em;
     margin-right: -10.34483%;
-    margin-bottom: 1.375em;
     margin-left: 2.85714%;
   }
 }
@@ -2923,8 +2941,11 @@ tfoot th {
 }
 
 .block-compare {
-  margin: 0 0 1.375em;
   clear: both;
+  margin-bottom: 2.75em;
+}
+.block-compare:last-child {
+  margin-bottom: 0 !important;
 }
 .block-compare .b-figures {
   *zoom: 1;
@@ -2988,8 +3009,8 @@ tfoot th {
 
 .block-pullquote {
   *zoom: 1;
-  margin: 2.75em 0;
   clear: both;
+  margin-bottom: 2.75em;
 }
 .block-pullquote:before, .block-pullquote:after {
   display: table;
@@ -2997,6 +3018,9 @@ tfoot th {
 }
 .block-pullquote:after {
   clear: both;
+}
+.block-pullquote:last-child {
+  margin-bottom: 0 !important;
 }
 .block-pullquote .b-quote {
   border-bottom: 1px solid #c0e3ec;
@@ -3026,7 +3050,10 @@ tfoot th {
 
 .block-stat {
   clear: both;
-  margin: 2.75em 0;
+  margin-bottom: 2.75em;
+}
+.block-stat:last-child {
+  margin-bottom: 0 !important;
 }
 .block-stat .b-number {
   padding: 0 .9em 1em;
@@ -3100,7 +3127,10 @@ tfoot th {
 
 .block-donate {
   clear: both;
-  margin: 2.75em 0;
+  margin-bottom: 2.75em;
+}
+.block-donate:last-child {
+  margin-bottom: 0 !important;
 }
 .block-donate .b-price {
   padding: 0 .9em 1em;
@@ -3179,7 +3209,10 @@ tfoot th {
 
 .block-map {
   clear: both;
-  margin: 2.75em 0;
+  margin-bottom: 2.75em;
+}
+.block-map:last-child {
+  margin-bottom: 0 !important;
 }
 .block-map .b-map-wrapper {
   display: block;
@@ -3223,6 +3256,10 @@ tfoot th {
 .block-map .b-body p:last-child {
   margin-bottom: 0;
 }
+.block-map[class*='inset-'] {
+  margin-top: .4em;
+  margin-bottom: 1.375em;
+}
 .block-map[class*='inset-'] .b-body {
   border-bottom-width: 0;
   padding: .75em 0 0;
@@ -3235,19 +3272,26 @@ tfoot th {
 .block-map[class*='inset-'] .b-body p {
   font-size: 0.875em;
 }
+@media (min-width: 0) and (max-width: 46.75em) {
+  .block-map[class*='inset-'] {
+    margin-top: -1.375em;
+  }
+}
 @media (min-width: 46.75em) {
   .block-map.inset-left {
     width: 31.42857%;
     float: left;
     margin-right: 2.85714%;
-    margin: 0.4em 2.85714% 1.375em 0;
+    margin-right: 2.85714%;
+    margin-left: 0;
   }
 }
 @media (min-width: 46.75em) {
   .block-map.inset-right {
     width: 31.42857%;
     float: right;
-    margin: 0.4em 0 1.375em 2.85714%;
+    margin-right: 0;
+    margin-left: 2.85714%;
   }
 }
 @media (min-width: 46.75em) {
@@ -3255,9 +3299,7 @@ tfoot th {
     width: 31.42857%;
     float: left;
     margin-right: 2.85714%;
-    margin-top: .4em;
     margin-left: -10.34483%;
-    margin-bottom: 1.375em;
     margin-right: 2.85714%;
   }
 }
@@ -3270,9 +3312,7 @@ tfoot th {
   .l-1col-narrow .block-map.inset-far-right {
     width: 31.42857%;
     float: right;
-    margin-top: .4em;
     margin-right: -10.34483%;
-    margin-bottom: 1.375em;
     margin-left: 2.85714%;
   }
 }

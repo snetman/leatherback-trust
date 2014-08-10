@@ -50,6 +50,12 @@ return array(
   "Now" => "Ahora",
   "Start" => "Comienza",
 
+  // Why Leatherbacks... section
+  "Why Leatherbacks & Sea Turtles Matter" => "Porque Leatherbacks & Sea Turtles Matter",
+
+  // Miscellaneous messages
+  "Oops" => "Ups",
+
   // Action links
   "More" => "Más",
   "Less" => "Menos",

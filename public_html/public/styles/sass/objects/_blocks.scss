@@ -2,6 +2,13 @@
     Blocks
    ======================================================= */
 
+@mixin storyBlockMargins {
+  margin-bottom: $space-double;
+  &:last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
 //
 //  Media block
 //
@@ -171,10 +178,10 @@
 
 //
 // Text block
-// Standard text block with options for divider below, and above
+// Standard text block
 
 .block-text {
-  //
+  @include storyBlockMargins;
 }
 
 //
@@ -182,8 +189,9 @@
 // Standard full-width image
 
 .block-image {
-  margin: 0 0 $space;
   clear: both;
+  margin: 0 0 $space-double;
+  @include storyBlockMargins;
 
   .b-figure {
     @include zero;
@@ -215,6 +223,8 @@
   // Other types
 
   &[class*='inset-'] {
+    margin-top: .4em;
+    margin-bottom: $space;
     .b-body {
       border-bottom-width: 0;
       padding: .75em 0 0;
@@ -227,19 +237,28 @@
         font-size: $font-size-small;
       }
     }
+    @include breakpoint(0 $bp-med) {
+      margin-top: -$space;
+    }
   }
 
   &.inset-left {
     @include breakpoint($bp-med) {
       @include span(4 of 12);
-      margin: .4em gutter(12) $space 0;
+      margin: {
+        right: gutter(12);
+        left: 0;
+      }
     }
   }
 
   &.inset-right {
     @include breakpoint($bp-med) {
       @include span(last 4 of 12);
-      margin: .4em 0 $space gutter(12);
+      margin: {
+        right: 0;
+        left: gutter(12);
+      }
     }
   }
 
@@ -247,9 +266,7 @@
     @include breakpoint($bp-med) {
       @include span(4 of 12);
       margin: {
-        top: .4em;
         left: -1 * span(1 wide of 10);
-        bottom: $space;
         right: gutter(12);
       }
     }
@@ -264,9 +281,7 @@
     @include breakpoint($bp-med) {
       @include span(last 4 of 12);
       margin: {
-        top: .4em;
         right: -1 * span(1 wide of 10);
-        bottom: $space;
         left: gutter(12);
       }
     }
@@ -301,8 +316,8 @@
 // 2-up image block
 
 .block-compare {
-  margin: 0 0 $space;
   clear: both;
+  @include storyBlockMargins;
 
   .b-figures {
     @include clearfix;
@@ -367,8 +382,9 @@
 
 .block-pullquote {
   @include clearfix;
-  margin: $space-double 0;
   clear: both;
+  @include storyBlockMargins;
+
   .b-quote {
     border-bottom: 1px solid $tlt-blue;
     padding-bottom: $space-half + $space-quarter;
@@ -404,7 +420,8 @@
 
 .block-stat {
   clear: both;
-  margin: $space-double 0;
+  @include storyBlockMargins;
+
   .b-number {
     padding: 0 .9em 1em;
     p {
@@ -464,7 +481,8 @@
 
 .block-donate {
   clear: both;
-  margin: $space-double 0;
+  @include storyBlockMargins;
+
   .b-price {
     padding: 0 .9em 1em;
     p {
@@ -529,7 +547,7 @@
 
 .block-map {
   clear: both;
-  margin: $space-double 0;
+  @include storyBlockMargins;
 
   .b-map-wrapper {
     display: block;
@@ -578,6 +596,8 @@
   // Other types
 
   &[class*='inset-'] {
+    margin-top: .4em;
+    margin-bottom: $space;
     .b-body {
       border-bottom-width: 0;
       padding: .75em 0 0;
@@ -590,19 +610,28 @@
         font-size: $font-size-small;
       }
     }
+    @include breakpoint(0 $bp-med) {
+      margin-top: -$space;
+    }
   }
 
   &.inset-left {
     @include breakpoint($bp-med) {
       @include span(4 of 12);
-      margin: .4em gutter(12) $space 0;
+      margin: {
+        right: gutter(12);
+        left: 0;
+      }
     }
   }
 
   &.inset-right {
     @include breakpoint($bp-med) {
       @include span(last 4 of 12);
-      margin: .4em 0 $space gutter(12);
+      margin: {
+        right: 0;
+        left: gutter(12);
+      }
     }
   }
 
@@ -610,9 +639,7 @@
     @include breakpoint($bp-med) {
       @include span(4 of 12);
       margin: {
-        top: .4em;
         left: -1 * span(1 wide of 10);
-        bottom: $space;
         right: gutter(12);
       }
     }
@@ -627,9 +654,7 @@
     @include breakpoint($bp-med) {
       @include span(last 4 of 12);
       margin: {
-        top: .4em;
         right: -1 * span(1 wide of 10);
-        bottom: $space;
         left: gutter(12);
       }
     }

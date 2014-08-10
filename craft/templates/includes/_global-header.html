@@ -1,3 +1,10 @@
+{# Main nav #}
+{% set navThreats = craft.entries.section('threatsFront').first() %}
+{% set navWhy = craft.entries.section('whyLeatherbacksFront').first() %}
+{# Secondary nav #}
+{% set navAbout = craft.entries.section('aboutFront').first() %}
+{% set navNews = craft.entries.section('newsAndEventsFront').first() %}
+
 <header id="Header" class="site-header" role="banner">
 
   <div id="Menu">
@@ -9,8 +16,8 @@
 
         <ul class="main-nav">
           <li id="nav-home"><a href="{{ siteUrl }}">{{ "Home" | translate }}</a></li>
-          <li id="nav-why"><a href="#">{{ "Why Leatherbacks <br>&amp; Sea Turtles Matter" | translate | raw }}</a></li>
-          <li id="nav-threats"><a href="{{ url('threats') }}">{{ "Threats" | translate }}</a></li>
+          <li id="nav-why"><a href="{{ navWhy.getUrl() }}">{{ "Why Leatherbacks <br>&amp; Sea Turtles Matter" | translate | raw }}</a></li>
+          <li id="nav-threats"><a href="{{ navThreats.getUrl() }}">{{ "Threats" | translate }}</a></li>
           <li id="nav-conservation"><a href="#">{{ "Conservation" | translate }}</a></li>
           <li id="nav-donate"><a href="#">{{ "Donate" | translate }}</a></li>
         </ul>
@@ -23,8 +30,8 @@
     <nav class="secondary">
       <div class="lc">
         <ul class="sec-nav">
-          <li id="nav-about"><a href="{{ url('about') }}">{{ "About" | translate }}</a></li>
-          <li id="nav-news"><a href="{{ url('news-events') }}">{{ "News & Events" | translate | raw }}</a></li>
+          <li id="nav-about"><a href="{{ navAbout.getUrl() }}">{{ "About" | translate }}</a></li>
+          <li id="nav-news"><a href="{{ navNews.getUrl() }}">{{ "News & Events" | translate | raw }}</a></li>
           <li id="nav-contribute"><a href="#">{{ "Contribute" | translate }}</a></li>
        </ul>
         <ul class="social-nav">

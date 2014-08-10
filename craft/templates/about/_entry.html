@@ -7,14 +7,9 @@
   {% set bodyClass = 'sec-about l-1col theme-yellow' %}
 {% endif %}
 
-{# Set the entries to use for building the section nav here #}
-  {% set secEntries = craft.entries.section('about').level(1) %}
-{# Set the path to use for some checks in the section nav here #}
-  {% set secPath = 'about' %}
-
 {% block header %}
 <div class="l-header">
-  {% include 'includes/_section-nav.html' %}
+  {% include 'includes/_section-nav.html' with {'secHandle':'about'} %}
 </div>
 <!--/.l-header-->
 {% endblock %}
@@ -43,11 +38,11 @@
 
   <h1{% if entry.type != "interior" %} class="display"{% endif %}>{{ title }}</h1>
 
-  <div class="page-intro cols-2med">
   {% if entry.pageIntro %}
-    {{ entry.pageIntro }}
+    <div class="page-intro cols-2med">
+      {{ entry.pageIntro }}
+    </div>
   {% endif %}
-  </div>
 
   {% switch entry.type %}
 

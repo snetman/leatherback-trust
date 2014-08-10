@@ -2,12 +2,9 @@
 {% set title = entry.title %}
 {% set bodyClass = 'sec-threats l-1col l-1col-narrow theme-green' %}
 
-{% set secEntries = craft.entries.section('threats').level(1) %}
-{% set secPath = 'threats' %}
-
 {% block header %}
 <div class="l-header">
-  {% include 'includes/_section-nav.html' %}
+  {% include 'includes/_section-nav.html' with {'secHandle':'threats'} %}
 </div>
 <!--/.l-header-->
 {% endblock %}

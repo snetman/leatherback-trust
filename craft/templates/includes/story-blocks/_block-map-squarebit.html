@@ -1,0 +1,68 @@
+{# Map block #}
+
+{% set mapId = "Map" ~ block.fieldId ~ "-" ~ block.id %}
+
+{% switch block.mapLayout %}
+
+  {% case "inset-left" %}
+    {% set captionClasses = "b-body" %}
+
+  {% case "inset-right" %}
+    {% set captionClasses = "b-body" %}
+
+  {% case "inset-far-left" %}
+    {% set captionClasses = "b-body" %}
+
+  {% case "inset-far-right" %}
+    {% set captionClasses = "b-body" %}
+
+  {% default %}
+    {% set captionClasses = "b-body patterned" %}
+
+{% endswitch %}
+
+{# Make sure to load assets required by leaflet #}
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+{% includeCssFile "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" %}
+
+
+<div class="block-map {{ block.mapLayout }}">
+  <div class="b-map-wrapper {{ block.mapAspect }}">
+    <div id="{{ mapId }}" class="b-map-embed"></div>
+  </div>
+  {% if block.caption %}
+    <div class="{{ captionClasses }}">
+      {% if block.captionTitle %}
+        <h4 class="cap-title">{{ block.captionTitle }}</h4>
+      {% endif %}
+      {{ block.caption }}
+    </div>
+  {% endif %}
+</div>
+<!--/.block-map-->
+<script>
+  var map = L.map('{{ mapId }}').setView([{{ block.mapLocation.mapLat }}, {{ block.mapLocation.mapLng }}], {{ block.mapLocation.mapZoom }});
+  L.tileLayer('http://{s}.tiles.mapbox.com/v3/startingnow.il9oogk9/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      maxZoom: 21
+  }).addTo(map);
+
+  {% if block.mapShowMarker %}
+    {% set baseUrl = craft.config.environmentVariables['baseUrl'] %}
+
+    var myIcon = L.icon({
+      iconUrl: '{{ baseUrl }}public/images/tlt-marker.png',
+      iconRetinaUrl: '{{ baseUrl }}public/images/tlt-marker2x.png',
+      iconSize:     [24, 30],
+      iconAnchor:   [12, 30],
+      popupAnchor:  [0, -30],
+      shadowUrl: '{{ baseUrl }}public/images/tlt-marker-shadow.png',
+      shadowRetinaUrl: '{{ baseUrl }}public/images/tlt-marker-shadow2x.png',
+      shadowSize:   [27, 23],
+      shadowAnchor: [2, 22]
+    });
+
+    L.marker([{{ block.mapLocation.pinLat }}, {{ block.mapLocation.pinLng }}], {icon: myIcon}).addTo(map);
+  {% endif %}
+</script>

@@ -2,12 +2,9 @@
 {% set title = "Threats"|translate  %}
 {% set bodyClass = 'sec-threats l-2col-rev theme-green' %}
 
-{% set secEntries = craft.entries.section('threats').level(1) %}
-{% set secPath = 'threats' %}
-
 {% block header %}
 <div class="l-header">
-  {% include 'includes/_section-nav.html' %}
+  {% include 'includes/_section-nav.html' with {'secHandle':'threats'} %}
   <header class="landing-header patterned">
     <h1 class="display">{{ title }}</h1>
   </header>
@@ -23,8 +20,10 @@
     <h2 class="sechead-title">{{ "In this section" | translate }}:</h2>
   </header>
 
+  {% set entries = craft.entries.section('threats') %}
+
   <ul class="a-spots">
-  {% for entry in secEntries %}
+  {% for entry in entries %}
     <li>
       <article class="a-spot">
       <figure class="a-image">
