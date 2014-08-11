@@ -5,13 +5,13 @@ $(document).ready(function() {
   //
 /*
 <div class="node-wrapper">
-  <div class="node" data-year="1988"><span class="node-count">100</span></div>
-  <div class="node" data-year="1989"><span class="node-count">100</span></div>
-  <div class="node" data-year="1990"><span class="node-count">100</span></div>
-  <div class="node" data-year="1991"><span class="node-count">100</span></div>
-  <div class="node" data-year="1992"><span class="node-count">100</span></div>
-  <div class="node" data-year="1993"><span class="node-count">100</span></div>
-  <div class="node" data-year="1994"><span class="node-count">100</span></div>
+  <div class="node" data-year="1988"><span class="node-count">0</span></div>
+  <div class="node" data-year="1989"><span class="node-count">0</span></div>
+  <div class="node" data-year="1990"><span class="node-count">0</span></div>
+  <div class="node" data-year="1991"><span class="node-count">0</span></div>
+  <div class="node" data-year="1992"><span class="node-count">0</span></div>
+  <div class="node" data-year="1993"><span class="node-count">0</span></div>
+  <div class="node" data-year="1994"><span class="node-count">0</span></div>
 </div>
 */
   // Set constants
