@@ -75,4 +75,17 @@ return array(
   // Blocks
   "Image by" => "Imagen por",
 
+  // Graphic data
+  "Turtle data" => "Data tortugas",
+  "Nest data" => "Data nests",
+  "Year" => "Year(es)",
+  "Leatherback" => "Leatherback(es)",
+  "Olive Ridley" => "Olive Ridley(es)",
+  "East Pacific Green" => "East Pacific Green(es)",
+  "Total" => "Total(es)",
+  "All" => "All(es)",
+  "Turtles" => "Tortugas",
+  "Nests" => "Nests(es)",
+  "in" => "en",
+
 );
