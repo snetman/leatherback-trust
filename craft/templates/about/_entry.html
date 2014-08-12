@@ -159,7 +159,7 @@
               <figure class="tlt-history-node">
                 {% if entry.histImage|length %}
                   {% set asset = entry.histImage.first() %}
-                  <img alt="{{ asset.altText }}" src="{{ asset.url }}" />
+                  <img alt="{{ asset.altText }}" src="{{ asset.getUrl('grid2up') }}" />
                 {% endif %}
                 <figcaption class="node-body">
                     {% include 'includes/_circle-date.html' with {'classes':'node-date'} %}

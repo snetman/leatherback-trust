@@ -2263,7 +2263,7 @@ tfoot th {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    padding-bottom: 5.375em;
+    padding-bottom: 1.375em;
     border-left-width: 0px;
   }
   .flexbox .a-card:first-child {
@@ -2285,6 +2285,10 @@ tfoot th {
     left: 0;
     width: 100%;
     z-index: 1;
+  }
+
+  .flexbox .a-card.has-date {
+    padding-bottom: 5.375em;
   }
 
   .flexbox .a-card.has-image {

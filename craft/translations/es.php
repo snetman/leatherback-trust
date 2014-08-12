@@ -44,7 +44,11 @@ return array(
   "From" => "Desde",
   "To" => "a",
   "All day" => "Todo el día",
+
+  // Times
   "F j, Y" => "j F Y",
+  "g:ia" => "H:i",
+  "at" => "a las",
 
   // About section text
   "Now" => "Ahora",
@@ -76,16 +80,24 @@ return array(
   "Image by" => "Imagen por",
 
   // Graphic data
+  "Graphic data" => "Datos gráficos",
   "Turtle data" => "Data tortugas",
   "Nest data" => "Data nests",
   "Year" => "Year(es)",
   "Leatherback" => "Leatherback(es)",
   "Olive Ridley" => "Olive Ridley(es)",
   "East Pacific Green" => "East Pacific Green(es)",
+  "Leatherback nest" => "Leatherback nest(es)",
+  "Olive Ridley nest" => "Olive Ridley nest(es)",
+  "East Pacific Green nest" => "East Pacific Green nest(es)",
   "Total" => "Total(es)",
   "All" => "All(es)",
   "Turtles" => "Tortugas",
   "Nests" => "Nests(es)",
   "in" => "en",
-
+  "Region" => "Region(es)",
+  "Unhatched eggs" => "Unhatched eggs(es)",
+  "Hatched eggs" => "Hatched eggs(es)",
+  "Bay" => "Bay(es)",
+  "Species" => "Species(es)",
 );

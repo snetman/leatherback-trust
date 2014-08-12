@@ -4,17 +4,18 @@
 {% set baseUrl = craft.config.environmentVariables['baseUrl'] %}
 
 {% block header %}
-<div class="l-header">
 {#
-{% include 'includes/_section-nav.html' with {'secHandle':'threats'} %}
-#}
-  <h1>{{ title }}</h1>
+<div class="l-header">
+  {% include 'includes/_section-nav.html' with {'secHandle':'threats'} %}
 </div>
 <!--/.l-header-->
+#}
 {% endblock %}
 
 {% block main %}
 <div class="l-main">
+
+  <h1>{{ title }}</h1>
 
   {% if entry.pageIntro %}
     <div class="page-intro cols-2med">
@@ -22,370 +23,323 @@
     </div>
   {% endif %}
 
-  <div class="block-divider stealth" area-hidden="true"></div>
+  {% if entry.comparisonShow %}
 
-  <section id="TurtleComparison" class="exhibit is-fancydisplay">
-    <header class="sechead">
-      <h2 class="sechead-title">Comparing Turtles</h2>
-    </header>
-    <div class="exhibit-body">
-      <p>Description here explaining graphic below which will depict the scales of the three species of turtle in relation to a human figure</p>
-      <img src="image.jpg" />
-    </div>
-  </section>
+    <div class="block-divider stealth" aria-hidden="true"></div>
 
-  <div class="block-divider stealth" area-hidden="true"></div>
+    <section id="TurtleComparison" class="exhibit is-fancydisplay">
+      <header class="sechead">
+        <h2 class="sechead-title">{{ entry.comparisonTitle }}</h2>
+      </header>
+      <div class="exhibit-body">
+        <div class="g g-2up">
+          {% if entry.comparisonImage|length %}
+            {% set asset = entry.comparisonImage.first() %}
+          {% endif %}
+          <div>
+            <img src="{{ asset.getUrl('grid2up') }}" />
+          </div>
+          <div>
+            {{ entry.comparisonIntro }}
+          </div>
+      </div>
+      <footer>
+        <ul class="key">
+          <li><span class="square-leatherback"></span> {{ "Leatherback" | translate }}</li>
+          <li><span class="square-oliveridley"></span> {{ "Olive Ridley" | translate }}</li>
+          <li><span class="square-green"></span> {{ "East Pacific Green" | translate }}</li>
+        </ul>
+      </footer>
+    </section>
 
-  <section id="TurtlesAndNestsInDecline" class="exhibit is-fancydisplay">
-    <header class="sechead">
-      <h2 class="sechead-title">{{ entry.historyTitle }}</h2>
-    </header>
-    {% if entry.historyIntro %}
-    <div class="exhibit-intro">
-      <div class="cols-2med">
+  {% endif %}
+
+  {% if entry.historyShow %}
+
+    <div class="block-divider stealth" aria-hidden="true"></div>
+
+    <section id="TurtlesAndNestsInDecline" class="exhibit is-fancydisplay">
+      <header class="sechead">
+        <h2 class="sechead-title">{{ entry.historyTitle }}</h2>
+      </header>
+      {% if entry.historyIntro %}
+      <div class="exhibit-intro">
         {{ entry.historyIntro }}
       </div>
-    </div>
-    {% endif %}
-    <div class="exhibit-body">
-      <div class="table-wrapper">
-        <table id="TurtlesOverTime" class="is-active" data-type="turtles">
-          <caption>{{ "Turtle data" | translate }}</caption>
-          <thead>
-            <tr>
-              <th>{{ "Year" | translate }}</th>
-              <th>{{ "Leatherback" | translate }}</th>
-              <th>{{ "Olive Ridley" | translate }}</th>
-              <th>{{ "East Pacific Green" | translate }}</th>
-              <th>{{ "Total" | translate }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for row in entry.historyTurtles %}
-            <tr class="year" data-year="{{ row.year }}">
-              <th class="year-number">{{ row.year }}</th>
-              <td class="year-count" data-species="leatherback">{{ row.leatherbackTotal }}</td>
-              <td class="year-count" data-species="oliveridley">{{ row.oliveridleyTotal }}</td>
-              <td class="year-count" data-species="green">{{ row.greenTotal }}</td>
-              <th class="year-count" data-species="all">{{ row.leatherbackTotal + row.oliveridleyTotal + row.greenTotal }}</th>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <table id="NestsOverTime" data-type="nests">
-          <caption>{{ "Nest data" | translate }}</caption>
-          <thead>
-            <tr>
-              <th>{{ "Year" | translate }}</th>
-              <th>{{ "Leatherback" | translate }}</th>
-              <th>{{ "Olive Ridley" | translate }}</th>
-              <th>{{ "East Pacific Green" | translate }}</th>
-              <th>{{ "Total" | translate }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for row in entry.historyNests %}
-            <tr class="year" data-year="{{ row.year }}">
-              <th class="year-number">{{ row.year }}</th>
-              <td class="year-count" data-species="leatherback">{{ row.leatherbackTotal }}</td>
-              <td class="year-count" data-species="oliveridley">{{ row.oliveridleyTotal }}</td>
-              <td class="year-count" data-species="green">{{ row.greenTotal }}</td>
-              <th class="year-count" data-species="all">{{ row.leatherbackTotal + row.oliveridleyTotal + row.greenTotal }}</th>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-      <!--/.table-wrapper-->
-      <div id="DataSelect">
-        <ul id="SpeciesSelect" class="drop-select">
-          <li class="is-active"><a href="#" data-species="leatherback">{{ "Leatherback" | translate }} <b class="pointer">&rarr;</b></a></li>
-          <li><a href="#" data-species="oliveridley">{{ "Olive Ridley" | translate }} <b class="pointer">&rarr;</b></a></li>
-          <li><a href="#" data-species="green">{{ "East Pacific Green" | translate }} <b class="pointer">&rarr;</b></a></li>
-          <li><a href="#" data-species="all">{{ "All" | translate }} <b class="pointer">&rarr;</b></a></li>
-        </ul>
-        <ul id="TypeSelect" class="drop-select">
-          <li class="is-active"><a href="#" data-type="Turtles">{{ "Turtles" | translate }} <b class="pointer">&rarr;</b></a></li>
-          <li><a href="#" data-type="Nests">{{ "Nests" | translate }} <b class="pointer">&rarr;</b></a></li>
-        </ul>
-      </div>
-      <!--/#DataSelect-->
-      {% set firstYear = '' %}
-      {% set lastYear = '' %}
-      <div class="node-wrapper">
-        {% for row in entry.historyTurtles %}
-          <div class="node" data-year="{{ row.year }}"><div class="node-inner"><span class="node-count">0</span></div></div>
-          {% if loop.first %}
-            {% set firstYear = row.year %}
-          {% endif %}
-          {% if loop.last %}
-            {% set lastYear = row.year %}
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-    <!--/.node-wrapper-->
-    <footer>
-      <div class="key">
-        <em>{{ firstYear }}</em>
-        <em>{{ lastYear }}</em>
-        <div class="node-tooltip" data-species="leatherback">
-          <div class="tooltip-inner">
-            <span class="tooltip-stat">0</span> {{ "in" | translate }} <span class="tooltip-year">1988</span>
-          </div>
-          <div class="pointer"></div>
+      {% endif %}
+      <div class="exhibit-body">
+        <div class="table-wrapper">
+          <table id="TurtlesOverTime" class="is-active" data-type="turtles">
+            <caption>{{ "Turtle data" | translate }}</caption>
+            <thead>
+              <tr>
+                <th>{{ "Year" | translate }}</th>
+                <th>{{ "Leatherback" | translate }}</th>
+                <th>{{ "Olive Ridley" | translate }}</th>
+                <th>{{ "East Pacific Green" | translate }}</th>
+                <th>{{ "Total" | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in entry.historyTurtles %}
+              <tr class="year" data-year="{{ row.year }}">
+                <th class="year-number">{{ row.year }}</th>
+                <td class="year-count" data-species="leatherback">{{ row.leatherbackTotal }}</td>
+                <td class="year-count" data-species="oliveridley">{{ row.oliveridleyTotal }}</td>
+                <td class="year-count" data-species="green">{{ row.greenTotal }}</td>
+                <th class="year-count" data-species="all">{{ row.leatherbackTotal + row.oliveridleyTotal + row.greenTotal }}</th>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <table id="NestsOverTime" data-type="nests">
+            <caption>{{ "Nest data" | translate }}</caption>
+            <thead>
+              <tr>
+                <th>{{ "Year" | translate }}</th>
+                <th>{{ "Leatherback" | translate }}</th>
+                <th>{{ "Olive Ridley" | translate }}</th>
+                <th>{{ "East Pacific Green" | translate }}</th>
+                <th>{{ "Total" | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in entry.historyNests %}
+              <tr class="year" data-year="{{ row.year }}">
+                <th class="year-number">{{ row.year }}</th>
+                <td class="year-count" data-species="leatherback">{{ row.leatherbackTotal }}</td>
+                <td class="year-count" data-species="oliveridley">{{ row.oliveridleyTotal }}</td>
+                <td class="year-count" data-species="green">{{ row.greenTotal }}</td>
+                <th class="year-count" data-species="all">{{ row.leatherbackTotal + row.oliveridleyTotal + row.greenTotal }}</th>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!--/.table-wrapper-->
+        <div id="DataSelect">
+          <ul id="SpeciesSelect" class="drop-select">
+            <li class="is-active"><a href="#" data-species="leatherback">{{ "Leatherback" | translate }} <b class="pointer">&rarr;</b></a></li>
+            <li><a href="#" data-species="oliveridley">{{ "Olive Ridley" | translate }} <b class="pointer">&rarr;</b></a></li>
+            <li><a href="#" data-species="green">{{ "East Pacific Green" | translate }} <b class="pointer">&rarr;</b></a></li>
+            <li><a href="#" data-species="all">{{ "All" | translate }} <b class="pointer">&rarr;</b></a></li>
+          </ul>
+          <ul id="TypeSelect" class="drop-select">
+            <li class="is-active"><a href="#" data-type="Turtles">{{ "Turtles" | translate }} <b class="pointer">&rarr;</b></a></li>
+            <li><a href="#" data-type="Nests">{{ "Nests" | translate }} <b class="pointer">&rarr;</b></a></li>
+          </ul>
+        </div>
+        <!--/#DataSelect-->
+        {% set firstYear = '' %}
+        {% set lastYear = '' %}
+        <div class="node-wrapper">
+          {% for row in entry.historyTurtles %}
+            <div class="node" data-year="{{ row.year }}"><div class="node-inner"><span class="node-count">0</span></div></div>
+            {% if loop.first %}
+              {% set firstYear = row.year %}
+            {% endif %}
+            {% if loop.last %}
+              {% set lastYear = row.year %}
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
-    </footer>
-  </section>
+      <!--/.node-wrapper-->
+      <footer>
+        <div class="key">
+          <em>{{ firstYear }}</em>
+          <em>{{ lastYear }}</em>
+          <div class="node-tooltip" data-species="leatherback">
+            <div class="tooltip-inner">
+              <span class="tooltip-stat">0</span> {{ "in" | translate }} <span class="tooltip-year">1988</span>
+            </div>
+            <div class="pointer"></div>
+          </div>
+        </div>
+      </footer>
+    </section>
 
-  <section id="NestingSnapshot" class="exhibit is-fancydisplay">
-    <time class="eyebrow">May 19, 2014 at 11:00pm</time>
-    <header class="sechead">
-      <h2 class="sechead-title">Nests at Las Baulas National Park</h2>
-    </header>
-    <div class="exhibit-body">
-      <table id="NestsByLocation">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Location</th>
-            <th>Leatherback</th>
-            <th>Olive Ridley</th>
-            <th>East Pacific Green</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="loc is-active">
-            <th class="loc-number">1</th>
-            <th class="loc-name as-h3">Playas Ventanas</th>
-            <td class="loc-nests" data-species="leatherback" data-total-nests="5">
-              <span class="number">5</span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-            </td>
-            <td class="loc-nests" data-species="oliveridley" data-total-nests="4">
-              <span class="number">4</span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-            </td>
-            <td class="loc-nests" data-species="green" data-total-nests="5">
-              <span class="number">5</span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-            </td>
-          </tr>
-          <tr class="loc">
-            <th class="loc-number">2</th>
-            <th class="loc-name as-h3">Playa Grande</th>
-            <td class="loc-nests" data-species="leatherback" data-total-nests="8">
-              <span class="number">8</span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-            </td>
-            <td class="loc-nests" data-species="oliveridley" data-total-nests="3">
-              <span class="number">3</span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-            </td>
-            <td class="loc-nests" data-species="green" data-total-nests="5">
-              <span class="number">5</span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-              <span class="nest"></span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="map-wrapper">
-        <div id="NestingMap" class="map-embed"></div>
-        <!--https://a.tiles.mapbox.com/v3/startingnow.il9oogk9/page.html#9/40.7229/-73.8424-->
-        <script>
-          var map = L.map('NestingMap').setView([10.327193,-85.846264], 13);
-          L.tileLayer('http://{s}.tiles.mapbox.com/v3/startingnow.il9oogk9/{z}/{x}/{y}.png', {
-              attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-              maxZoom: 18
-          }).addTo(map);
+  {% endif %}
 
-          var NumberIcon = L.Icon.extend({
-            options: {
-              shadowUrl: 'public/images/tlt-num-shadow.png',
-              shadowRetinaUrl: 'public/images/tlt-num-shadow2x.png',
-              iconSize:     [24, 30],
-              shadowSize:   [27, 23],
-              iconAnchor:   [12, 30],
-              shadowAnchor: [2, 22],
-              popupAnchor:  [0, -30]
-            }
-          });
+  {% if entry.nestingShow %}
 
-          var numberIcon1 = new NumberIcon({iconUrl: 'public/images/tlt-num-1.png', iconRetinaUrl: 'public/images/tlt-num-12x.png'}),
-              numberIcon2 = new NumberIcon({iconUrl: 'public/images/tlt-num-2.png', iconRetinaUrl: 'public/images/tlt-num-22x.png'}),
-              numberIcon3 = new NumberIcon({iconUrl: 'public/images/tlt-num-3.png', iconRetinaUrl: 'public/images/tlt-num-32x.png'}),
-              numberIcon4 = new NumberIcon({iconUrl: 'public/images/tlt-num-4.png', iconRetinaUrl: 'public/images/tlt-num-42x.png'}),
-              numberIcon5 = new NumberIcon({iconUrl: 'public/images/tlt-num-5.png', iconRetinaUrl: 'public/images/tlt-num-52x.png'}),
-              numberIcon6 = new NumberIcon({iconUrl: 'public/images/tlt-num-6.png', iconRetinaUrl: 'public/images/tlt-num-62x.png'}),
-              numberIcon7 = new NumberIcon({iconUrl: 'public/images/tlt-num-7.png', iconRetinaUrl: 'public/images/tlt-num-72x.png'}),
-              numberIcon8 = new NumberIcon({iconUrl: 'public/images/tlt-num-8.png', iconRetinaUrl: 'public/images/tlt-num-82x.png'}),
-              numberIcon9 = new NumberIcon({iconUrl: 'public/images/tlt-num-9.png', iconRetinaUrl: 'public/images/tlt-num-92x.png'}),
-              numberIcon10 = new NumberIcon({iconUrl: 'public/images/tlt-num-10.png', iconRetinaUrl: 'public/images/tlt-num-102x.png'});
+    <div class="block-divider stealth" aria-hidden="true"></div>
 
-          L.icon = function (options) {
-              return new L.Icon(options);
-          };
+    <section id="NestingSnapshot" class="exhibit is-fancydisplay">
+      <time class="eyebrow"><em>{{ entry.nestingTime|date('F j, Y'|t) }} {{ "at"|translate }} {{ entry.nestingTime|date('g:ia'|t) }}</em></time>
+      <header class="sechead">
+        <h2 class="sechead-title">{{ entry.nestingTitle }}</h2>
+      </header>
+      {% if entry.nestingIntro %}
+        <div class="exhibit-intro">
+          {{ entry.nestingIntro }}
+        </div>
+      {% endif %}
 
-          L.marker([10.3426894,-85.8570599], {icon: numberIcon1}).addTo(map).bindPopup("<p>Playas Ventanas</p>",{closeButton: false, className: 'nestdata-popup', autoPanPadding: [20,20]});
-          L.marker([10.323177, -85.842782], {icon: numberIcon2}).addTo(map).bindPopup("<p>Playa Grande</p>",{closeButton: false, className: 'nestdata-popup', autoPanPadding: [20,20]});
-        </script>
+      <div class="exhibit-body">
+        <table id="NestsByLocation">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{{ "Region" | translate }}</th>
+              <th>{{ "Leatherback" | translate }}</th>
+              <th>{{ "Olive Ridley" | translate }}</th>
+              <th>{{ "East Pacific Green" | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for region in entry.nestingRegions %}
+            <tr class="loc">
+              <th class="loc-number">{{ region.sortOrder }}</th>
+              <th class="loc-name as-h3">{{ region.regionName }}</th>
+              <td class="loc-nests" data-species="leatherback" data-total-nests="{{ region.regionLeatherbackTotal }}">
+                <span class="number">{{ region.regionLeatherbackTotal }}</span>
+                {% for nest in 1..region.regionLeatherbackTotal %}
+                  <span class="nest"></span>
+                {% endfor %}
+              </td>
+              <td class="loc-nests" data-species="oliveridley" data-total-nests="{{ region.regionOliveridleyTotal }}">
+                <span class="number">{{ region.regionOliveridleyTotal }}</span>
+                {% for nest in 1..region.regionOliveridleyTotal %}
+                  <span class="nest"></span>
+                {% endfor %}
+              </td>
+              <td class="loc-nests" data-species="green" data-total-nests="{{ region.regionGreenTotal }}">
+                <span class="number">{{ region.regionGreenTotal }}</span>
+                {% for nest in 1..region.regionGreenTotal %}
+                  <span class="nest"></span>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        <div class="map-wrapper">
+          <div id="NestingMap" class="map-embed"></div>
+
+          {# Make sure to load assets required by leaflet #}
+          <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+          {% includeCssFile "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" %}
+
+          <script>
+            var map = L.map('NestingMap').setView([{{ entry.nestingMap.mapLat }},{{ entry.nestingMap.mapLng }}], {{ entry.nestingMap.mapZoom }});
+            L.tileLayer('http://{s}.tiles.mapbox.com/v3/startingnow.il9oogk9/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18
+            }).addTo(map);
+
+            {% set baseUrl = craft.config.environmentVariables['baseUrl'] %}
+
+            var NumberIcon = L.Icon.extend({
+              options: {
+                shadowUrl: '{{ baseUrl }}public/images/tlt-num-shadow.png',
+                shadowRetinaUrl: '{{ baseUrl }}public/images/tlt-num-shadow2x.png',
+                iconSize:     [24, 30],
+                shadowSize:   [27, 23],
+                iconAnchor:   [12, 30],
+                shadowAnchor: [2, 22],
+                popupAnchor:  [0, -30]
+              }
+            });
+
+            var numberIcon1 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-1.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-12x.png'}),
+                numberIcon2 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-2.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-22x.png'}),
+                numberIcon3 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-3.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-32x.png'}),
+                numberIcon4 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-4.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-42x.png'}),
+                numberIcon5 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-5.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-52x.png'}),
+                numberIcon6 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-6.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-62x.png'}),
+                numberIcon7 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-7.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-72x.png'}),
+                numberIcon8 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-8.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-82x.png'}),
+                numberIcon9 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-9.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-92x.png'}),
+                numberIcon10 = new NumberIcon({iconUrl: '{{ baseUrl }}public/images/tlt-num-10.png', iconRetinaUrl: '{{ baseUrl }}public/images/tlt-num-102x.png'});
+
+            L.icon = function (options) {
+                return new L.Icon(options);
+            };
+
+            {% for region in entry.nestingRegions %}
+              L.marker([{{ region.regionLocation.pinLat }},{{ region.regionLocation.pinLng }}], {icon: numberIcon{{ region.sortOrder }}}).addTo(map).bindPopup("<p>{{ region.regionName }}</p>",{closeButton: false, className: 'nestdata-popup', autoPanPadding: [20,20]});
+            {% endfor %}
+          </script>
+
+        </div>
       </div>
-    </div>
-    <!--/.exhibit-body-->
-    <footer>
-      <ul id="NestsByLocationKey" class="key">
-        <li><span class="turtle-leatherback"></span> Leatherback nest</li>
-        <li><span class="turtle-oliveridley"></span> Olive Ridley nest</li>
-        <li><span class="turtle-green"></span> East Pacific Green nest</li>
-      </ul>
-    </footer>
-  </section>
+      <!--/.exhibit-body-->
+      <footer>
+        <ul id="NestsByLocationKey" class="key">
+          <li><span class="turtle-leatherback"></span> {{ "Leatherback nest" | translate }}</li>
+          <li><span class="turtle-oliveridley"></span> {{ "Olive Ridley nest" | translate }}</li>
+          <li><span class="turtle-green"></span> {{ "East Pacific Green nest" | translate }}</li>
+        </ul>
+      </footer>
+    </section>
 
-  <section id="HatcherySnapshot" class="exhibit is-fancydisplay">
-    <time class="eyebrow">May 19, 2014</time>
-    <header class="sechead">
-      <h2 class="sechead-title">In the Las Baulas Hatchery</h2>
-    </header>
-    <div class="exhibit-body">
-      <table id="HatcheryBays">
-        <thead>
-          <tr>
-            <th>Bay</th>
-            <th>Species</th>
-            <th>Eggs</th>
-            <th>Hatchlings</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="hbay" data-species="leatherback" data-total-eggs="80" data-total-hatchlings="0">
-            <th class="hbay-label">1</th>
-            <td class="hbay-species">Leatherback</td>
-            <td class="hbay-eggs">80</td>
-            <td class="hbay-hatchlings">0</td>
-          </tr>
-          <tr class="hbay" data-species="leatherback" data-total-eggs="36" data-total-hatchlings="28">
-            <th class="hbay-label">2</th>
-            <td class="hbay-species">Leatherback</td>
-            <td class="hbay-eggs">36</td>
-            <td class="hbay-hatchlings">28</td>
-          </tr>
-          <tr class="hbay" data-species="none" data-total-eggs="0" data-total-hatchlings="0">
-            <th class="hbay-label">3</th>
-            <td class="hbay-species">—</td>
-            <td class="hbay-eggs">—</td>
-            <td class="hbay-hatchlings">—</td>
-          </tr>
-          <tr class="hbay" data-species="oliveridley" data-total-eggs="78" data-total-hatchlings="10">
-            <th class="hbay-label">4</th>
-            <td class="hbay-species">Olive Ridley</td>
-            <td class="hbay-eggs">78</td>
-            <td class="hbay-hatchlings">10</td>
-          </tr>
-          <tr class="hbay" data-species="green" data-total-eggs="60" data-total-hatchlings="22">
-            <th class="hbay-label">5</th>
-            <td class="hbay-species">East Pacific Green</td>
-            <td class="hbay-eggs">60</td>
-            <td class="hbay-hatchlings">22</td>
-          </tr>
-          <tr class="hbay" data-species="none">
-            <th class="hbay-label">6</th>
-            <td class="hbay-species">&mdash;</td>
-            <td class="hbay-eggs">&mdash;</td>
-            <td class="hbay-hatchlings">&mdash;</td>
-          </tr>
-          <tr class="hbay" data-species="oliveridley" data-total-eggs="78" data-total-hatchlings="0">
-            <th class="hbay-label">7</th>
-            <td class="hbay-species">Olive Ridley</td>
-            <td class="hbay-eggs">92</td>
-            <td class="hbay-hatchlings">0</td>
-          </tr>
-          <tr class="hbay" data-species="oliveridley" data-total-eggs="78" data-total-hatchlings="0">
-            <th class="hbay-label">8</th>
-            <td class="hbay-species">Olive Ridley</td>
-            <td class="hbay-eggs">66</td>
-            <td class="hbay-hatchlings">0</td>
-          </tr>
-          <tr class="hbay" data-species="oliveridley" data-total-eggs="78" data-total-hatchlings="0">
-            <th class="hbay-label">9</th>
-            <td class="hbay-species">Olive Ridley</td>
-            <td class="hbay-eggs">76</td>
-            <td class="hbay-hatchlings">0</td>
-          </tr>
-          <tr class="hbay" data-species="none">
-            <th class="hbay-label">10</th>
-            <td class="hbay-species">&mdash;</td>
-            <td class="hbay-eggs">&mdash;</td>
-            <td class="hbay-hatchlings">&mdash;</td>
-          </tr>
-          <tr class="hbay" data-species="none">
-            <th class="hbay-label">11</th>
-            <td class="hbay-species">&mdash;</td>
-            <td class="hbay-eggs">&mdash;</td>
-            <td class="hbay-hatchlings">&mdash;</td>
-          </tr>
-          <tr class="hbay" data-species="green" data-total-eggs="70" data-total-hatchlings="24">
-            <th class="hbay-label">12</th>
-            <td class="hbay-species">East Pacific Green</td>
-            <td class="hbay-eggs">70</td>
-            <td class="hbay-hatchlings">24</td>
-          </tr>
-          <tr class="hbay" data-species="none">
-            <th class="hbay-label">13</th>
-            <td class="hbay-species">&mdash;</td>
-            <td class="hbay-eggs">&mdash;</td>
-            <td class="hbay-hatchlings">&mdash;</td>
-          </tr>
-          <tr class="hbay" data-species="leatherback" data-total-eggs="75" data-total-hatchlings="0">
-            <th class="hbay-label">14</th>
-            <td class="hbay-species">Leatherback</td>
-            <td class="hbay-eggs">75</td>
-            <td class="hbay-hatchlings">0</td>
-          </tr>
-          <tr class="hbay" data-species="green" data-total-eggs="70" data-total-hatchlings="0">
-            <th class="hbay-label">15</th>
-            <td class="hbay-species">East Pacific Green</td>
-            <td class="hbay-eggs">85</td>
-            <td class="hbay-hatchlings">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!--/.exhibit-body-->
-    <footer>
-      <ul id="HatcheryBaysKey" class="key">
-        <li><span class="square-leatherback"></span> Leatherback</li>
-        <li><span class="square-oliveridley"></span> Olive Ridley</li>
-        <li><span class="square-green"></span> East Pacific Green</li>
-        <li><span class="egg-leatherback"></span> Unhatched eggs</li>
-        <li><span class="turtle-leatherback"></span> Hatched eggs</li>
-      </ul>
-    </footer>
-  </section>
+  {% endif %}
+
+  {% if entry.hatcheryShow %}
+
+    <div class="block-divider stealth" aria-hidden="true"></div>
+
+    <section id="HatcherySnapshot" class="exhibit is-fancydisplay">
+      <time class="eyebrow"><em>{{ entry.hatcheryTime|date('F j, Y'|t) }} {{ "at"|translate }} {{ entry.hatcheryTime|date('g:ia'|t) }}</em></time>
+      <header class="sechead">
+        <h2 class="sechead-title">{{ entry.hatcheryTitle }}</h2>
+      </header>
+      {% if entry.historyIntro %}
+        <div class="exhibit-intro">
+          {{ entry.historyIntro }}
+        </div>
+      {% endif %}
+      <div class="exhibit-body">
+        <table id="HatcheryBays">
+          <thead>
+            <tr>
+              <th>{{ "Bay" | translate }}</th>
+              <th>{{ "Species" | translate }}</th>
+              <th>{{ "Unhatched eggs" | translate }}</th>
+              <th>{{ "Hatched eggs" | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for bay in entry.hatcheryBays %}
+            <tr class="hbay" data-species="{{ bay.baySpecies }}" data-total-eggs="{{ bay.bayEggs }}" data-total-hatchlings="{{ bay.bayHatchlings }}">
+              <th class="hbay-label">{{ bay.sortOrder }}</th>
+              {% switch bay.baySpecies %}
+                {% case "leatherback" %}
+                  <td class="hbay-species">{{ "Leatherback" | translate }}</td>
+                  <td class="hbay-eggs">{{ bay.bayEggs }}</td>
+                  <td class="hbay-hatchlings">{{ bay.bayHatchlings }}</td>
+                {% case "oliveridley" %}
+                  <td class="hbay-species">{{ "Olive Ridley" | translate }}</td>
+                  <td class="hbay-eggs">{{ bay.bayEggs }}</td>
+                  <td class="hbay-hatchlings">{{ bay.bayHatchlings }}</td>
+                {% case "green" %}
+                  <td class="hbay-species">{{ "East Pacific Green" | translate }}</td>
+                  <td class="hbay-eggs">{{ bay.bayEggs }}</td>
+                  <td class="hbay-hatchlings">{{ bay.bayHatchlings }}</td>
+                {% default %}
+                  <td class="hbay-species">&mdash;</td>
+                  <td class="hbay-eggs">&mdash;</td>
+                  <td class="hbay-hatchlings">&mdash;</td>
+              {% endswitch %}
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!--/.exhibit-body-->
+      <footer>
+        <ul id="HatcheryBaysKey" class="key">
+          <li><span class="square-leatherback"></span> {{ "Leatherback" | translate }}</li>
+          <li><span class="square-oliveridley"></span> {{ "Olive Ridley" | translate }}</li>
+          <li><span class="square-green"></span> {{ "East Pacific Green" | translate }}</li>
+          <li><span class="egg-leatherback"></span> {{ "Unhatched eggs" | translate }}</li>
+          <li><span class="turtle-leatherback"></span> {{ "Hatched eggs" | translate }}</li>
+        </ul>
+      </footer>
+    </section>
+
+  {% endif %}
 
 </div>
 <!--/.l-main-->

@@ -13,7 +13,6 @@
 {% endblock %}
 
 {% block main %}
-
 <div class="l-main">
 
   <header class="sechead">
@@ -53,6 +52,10 @@
 {% block aside %}
 <div class="l-aside">
   {{ entry.pageIntro }}
+  <div class="metadata">
+    {# Sharing options #}
+    {% include 'includes/_sharing-options.html' %}
+  </div>
 </div>
 <!--/.l-aside-->
 {% endblock %}

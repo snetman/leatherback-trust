@@ -1,6 +1,6 @@
 {% extends "_layout" %}
 {% set title = "About"|translate %}
-{% set bodyClass = 'sec-about l-1col l-1col-narrow theme-yellow' %}
+{% set bodyClass = 'sec-about l-2col-rev theme-yellow' %}
 
 {% block header %}
 <div class="l-header">
@@ -15,21 +15,49 @@
 {% block main %}
 <div class="l-main">
 
-  {% include 'includes/story-blocks/_story-blocks.html' %}
+  <header class="sechead">
+    <h2 class="sechead-title">{{ "In this section" | translate }}:</h2>
+  </header>
+
+  {% set entries = craft.entries.section('about') %}
+
+  <ul class="a-spots">
+  {% for entry in entries %}
+    {% if entry.teaserImage|length %}
+      {% set asset = entry.teaserImage.first() %}
+    {% else %}
+      {% set asset = "" %}
+    {% endif %}
+    <li>
+      <article class="a-spot">
+      {% if asset|length %}
+        <figure class="a-image">
+          <a href="{{ entry.url }}"><img class="img-bordered img-round" src="{{ asset.getUrl('spotTeaser') }}" /></a>
+        </figure>
+      {% endif %}
+        <div class="a-body">
+          <h3 class="a-title">{{ entry.link }}</h3>
+          {{ entry.teaser }}
+          <p><a class="" href="{{ entry.url }}">{{ "Learn more" | translate }}</a></p>
+        </div>
+      </article>
+    </li>
+  {% endfor %}
+  </ul>
 
 </div>
 <!--/.l-main-->
 {% endblock %}
 
 {% block aside %}
-<div class="l-aside metadata">
-
-  {# Sharing options #}
-  {% include 'includes/_sharing-options.html' %}
-
+<div class="l-aside">
+  {{ entry.pageIntro }}
+  <div class="metadata">
+    {# Sharing options #}
+    {% include 'includes/_sharing-options.html' %}
+  </div>
 </div>
 <!--/.l-aside-->
 {% endblock %}
 
-{% block footer %}
-{% endblock %}
+{% block footer %}{% endblock %}

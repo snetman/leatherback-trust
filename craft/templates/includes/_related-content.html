@@ -8,10 +8,10 @@
   </header>
   <div class="a-cards">
   {% for entry in entries %}
-    <a href="{{ entry.url }}" class="a-card">
+    <a href="{{ entry.url }}" class="a-card{% if entry.type == 'news' %} has-date{% endif %}">
       <article>
         <header>
-          <div class="eyebrow"><em>{{ entry.section|translate }}</em></div>
+          {% if entry.section.type != "single" %}<div class="eyebrow"><em>{{ entry.section|translate }}</em></div>{% endif %}
           <h3 class="a-title">{% if entry.shortTitle %}{{ entry.shortTitle }}{% else %}{{ entry.title }}{% endif %}</h3>
         </header>
         {% if entry.teaser %}

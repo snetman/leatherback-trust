@@ -181,7 +181,7 @@
         </header>
         <div class="a-cards">
         {% for entry in relatedEntries %}
-          <a href="{{ entry.url }}" class="a-card">
+          <a href="{{ entry.url }}" class="a-card{% if entry.type == 'news' %} has-date{% endif %}">
             <article>
               <header>
                 <h3 class="a-title">{{ entry.shortTitle}}</h3>

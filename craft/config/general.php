@@ -10,7 +10,7 @@
 return array(
     '*' => array(
         'omitScriptNameInUrls' => true,
-        'defaultImageQuality' => '100'
+        'defaultImageQuality' => '65'
     ),
 
     // Local

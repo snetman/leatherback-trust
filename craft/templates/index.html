@@ -72,7 +72,7 @@
           {% set asset = "" %}
         {% endif %}
 
-        <a href="{{ entry.url }}" class="a-card{% if asset|length %} has-image{% endif %}">
+        <a href="{{ entry.url }}" class="a-card{% if asset|length %} has-image{% endif %}{% if entry.type == 'news' %} has-date{% endif %}">
           <article>
             <header>
               <h3 class="a-title">{{ entry.shortTitle }}</h3>
@@ -110,7 +110,7 @@
         {% set asset = "" %}
       {% endif %}
 
-      <a href="{{ entry.url }}" class="a-card{% if asset|length %} has-image{% endif %}">
+      <a href="{{ entry.url }}" class="a-card{% if asset|length %} has-image{% endif %}{% if entry.type == 'news' %} has-date{% endif %}">
         <article>
           <header>
             <h3 class="a-title">{{ entry.shortTitle }}</h3>
