@@ -80,6 +80,7 @@ $navitemheight: 2.5em;
     background-color: transparent;
     height: $navitemheight;
     padding: .5em .5em 0;
+    //font-size: $font-size-small;
     &:hover,
     &:active {
       text-decoration: underline;
@@ -108,164 +109,85 @@ $navitemheight: 2.5em;
     }
     a {
       padding: .625em .5em 0;
+      //font-size: $font-size-norm;
     }
   }
 }
 
 // States
 
-.no-js .section-nav {
-  #MoreNav {
-    width: auto;
-    height: $navitemheight;
-    opacity: 1;
-    @include transition(width 0, height 0, opacity .2s);
-  }
-  #LessNav {
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    @include transition(opacity .2s, width 0 .3s, height 0 .3s);
-  }
-  &:target {
-    #MoreNav {
-      width: 0;
-      height: 0;
-      overflow: hidden;
-      opacity: 0;
-      @include transition(opacity .2s, width 0 .3s, height 0 .3s);
-    }
-    #LessNav {
-      width: auto;
-      height: $navitemheight;
-      opacity: 1;
-      @include transition(width 0, height 0, opacity .2s);
-    }
-  }
-
-  @include breakpoint(0 $bp-med) {
-    ul li:nth-child(n+6) {
-      display: none;
-    }
-    &:target {
-      ul li:nth-child(n+6) {
-        display: block;
-      }
-    }
-  }
-
-  @include breakpoint($bp-med $bp-large-2) {
-    ul li:nth-child(n+7) {
-      display: none;
-    }
-    &:target {
-      ul li:nth-child(n+7) {
-        display: block;
-      }
-    }
-  }
-
-  @include breakpoint($bp-large-2) {
-    ul li:nth-child(n+8) {
-      display: none;
-    }
-    &:target {
-      ul li:nth-child(n+8) {
-        display: block;
-      }
-    }
-
-  }
+@mixin show-me {
+  width: auto;
+  height: $navitemheight;
+  opacity: 1;
+  @include transition(width 0, height 0, opacity .2s);
+}
+@mixin hide-me {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  @include transition(opacity .2s, width 0 .3s, height 0 .3s);
 }
 
 .js .section-nav {
 
-  // Full nav showing
+  // First we assume less/more's get hidden
 
+  #LessNav,
   #MoreNav {
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+    @include hide-me;
   }
-  #LessNav {
-    width: auto;
-    height: $navitemheight;
-    opacity: 1;
-    @include transition(width 0, height 0, opacity .2s);
-  }
+
   @include breakpoint(0 $bp-med) {
-    ul li:nth-child(n+6) {
-      width: auto;
-      height: $navitemheight;
-      opacity: 1;
-      @include transition(width 0, height 0, opacity .2s);
-    }
-  }
-  @include breakpoint($bp-med $bp-large-2) {
-    ul li:nth-child(n+7) {
-      width: auto;
-      height: $navitemheight;
-      opacity: 1;
-      @include transition(width 0, height 0, opacity .2s);
-    }
-  }
-  @include breakpoint($bp-large-2) {
-    ul li:nth-child(n+8) {
-      width: auto;
-      height: $navitemheight;
-      opacity: 1;
-      @include transition(width 0, height 0, opacity .2s);
-    }
-  }
-
-  // Full nav hidden
-
-  &.hide-more {
-
-    #MoreNav {
-      width: auto;
-      height: $navitemheight;
-      opacity: 1;
-      @include transition(width 0, height 0, opacity .2s);
-    }
-    #LessNav {
-      width: 0;
-      height: 0;
-      overflow: hidden;
-      opacity: 0;
-      @include transition(opacity .2s, width 0 .3s, height 0 .3s);
-    }
-    @include breakpoint(0 $bp-med) {
-      ul li:nth-child(n+6) {
-        width: 0;
-        height: 0;
-        overflow: hidden;
-        opacity: 0;
-        @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+    // If we have need of more/less buttons
+    &.need-more-mobile {
+      #MoreNav {
+        @include hide-me;
+      }
+      #LessNav,
+      .overflow-mobile {
+        @include show-me;
       }
     }
-    @include breakpoint($bp-med $bp-large-2) {
-      ul li:nth-child(n+7) {
-        width: 0;
-        height: 0;
-        overflow: hidden;
-        opacity: 0;
-        @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+    &.need-more-mobile.hide-more {
+      #MoreNav {
+        @include show-me;
+      }
+      #LessNav,
+      .overflow-mobile {
+        @include hide-me;
       }
     }
-    @include breakpoint($bp-large-2) {
-      ul li:nth-child(n+8) {
-        width: 0;
-        height: 0;
-        overflow: hidden;
-        opacity: 0;
-        @include transition(opacity .2s, width 0 .3s, height 0 .3s);
+  }
+  @include breakpoint($bp-med) {
+    // If we have need of more/less buttons
+    &.need-more-tablet {
+      #MoreNav {
+        @include hide-me;
+      }
+      #LessNav,
+      .overflow-tablet {
+        @include show-me;
       }
     }
+    &.need-more-tablet.hide-more {
+      #MoreNav {
+        @include show-me;
+      }
+      #LessNav,
+      .overflow-tablet {
+        @include hide-me;
+      }
+    }
+  }  // When the 'hide-more' class is applied...
 
+}
+
+.no-js .section-nav {
+  #MoreNav,
+  #LessNav {
+    display: none;
   }
 }
 

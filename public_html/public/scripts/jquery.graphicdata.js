@@ -210,10 +210,10 @@ $(document).ready(function() {
   // Write new data to the tooltip
   function updateTooltipData(stat, year) {
     var tip = $('.node-tooltip');
-    if (stat != '') {
+    if (stat !== '') {
       tip.find('.tooltip-stat').text(stat);
     }
-    if (year != '') {
+    if (year !== '') {
       tip.find('.tooltip-year').text(year);
     }
   }

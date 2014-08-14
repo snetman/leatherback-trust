@@ -6088,71 +6088,7 @@ Tried to write these so they let me delicately fade in new stuff
   }
 }
 
-.no-js .section-nav #MoreNav {
-  width: auto;
-  height: 2.5em;
-  opacity: 1;
-  -moz-transition: width 0, height 0, opacity 0.2s;
-  -o-transition: width 0, height 0, opacity 0.2s;
-  -webkit-transition: width 0, height 0, opacity 0.2s;
-  transition: width 0, height 0, opacity 0.2s;
-}
-.no-js .section-nav #LessNav {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
-  -moz-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-  -o-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-  -webkit-transition: opacity 0.2s, width 0, height 0;
-  -webkit-transition-delay: 0s, 0.3s, 0.3s;
-  transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-}
-.no-js .section-nav:target #MoreNav {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
-  -moz-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-  -o-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-  -webkit-transition: opacity 0.2s, width 0, height 0;
-  -webkit-transition-delay: 0s, 0.3s, 0.3s;
-  transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-}
-.no-js .section-nav:target #LessNav {
-  width: auto;
-  height: 2.5em;
-  opacity: 1;
-  -moz-transition: width 0, height 0, opacity 0.2s;
-  -o-transition: width 0, height 0, opacity 0.2s;
-  -webkit-transition: width 0, height 0, opacity 0.2s;
-  transition: width 0, height 0, opacity 0.2s;
-}
-@media (min-width: 0) and (max-width: 46.75em) {
-  .no-js .section-nav ul li:nth-child(n+6) {
-    display: none;
-  }
-  .no-js .section-nav:target ul li:nth-child(n+6) {
-    display: block;
-  }
-}
-@media (min-width: 46.75em) and (max-width: 75em) {
-  .no-js .section-nav ul li:nth-child(n+7) {
-    display: none;
-  }
-  .no-js .section-nav:target ul li:nth-child(n+7) {
-    display: block;
-  }
-}
-@media (min-width: 75em) {
-  .no-js .section-nav ul li:nth-child(n+8) {
-    display: none;
-  }
-  .no-js .section-nav:target ul li:nth-child(n+8) {
-    display: block;
-  }
-}
-
+.js .section-nav #LessNav,
 .js .section-nav #MoreNav {
   width: 0;
   height: 0;
@@ -6164,17 +6100,20 @@ Tried to write these so they let me delicately fade in new stuff
   -webkit-transition-delay: 0s, 0.3s, 0.3s;
   transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
 }
-.js .section-nav #LessNav {
-  width: auto;
-  height: 2.5em;
-  opacity: 1;
-  -moz-transition: width 0, height 0, opacity 0.2s;
-  -o-transition: width 0, height 0, opacity 0.2s;
-  -webkit-transition: width 0, height 0, opacity 0.2s;
-  transition: width 0, height 0, opacity 0.2s;
-}
 @media (min-width: 0) and (max-width: 46.75em) {
-  .js .section-nav ul li:nth-child(n+6) {
+  .js .section-nav.need-more-mobile #MoreNav {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    -moz-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
+    -o-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
+    -webkit-transition: opacity 0.2s, width 0, height 0;
+    -webkit-transition-delay: 0s, 0.3s, 0.3s;
+    transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
+  }
+  .js .section-nav.need-more-mobile #LessNav,
+  .js .section-nav.need-more-mobile .overflow-mobile {
     width: auto;
     height: 2.5em;
     opacity: 1;
@@ -6183,9 +6122,7 @@ Tried to write these so they let me delicately fade in new stuff
     -webkit-transition: width 0, height 0, opacity 0.2s;
     transition: width 0, height 0, opacity 0.2s;
   }
-}
-@media (min-width: 46.75em) and (max-width: 75em) {
-  .js .section-nav ul li:nth-child(n+7) {
+  .js .section-nav.need-more-mobile.hide-more #MoreNav {
     width: auto;
     height: 2.5em;
     opacity: 1;
@@ -6194,40 +6131,8 @@ Tried to write these so they let me delicately fade in new stuff
     -webkit-transition: width 0, height 0, opacity 0.2s;
     transition: width 0, height 0, opacity 0.2s;
   }
-}
-@media (min-width: 75em) {
-  .js .section-nav ul li:nth-child(n+8) {
-    width: auto;
-    height: 2.5em;
-    opacity: 1;
-    -moz-transition: width 0, height 0, opacity 0.2s;
-    -o-transition: width 0, height 0, opacity 0.2s;
-    -webkit-transition: width 0, height 0, opacity 0.2s;
-    transition: width 0, height 0, opacity 0.2s;
-  }
-}
-.js .section-nav.hide-more #MoreNav {
-  width: auto;
-  height: 2.5em;
-  opacity: 1;
-  -moz-transition: width 0, height 0, opacity 0.2s;
-  -o-transition: width 0, height 0, opacity 0.2s;
-  -webkit-transition: width 0, height 0, opacity 0.2s;
-  transition: width 0, height 0, opacity 0.2s;
-}
-.js .section-nav.hide-more #LessNav {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
-  -moz-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-  -o-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-  -webkit-transition: opacity 0.2s, width 0, height 0;
-  -webkit-transition-delay: 0s, 0.3s, 0.3s;
-  transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-}
-@media (min-width: 0) and (max-width: 46.75em) {
-  .js .section-nav.hide-more ul li:nth-child(n+6) {
+  .js .section-nav.need-more-mobile.hide-more #LessNav,
+  .js .section-nav.need-more-mobile.hide-more .overflow-mobile {
     width: 0;
     height: 0;
     overflow: hidden;
@@ -6239,8 +6144,39 @@ Tried to write these so they let me delicately fade in new stuff
     transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
   }
 }
-@media (min-width: 46.75em) and (max-width: 75em) {
-  .js .section-nav.hide-more ul li:nth-child(n+7) {
+@media (min-width: 46.75em) {
+  .js .section-nav.need-more-tablet #MoreNav {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    -moz-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
+    -o-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
+    -webkit-transition: opacity 0.2s, width 0, height 0;
+    -webkit-transition-delay: 0s, 0.3s, 0.3s;
+    transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
+  }
+  .js .section-nav.need-more-tablet #LessNav,
+  .js .section-nav.need-more-tablet .overflow-tablet {
+    width: auto;
+    height: 2.5em;
+    opacity: 1;
+    -moz-transition: width 0, height 0, opacity 0.2s;
+    -o-transition: width 0, height 0, opacity 0.2s;
+    -webkit-transition: width 0, height 0, opacity 0.2s;
+    transition: width 0, height 0, opacity 0.2s;
+  }
+  .js .section-nav.need-more-tablet.hide-more #MoreNav {
+    width: auto;
+    height: 2.5em;
+    opacity: 1;
+    -moz-transition: width 0, height 0, opacity 0.2s;
+    -o-transition: width 0, height 0, opacity 0.2s;
+    -webkit-transition: width 0, height 0, opacity 0.2s;
+    transition: width 0, height 0, opacity 0.2s;
+  }
+  .js .section-nav.need-more-tablet.hide-more #LessNav,
+  .js .section-nav.need-more-tablet.hide-more .overflow-tablet {
     width: 0;
     height: 0;
     overflow: hidden;
@@ -6252,18 +6188,10 @@ Tried to write these so they let me delicately fade in new stuff
     transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
   }
 }
-@media (min-width: 75em) {
-  .js .section-nav.hide-more ul li:nth-child(n+8) {
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    -moz-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-    -o-transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-    -webkit-transition: opacity 0.2s, width 0, height 0;
-    -webkit-transition-delay: 0s, 0.3s, 0.3s;
-    transition: opacity 0.2s, width 0 0.3s, height 0 0.3s;
-  }
+
+.no-js .section-nav #MoreNav,
+.no-js .section-nav #LessNav {
+  display: none;
 }
 
 .theme-gray .section-nav,
