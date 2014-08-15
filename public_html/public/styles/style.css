@@ -6697,8 +6697,10 @@ Markup:
 .search-results h3 {
   margin-bottom: 0;
 }
+.search-results p {
+  margin-bottom: 0.6875em;
+}
 .search-results .url {
-  margin-top: -1.375em;
   font-size: 0.875em;
   font-family: "ff-tisa-web-pro", Georgia, serif;
   line-height: 1.125;

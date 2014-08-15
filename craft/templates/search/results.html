@@ -1,0 +1,84 @@
+{% extends "_layout" %}
+{% set bodyClass = 'l-1col theme-yellow' %}
+
+{% set query = craft.request.getParam('q') %}
+{% set title = 'Search results for'|translate ~ ' "' ~ query ~ '"' %}
+
+{% set entries = craft.entries({
+  search: query,
+  order: 'score',
+  section: 'about, graphicData, newsAndEvents, threats, whyLeatherbacks'
+}) %}
+
+{% set entriesPerPage = 10 %}
+
+{% block header %}
+<div class="l-header">
+  <form class="search-form" action="{{ url('search/results') }}">
+    <h1 class="result-count">{{ entries|length}} {% if entries|length != 1 %}{{ "results"|translate }}{% else %}{{ "result"|translate }}{% endif %}</h1>
+    <div class="ui">
+      <div class="form-group">
+        <input class="form-control" type="search" name="q" value="{{ query }}" {% if entries|length == 0 %}autofocus{% endif %}/>
+      </div>
+      <div>
+        <input class="btn" type="submit" value="{{ 'Search' | translate }}" />
+      </div>
+    </div>
+    <!--/.ui-->
+  </form>
+</div>
+<!--/.l-header-->
+{% endblock %}
+
+{% block main %}
+
+  <div class="l-main">
+
+    {% if entries|length %}
+
+      {% paginate entries.limit(entriesPerPage) as entriesOnPage %}
+
+        <ul class="search-results">
+          {% for entry in entriesOnPage %}
+            <li>
+              <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+              {% if entry.teaser %}
+                {{ entry.teaser }}
+              {% endif %}
+              <p class="url"><a href="{{ entry.url }}">{{ entry.url }}</a></p>
+            </li>
+          {% endfor %}
+        </ul>
+
+      {% endpaginate %}
+
+    {% else %}
+      <p>{{ "Your search for"|translate }} “{{ query }}” {{ "didn’t return any results"|translate }}.</p>
+    {% endif %}
+  </div>
+  <!--/.l-main-->
+
+
+{% endblock %}
+
+{% block aside %}
+{% endblock %}
+
+{% block footer %}
+  {% paginate entries.limit(entriesPerPage) as entriesOnPage %}
+    {% if paginate.prevUrl or paginate.nextUrl %}
+      <nav class="nav brick-nav brick-nav-full">
+        <ul>
+          {% if paginate.prevUrl %}
+            <li class="brick-left"><a href="{{ paginate.prevUrl }}?q={{ query }}"><span class="arrow">&larr;</span> <span class="hide-small">{{ "Prev"|translate }}</span></a></li>
+          {% endif %}
+          {% if paginate.nextUrl %}
+            <li class="brick-right"><a href="{{ paginate.nextUrl }}?q={{ query }}"><span class="hide-small">{{ "Next"|translate }}</span> <span class="arrow">&rarr;</span></a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <p><em>{{ "Page"|translate }}</em> {{ paginate.currentPage }} <em>{{ "of"|translate }}</em> {{ paginate.totalPages }}</p>
+    {% endif %}
+  {% endpaginate %}
+
+{% endblock %}

@@ -36,7 +36,7 @@
        </ul>
         <ul class="social-nav">
           <li class="site-search">
-            <form action="search-results"><input class="form-control" type="search" /></form>
+            <form action="{{ url('search/results') }}"><input class="form-control" type="search" name="q" /></form>
             <span class="icon-search"></span>
           </li>
           {% if socialProfiles.twitterHandle %}

@@ -55,8 +55,8 @@
     {% if paginate.prevUrl or paginate.nextUrl %}
     <nav class="nav brick-nav brick-nav-full">
       <ul>
-        {% if paginate.nextUrl %}<li class="brick-left"><a href="{{ paginate.nextUrl }}"><span class="arrow">&larr;</span> Prev</a></li>{% endif %}
-        {% if paginate.prevUrl %}<li class="brick-right"><a href="{{ paginate.prevUrl }}">Next <span class="arrow">&rarr;</span></a></li>{% endif %}
+        {% if paginate.nextUrl %}<li class="brick-left"><a href="{{ paginate.nextUrl }}"><span class="arrow">&larr;</span> {{ "Prev"|translate }}</a></li>{% endif %}
+        {% if paginate.prevUrl %}<li class="brick-right"><a href="{{ paginate.prevUrl }}">{{ "Next"|translate }} <span class="arrow">&rarr;</span></a></li>{% endif %}
       </ul>
     </nav>
     {% endif %}

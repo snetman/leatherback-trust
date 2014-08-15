@@ -154,8 +154,8 @@
   {% if prevEntry or nextEntry %}
   <nav class="nav brick-nav brick-nav-full">
     <ul>
-      {% if prevEntry %}<li class="brick-left"><a href="{{ prevEntry.url }}"><span class="arrow">&larr;</span> Prev</a></li>{% endif %}
-      {% if nextEntry %}<li class="brick-right"><a href="{{ nextEntry.url }}">Next <span class="arrow">&rarr;</span></a></li>{% endif %}
+      {% if prevEntry %}<li class="brick-left"><a href="{{ prevEntry.url }}"><span class="arrow">&larr;</span> {{ "Prev"|translate }}</a></li>{% endif %}
+      {% if nextEntry %}<li class="brick-right"><a href="{{ nextEntry.url }}">{{ "Next"|translate }} <span class="arrow">&rarr;</span></a></li>{% endif %}
     </ul>
   </nav>
   {% endif %}

@@ -57,9 +57,6 @@ return array(
   // Why Leatherbacks... section
   "Why Leatherbacks & Sea Turtles Matter" => "Porque Leatherbacks & Sea Turtles Matter",
 
-  // Miscellaneous messages
-  "Oops" => "Ups",
-
   // Action links
   "More" => "Más",
   "Less" => "Menos",
@@ -70,6 +67,8 @@ return array(
   "RSVP" => "Responda",
   "Register" => "Registrar",
   "Visit site" => "Ver sitio",
+  "Prev" => "Prev(es)",
+  "Next" => "Next(es)",
 
   // Sharing link title text
   "Email this" => "Envía este",
@@ -100,4 +99,18 @@ return array(
   "Hatched eggs" => "Hatched eggs(es)",
   "Bay" => "Bay(es)",
   "Species" => "Species(es)",
+
+  // Site search
+  "Search" => "Search(es)", // The button
+  "Search results for" => "Search results for(es)", // The page title
+  "result" => "result(es)", // 1 result count
+  "results" => "results(es)", // Plural results count
+  "Your search for" => "Your search for(es)",
+  "didn’t return any results" => "didn’t return any results(es)",
+  "Page" => "Pagina", // As in "Page 3 of 4"
+  "of" => "de", // As in "Page 3 of 4"
+
+   // 404
+  "Oops" => "Ups",
+
 );
