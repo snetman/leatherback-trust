@@ -2,45 +2,26 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class AssetIndexDataRecord
  *
- * @package craft.app.records
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.records
+ * @since     1.0
  */
 class AssetIndexDataRecord extends BaseRecord
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * @return string
 	 */
 	public function getTableName()
 	{
 		return 'assetindexdata';
-	}
-
-	/**
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineAttributes()
-	{
-		return array(
-			'sessionId' 	=> array(ColumnType::Char, 'length' => 36, 'required' => true, 'default' => ''),
-			'sourceId' 		=> array(AttributeType::Number, 'required' => true),
-			'offset'  		=> array(AttributeType::Number, 'required' => true),
-			'uri'  			=> array(ColumnType::Varchar, 'maxLength' => 255),
-			'size' 			=> array(AttributeType::Number),
-			'recordId'		=> array(AttributeType::Number),
-
-		);
 	}
 
 	/**
@@ -60,6 +41,25 @@ class AssetIndexDataRecord extends BaseRecord
 	{
 		return array(
 			array('columns' => array('sessionId', 'sourceId', 'offset'), 'unique' => true),
+		);
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array(
+			'sessionId' 	=> array(ColumnType::Char, 'length' => 36, 'required' => true, 'default' => ''),
+			'sourceId' 		=> array(AttributeType::Number, 'required' => true),
+			'offset'  		=> array(AttributeType::Number, 'required' => true),
+			'uri'  			=> array(ColumnType::Varchar, 'maxLength' => 255),
+			'size' 			=> array(AttributeType::Number),
+			'recordId'		=> array(AttributeType::Number),
+
 		);
 	}
 }

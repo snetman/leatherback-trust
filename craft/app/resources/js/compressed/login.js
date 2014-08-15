@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2014, Pixel & Tonic, Inc.
  @license   http://buildwithcraft.com/license Craft License Agreement
- @link      http://buildwithcraft.com
+ @see       http://buildwithcraft.com
+ @package   craft.app.resources
 */
 (function(b){var d=Garnish.Base.extend({$form:null,$loginNameInput:null,$loginFields:null,$passwordPaneItem:null,$passwordInput:null,$forgotPasswordLink:null,$rememberMeCheckbox:null,$sslIcon:null,$submitBtn:null,$spinner:null,$error:null,passwordInputInterval:null,forgotPassword:!1,loading:!1,init:function(){this.$form=b("#login-form");this.$loginNameInput=b("#loginName");this.$loginFields=b("#login-fields");this.$passwordPaneItem=this.$loginFields.children();this.$passwordInput=b("#password");this.$forgotPasswordLink=
 b("#forgot-password");this.$sslIcon=b("#ssl-icon");this.$submitBtn=b("#submit");this.$spinner=b("#spinner");this.$rememberMeCheckbox=b("#rememberMe");new Craft.PasswordInput(this.$passwordInput,{onToggleInput:b.proxy(function(a){this.removeListener(this.$passwordInput,"textchange");this.$passwordInput=a;this.addListener(this.$passwordInput,"textchange","validate")},this)});this.addListener(this.$loginNameInput,"textchange","validate");this.addListener(this.$passwordInput,"textchange","validate");

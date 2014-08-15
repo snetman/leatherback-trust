@@ -2,30 +2,29 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class FeedsService
  *
- * @package craft.app.services
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.services
+ * @since     1.0
  */
 class FeedsService extends BaseApplicationComponent
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
-	 *
+	 * return void
 	 */
 	public function init()
 	{
 		parent::init();
 
-		// Import this here to ensure that libs like SimplePie are using our version of the class and not any servers's random version.
+		// Import this here to ensure that libs like SimplePie are using our version of the class and not any server's
+		// random version.
 		require_once(Craft::getPathOfAlias('app.vendor.simplepie.simplepie.idn.').DIRECTORY_SEPARATOR.'idna_convert.class.php');
 	}
 
@@ -35,7 +34,8 @@ class FeedsService extends BaseApplicationComponent
 	 * @param string|array $url
 	 * @param int          $limit
 	 * @param int          $offset
-	 * @param null         $cacheDuration Any valid PHP time format http://www.php.net/manual/en/datetime.formats.time.php
+	 * @param null         $cacheDuration Any valid PHP time format {@see http://www.php.net/manual/en/datetime.formats.time.php}
+	 *
 	 * @return array
 	 */
 	public function getFeedItems($url, $limit = 0, $offset = 0, $cacheDuration = null)
@@ -85,8 +85,12 @@ class FeedsService extends BaseApplicationComponent
 		return $items;
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * @param $objects
+	 *
 	 * @return array
 	 */
 	private function _getEnclosures($objects)
@@ -135,6 +139,7 @@ class FeedsService extends BaseApplicationComponent
 
 	/**
 	 * @param $objects
+	 *
 	 * @return array
 	 */
 	private function _getRatings($objects)
@@ -157,6 +162,7 @@ class FeedsService extends BaseApplicationComponent
 
 	/**
 	 * @param $objects
+	 *
 	 * @return array
 	 */
 	private function _getRestrictions($objects)
@@ -180,6 +186,7 @@ class FeedsService extends BaseApplicationComponent
 
 	/**
 	 * @param $objects
+	 *
 	 * @return array
 	 */
 	private function _getCaptions($objects)
@@ -205,6 +212,7 @@ class FeedsService extends BaseApplicationComponent
 
 	/**
 	 * @param $objects
+	 *
 	 * @return array
 	 */
 	private function _getCredits($objects)
@@ -228,6 +236,7 @@ class FeedsService extends BaseApplicationComponent
 
 	/**
 	 * @param $objects
+	 *
 	 * @return array
 	 */
 	private function _getCategories($objects)
@@ -252,8 +261,8 @@ class FeedsService extends BaseApplicationComponent
 	/**
 	 * Returns an array of authors.
 	 *
-	 * @access private
 	 * @param array $objects
+	 *
 	 * @return array
 	 */
 	private function _getItemAuthors($objects)
@@ -278,8 +287,8 @@ class FeedsService extends BaseApplicationComponent
 	/**
 	 * Returns an array of categories.
 	 *
-	 * @access private
 	 * @param array $objects
+	 *
 	 * @return array
 	 */
 	private function _getItemCategories($objects)

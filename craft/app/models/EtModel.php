@@ -2,24 +2,32 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class EtModel
  *
- * @package craft.app.models
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.models
+ * @since     1.0
  */
 class EtModel extends BaseModel
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
-	 * @access protected
+	 * @return null
+	 */
+	public function decode()
+	{
+		echo JsonHelper::decode($this);
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
 	 * @return array
 	 */
 	protected function defineAttributes()
@@ -73,13 +81,5 @@ class EtModel extends BaseModel
 		$attributes['errors'] = AttributeType::Mixed;
 
 		return $attributes;
-	}
-
-	/*
-	 *
-	 */
-	public function decode()
-	{
-		echo JsonHelper::decode($this);
 	}
 }

@@ -1,11 +1,9 @@
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
  * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.resources
  */
 
 (function($){
@@ -34,6 +32,25 @@ Craft.RichTextInput = Garnish.Base.extend(
 		this.redactorConfig.lang = redactorLang;
 		this.redactorConfig.direction = Craft.orientation;
 
+		var that = this,
+			originalInitCallback = redactorConfig.initCallback;
+
+		this.redactorConfig.initCallback = function(ev, data)
+		{
+			that.redactor = this;
+			that.onRedactorInit();
+
+			// Did the config have its own callback?
+			if ($.isFunction(originalInitCallback))
+			{
+				return originalInitCallback.call(this, ev, data);
+			}
+			else
+			{
+				return data;
+			}
+		};
+
 		// Initialize Redactor
 		this.$textarea = $('#'+this.id);
 
@@ -58,7 +75,10 @@ Craft.RichTextInput = Garnish.Base.extend(
 	{
 		this.$textarea.redactor(this.redactorConfig);
 		this.redactor = this.$textarea.data('redactor');
+	},
 
+	onRedactorInit: function()
+	{
 		this.replaceRedactorButton('image', Craft.t('Insert image'), null,
 		{
 			from_web:

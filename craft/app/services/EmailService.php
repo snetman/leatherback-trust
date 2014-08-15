@@ -2,30 +2,39 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class EmailService
  *
- * @package craft.app.services
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.services
+ * @since     1.0
  */
 class EmailService extends BaseApplicationComponent
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private $_settings;
+
+	/**
+	 * @var int
+	 */
 	private $_defaultEmailTimeout = 10;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Sends an email.
 	 *
 	 * @param EmailModel $emailModel
 	 * @param array      $variables
+	 *
 	 * @return bool
 	 */
 	public function sendEmail(EmailModel $emailModel, $variables = array())
@@ -47,10 +56,11 @@ class EmailService extends BaseApplicationComponent
 	 * Sends an email by its key.
 	 *
 	 * @param UserModel $user
-	 * @param string $key
-	 * @param array $variables
-	 * @return bool
+	 * @param string    $key
+	 * @param array     $variables
+	 *
 	 * @throws Exception
+	 * @return bool
 	 */
 	public function sendEmailByKey(UserModel $user, $key, $variables = array())
 	{
@@ -129,7 +139,10 @@ class EmailService extends BaseApplicationComponent
 	}
 
 	/**
-	 * @param $settings
+	 * Sends a test email.
+	 *
+	 * @param array $settings
+	 *
 	 * @return bool
 	 */
 	public function sendTestEmail($settings)
@@ -158,10 +171,14 @@ class EmailService extends BaseApplicationComponent
 		return $success;
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * @param UserModel  $user
 	 * @param EmailModel $emailModel
 	 * @param array      $variables
+	 *
 	 * @throws Exception
 	 * @return bool
 	 */
@@ -341,7 +358,9 @@ class EmailService extends BaseApplicationComponent
 	/**
 	 * @param $email
 	 * @param $emailSettings
+	 *
 	 * @throws Exception
+	 * @return null
 	 */
 	private function _setSmtpSettings(&$email, $emailSettings)
 	{

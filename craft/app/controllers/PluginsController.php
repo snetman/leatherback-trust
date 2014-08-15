@@ -2,24 +2,27 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
+ * The PluginsController class is a controller that handles various plugin related tasks such installing, uninstalling,
+ * enabling, disabling and saving plugin settings in the control panel.
  *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
+ * Note that all actions in the controller require an authenticated Craft session via {@link BaseController::allowAnonymous}.
+ *
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
  * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
- * Handles plugin administration tasks.
- *
- * @package craft.app.controllers
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.controllers
+ * @since     1.0
  */
 class PluginsController extends BaseController
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Installs a plugin.
+	 *
+	 * @return null
 	 */
 	public function actionInstallPlugin()
 	{
@@ -40,6 +43,8 @@ class PluginsController extends BaseController
 
 	/**
 	 * Uninstalls a plugin.
+	 *
+	 * @return null
 	 */
 	public function actionUninstallPlugin()
 	{
@@ -60,6 +65,8 @@ class PluginsController extends BaseController
 
 	/**
 	 * Enables a plugin.
+	 *
+	 * @return null
 	 */
 	public function actionEnablePlugin()
 	{
@@ -80,6 +87,8 @@ class PluginsController extends BaseController
 
 	/**
 	 * Disables a plugin.
+	 *
+	 * @return null
 	 */
 	public function actionDisablePlugin()
 	{
@@ -100,6 +109,9 @@ class PluginsController extends BaseController
 
 	/**
 	 * Saves a plugin's settings.
+	 *
+	 * @throws Exception
+	 * @return null
 	 */
 	public function actionSavePluginSettings()
 	{

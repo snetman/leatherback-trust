@@ -1,19 +1,15 @@
 <?php
 
-/**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
 // Make sure this is PHP 5.3 or later
 if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50300)
 {
 	exit('Craft requires PHP 5.3.0 or later, but you&rsquo;re running '.PHP_VERSION.'. Please talk to your host/IT department about upgrading PHP or your server.');
+}
+
+// Check for this early because Craft uses it before the requirements checker gets a chance to run.
+if (!extension_loaded('mbstring') || (extension_loaded('mbstring') && ini_get('mbstring.func_overload') == 1))
+{
+	exit('Craft requires the <a href="http://php.net/manual/en/book.mbstring.php" target="_blank">PHP multibyte string</a> extension in order to run. Please talk to your host/IT department about enabling it on your server.');
 }
 
 /**
@@ -37,9 +33,10 @@ if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/testPathInfo')
  * Path constants and validation
  */
 
-// We're already in the app/ folder, so let's use that as the starting point.
-// Make sure it doesn't look like we're on a network share that starts with \\
+// We're already in the app/ folder, so let's use that as the starting point. Make sure it doesn't look like we're on
+// a network share that starts with \\
 $appPath = realpath(dirname(__FILE__));
+
 if (isset($appPath[0]) && isset($appPath[1]))
 {
 	if ($appPath[0] !== '\\' && $appPath[1] !== '\\')
@@ -166,7 +163,7 @@ if (!class_exists('Yii', false))
 	require CRAFT_APP_PATH.'framework/yii.php';
 }
 
-// Guzzle makes use of these PHP constants, but they aren't actually defined in some compilations of PHP
+// Guzzle makes use of these PHP constants, but they aren't actually defined in some compilations of PHP.
 // See http://it.blog.adclick.pt/php/fixing-php-notice-use-of-undefined-constant-curlopt_timeout_ms-assumed-curlopt_timeout_ms/
 defined('CURLOPT_TIMEOUT_MS')        || define('CURLOPT_TIMEOUT_MS',        155);
 defined('CURLOPT_CONNECTTIMEOUT_MS') || define('CURLOPT_CONNECTTIMEOUT_MS', 156);

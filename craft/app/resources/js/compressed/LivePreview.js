@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2014, Pixel & Tonic, Inc.
  @license   http://buildwithcraft.com/license Craft License Agreement
- @link      http://buildwithcraft.com
+ @see       http://buildwithcraft.com
+ @package   craft.app.resources
 */
 (function(a){Craft.LivePreview=Garnish.Base.extend({$form:null,$settingsContainer:null,$btn:null,$spinner:null,$shade:null,$editor:null,$dragHandle:null,$iframeContainer:null,$iframe:null,$fieldPlaceholder:null,postUrl:null,locale:null,basePostData:null,inPreviewMode:!1,fields:null,lastPostData:null,updateIframeInterval:null,loading:!1,checkAgain:!1,editorWidth:null,dragger:null,dragStartEditorWidth:null,init:function(b,c){this.postUrl=b?b:Craft.baseSiteUrl.replace(/\/+$/,"")+"/";this.locale=c;"https:"==
 document.location.protocol&&(this.postUrl=this.postUrl.replace(/^http:/,"https:"));this.$form=a("#entry-form");this.$settingsContainer=a("#settings");this.$btn=a("#livepreview-btn");this.$spinner=a("#livepreview-spinner");this.$fieldPlaceholder=a("<div/>");this.basePostData={action:"entries/previewEntry",locale:this.locale};for(var d=this.$form.children("input[type=hidden]"),e=0;e<d.length;e++){var f=a(d[e]);this.basePostData[f.attr("name")]=f.val()}this.editorWidth=Craft.getLocalStorage("LivePreview.editorWidth",

@@ -2,22 +2,20 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Interface ITool
  *
- * @package craft.app.tools
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.tools
+ * @since     1.0
  */
 interface ITool extends IComponentType
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * @return string
 	 */
@@ -35,6 +33,7 @@ interface ITool extends IComponentType
 
 	/**
 	 * @param array $params
+	 *
 	 * @return array
 	 */
 	public function performAction($params = array());

@@ -2,22 +2,20 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class DropdownFieldType
  *
- * @package craft.app.fieldtypes
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.fieldtypes
+ * @since     1.0
  */
 class DropdownFieldType extends BaseOptionsFieldType
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Returns the type of field this is.
 	 *
@@ -29,21 +27,11 @@ class DropdownFieldType extends BaseOptionsFieldType
 	}
 
 	/**
-	 * Returns the label for the Options setting.
-	 *
-	 * @access protected
-	 * @return string
-	 */
-	protected function getOptionsSettingsLabel()
-	{
-		return Craft::t('Dropdown Options');
-	}
-
-	/**
 	 * Returns the field's input HTML.
 	 *
 	 * @param string $name
 	 * @param mixed  $value
+	 *
 	 * @return string
 	 */
 	public function getInputHtml($name, $value)
@@ -68,5 +56,18 @@ class DropdownFieldType extends BaseOptionsFieldType
 			'value'   => $value,
 			'options' => $options
 		));
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * Returns the label for the Options setting.
+	 *
+	 * @return string
+	 */
+	protected function getOptionsSettingsLabel()
+	{
+		return Craft::t('Dropdown Options');
 	}
 }

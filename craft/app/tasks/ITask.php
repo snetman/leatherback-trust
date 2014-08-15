@@ -2,22 +2,20 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Interface ITask
  *
- * @package craft.app.tasks
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.tasks
+ * @since     2.0
  */
 interface ITask extends ISavableComponentType
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * @return string
 	 */
@@ -30,6 +28,7 @@ interface ITask extends ISavableComponentType
 
 	/**
 	 * @param int $step
+	 *
 	 * @return bool
 	 */
 	public function runStep($step);

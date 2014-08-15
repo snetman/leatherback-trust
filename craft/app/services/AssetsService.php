@@ -2,36 +2,42 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class AssetsService
  *
- * @package craft.app.services
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.services
+ * @since     1.0
  */
 class AssetsService extends BaseApplicationComponent
 {
-	private $_foldersById;
-	private $_includedTransformLoader = false;
+	// Properties
+	// =========================================================================
 
 	/**
-	 * A flag that designates that a file merge is in progress and name uniqueness should not be enforced
+	 * @var
+	 */
+	private $_foldersById;
+
+	/**
+	 * A flag that designates that a file merge is in progress and name uniqueness
+	 * should not be enforced.
+	 *
 	 * @var bool
 	 */
 	private $_mergeInProgress = false;
 
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Returns all top-level files in a source.
 	 *
-	 * @param int $sourceId
+	 * @param int         $sourceId
 	 * @param string|null $indexBy
+	 *
 	 * @return array
 	 */
 	public function getFilesBySourceId($sourceId, $indexBy = null)
@@ -50,8 +56,9 @@ class AssetsService extends BaseApplicationComponent
 	/**
 	 * Returns a file by its ID.
 	 *
-	 * @param $fileId
+	 * @param             $fileId
 	 * @param string|null $localeId
+	 *
 	 * @return AssetFileModel|null
 	 */
 	public function getFileById($fileId, $localeId = null)
@@ -63,6 +70,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Finds the first file that matches the given criteria.
 	 *
 	 * @param mixed $criteria
+	 *
 	 * @return AssetFileModel|null
 	 */
 	public function findFile($criteria = null)
@@ -79,6 +87,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Gets the total number of files that match a given criteria.
 	 *
 	 * @param mixed $criteria
+	 *
 	 * @return int
 	 */
 	public function getTotalFiles($criteria = null)
@@ -95,6 +104,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Saves the record for an asset.
 	 *
 	 * @param AssetFileModel $file
+	 *
 	 * @throws \Exception
 	 * @return bool
 	 */
@@ -196,6 +206,8 @@ class AssetsService extends BaseApplicationComponent
 	 * Fires an 'onBeforeSaveAsset' event.
 	 *
 	 * @param Event $event
+	 *
+	 * @return null
 	 */
 	public function onBeforeSaveAsset(Event $event)
 	{
@@ -206,6 +218,8 @@ class AssetsService extends BaseApplicationComponent
 	 * Fires an 'onSaveAsset' event.
 	 *
 	 * @param Event $event
+	 *
+	 * @return null
 	 */
 	public function onSaveAsset(Event $event)
 	{
@@ -216,7 +230,9 @@ class AssetsService extends BaseApplicationComponent
 	 * Fires an 'onSaveFileContent' event.
 	 *
 	 * @param Event $event
-	 * @deprecated Deprecated in 2.0.
+	 *
+	 * @deprecated Deprecated in 2.0. Use {@link onSaveAsset() assets.onSaveAsset} instead.
+	 * @return null
 	 */
 	public function onSaveFileContent(Event $event)
 	{
@@ -229,8 +245,10 @@ class AssetsService extends BaseApplicationComponent
 	// -------------------------------------------
 
 	/**
-	 * Store a folder by model and return the id
+	 * Store a folder by model and return the id.
+	 *
 	 * @param AssetFolderModel $folderModel
+	 *
 	 * @return mixed
 	 */
 	public function storeFolder(AssetFolderModel $folderModel)
@@ -257,6 +275,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Get the folder tree for Assets by source ids
 	 *
 	 * @param $allowedSourceIds
+	 *
 	 * @return array
 	 */
 	public function getFolderTreeBySourceIds($allowedSourceIds)
@@ -278,8 +297,9 @@ class AssetsService extends BaseApplicationComponent
 	 * Get the users Folder model.
 	 *
 	 * @param UserModel $userModel
-	 * @return AssetFolderModel|null
+	 *
 	 * @throws Exception
+	 * @return AssetFolderModel|null
 	 */
 	public function getUserFolder(UserModel $userModel = null)
 	{
@@ -295,12 +315,12 @@ class AssetsService extends BaseApplicationComponent
 
 		if ($userModel)
 		{
-			$folderName = 'user_' . $userModel->id;
+			$folderName = 'user_'.$userModel->id;
 		}
 		else
 		{
 			// A little obfuscation never hurt anyone
-			$folderName = 'user_' . sha1(craft()->httpSession->getSessionID());
+			$folderName = 'user_'.sha1(craft()->httpSession->getSessionID());
 		}
 		$folderCriteria = new FolderCriteriaModel(array(
 			'name' => $folderName,
@@ -323,6 +343,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Get the folder tree for Assets by a folder id.
 	 *
 	 * @param $folderId
+	 *
 	 * @return array
 	 */
 	public function getFolderTreeByFolderId($folderId)
@@ -342,6 +363,7 @@ class AssetsService extends BaseApplicationComponent
 	 *
 	 * @param $parentId
 	 * @param $folderName
+	 *
 	 * @return AssetOperationResponseModel
 	 */
 	public function createFolder($parentId, $folderName)
@@ -372,6 +394,7 @@ class AssetsService extends BaseApplicationComponent
 	 *
 	 * @param $folderId
 	 * @param $newName
+	 *
 	 * @throws Exception
 	 * @return AssetOperationResponseModel
 	 */
@@ -404,6 +427,7 @@ class AssetsService extends BaseApplicationComponent
 	 * @param $folderId
 	 * @param $newParentId
 	 * @param $action
+	 *
 	 * @return AssetOperationResponseModel
 	 */
 	public function moveFolder($folderId, $newParentId, $action)
@@ -437,8 +461,9 @@ class AssetsService extends BaseApplicationComponent
 	 * Deletes a folder by its ID.
 	 *
 	 * @param int $folderId
-	 * @return AssetOperationResponseModel
+	 *
 	 * @throws Exception
+	 * @return AssetOperationResponseModel
 	 */
 	public function deleteFolderById($folderId)
 	{
@@ -467,6 +492,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Returns a folder by its ID.
 	 *
 	 * @param int $folderId
+	 *
 	 * @return AssetFolderModel|null
 	 */
 	public function getFolderById($folderId)
@@ -496,6 +522,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Finds folders that match a given criteria.
 	 *
 	 * @param mixed $criteria
+	 *
 	 * @return array
 	 */
 	public function findFolders($criteria = null)
@@ -543,6 +570,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Find all folder's child folders in it's subtree.
 	 *
 	 * @param AssetFolderModel $folderModel
+	 *
 	 * @return array
 	 */
 	public function getAllDescendantFolders(AssetFolderModel $folderModel)
@@ -570,6 +598,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Finds the first folder that matches a given criteria.
 	 *
 	 * @param mixed $criteria
+	 *
 	 * @return AssetFolderModel|null
 	 */
 	public function findFolder($criteria = null)
@@ -594,6 +623,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Gets the total number of folders that match a given criteria.
 	 *
 	 * @param mixed $criteria
+	 *
 	 * @return int
 	 */
 	public function getTotalFolders($criteria)
@@ -612,33 +642,28 @@ class AssetsService extends BaseApplicationComponent
 		return (int)$query->queryScalar();
 	}
 
-	// -------------------------------------------
-	//  File and folder managing
-	// -------------------------------------------
+	// File and folder managing
+	// -------------------------------------------------------------------------
 
 	/**
-	 * @param $folderId
-	 * @param string $userResponse User response regarding filename conflict
-	 * @param string $responseInfo Additional information about the chosen action
-	 * @param string $fileName The filename that is in the conflict
+	 * @param int    $folderId     The Id of the folder the file is being uploaded to.
+	 * @param string $userResponse User response regarding filename conflict.
+	 * @param int    $theNewFileId The new file ID that has triggered the conflict.
+	 * @param string $fileName     The filename that is in the conflict.
 	 *
 	 * @return AssetOperationResponseModel
 	 */
-	public function uploadFile($folderId, $userResponse = '', $responseInfo = '', $fileName = '')
+	public function uploadFile($folderId, $userResponse = '', $theNewFileId = 0, $fileName = '')
 	{
 		try
 		{
 			// handle a user's conflict resolution response
-			if ( ! empty($userResponse))
+			if (!empty($userResponse))
 			{
-				$this->_startMergeProcess();
-				$response =  $this->_mergeUploadedFiles($userResponse, $responseInfo, $fileName);
-				$this->_finishMergeProcess();
-				return $response;
+				return $this->_resolveUploadConflict($userResponse, $theNewFileId, $fileName);
 			}
 
 			$folder = $this->getFolderById($folderId);
-
 			$source = craft()->assetSources->getSourceTypeById($folder->sourceId);
 
 			return $source->uploadFile($folder);
@@ -652,14 +677,17 @@ class AssetsService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Inserts a file from a local path into a folder and returns the resultinf file id.
+	 * Inserts a file from a local path into a folder and returns the resulting file id.
 	 *
-	 * @param $localPath
-	 * @param $fileName
-	 * @param $folderId
-	 * @return bool|null
+	 * @param string $localPath
+	 * @param string $fileName
+	 * @param int    $folderId
+	 * @param mixed  $conflictResolution What action should be taken in the event
+	 *                                   of a filename conflict.
+	 *
+	 * @return AssetOperationResponseModel
 	 */
-	public function insertFileByLocalPath($localPath, $fileName, $folderId)
+	public function insertFileByLocalPath($localPath, $fileName, $folderId, $conflictResolution = null)
 	{
 		$folder = $this->getFolderById($folderId);
 
@@ -670,8 +698,16 @@ class AssetsService extends BaseApplicationComponent
 
 		$fileName = IOHelper::cleanFilename($fileName);
 		$source = craft()->assetSources->getSourceTypeById($folder->sourceId);
-		$response = $source->insertFileByPath($localPath, $folder, $fileName, true);
-		return $response->getDataItem('fileId');
+
+		$response = $source->insertFileByPath($localPath, $folder, $fileName);
+
+		if ($response->isConflict() && $conflictResolution)
+		{
+			$theNewFileId = $response->getDataItem('fileId');
+			$response = $this->_resolveUploadConflict($conflictResolution, $theNewFileId, $fileName);
+		}
+
+		return $response;
 	}
 
 	/**
@@ -688,6 +724,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Delete a list of files by an array of ids (or a single id).
 	 *
 	 * @param $fileIds
+	 *
 	 * @return AssetOperationResponseModel
 	 */
 	public function deleteFiles($fileIds)
@@ -698,6 +735,7 @@ class AssetsService extends BaseApplicationComponent
 		}
 
 		$response = new AssetOperationResponseModel();
+
 		try
 		{
 			foreach ($fileIds as $fileId)
@@ -720,12 +758,13 @@ class AssetsService extends BaseApplicationComponent
 	/**
 	 * Move or rename files.
 	 *
-	 * @param $fileIds
-	 * @param $folderId
-	 * @param string $filename if this is a rename operation
-	 * @param array $actions actions to take in case of a conflict.
-	 * @return bool|AssetOperationResponseModel
+	 * @param        $fileIds
+	 * @param        $folderId
+	 * @param string $filename If this is a rename operation or not.
+	 * @param array  $actions  Actions to take in case of a conflict.
+	 *
 	 * @throws Exception
+	 * @return bool|AssetOperationResponseModel
 	 */
 	public function moveFiles($fileIds, $folderId, $filename = '', $actions = array())
 	{
@@ -779,7 +818,7 @@ class AssetsService extends BaseApplicationComponent
 
 			if ($originalSourceType && $newSourceType)
 			{
-				if ( !$response = $newSourceType->moveFileInsideSource($originalSourceType, $file, $folder, $filename, $actions[$i]))
+				if (!$response = $newSourceType->moveFileInsideSource($originalSourceType, $file, $folder, $filename, $actions[$i]))
 				{
 					$response = $this->_moveFileBetweenSources($originalSourceType, $newSourceType, $file, $folder, $actions[$i]);
 				}
@@ -796,11 +835,12 @@ class AssetsService extends BaseApplicationComponent
 
 	/**
 	 * @param AssetFileModel $file
-	 * @param $filename
-	 * @param string $action action to take in case of a conflict.
+	 * @param string         $filename
+	 * @param string         $action The action to take in case of a conflict.
+	 *
 	 * @return bool|AssetOperationResponseModel
 	 */
-	public function renameFile(AssetFileModel $file, $filename, $action = "")
+	public function renameFile(AssetFileModel $file, $filename, $action = '')
 	{
 		$response = $this->moveFiles(array($file->id), $file->folderId, $filename, $action);
 
@@ -814,11 +854,12 @@ class AssetsService extends BaseApplicationComponent
 	}
 
 	/**
-	* Delete a folder record by id.
-	*
-	* @param $folderId
-	* @return bool
-	*/
+	 * Delete a folder record by id.
+	 *
+	 * @param $folderId
+	 *
+	 * @return bool
+	 */
 	public function deleteFolderRecord($folderId)
 	{
 		return (bool) AssetFolderRecord::model()->deleteAll('id = :folderId', array(':folderId' => $folderId));
@@ -828,7 +869,8 @@ class AssetsService extends BaseApplicationComponent
 	 * Get URL for a file.
 	 *
 	 * @param AssetFileModel $file
-	 * @param $transform
+	 * @param                $transform
+	 *
 	 * @return string
 	 */
 	public function getUrlForFile(AssetFileModel $file, $transform = null)
@@ -868,7 +910,90 @@ class AssetsService extends BaseApplicationComponent
 		}
 	}
 
-	// Private methods
+	/**
+	 * Return true if user has permission to perform the action on the folder.
+	 *
+	 * @param $folderId
+	 * @param $action
+	 *
+	 * @return bool
+	 */
+	public function canUserPerformAction($folderId, $action)
+	{
+		try
+		{
+			$this->checkPermissionByFolderIds($folderId, $action);
+			return true;
+		}
+		catch (Exception $exception)
+		{
+			return false;
+		}
+	}
+
+	/**
+	 * Check for a permission on a source by a folder id or an array of folder ids.
+	 *
+	 * @param $folderIds
+	 * @param $permission
+	 *
+	 * @throws Exception
+	 * @return null
+	 */
+	public function checkPermissionByFolderIds($folderIds, $permission)
+	{
+		if (!is_array($folderIds))
+		{
+			$folderIds = array($folderIds);
+		}
+
+		foreach ($folderIds as $folderId)
+		{
+			$folderModel = $this->getFolderById($folderId);
+			if (!$folderModel)
+			{
+				throw new Exception(Craft::t('That folder does not seem to exist anymore. Re-index the Assets source and try again.'));
+			}
+
+			if(!craft()->userSession->checkPermission($permission.':'.$folderModel->sourceId))
+			{
+				throw new Exception(Craft::t('You don’t have the required permissions for this operation.'));
+			}
+		}
+	}
+
+	/**
+	 * Check for a permission on a source by a file id or an array of file ids.
+	 *
+	 * @param $fileIds
+	 * @param $permission
+	 *
+	 * @throws Exception
+	 * @return null
+	 */
+	public function checkPermissionByFileIds($fileIds, $permission)
+	{
+		if (!is_array($fileIds))
+		{
+			$fileIds = array($fileIds);
+		}
+
+		foreach ($fileIds as $fileId)
+		{
+			$fileModel = $this->getFileById($fileId);
+			if (!$fileModel)
+			{
+				throw new Exception(Craft::t('That file does not seem to exist anymore. Re-index the Assets source and try again.'));
+			}
+			if(!craft()->userSession->checkPermission($permission.':'.$fileModel->sourceId))
+			{
+				throw new Exception(Craft::t('You don’t have the required permissions for this operation.'));
+			}
+		}
+	}
+
+	// Private Methods
+	// =========================================================================
 
 	/**
 	 * Returns a DbCommand object prepped for retrieving assets.
@@ -886,6 +1011,7 @@ class AssetsService extends BaseApplicationComponent
 	 * Return the folder tree form a list of folders.
 	 *
 	 * @param $folders
+	 *
 	 * @return array
 	 */
 	private function _getFolderTreeByFolders($folders)
@@ -920,9 +1046,10 @@ class AssetsService extends BaseApplicationComponent
 	/**
 	 * Applies WHERE conditions to a DbCommand query for folders.
 	 *
-	 * @access private
-	 * @param DbCommand $query
+	 * @param DbCommand           $query
 	 * @param FolderCriteriaModel $criteria
+	 *
+	 * @return null
 	 */
 	private function _applyFolderConditions($query, FolderCriteriaModel $criteria)
 	{
@@ -982,6 +1109,8 @@ class AssetsService extends BaseApplicationComponent
 
 	/**
 	 * Flag a file merge in progress.
+	 *
+	 * @return null
 	 */
 	private function _startMergeProcess()
 	{
@@ -990,6 +1119,8 @@ class AssetsService extends BaseApplicationComponent
 
 	/**
 	 * Flag a file merge no longer in progress.
+	 *
+	 * @return null
 	 */
 	private function _finishMergeProcess()
 	{
@@ -999,50 +1130,50 @@ class AssetsService extends BaseApplicationComponent
 	/**
 	 * Merge a conflicting uploaded file.
 	 *
-	 * @param string $userResponse User response to conflict
-	 * @param string $responseInfo Additional information about the chosen action
-	 * @param string $fileName The filename that is in the conflict
-	 * @return array|string
+	 * @param string $conflictResolution  User response to conflict
+	 * @param int    $theNewFileId        The id of the new file that is conflicting
+	 * @param string $fileName            The filename that is in the conflict
+	 *
+	 * @return AssetOperationResponseModel
 	 */
-	private function _mergeUploadedFiles($userResponse, $responseInfo, $fileName)
+	private function _mergeUploadedFiles($conflictResolution, $theNewFileId, $fileName)
 	{
-		list ($folderId, $createdFileId) = explode(":", $responseInfo);
 
-		$folder = $this->getFolderById($folderId);
+		$theNewFile = $this->getFileById($theNewFileId);
+		$folder = $theNewFile->getFolder();
 		$source = craft()->assetSources->getSourceTypeById($folder->sourceId);
 
 		$fileId = null;
 
-		switch ($userResponse)
+		switch ($conflictResolution)
 		{
-			case AssetsHelper::ActionReplace:
+			case AssetConflictResolution::Replace:
 			{
 				// Replace the actual file
 				$targetFile = $this->findFile(array(
-					'folderId' => $folderId,
+					'folderId' => $folder->id,
 					'filename' => $fileName
 				));
 
-				$replaceWith = $this->getFileById($createdFileId);
-
-				$source->replaceFile($targetFile, $replaceWith);
+				$source->replaceFile($targetFile, $theNewFile);
 				$fileId = $targetFile->id;
 			}
 			// Falling through to delete the file
-			case AssetsHelper::ActionCancel:
+			case AssetConflictResolution::Cancel:
 			{
-				$this->deleteFiles($createdFileId);
+				$this->deleteFiles($theNewFileId);
 				break;
 			}
 			default:
 			{
-				$fileId = $createdFileId;
+				$fileId = $theNewFileId;
 				break;
 			}
 		}
 
 		$response = new AssetOperationResponseModel();
 		$response->setSuccess();
+
 		if ($fileId)
 		{
 			$response->setDataItem('fileId', $fileId);
@@ -1056,9 +1187,10 @@ class AssetsService extends BaseApplicationComponent
 	 *
 	 * @param BaseAssetSourceType $originalSource
 	 * @param BaseAssetSourceType $newSource
-	 * @param AssetFileModel $file
-	 * @param AssetFolderModel $folder
-	 * @param string $action
+	 * @param AssetFileModel      $file
+	 * @param AssetFolderModel    $folder
+	 * @param string              $action
+	 *
 	 * @return AssetOperationResponseModel
 	 */
 	private function _moveFileBetweenSources(BaseAssetSourceType $originalSource, BaseAssetSourceType $newSource, AssetFileModel $file, AssetFolderModel $folder, $action = '')
@@ -1069,6 +1201,7 @@ class AssetsService extends BaseApplicationComponent
 		$oldFileModel = clone $file;
 
 		$response = $newSource->transferFileIntoSource($localCopy, $folder, $file, $action);
+
 		if ($response->isSuccess())
 		{
 			// Use the previous data to clean up
@@ -1082,79 +1215,20 @@ class AssetsService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Return true if user has permission to perform the action on the folder.
+	 * Do an upload conflict resolution with merging.
 	 *
-	 * @param $folderId
-	 * @param $action
-	 * @return bool
-	 */
-	public function canUserPerformAction($folderId, $action)
-	{
-		try
-		{
-			$this->checkPermissionByFolderIds($folderId, $action);
-			return true;
-		}
-		catch (Exception $exception)
-		{
-			return false;
-		}
-	}
-
-	/**
-	 * Check for a permission on a source by a folder id or an array of folder ids.
+	 * @param $conflictResolution
+	 * @param $theNewFileId
+	 * @param $fileName
 	 *
-	 * @param $folderIds
-	 * @param $permission
-	 * @throws Exception
+	 * @return AssetOperationResponseModel
 	 */
-	public function checkPermissionByFolderIds($folderIds, $permission)
+	private function _resolveUploadConflict($conflictResolution, $theNewFileId, $fileName)
 	{
-		if (!is_array($folderIds))
-		{
-			$folderIds = array($folderIds);
-		}
-		foreach ($folderIds as $folderId)
-		{
-			$folderModel = $this->getFolderById($folderId);
-			if (!$folderModel)
-			{
-				throw new Exception(Craft::t('That folder does not seem to exist anymore. Re-index the Assets source and try again.'));
-			}
+		$this->_startMergeProcess();
+		$response =  $this->_mergeUploadedFiles($conflictResolution, $theNewFileId, $fileName);
+		$this->_finishMergeProcess();
 
-			if(!craft()->userSession->checkPermission($permission.':'.$folderModel->sourceId))
-			{
-				throw new Exception(Craft::t('You don’t have the required permissions for this operation.'));
-			}
-		}
+		return $response;
 	}
-
-	/**
-	 * Check for a permission on a source by a file id or an array of file ids.
-	 *
-	 * @param $fileIds
-	 * @param $permission
-	 * @throws Exception
-	 */
-	public function checkPermissionByFileIds($fileIds, $permission)
-	{
-		if (!is_array($fileIds))
-		{
-			$fileIds = array($fileIds);
-		}
-		foreach ($fileIds as $fileId)
-		{
-			$fileModel = $this->getFileById($fileId);
-			if (!$fileModel)
-			{
-				throw new Exception(Craft::t('That file does not seem to exist anymore. Re-index the Assets source and try again.'));
-			}
-			if(!craft()->userSession->checkPermission($permission.':'.$fileModel->sourceId))
-			{
-				throw new Exception(Craft::t('You don’t have the required permissions for this operation.'));
-			}
-		}
-
-	}
-
 }

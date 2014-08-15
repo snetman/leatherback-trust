@@ -2,34 +2,27 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Category model class.
  *
- * @package craft.app.models
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.models
+ * @since     2.0
  */
 class CategoryModel extends BaseElementModel
 {
-	protected $elementType = ElementType::Category;
+	// Properties
+	// =========================================================================
 
 	/**
-	 * @access protected
-	 * @return array
+	 * @var string
 	 */
-	protected function defineAttributes()
-	{
-		return array_merge(parent::defineAttributes(), array(
-			'groupId' => AttributeType::Number,
-		));
-	}
+	protected $elementType = ElementType::Category;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns the field layout used by this element.
@@ -94,5 +87,18 @@ class CategoryModel extends BaseElementModel
 		{
 			return craft()->categories->getGroupById($this->groupId);
 		}
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array_merge(parent::defineAttributes(), array(
+			'groupId' => AttributeType::Number,
+		));
 	}
 }

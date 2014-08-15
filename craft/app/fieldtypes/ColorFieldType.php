@@ -2,22 +2,20 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class ColorFieldType
  *
- * @package craft.app.fieldtypes
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.fieldtypes
+ * @since     1.0
  */
 class ColorFieldType extends BaseFieldType
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Returns the type of field this is.
 	 *
@@ -43,6 +41,7 @@ class ColorFieldType extends BaseFieldType
 	 *
 	 * @param string $name
 	 * @param mixed  $value
+	 *
 	 * @return string
 	 */
 	public function getInputHtml($name, $value)
@@ -64,6 +63,7 @@ class ColorFieldType extends BaseFieldType
 	 * Returns static HTML for the field's value.
 	 *
 	 * @param mixed $value
+	 *
 	 * @return string
 	 */
 	public function getStaticHtml($value)

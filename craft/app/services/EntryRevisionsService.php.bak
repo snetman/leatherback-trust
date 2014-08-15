@@ -14,7 +14,9 @@ namespace Craft;
 craft()->requireEdition(Craft::Client);
 
 /**
+ * Class EntryRevisionsService
  *
+ * @package craft.app.services
  */
 class EntryRevisionsService extends BaseApplicationComponent
 {

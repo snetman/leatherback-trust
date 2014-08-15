@@ -2,22 +2,20 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Backup Database tool
  *
- * @package craft.app.tools
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.tools
+ * @since     1.0
  */
 class DbBackupTool extends BaseTool
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Returns the tool name.
 	 *
@@ -56,6 +54,7 @@ class DbBackupTool extends BaseTool
 	 * Performs the tool's action.
 	 *
 	 * @param array $params
+	 *
 	 * @return array
 	 */
 	public function performAction($params = array())
@@ -65,6 +64,7 @@ class DbBackupTool extends BaseTool
 		if (IOHelper::fileExists($file) && isset($params['downloadBackup']) && (bool)$params['downloadBackup'])
 		{
 			$destZip = craft()->path->getTempPath().IOHelper::getFileName($file, false).'.zip';
+
 			if (IOHelper::fileExists($destZip))
 			{
 				IOHelper::deleteFile($destZip, true);

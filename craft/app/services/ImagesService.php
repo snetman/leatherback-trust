@@ -2,23 +2,24 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Service for image operations.
  *
- * @package craft.app.services
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.services
+ * @since     1.0
  */
 class ImagesService extends BaseApplicationComponent
 {
+	// Properties
+	// =========================================================================
+
 	private $_isGd = null;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns whether image manipulations will be performed using GD or not.
@@ -68,7 +69,8 @@ class ImagesService extends BaseApplicationComponent
 	/**
 	 * Loads an image from a file system path.
 	 *
-	 * @param $path
+	 * @param string $path
+	 *
 	 * @throws \Exception
 	 * @return Image
 	 */
@@ -80,11 +82,13 @@ class ImagesService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Determines if there is enough memory to process this image.  Adapted from http://www.php.net/manual/en/function.imagecreatefromjpeg.php#64155.
-	 * Will first attempt to do it with available memory. If that fails will bump the memory to phpMaxMemoryLimit, then try again.
+	 * Determines if there is enough memory to process this image.  Adapted from
+	 * {@link http://www.php.net/manual/en/function.imagecreatefromjpeg.php#64155}. Will first attempt to do it with
+	 * available memory. If that fails will bump the memory to phpMaxMemoryLimit, then try again.
 	 *
 	 * @param string $filePath The path to the image file.
-	 * @param bool $toTheMax If set to true, will set the PHP memory to the config setting phpMaxMemoryLimit.
+	 * @param bool   $toTheMax If set to true, will set the PHP memory to the config setting phpMaxMemoryLimit.
+	 *
 	 * @return bool
 	 */
 	public function checkMemoryForImage($filePath, $toTheMax = false)
@@ -127,7 +131,8 @@ class ImagesService extends BaseApplicationComponent
 	/**
 	 * Cleans an image by it's path, clearing embedded JS and PHP code.
 	 *
-	 * @param $filePath
+	 * @param string $filePath
+	 *
 	 * @return bool
 	 */
 	public function cleanImage($filePath)

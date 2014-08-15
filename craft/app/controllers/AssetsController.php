@@ -2,26 +2,47 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
+ * The AssetsController class is a controller that handles various actions related to asset tasks, such as uploading
+ * files and creating/deleting/renaming files and folders.
  *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
+ * Note that all actions in the controller except {@link actionGenerateTransform} require an authenticated Craft session
+ * via {@link BaseController::allowAnonymous}.
+ *
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
  * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
- * Handles asset tasks.
- *
- * @package craft.app.controllers
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.controllers
+ * @since     1.0
  */
 class AssetsController extends BaseController
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * If set to false, you are required to be logged in to execute any of the given controller's actions.
+	 *
+	 * If set to true, anonymous access is allowed for all of the given controller's actions.
+	 *
+	 * If the value is an array of action names, then you must be logged in for any action method except for the ones in
+	 * the array list.
+	 *
+	 * If you have a controller that where the majority of action methods will be anonymous, but you only want require
+	 * login on a few, it's best to use {@link UserSessionService::requireLogin() craft()->userSession->requireLogin()}
+	 * in the individual methods.
+	 *
+	 * @var bool
+	 */
 	protected $allowAnonymous = array('actionGenerateTransform');
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Upload a file
+	 *
+	 * @return null
 	 */
 	public function actionUploadFile()
 	{
@@ -30,7 +51,7 @@ class AssetsController extends BaseController
 
 		// Conflict resolution data
 		$userResponse = craft()->request->getPost('userResponse');
-		$responseInfo = craft()->request->getPost('additionalInfo');
+		$theNewFileId = craft()->request->getPost('newFileId', 0);
 		$fileName = craft()->request->getPost('fileName');
 
 		// For a conflict resolution, the folder ID is no longer there and no file is actually being uploaded
@@ -46,7 +67,7 @@ class AssetsController extends BaseController
 			}
 		}
 
-		$response = craft()->assets->uploadFile($folderId, $userResponse, $responseInfo, $fileName);
+		$response = craft()->assets->uploadFile($folderId, $userResponse, $theNewFileId, $fileName);
 
 		$this->returnJson($response->getResponseData());
 	}
@@ -55,6 +76,7 @@ class AssetsController extends BaseController
 	 * Uploads a file directly to a field for an entry.
 	 *
 	 * @throws Exception
+	 * @return null
 	 */
 	public function actionExpressUpload()
 	{
@@ -67,9 +89,6 @@ class AssetsController extends BaseController
 			throw new Exception(Craft::t('The upload failed.'));
 		}
 
-		/**
-		 * @var AssetsFieldType
-		 */
 		$field = craft()->fields->populateFieldType(craft()->fields->getFieldById($fieldId));
 
 		if (!($field instanceof AssetsFieldType))
@@ -97,17 +116,21 @@ class AssetsController extends BaseController
 		$fileLocation = AssetsHelper::getTempFilePath(pathinfo($fileName, PATHINFO_EXTENSION));
 		move_uploaded_file($_FILES['files']['tmp_name'][0], $fileLocation);
 
-		$fileId = craft()->assets->insertFileByLocalPath($fileLocation, $fileName, $targetFolderId);
+		$response = craft()->assets->insertFileByLocalPath($fileLocation, $fileName, $targetFolderId, AssetConflictResolution::KeepBoth);
+		$fileId = $response->getDataItem('fileId');
 
 		// Render and return
 		$element = craft()->elements->getElementById($fileId);
 		$html = craft()->templates->render('_elements/element', array('element' => $element));
 		$css = craft()->templates->getHeadHtml();
+
 		$this->returnJson(array('html' => $html, 'css' => $css));
 	}
 
 	/**
 	 * Create a folder.
+	 *
+	 * @return null
 	 */
 	public function actionCreateFolder()
 	{
@@ -132,6 +155,8 @@ class AssetsController extends BaseController
 
 	/**
 	 * Delete a folder.
+	 *
+	 * @return null
 	 */
 	public function actionDeleteFolder()
 	{
@@ -155,6 +180,8 @@ class AssetsController extends BaseController
 
 	/**
 	 * Rename a folder
+	 *
+	 * @return null
 	 */
 	public function actionRenameFolder()
 	{
@@ -181,6 +208,8 @@ class AssetsController extends BaseController
 
 	/**
 	 * Delete a file or multiple files.
+	 *
+	 * @return null
 	 */
 	public function actionDeleteFile()
 	{
@@ -203,6 +232,8 @@ class AssetsController extends BaseController
 
 	/**
 	 * Move a file or multiple files.
+	 *
+	 * @return null
 	 */
 	public function actionMoveFile()
 	{
@@ -229,6 +260,8 @@ class AssetsController extends BaseController
 
 	/**
 	 * Move a folder.
+	 *
+	 * @return null
 	 */
 	public function actionMoveFolder()
 	{
@@ -256,6 +289,9 @@ class AssetsController extends BaseController
 
 	/**
 	 * Generate a transform.
+	 *
+	 * @throws HttpException
+	 * @return null
 	 */
 	public function actionGenerateTransform()
 	{
@@ -295,6 +331,8 @@ class AssetsController extends BaseController
 
 	/**
 	 * Get information about available transforms.
+	 *
+	 * @return null
 	 */
 	public function actionGetTransformInfo()
 	{
@@ -309,14 +347,20 @@ class AssetsController extends BaseController
 		$this->returnJson($output);
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * Check upload permissions.
 	 *
 	 * @param $folderId
+	 *
+	 * @return null
 	 */
 	private function _checkUploadPermissions($folderId)
 	{
 		$folder = craft()->assets->getFolderById($folderId);
+
 		// if folder exists and the source ID is null, it's a temp source and we always allow uploads there.
 		if (!(is_object($folder) && is_null($folder->sourceId)))
 		{

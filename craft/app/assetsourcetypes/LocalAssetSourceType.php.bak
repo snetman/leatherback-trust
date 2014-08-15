@@ -12,7 +12,9 @@ namespace Craft;
  */
 
 /**
- * Local source type class
+ * Local source type class.
+ *
+ * @package craft.app.assetsourcetypes
  */
 class LocalAssetSourceType extends BaseAssetSourceType
 {

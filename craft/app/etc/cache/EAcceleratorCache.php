@@ -2,16 +2,6 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * EAcceleratorCache implements a cache application module based on {@link http://eaccelerator.net/ eaccelerator}.
  *
  * To use this application component, the eAccelerator PHP extension must be loaded.
@@ -20,7 +10,12 @@ namespace Craft;
  *
  * This means if you still want to use this component, your eAccelerator should be of 0.9.5.x or lower version.
  *
- * @package craft.app.etc.cache
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.cache
+ * @since     2.0
  */
 class EAcceleratorCache extends \CEAcceleratorCache
 {

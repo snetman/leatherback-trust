@@ -2,32 +2,49 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class ConfigService
  *
- * @package craft.app.services
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.services
+ * @since     1.0
  */
 class ConfigService extends BaseApplicationComponent
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private $_cacheDuration;
+
+	/**
+	 * @var
+	 */
 	private $_omitScriptNameInUrls;
+
+	/**
+	 * @var
+	 */
 	private $_usePathInfo;
+
+	/**
+	 * @var array
+	 */
 	private $_loadedConfigFiles = array();
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns a config item value, or null if it doesn't exist.
 	 *
 	 * @param string $item
 	 * @param string $file
+	 *
 	 * @return mixed
 	 */
 	public function get($item, $file = ConfigFile::General)
@@ -37,7 +54,8 @@ class ConfigService extends BaseApplicationComponent
 			$this->_loadConfigFile($file);
 		}
 
-		// If we're looking for devMode and we it looks like we're on the installer and it's a CP request, pretend like devMode is turned on.
+		// If we're looking for devMode and we it looks like we're on the installer and it's a CP request, pretend like
+		// devMode is turned on.
 		if (!craft()->isConsole() && $item == 'devMode' && craft()->request->getSegment(1) == 'install' && craft()->request->isCpRequest())
 		{
 			return true;
@@ -57,6 +75,8 @@ class ConfigService extends BaseApplicationComponent
 	 * @param string $item
 	 * @param mixed  $value
 	 * @param string $file
+	 *
+	 * @return null
 	 */
 	public function set($item, $value, $file = ConfigFile::General)
 	{
@@ -74,6 +94,7 @@ class ConfigService extends BaseApplicationComponent
 	 * @param string      $item
 	 * @param string|null $localeId
 	 * @param string      $file
+	 *
 	 * @return mixed
 	 */
 	public function getLocalized($item, $localeId = null, $file = ConfigFile::General)
@@ -109,12 +130,13 @@ class ConfigService extends BaseApplicationComponent
 	 *
 	 * @param      $item
 	 * @param null $default
-	 * @return null
-	 * @deprecated Deprecated in 2.0.
+	 *
+	 * @deprecated Deprecated in 2.0. Use {@link ConfigService::getDbItem() get('key', ConfigFile::Db)} instead.
+	 * @return string
 	 */
 	public function getDbItem($item, $default = null)
 	{
-		craft()->deprecator->log('ConfigService::getDbItem()', 'ConfigService::getDbItem() is deprecated. Use get(<item>, ConfigFile::Db) instead.');
+		craft()->deprecator->log('ConfigService::getDbItem()', 'ConfigService::getDbItem() is deprecated. Use get(\'key\', ConfigFile::Db) instead.');
 
 		if ($value = craft()->config->get($item, Config::Db))
 		{
@@ -129,6 +151,7 @@ class ConfigService extends BaseApplicationComponent
 	 *
 	 * @param        $item
 	 * @param string $file
+	 *
 	 * @return bool
 	 */
 	public function exists($item, $file = ConfigFile::General)
@@ -273,8 +296,8 @@ class ConfigService extends BaseApplicationComponent
 					{
 						$this->_usePathInfo = 'y';
 					}
-					// PHP Dev Server supports path info, and doesn't support simultaneous requests,
-					// so we need to explicitly check for that.
+					// PHP Dev Server supports path info, and doesn't support simultaneous requests, so we need to
+					// explicitly check for that.
 					else if (AppHelper::isPhpDevServer())
 					{
 						$this->_usePathInfo = 'y';
@@ -313,6 +336,8 @@ class ConfigService extends BaseApplicationComponent
 
 	/**
 	 * For when you have to give it all you can.
+	 *
+	 * @return null
 	 */
 	public function maxPowerCaptain()
 	{
@@ -356,9 +381,10 @@ class ConfigService extends BaseApplicationComponent
 	/**
 	 * Gets the account verification URL for a user account.
 	 *
-	 * @param       $code
-	 * @param       $uid
-	 * @param  bool $full
+	 * @param string $code
+	 * @param string $uid
+	 * @param bool   $full
+	 *
 	 * @return string
 	 */
 	public function getActivateAccountPath($code, $uid, $full = true)
@@ -392,6 +418,7 @@ class ConfigService extends BaseApplicationComponent
 	 * @param       $uid
 	 * @param       $user
 	 * @param  bool $full
+	 *
 	 * @return string
 	 */
 	public function getSetPasswordPath($code, $uid, $user, $full = false)
@@ -476,6 +503,7 @@ class ConfigService extends BaseApplicationComponent
 	 * Parses a string for any environment variable tags.
 	 *
 	 * @param string $str
+	 *
 	 * @return string $str
 	 */
 	public function parseEnvironmentString($str)
@@ -504,6 +532,9 @@ class ConfigService extends BaseApplicationComponent
 			return $this->get('resourceTrigger');
 		}
 	}
+
+	// Private Methods
+	// =========================================================================
 
 	/**
 	 * @param $name
@@ -584,6 +615,8 @@ class ConfigService extends BaseApplicationComponent
 	 *
 	 * @param array &$baseConfig
 	 * @param array $customConfig
+	 *
+	 * @return null
 	 */
 	private function _mergeConfigs(&$baseConfig, $customConfig)
 	{

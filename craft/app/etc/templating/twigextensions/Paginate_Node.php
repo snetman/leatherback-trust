@@ -2,26 +2,26 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Represents a paginate node.
  *
- * @package craft.app.etc.templating.twigextensions
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.templating.twigextensions
+ * @since     1.0
  */
 class Paginate_Node extends \Twig_Node
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Compiles the node to PHP.
 	 *
-	 * @param \Twig_Compiler
+	 * @param \Twig_Compiler $compiler
+	 *
+	 * @return null
 	 */
 	public function compile(\Twig_Compiler $compiler)
 	{

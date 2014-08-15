@@ -2,39 +2,47 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class Model
  *
- * @package craft.app.models
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.models
+ * @since     1.0
  */
 class Model extends BaseModel
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var array
+	 */
 	private $_attributeDefs;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Constructor
 	 *
 	 * @param array $attributeDefs
+	 *
+	 * @return Model
 	 */
-	function __construct($attributeDefs)
+	public function __construct($attributeDefs)
 	{
 		$this->_attributeDefs = $attributeDefs;
 		parent::__construct();
 	}
 
+	// Protected Methods
+	// =========================================================================
+
 	/**
 	 * Defines this model's attributeDefs.
 	 *
-	 * @access protected
 	 * @return array
 	 */
 	protected function defineAttributes()

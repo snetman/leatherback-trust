@@ -12,7 +12,9 @@ namespace Craft;
  */
 
 /**
+ * Class Craft
  *
+ * @package craft.app
  */
 class Craft extends \Yii
 {

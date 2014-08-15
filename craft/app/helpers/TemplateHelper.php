@@ -2,24 +2,26 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class TemplateHelper
  *
- * @package craft.app.helpers
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.helpers
+ * @since     1.0
  */
 class TemplateHelper
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Paginates an ElementCriteriaModel instance.
+	 *
+	 * @param ElementCriteriaModel $criteria
+	 *
+	 * @return array
 	 */
 	public static function paginateCriteria(ElementCriteriaModel $criteria)
 	{
@@ -66,6 +68,7 @@ class TemplateHelper
 	 * Returns a string wrapped in a \Twig_Markup object
 	 *
 	 * @param $value
+	 *
 	 * @return \Twig_Markup
 	 */
 	public static function getRaw($value)

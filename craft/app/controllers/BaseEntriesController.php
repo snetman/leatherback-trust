@@ -2,28 +2,29 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
+ * BaseController is a base class that any entry related controllers, such as {@link EntriesController} and
+ * {@link EntryRevisionsController} extend to share common functionality.
  *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
+ * It extend's Yii's {@link CController} overwriting specific methods as required.
+ *
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
  * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
- * Handles entry tasks.
- *
- * @abstract
- * @package craft.app.controllers
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.controllers
+ * @since     2.1
  */
 abstract class BaseEntriesController extends BaseController
 {
+	// Protected Methods
+	// =========================================================================
+
 	/**
 	 * Enforces all Edit Entry permissions.
 	 *
-	 * @access protected
 	 * @param EntryModel $entry
+	 *
+	 * @return null
 	 */
 	protected function enforceEditEntryPermissions(EntryModel $entry)
 	{

@@ -2,39 +2,26 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class TagRecord
  *
- * @package craft.app.records
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.records
+ * @since     1.1
  */
 class TagRecord extends BaseRecord
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * @return string
 	 */
 	public function getTableName()
 	{
 		return 'tags';
-	}
-
-	/**
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineAttributes()
-	{
-		return array(
-			'name'   => array(AttributeType::String, 'required' => true),
-		);
 	}
 
 	/**
@@ -55,6 +42,19 @@ class TagRecord extends BaseRecord
 	{
 		return array(
 			array('columns' => array('name', 'groupId'), 'unique' => true),
+		);
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array(
+			'name'   => array(AttributeType::String, 'required' => true),
 		);
 	}
 }

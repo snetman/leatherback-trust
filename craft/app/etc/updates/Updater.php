@@ -2,32 +2,31 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class Updater
  *
- * @package craft.app.etc.updates
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.updates
+ * @since     1.0
  */
 class Updater
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
-	 *
+	 * @return Updater
 	 */
-	function __construct()
+	public function __construct()
 	{
 		craft()->config->maxPowerCaptain();
 	}
 
 	/**
 	 * @throws Exception
+	 * @return null
 	 */
 	public function getLatestUpdateInfo()
 	{
@@ -57,6 +56,7 @@ class Updater
 	 * Performs environmental requirement checks before running an update.
 	 *
 	 * @throws Exception
+	 * @return null
 	 */
 	public function checkRequirements()
 	{
@@ -64,7 +64,8 @@ class Updater
 	}
 
 	/**
-	 * @param $md5
+	 * @param string $md5
+	 *
 	 * @throws Exception
 	 * @return array
 	 */
@@ -123,7 +124,9 @@ class Updater
 
 	/**
 	 * @param $uid
+	 *
 	 * @throws Exception
+	 * @return null
 	 */
 	public function backupFiles($uid)
 	{
@@ -139,7 +142,9 @@ class Updater
 
 	/**
 	 * @param $uid
-	 * @throws \Exception
+	 *
+	 * @throws Exception
+	 * @return null
 	 */
 	public function updateFiles($uid)
 	{
@@ -158,8 +163,8 @@ class Updater
 	}
 
 	/**
-	 * @return bool
 	 * @throws Exception
+	 * @return string
 	 */
 	public function backupDatabase()
 	{
@@ -175,8 +180,10 @@ class Updater
 	}
 
 	/**
-	 * @param null $plugin
+	 * @param BasePlugin|null $plugin
+	 *
 	 * @throws Exception
+	 * @return null
 	 */
 	public function updateDatabase($plugin = null)
 	{
@@ -211,6 +218,7 @@ class Updater
 
 	/**
 	 * @param $uid
+	 *
 	 * @throws Exception
 	 * @return bool
 	 */
@@ -237,8 +245,15 @@ class Updater
 		return true;
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * Remove any temp files and/or folders that might have been created.
+	 *
+	 * @param string $unzipFolder
+	 *
+	 * @return null
 	 */
 	private function _cleanTempFiles($unzipFolder)
 	{
@@ -308,9 +323,9 @@ class Updater
 	/**
 	 * Validates that the downloaded file MD5 the MD5 of the file from Elliott
 	 *
-	 * @access private
-	 * @param $downloadFilePath
-	 * @param $sourceMD5
+	 * @param string $downloadFilePath
+	 * @param string $sourceMD5
+	 *
 	 * @return bool
 	 */
 	private function _validateUpdate($downloadFilePath, $sourceMD5)
@@ -329,10 +344,8 @@ class Updater
 	/**
 	 * Unzip the downloaded update file into the temp package folder.
 	 *
-	 * @access private
-	 *
-	 * @param $downloadFilePath
-	 * @param $unzipFolder
+	 * @param string $downloadFilePath
+	 * @param string $unzipFolder
 	 *
 	 * @return bool
 	 */
@@ -350,8 +363,8 @@ class Updater
 	/**
 	 * Checks to see if the files that we are about to update are writable by Craft.
 	 *
-	 * @access private
-	 * @param $unzipFolder
+	 * @param string $unzipFolder
+	 *
 	 * @return bool
 	 */
 	private function _validateManifestPathsWritable($unzipFolder)
@@ -397,11 +410,11 @@ class Updater
 	}
 
 	/**
-	 * Attempt to backup each of the update manifest files by copying them to a file with the same name with a .bak extension.
-	 * If there is an exception thrown, we attempt to roll back all of the changes.
+	 * Attempt to backup each of the update manifest files by copying them to a file with the same name with a .bak
+	 * extension. If there is an exception thrown, we attempt to roll back all of the changes.
 	 *
-	 * @access private
-	 * @param $unzipFolder
+	 * @param string $unzipFolder
+	 *
 	 * @return bool
 	 */
 	private function _backupFiles($unzipFolder)
@@ -460,9 +473,10 @@ class Updater
 	}
 
 	/**
-	 * @param $unzipFolder
-	 * @return array
+	 * @param string $unzipFolder
+	 *
 	 * @throws Exception
+	 * @return array
 	 */
 	private function _validateNewRequirements($unzipFolder)
 	{
@@ -488,7 +502,8 @@ class Updater
 
 		$newTempFilePath = craft()->path->getAppPath().'etc/requirements/'.$tempFileName;
 
-		// Copy the random file name requirements to the requirements folder.  We don't want to execute any PHP from the storage folder.
+		// Copy the random file name requirements to the requirements folder.
+		// We don't want to execute any PHP from the storage folder.
 		IOHelper::copyFile($requirementsFolderPath.$tempFileName, $newTempFilePath);
 
 		require_once($newTempFilePath);

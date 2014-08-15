@@ -2,22 +2,20 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class Hook_TokenParser
  *
- * @package craft.app.etc.templating.twigextensions
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.templating.twigextensions
+ * @since     1.3
  */
 class Hook_TokenParser extends \Twig_TokenParser
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Defines the tag name.
 	 *
@@ -32,6 +30,7 @@ class Hook_TokenParser extends \Twig_TokenParser
 	 * Parses {% hook %} tags.
 	 *
 	 * @param \Twig_Token $token
+	 *
 	 * @return Hook_Node
 	 */
 	public function parse(\Twig_Token $token)

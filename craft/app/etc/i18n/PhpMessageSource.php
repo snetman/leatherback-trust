@@ -2,32 +2,44 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class PhpMessageSource
  *
- * @package craft.app.etc.i18n
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.i18n
+ * @since     1.0
  */
 class PhpMessageSource extends \CPhpMessageSource
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * Whether to force message translation when the source and target languages are the same. Yii defaults this to
+	 * false, meaning translation is only performed when source and target languages are different, but Craft defaults
+	 * it to true.
+	 *
+	 * @var boolean
+	 */
 	public $forceTranslation = true;
 
+	/**
+	 * @var
+	 */
 	private $_translations;
+
+	// Protected Methods
+	// =========================================================================
 
 	/**
 	 * Loads the message translation for the specified language and category.
 	 *
-	 * @param string $category the message category
-	 * @param string $language the target locale
-	 * @return array the loaded messages
+	 * @param string $category The message category
+	 * @param string $language The target locale
+	 *
+	 * @return array The loaded messages
 	 */
 	protected function loadMessages($category, $language)
 	{
@@ -64,8 +76,7 @@ class PhpMessageSource extends \CPhpMessageSource
 			// Site translations take the highest precidence, so they get added last
 			$paths[] = craft()->path->getSiteTranslationsPath();
 
-			// Look for translation file from least to most specific.
-			// So nl.php gets loaded before nl_nl.php, for example.
+			// Look for translation file from least to most specific. For example, nl.php gets loaded before nl_nl.php.
 			$translationFiles = array();
 			$parts = explode('_', $language);
 			$totalParts = count($parts);
@@ -108,8 +119,12 @@ class PhpMessageSource extends \CPhpMessageSource
 		return $this->_translations[$language];
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * @param $localeId
+	 *
 	 * @return array
 	 */
 	private function _processFrameworkData($localeId)

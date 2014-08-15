@@ -2,22 +2,20 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Clear Caches tool.
  *
- * @package craft.app.tools
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.tools
+ * @since     1.0
  */
 class ClearCachesTool extends BaseTool
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Returns the tool name.
 	 *
@@ -70,7 +68,8 @@ class ClearCachesTool extends BaseTool
 	 * Performs the tool's action.
 	 *
 	 * @param array $params
-	 * @return void
+	 *
+	 * @return null
 	 */
 	public function performAction($params = array())
 	{
@@ -134,11 +133,15 @@ class ClearCachesTool extends BaseTool
 		}
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
-	 * Returns the cache folders we allow to be cleared as well as any plugin cache paths that have used the 'registerCachePaths' hook.
+	 * Returns the cache folders we allow to be cleared as well as any plugin cache paths that have used the
+	 * 'registerCachePaths' hook.
 	 *
-	 * @access private
-	 * @param  bool    $obfuscate If true, will MD5 the path so it will be obfuscated in the template.
+	 * @param bool $obfuscate If true, will MD5 the path so it will be obfuscated in the template.
+	 *
 	 * @return array
 	 */
 	private function _getFolders($obfuscate = true)

@@ -14,7 +14,9 @@ namespace Craft;
 craft()->requireEdition(Craft::Client);
 
 /**
+ * Class EntryRevisionsController
  *
+ * @package craft.app.controllers
  */
 class EntryRevisionsController extends BaseEntriesController
 {

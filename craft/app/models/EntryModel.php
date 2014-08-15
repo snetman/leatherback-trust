@@ -2,46 +2,34 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Entry model class.
  *
- * @package craft.app.models
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.models
+ * @since     1.0
  */
 class EntryModel extends BaseElementModel
 {
-	protected $elementType = ElementType::Entry;
+	// Constants
+	// =========================================================================
 
 	const LIVE     = 'live';
 	const PENDING  = 'pending';
 	const EXPIRED  = 'expired';
 
-	/**
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineAttributes()
-	{
-		return array_merge(parent::defineAttributes(), array(
-			'sectionId'  => AttributeType::Number,
-			'typeId'     => AttributeType::Number,
-			'authorId'   => AttributeType::Number,
-			'postDate'   => AttributeType::DateTime,
-			'expiryDate' => AttributeType::DateTime,
+	// Properties
+	// =========================================================================
 
-			// Just used for saving entries
-			'parentId'      => AttributeType::Number,
-			'revisionNotes' => AttributeType::String,
-		));
-	}
+	/**
+	 * @var string
+	 */
+	protected $elementType = ElementType::Entry;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns the field layout used by this element.
@@ -239,12 +227,33 @@ class EntryModel extends BaseElementModel
 	/**
 	 * Returns the entry's level (formerly "depth").
 	 *
+	 * @deprecated Deprecated in 2.0. Use 'level' instead.
 	 * @return int|null
-	 * @deprecated Deprecated in 2.0.
 	 */
 	public function depth()
 	{
 		craft()->deprecator->log('EntryModel::depth', 'Entries’ ‘depth’ property has been deprecated. Use ‘level’ instead.');
 		return $this->level;
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array_merge(parent::defineAttributes(), array(
+			'sectionId'  => AttributeType::Number,
+			'typeId'     => AttributeType::Number,
+			'authorId'   => AttributeType::Number,
+			'postDate'   => AttributeType::DateTime,
+			'expiryDate' => AttributeType::DateTime,
+
+			// Just used for saving entries
+			'parentId'      => AttributeType::Number,
+			'revisionNotes' => AttributeType::String,
+		));
 	}
 }

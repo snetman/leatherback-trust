@@ -2,30 +2,36 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Cache twig node.
  *
- * @package craft.app.etc.templating.twigextensions
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.templating.twigextensions
+ * @since     2.0
  */
 class Cache_Node extends \Twig_Node
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var int
+	 */
 	private static $_cacheCount = 1;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * @param \Twig_Compiler $compiler
+	 *
+	 * @return null
 	 */
 	public function compile(\Twig_Compiler $compiler)
 	{
-		$n = self::$_cacheCount++;
+		$n = static::$_cacheCount++;
 		$key = StringHelper::randomString();
 
 		$ignoreConditions = $this->getNode('ignoreConditions');
@@ -70,8 +76,7 @@ class Cache_Node extends \Twig_Node
 
 		if ($durationNum)
 		{
-			// So silly that PHP doesn't support "+1 week"
-			// http://www.php.net/manual/en/datetime.formats.relative.php
+			// So silly that PHP doesn't support "+1 week" http://www.php.net/manual/en/datetime.formats.relative.php
 
 			if ($durationUnit == 'week')
 			{

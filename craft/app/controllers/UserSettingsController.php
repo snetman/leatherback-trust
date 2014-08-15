@@ -1,36 +1,42 @@
 <?php
 namespace Craft;
 
-/**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
 craft()->requireEdition(Craft::Pro);
 
 /**
- * Handles user group tasks.
+ * The TagsController class is a controller that handles various user group and user settings related tasks such as
+ * creating, editing and deleting user groups and saving Craft user settings.
  *
- * @package craft.app.controllers
+ * Note that all actions in this controller require administrator access in order to execute.
+ *
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.controllers
+ * @since     1.0
  */
 class UserSettingsController extends BaseController
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
-	 * Init
+	 * Initializes the controller.  This method is called by the Craft before the controller starts to execute.
+	 *
+	 * @throws HttpException
+	 * @return null
 	 */
 	public function init()
 	{
-		// All System Settings actions require an admin
+		// All user settings actions require an admin
 		craft()->userSession->requireAdmin();
 	}
 
 	/**
 	 * Saves a user group.
+	 *
+	 * @return null
 	 */
 	public function actionSaveGroup()
 	{
@@ -64,6 +70,8 @@ class UserSettingsController extends BaseController
 
 	/**
 	 * Deletes a user group.
+	 *
+	 * @return null
 	 */
 	public function actionDeleteGroup()
 	{
@@ -79,6 +87,8 @@ class UserSettingsController extends BaseController
 
 	/**
 	 * Saves the system user settings.
+	 *
+	 * @return null
 	 */
 	public function actionSaveUserSettings()
 	{

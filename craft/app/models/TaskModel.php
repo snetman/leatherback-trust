@@ -2,48 +2,36 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class TaskModel
  *
- * @package craft.app.models
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.models
+ * @since     2.0
  */
 class TaskModel extends BaseComponentModel
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private $_taskType;
 
-	/**
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineAttributes()
-	{
-		return array_merge(parent::defineAttributes(), array(
-			'level'       => AttributeType::Number,
-			'description' => AttributeType::String,
-			'parentId'    => AttributeType::Mixed,
-			'totalSteps'  => AttributeType::Number,
-			'currentStep' => AttributeType::Number,
-			'status'      => array(AttributeType::Enum, 'values' => array(TaskStatus::Pending, TaskStatus::Error, TaskStatus::Running), 'default' => TaskStatus::Pending),
-		));
-	}
+	// Public Methods
+	// =========================================================================
 
 	/**
-	 * Retuns the task's description.
+	 * Returns the task's description.
 	 *
 	 * @return string
 	 */
 	public function getDescription()
 	{
-		// Was a description explicitely set when creating this task?
+		// Was a description explicitly set when creating this task?
 		$description = $this->getAttribute('description');
 
 		if (!$description)
@@ -120,5 +108,23 @@ class TaskModel extends BaseComponentModel
 			'status'      => $this->status,
 			'progress'    => $this->getProgress(),
 		);
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array_merge(parent::defineAttributes(), array(
+			'level'       => AttributeType::Number,
+			'description' => AttributeType::String,
+			'parentId'    => AttributeType::Mixed,
+			'totalSteps'  => AttributeType::Number,
+			'currentStep' => AttributeType::Number,
+			'status'      => array(AttributeType::Enum, 'values' => array(TaskStatus::Pending, TaskStatus::Error, TaskStatus::Running), 'default' => TaskStatus::Pending),
+		));
 	}
 }

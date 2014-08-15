@@ -2,33 +2,72 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class BaseIO
  *
- * @abstract
- * @package craft.app.etc.io
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.io
+ * @since     1.0
  */
 abstract class BaseIO
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var string
+	 */
 	protected $path;
+
+	/**
+	 * @var string
+	 */
 	private $_realPath;
+
+	/**
+	 * @var bool
+	 */
 	private $_isReadable;
+
+	/**
+	 * @var bool
+	 */
 	private $_isWritable;
+
+	/**
+	 * @var string
+	 */
 	private $_fullFolderName;
+
+	/**
+	 * @var string
+	 */
 	private $_folderNameOnly;
+
+	/**
+	 * @var
+	 */
 	private $_lastTimeModified;
+
+	/**
+	 * @var
+	 */
 	private $_owner;
+
+	/**
+	 * @var
+	 */
 	private $_group;
+
+	/**
+	 * @var
+	 */
 	private $_permissions;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * @return mixed
@@ -123,6 +162,7 @@ abstract class BaseIO
 
 	/**
 	 * @param $owner
+	 *
 	 * @return bool
 	 */
 	public function changeOwner($owner)
@@ -137,6 +177,7 @@ abstract class BaseIO
 
 	/**
 	 * @param $group
+	 *
 	 * @return bool
 	 */
 	public function changeGroup($group)
@@ -151,6 +192,7 @@ abstract class BaseIO
 
 	/**
 	 * @param $permissions
+	 *
 	 * @return bool
 	 */
 	public function changePermissions($permissions)
@@ -164,7 +206,8 @@ abstract class BaseIO
 	}
 
 	/**
-	 * @param $newName
+	 * @param string $newName
+	 *
 	 * @return bool
 	 */
 	public function rename($newName)
@@ -178,7 +221,8 @@ abstract class BaseIO
 	}
 
 	/**
-	 * @param $newPath
+	 * @param string $newPath
+	 *
 	 * @return bool
 	 */
 	public function move($newPath)
@@ -193,7 +237,8 @@ abstract class BaseIO
 
 	/**
 	 * @param bool $fullPath
-	 * @return mixed
+	 *
+	 * @return string
 	 */
 	public function getFolderName($fullPath = true)
 	{

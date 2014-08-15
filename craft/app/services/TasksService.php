@@ -2,25 +2,37 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class TasksService
  *
- * @package craft.app.services
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.services
+ * @since     2.0
  */
 class TasksService extends BaseApplicationComponent
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private $_taskRecordsById;
+
+	/**
+	 * @var
+	 */
 	private $_nextPendingTask;
+
+	/**
+	 * @var
+	 */
 	private $_runningTask;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Creates a task to run later in the system.
@@ -29,6 +41,7 @@ class TasksService extends BaseApplicationComponent
 	 * @param string|null $description
 	 * @param array|null  $settings
 	 * @param int|null    $parentId
+	 *
 	 * @throws \Exception
 	 * @return TaskModel
 	 */
@@ -40,6 +53,7 @@ class TasksService extends BaseApplicationComponent
 		$task->settings = $settings;
 		$task->parentId = $parentId;
 		$this->saveTask($task);
+
 		return $task;
 	}
 
@@ -48,6 +62,7 @@ class TasksService extends BaseApplicationComponent
 	 *
 	 * @param TaskModel $task
 	 * @param bool      $validate
+	 *
 	 * @return bool
 	 */
 	public function saveTask(TaskModel $task, $validate = true)
@@ -103,7 +118,8 @@ class TasksService extends BaseApplicationComponent
 	/**
 	 * Re-runs a task by a given ID.
 	 *
-	 * @param $taskId
+	 * @param int $taskId
+	 *
 	 * @return TaskModel|null
 	 */
 	public function rerunTaskById($taskId)
@@ -132,6 +148,8 @@ class TasksService extends BaseApplicationComponent
 
 	/**
 	 * Runs any pending tasks.
+	 *
+	 * @return null
 	 */
 	public function runPendingTasks()
 	{
@@ -158,6 +176,7 @@ class TasksService extends BaseApplicationComponent
 	 * Runs a given task.
 	 *
 	 * @param TaskModel $task
+	 *
 	 * @return bool
 	 */
 	public function runTask(TaskModel $task)
@@ -239,6 +258,8 @@ class TasksService extends BaseApplicationComponent
 	 *
 	 * @param TaskModel $task
 	 * @param mixed     $error
+	 *
+	 * @return null
 	 */
 	public function fail(TaskModel $task, $error = null)
 	{
@@ -274,6 +295,7 @@ class TasksService extends BaseApplicationComponent
 	 * Returns a task by its ID.
 	 *
 	 * @param int $taskId
+	 *
 	 * @return TaskModel|null
 	 */
 	public function getTaskById($taskId)
@@ -292,6 +314,8 @@ class TasksService extends BaseApplicationComponent
 
 	/**
 	 * Returns all the tasks.
+	 *
+	 * @return TaskModel[]
 	 */
 	public function getAllTasks()
 	{
@@ -359,6 +383,7 @@ class TasksService extends BaseApplicationComponent
 	 * Returns whether there are any pending tasks, optionally by a given type.
 	 *
 	 * @param string|null $type
+	 *
 	 * @return bool
 	 */
 	public function areTasksPending($type = null)
@@ -382,8 +407,9 @@ class TasksService extends BaseApplicationComponent
 	 * Returns any pending tasks, optionally by a given type.
 	 *
 	 * @param string|null $type
-	 * @param int|null $limit
-	 * @return array
+	 * @param int|null    $limit
+	 *
+	 * @return TaskModel[]
 	 */
 	public function getPendingTasks($type = null, $limit = null)
 	{
@@ -442,12 +468,12 @@ class TasksService extends BaseApplicationComponent
 	 * Returns the next pending task.
 	 *
 	 * @param string|null $type
-	 * @return TaskModel|null
+	 *
+	 * @return TaskModel|null|false
 	 */
 	public function getNextPendingTask($type = null)
 	{
-		// If a type was passed, we don't need to actually save it,
-		// as it's probably not an actual task-running request
+		// If a type was passed, we don't need to actually save it, as it's probably not an actual task-running request.
 		if ($type)
 		{
 			$pendingTasks = $this->getPendingTasks($type, 1);
@@ -487,6 +513,7 @@ class TasksService extends BaseApplicationComponent
 	 * Deletes a task by its ID.
 	 *
 	 * @param int $taskId
+	 *
 	 * @return bool
 	 */
 	public function deleteTaskById($taskId)
@@ -494,15 +521,19 @@ class TasksService extends BaseApplicationComponent
 		$taskRecord = $this->_getTaskRecordById($taskId);
 		$success = $taskRecord->deleteNode();
 		unset($this->_taskRecordsById[$taskId]);
+
 		return $success;
 	}
+
+	// Private Methods
+	// =========================================================================
 
 	/**
 	 * Returns a task by its ID.
 	 *
-	 * @access private
 	 * @param int $taskId
-	 * @return TaskRecord|null
+	 *
+	 * @return TaskRecord|null|false
 	 */
 	private function _getTaskRecordById($taskId)
 	{

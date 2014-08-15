@@ -2,22 +2,20 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Search Index tool.
  *
- * @package craft.app.tools
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.tools
+ * @since     1.0
  */
 class SearchIndexTool extends BaseTool
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Returns the tool name.
 	 *
@@ -42,6 +40,7 @@ class SearchIndexTool extends BaseTool
 	 * Performs the tool's action.
 	 *
 	 * @param array $params
+	 *
 	 * @return array
 	 */
 	public function performAction($params = array())
@@ -99,8 +98,6 @@ class SearchIndexTool extends BaseTool
 						if ($elementType->hasContent())
 						{
 							$fieldLayout = $element->getFieldLayout();
-							$content     = $element->getContent();
-
 							$keywords = array();
 
 							foreach ($fieldLayout->getFields() as $fieldLayoutField)

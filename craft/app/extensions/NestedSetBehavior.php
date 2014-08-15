@@ -1,22 +1,13 @@
 <?php
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Provides nested set functionality for a model.
  *
  * @version 1.06
- * @author Alexander Kochetov <creocoder@gmail.com>
- * @link https://github.com/yiiext/nested-set-behavior
+ * @author  Alexander Kochetov <creocoder@gmail.com>
+ * @link    https://github.com/yiiext/nested-set-behavior
  * @package craft.app.extensions
+ * @since   1.2
  */
 class NestedSetBehavior extends CActiveRecordBehavior
 {

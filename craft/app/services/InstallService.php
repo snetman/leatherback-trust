@@ -2,31 +2,35 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class InstallService
  *
- * @package craft.app.services
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.services
+ * @since     1.0
  */
 class InstallService extends BaseApplicationComponent
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private $_user;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Installs Craft!
 	 *
 	 * @param array $inputs
-	 * @throws Exception
-	 * @throws \Exception
-	 * @return void
+	 *
+	 * @throws Exception|\Exception
+	 * @return null
 	 */
 	public function run($inputs)
 	{
@@ -145,12 +149,15 @@ class InstallService extends BaseApplicationComponent
 		return $records;
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * Creates the tables as defined in the records.
 	 *
-	 * @access private
 	 * @param $records
-	 * @return void
+	 *
+	 * @return null
 	 */
 	private function _createTablesFromRecords($records)
 	{
@@ -164,8 +171,9 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Creates the foreign keys as defined in the records.
 	 *
-	 * @access private
 	 * @param $records
+	 *
+	 * @return null
 	 */
 	private function _createForeignKeysFromRecords($records)
 	{
@@ -179,7 +187,7 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Creates the content table.
 	 *
-	 * @access private
+	 * @return null
 	 */
 	private function _createContentTable()
 	{
@@ -201,7 +209,7 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Creates the relations table.
 	 *
-	 * @access private
+	 * @return null
 	 */
 	private function _createRelationsTable()
 	{
@@ -227,7 +235,7 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Creates the shunnedmessages table.
 	 *
-	 * @access private
+	 * @return null
 	 */
 	private function _createShunnedMessagesTable()
 	{
@@ -247,7 +255,7 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Creates the searchindex table.
 	 *
-	 * @access private
+	 * @return null
 	 */
 	private function _createSearchIndexTable()
 	{
@@ -282,7 +290,7 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Creates the template cache tables.
 	 *
-	 * @access private
+	 * @return null
 	 */
 	private function _createTemplateCacheTables()
 	{
@@ -328,9 +336,11 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Populates the info table with install and environment information.
 	 *
-	 * @access private
 	 * @param $inputs
+	 *
 	 * @throws Exception
+	 *
+	 * @return null
 	 */
 	private function _createAndPopulateInfoTable($inputs)
 	{
@@ -380,6 +390,8 @@ class InstallService extends BaseApplicationComponent
 
 	/**
 	 * Creates the Rackspace access table.
+	 *
+	 * @return null
 	 */
 	private function _createRackspaceAccessTable()
 	{
@@ -398,6 +410,8 @@ class InstallService extends BaseApplicationComponent
 
 	/**
 	 * Creates the deprecationerrors table for The Deprecator (tm).
+	 *
+	 * @return null
 	 */
 	private function _createDeprecationErrorsTable()
 	{
@@ -423,6 +437,8 @@ class InstallService extends BaseApplicationComponent
 
 	/**
 	 * Create the Asset Transform Index table.
+	 *
+	 * @return null
 	 */
 	private function _createAssetTransformIndexTable()
 	{
@@ -445,6 +461,7 @@ class InstallService extends BaseApplicationComponent
 	 * Populates the migrations table with the base migration plus any existing ones from app/migrations.
 	 *
 	 * @throws Exception
+	 * @return null
 	 */
 	private function _populateMigrationTable()
 	{
@@ -489,8 +506,9 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Adds the initial locale to the database.
 	 *
-	 * @access private
 	 * @param string $locale
+	 *
+	 * @return null
 	 */
 	private function _addLocale($locale)
 	{
@@ -502,10 +520,10 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Adds the initial user to the database.
 	 *
-	 * @access private
 	 * @param $inputs
-	 * @return UserModel
+	 *
 	 * @throws Exception
+	 * @return UserModel
 	 */
 	private function _addUser($inputs)
 	{
@@ -532,8 +550,9 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Attempts to log in the given user.
 	 *
-	 * @access private
 	 * @param array $inputs
+	 *
+	 * @return null
 	 */
 	private function _logUserIn($inputs)
 	{
@@ -552,9 +571,10 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Saves some default mail settings for the site.
 	 *
-	 * @access private
-	 * @param $email
-	 * @param $siteName
+	 * @param string $email
+	 * @param string $siteName
+	 *
+	 * @return null
 	 */
 	private function _saveDefaultMailSettings($email, $siteName)
 	{
@@ -579,8 +599,8 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Creates initial database content for the install.
 	 *
-	 * @access private
 	 * @param $inputs
+	 *
 	 * @return null
 	 */
 	private function _createDefaultContent($inputs)
@@ -699,10 +719,10 @@ class InstallService extends BaseApplicationComponent
 		$homepageLayout->type = ElementType::Entry;
 
 		$homepageSingleSection = new SectionModel();
-		$homepageSingleSection->name       = Craft::t('Homepage');
-		$homepageSingleSection->handle     = 'homepage';
-		$homepageSingleSection->type       = SectionType::Single;
-		$homepageSingleSection->hasUrls  = false;
+		$homepageSingleSection->name = Craft::t('Homepage');
+		$homepageSingleSection->handle = 'homepage';
+		$homepageSingleSection->type = SectionType::Single;
+		$homepageSingleSection->hasUrls = false;
 		$homepageSingleSection->template = 'index';
 
 		$primaryLocaleId = craft()->i18n->getPrimarySiteLocaleId();
@@ -851,8 +871,8 @@ class InstallService extends BaseApplicationComponent
 	/**
 	 * Get a flattened list of model errors
 	 *
-	 * @access private
 	 * @param array $errors
+	 *
 	 * @return string
 	 */
 	private function _getFlattenedErrors($errors)

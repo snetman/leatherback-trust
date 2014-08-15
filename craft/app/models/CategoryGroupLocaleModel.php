@@ -2,39 +2,32 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Category group locale model class.
  *
- * @package craft.app.models
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.models
+ * @since     2.0
  */
 class CategoryGroupLocaleModel extends BaseModel
 {
-	public $urlFormatIsRequired = false;
-	public $nestedUrlFormatIsRequired = false;
+	// Properties
+	// =========================================================================
 
 	/**
-	 * @access protected
-	 * @return array
+	 * @var bool
 	 */
-	protected function defineAttributes()
-	{
-		return array(
-			'id'              => AttributeType::Number,
-			'groupId'         => AttributeType::Number,
-			'locale'          => AttributeType::Locale,
-			'urlFormat'       => array(AttributeType::UrlFormat, 'label' => 'URL Format'),
-			'nestedUrlFormat' => array(AttributeType::UrlFormat, 'label' => 'URL Format'),
-		);
-	}
+	public $urlFormatIsRequired = false;
+
+	/**
+	 * @var bool
+	 */
+	public $nestedUrlFormatIsRequired = false;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns this model's validation rules.
@@ -56,5 +49,22 @@ class CategoryGroupLocaleModel extends BaseModel
 		}
 
 		return $rules;
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array(
+			'id'              => AttributeType::Number,
+			'groupId'         => AttributeType::Number,
+			'locale'          => AttributeType::Locale,
+			'urlFormat'       => array(AttributeType::UrlFormat, 'label' => 'URL Format'),
+			'nestedUrlFormat' => array(AttributeType::UrlFormat, 'label' => 'URL Format'),
+		);
 	}
 }

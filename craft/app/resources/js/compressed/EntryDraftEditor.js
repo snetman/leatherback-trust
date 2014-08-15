@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2014, Pixel & Tonic, Inc.
  @license   http://buildwithcraft.com/license Craft License Agreement
- @link      http://buildwithcraft.com
+ @see       http://buildwithcraft.com
+ @package   craft.app.resources
 */
 (function(b){Craft.EntryDraftEditor=Garnish.Base.extend({$revisionBtn:null,$editBtn:null,$form:null,$nameInput:null,$saveBtn:null,$spinner:null,draftId:null,draftName:null,draftNotes:null,hud:null,loading:!1,init:function(a,c,d){this.draftId=a;this.draftName=c;this.draftNotes=d;this.$revisionBtn=b("#revision-btn");this.$editBtn=b("#editdraft-btn");this.addListener(this.$editBtn,"click","showHud")},showHud:function(){if(this.hud)this.hud.show();else{this.$form=b('<form method="post" accept-charset="UTF-8"/>');
 var a=b('<div class="field"><div class="heading"><label for="draft-name">'+Craft.t("Draft Name")+"</label></div></div>").appendTo(this.$form),a=b('<div class="input"/>').appendTo(a);this.$nameInput=b('<input type="text" class="text fullwidth" id="draft-name"/>').appendTo(a).val(this.draftName);a=b('<div class="field"><div class="heading"><label for="draft-notes">'+Craft.t("Notes")+"</label></div></div>").appendTo(this.$form);a=b('<div class="input"/>').appendTo(a);this.$notesInput=b('<textarea class="text fullwidth" id="draft-notes" rows="2"/>').appendTo(a).val(this.draftNotes);

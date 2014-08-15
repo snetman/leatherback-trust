@@ -1,27 +1,35 @@
 <?php
 namespace Craft;
 
-/**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
 craft()->requireEdition(Craft::Pro);
 
 /**
  * Class UserPermissionsService
  *
- * @package craft.app.services
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.services
+ * @since     1.0
  */
 class UserPermissionsService extends BaseApplicationComponent
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private $_permissionsByGroupId;
+
+	/**
+	 * @var
+	 */
 	private $_permissionsByUserId;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns all of the known permissions, sorted by category.
@@ -31,6 +39,7 @@ class UserPermissionsService extends BaseApplicationComponent
 	public function getAllPermissions()
 	{
 		// General
+		// ---------------------------------------------------------------------
 
 		$general = array(
 			'accessSiteWhenSystemIsOff' => array(
@@ -62,6 +71,7 @@ class UserPermissionsService extends BaseApplicationComponent
 		$permissions[Craft::t('General')] = $general;
 
 		// Users
+		// ---------------------------------------------------------------------
 
 		$permissions[Craft::t('Users')] = array(
 			'editUsers' => array(
@@ -84,6 +94,7 @@ class UserPermissionsService extends BaseApplicationComponent
 		);
 
 		// Locales
+		// ---------------------------------------------------------------------
 
 		if (craft()->isLocalized())
 		{
@@ -99,6 +110,7 @@ class UserPermissionsService extends BaseApplicationComponent
 		}
 
 		// Entries
+		// ---------------------------------------------------------------------
 
 		$sections = craft()->sections->getAllSections();
 
@@ -117,6 +129,7 @@ class UserPermissionsService extends BaseApplicationComponent
 		}
 
 		// Global sets
+		// ---------------------------------------------------------------------
 
 		$globalSets = craft()->globals->getAllSets();
 
@@ -126,6 +139,7 @@ class UserPermissionsService extends BaseApplicationComponent
 		}
 
 		// Categories
+		// ---------------------------------------------------------------------
 
 		$categoryGroups = craft()->categories->getAllGroups();
 
@@ -135,6 +149,7 @@ class UserPermissionsService extends BaseApplicationComponent
 		}
 
 		// Asset sources
+		// ---------------------------------------------------------------------
 
 		$assetSources = craft()->assetSources->getAllSources();
 
@@ -145,6 +160,7 @@ class UserPermissionsService extends BaseApplicationComponent
 		}
 
 		// Plugins
+		// ---------------------------------------------------------------------
 
 		foreach (craft()->plugins->call('registerUserPermissions') as $pluginHandle => $pluginPermissions)
 		{
@@ -159,6 +175,7 @@ class UserPermissionsService extends BaseApplicationComponent
 	 * Returns all of a given user group's permissions.
 	 *
 	 * @param int $groupId
+	 *
 	 * @return array
 	 */
 	public function getPermissionsByGroupId($groupId)
@@ -182,6 +199,7 @@ class UserPermissionsService extends BaseApplicationComponent
 	 * Returns all of the group permissions a given user has.
 	 *
 	 * @param int $userId
+	 *
 	 * @return array
 	 */
 	public function getGroupPermissionsByUserId($userId)
@@ -198,8 +216,9 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Returns whether a given user group has a given permission.
 	 *
-	 * @param int $groupId
+	 * @param int    $groupId
 	 * @param string $checkPermission
+	 *
 	 * @return bool
 	 */
 	public function doesGroupHavePermission($groupId, $checkPermission)
@@ -213,8 +232,9 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Saves new permissions for a user group.
 	 *
-	 * @param int $groupId
+	 * @param int   $groupId
 	 * @param array $permissions
+	 *
 	 * @return bool
 	 */
 	public function saveGroupPermissions($groupId, $permissions)
@@ -247,6 +267,7 @@ class UserPermissionsService extends BaseApplicationComponent
 	 * Returns all of a given user's permissions.
 	 *
 	 * @param int $userId
+	 *
 	 * @return array
 	 */
 	public function getPermissionsByUserId($userId)
@@ -271,8 +292,9 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Returns whether a given user has a given permission.
 	 *
-	 * @param int $userId
+	 * @param int    $userId
 	 * @param string $checkPermission
+	 *
 	 * @return bool
 	 */
 	public function doesUserHavePermission($userId, $checkPermission)
@@ -286,8 +308,9 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Saves new permissions for a user.
 	 *
-	 * @param int $userId
+	 * @param int   $userId
 	 * @param array $permissions
+	 *
 	 * @return bool
 	 */
 	public function saveUserPermissions($userId, $permissions)
@@ -318,11 +341,14 @@ class UserPermissionsService extends BaseApplicationComponent
 		return true;
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * Returns the entry permissions for a given Single section.
 	 *
-	 * @access private
-	 * @param ScetinoModel $section
+	 * @param SectionModel $section
+	 *
 	 * @return array
 	 */
 	private function _getSingleEntryPermissions($section)
@@ -355,8 +381,8 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Returns the entry permissions for a given Channel or Structure section.
 	 *
-	 * @access private
 	 * @param SectionModel $section
+	 *
 	 * @return array
 	 */
 	private function _getEntryPermissions($section)
@@ -406,8 +432,8 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Returns the global set permissions.
 	 *
-	 * @access private
 	 * @param array $globalSets
+	 *
 	 * @return array
 	 */
 	private function _getGlobalSetPermissions($globalSets)
@@ -427,8 +453,8 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Returns the category permissions.
 	 *
-	 * @access private
-	 * @param array $globalSets
+	 * @param $groups
+	 *
 	 * @return array
 	 */
 	private function _getCategoryGroupPermissions($groups)
@@ -448,8 +474,8 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Returns the array source permissions.
 	 *
-	 * @access private
 	 * @param int $sourceId
+	 *
 	 * @return array
 	 */
 	private function _getAssetSourcePermissions($sourceId)
@@ -477,9 +503,10 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Filters out any orphaned permissions.
 	 *
-	 * @access private
-	 * @param array  $postedPermissions   The posted permissions.
-	 * @param array  $groupPermissions    Permissions the user is already assigned to via their group, if we're saving a user's permissions.
+	 * @param array $postedPermissions The posted permissions.
+	 * @param array $groupPermissions  Permissions the user is already assigned to via their group, if we're saving a
+	 *                                 user's permissions.
+	 *
 	 * @return array $filteredPermissions The permissions we'll actually let them save.
 	 */
 	private function _filterOrphanedPermissions($postedPermissions, $groupPermissions = array())
@@ -500,11 +527,12 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Iterates through a group of permissions, returning the ones that were selected.
 	 *
-	 * @access private
 	 * @param array $permissionsGroup
 	 * @param array $postedPermissions
 	 * @param array $groupPermissions
 	 * @param array &$filteredPermissions
+	 *
+	 * @return null
 	 */
 	private function _findSelectedPermissions($permissionsGroup, $postedPermissions, $groupPermissions, &$filteredPermissions)
 	{
@@ -530,8 +558,8 @@ class UserPermissionsService extends BaseApplicationComponent
 	/**
 	 * Returns a permission record based on its name. If a record doesn't exist, it will be created.
 	 *
-	 * @access private
 	 * @param string $permissionName
+	 *
 	 * @return UserPermissionRecord
 	 */
 	private function _getPermissionRecordByName($permissionName)

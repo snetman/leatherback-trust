@@ -1,11 +1,9 @@
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
  * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.resources
  */
 
 (function($){
@@ -2373,15 +2371,8 @@ Craft.BaseElementSelectInput = Garnish.Base.extend(
 	onSelectElements: function()
 	{
 		this.trigger('selectElements');
-	},
-
-	forceModalRefresh: function ()
-	{
-		if (this.modal)
-		{
-			this.modal.elementIndex = null;
-		}
 	}
+
 });
 
 
@@ -3799,9 +3790,9 @@ Craft.AssetIndex = Craft.BaseElementIndex.extend(
 		var doFollowup = $.proxy(function(parameterArray, parameterIndex, callback)
 		{
 			var postData = {
-				additionalInfo: parameterArray[parameterIndex].additionalInfo,
-				fileName:       parameterArray[parameterIndex].fileName,
-				userResponse:   parameterArray[parameterIndex].choice
+				newFileId:    parameterArray[parameterIndex].fileId,
+				fileName:     parameterArray[parameterIndex].fileName,
+				userResponse: parameterArray[parameterIndex].choice
 			};
 
 			Craft.postActionRequest('assets/uploadFile', postData, $.proxy(function(data, textStatus)
@@ -4552,10 +4543,7 @@ Craft.AssetSelectInput = Craft.BaseElementSelectInput.extend(
 			this.$addElementBtn.addClass('disabled');
 		}
 
-		if (this.modal)
-		{
-			this.modal.elementIndex.rememberDisabledElementId(element.id);
-		}
+		delete this.modal;
 
 	},
 
@@ -4599,7 +4587,7 @@ Craft.AssetSelectInput = Craft.BaseElementSelectInput.extend(
 			this.$container.removeClass('uploading');
 		}
 
-		this.forceModalRefresh();
+		this.updateAddElementsBtn();
 	},
 
 	/**

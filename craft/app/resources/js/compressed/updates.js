@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2014, Pixel & Tonic, Inc.
  @license   http://buildwithcraft.com/license Craft License Agreement
- @link      http://buildwithcraft.com
+ @see       http://buildwithcraft.com
+ @package   craft.app.resources
 */
 (function(b){Craft.UpdateInfo=Garnish.Base.extend({appUpdateInfo:null,$container:null,$downloadBtn:null,licenseHud:null,$licenseSubmitBtn:null,licenseSubmitAction:null,allowAutoUpdates:null,init:function(a){this.allowAutoUpdates=a;var c=b("#graphic"),d=b("#status");Craft.postActionRequest("update/getAvailableUpdates",b.proxy(function(a,f){if("success"!=f||a.error||a.errors){var e=Craft.t("An unknown error occurred.");a.errors&&a.errors.length?e=a.errors[0]:a.error&&(e=a.error);c.addClass("error");
 d.text(e)}else e={total:a.app&&a.app.releases&&a.app.releases.length?1:0,critical:a.app&&a.criticalUpdateAvailable},e.total?(c.fadeOut("fast"),d.fadeOut("fast",b.proxy(function(){c.remove();d.remove();this.appUpdateInfo=a.app;this.showAvailableUpdates()},this))):(c.addClass("success"),d.text(Craft.t("You\u2019re all up-to-date!"))),Craft.cp.displayUpdateInfo(e)},this))},showAvailableUpdates:function(){this.$container=b("<div/>").appendTo(Craft.cp.$main).hide();var a=b('<div class="pane clearafter"/>').appendTo(this.$container);

@@ -2,24 +2,27 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class RichTextFieldType
  *
- * @package craft.app.fieldtypes
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.fieldtypes
+ * @since     1.0
  */
 class RichTextFieldType extends BaseFieldType
 {
-	private static $_includedFieldResources = false;
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var string
+	 */
 	private static $_redactorLang = 'en';
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns the type of field this is.
@@ -29,20 +32,6 @@ class RichTextFieldType extends BaseFieldType
 	public function getName()
 	{
 		return Craft::t('Rich Text');
-	}
-
-	/**
-	 * Defines the settings.
-	 *
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineSettings()
-	{
-		return array(
-			'configFile'  => AttributeType::String,
-			'cleanupHtml' => array(AttributeType::Bool, 'default' => true),
-		);
 	}
 
 	/**
@@ -88,6 +77,7 @@ class RichTextFieldType extends BaseFieldType
 	 * Preps the field value for use.
 	 *
 	 * @param mixed $value
+	 *
 	 * @return mixed
 	 */
 	public function prepValue($value)
@@ -109,6 +99,7 @@ class RichTextFieldType extends BaseFieldType
 	 *
 	 * @param string $name
 	 * @param mixed  $value
+	 *
 	 * @return string
 	 */
 	public function getInputHtml($name, $value)
@@ -132,8 +123,7 @@ class RichTextFieldType extends BaseFieldType
 
 		if (strpos($value, '{') !== false)
 		{
-			// Preserve the ref tags with hashes
-			// {type:id:url} => {type:id:url}#type:id
+			// Preserve the ref tags with hashes {type:id:url} => {type:id:url}#type:id
 			$value = preg_replace_callback('/(href=|src=)([\'"])(\{(\w+\:\d+\:'.HandleValidator::$handlePattern.')\})\2/', function($matches)
 			{
 				return $matches[1].$matches[2].$matches[3].'#'.$matches[4].$matches[2];
@@ -153,6 +143,7 @@ class RichTextFieldType extends BaseFieldType
 	 * Returns the input value as it should be saved to the database.
 	 *
 	 * @param mixed $value
+	 *
 	 * @return mixed
 	 */
 	public function prepValueFromPost($value)
@@ -190,12 +181,32 @@ class RichTextFieldType extends BaseFieldType
 	 * Returns static HTML for the field's value.
 	 *
 	 * @param mixed $value
+	 *
 	 * @return string
 	 */
 	public function getStaticHtml($value)
 	{
 		return '<div class="text">'.($value ? $value : '&nbsp;').'</div>';
 	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * Defines the settings.
+	 *
+	 * @return array
+	 */
+	protected function defineSettings()
+	{
+		return array(
+			'configFile'  => AttributeType::String,
+			'cleanupHtml' => array(AttributeType::Bool, 'default' => true),
+		);
+	}
+
+	// Private Methods
+	// =========================================================================
 
 	/**
 	 * Get available section sources.
@@ -216,7 +227,7 @@ class RichTextFieldType extends BaseFieldType
 			}
 			else if ($section->hasUrls)
 			{
-				$sources[] = 'section:' . $section->id;
+				$sources[] = 'section:'.$section->id;
 			}
 		}
 
@@ -252,7 +263,7 @@ class RichTextFieldType extends BaseFieldType
 	/**
 	 * Includes the input resources.
 	 *
-	 * @access private
+	 * @return null
 	 */
 	private function _includeFieldResources()
 	{
@@ -286,8 +297,8 @@ class RichTextFieldType extends BaseFieldType
 	/**
 	 * Attempts to include a Redactor language file.
 	 *
-	 * @access private
 	 * @param string $lang
+	 *
 	 * @return bool
 	 */
 	private function _includeRedactorLangFile($lang)

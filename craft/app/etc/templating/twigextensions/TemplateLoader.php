@@ -2,27 +2,25 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Loads Craft templates into Twig.
  *
- * @implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface
- * @package craft.app.etc.templating
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.templating.twigextensions
+ * @since     1.0
  */
 class TemplateLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface
 {
+	// Public Methods
+	// =========================================================================
+
 	 /**
 	 * Checks if a template exists.
 	 *
 	 * @param string $name
+	  *
 	 * @return bool
 	 */
 	public function exists($name)
@@ -34,8 +32,9 @@ class TemplateLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterfa
 	 * Gets the source code of a template.
 	 *
 	 * @param  string $name The name of the template to load, or a StringTemplate object.
+	 *
 	 * @throws Exception
-	 * @return string       The template source code.
+	 * @return string The template source code.
 	 */
 	public function getSource($name)
 	{
@@ -62,7 +61,8 @@ class TemplateLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterfa
 	 * Gets the cache key to use for the cache for a given template.
 	 *
 	 * @param string $name The name of the template to load, or a StringTemplate object.
-	 * @return string      The cache key (the path to the template)
+	 *
+	 * @return string The cache key (the path to the template)
 	 */
 	public function getCacheKey($name)
 	{
@@ -79,8 +79,9 @@ class TemplateLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterfa
 	/**
 	 * Returns whether the cached template is still up-to-date with the latest template.
 	 *
-	 * @param string    $name The template name, or a StringTemplate object.
-	 * @param timestamp $time The last modification time of the cached template
+	 * @param string $name The template name, or a StringTemplate object.
+	 * @param int    $time The last modification time of the cached template
+	 *
 	 * @return bool
 	 */
 	public function isFresh($name, $time)
@@ -102,10 +103,14 @@ class TemplateLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterfa
 		}
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * Returns the path to a given template, or throws a TemplateLoaderException.
 	 *
-	 * @access private
+	 * @param $name
+	 *
 	 * @throws TemplateLoaderException
 	 * @return string $name
 	 */

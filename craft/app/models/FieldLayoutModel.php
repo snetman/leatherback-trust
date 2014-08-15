@@ -2,36 +2,32 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Field layout model class.
  *
- * @package craft.app.models
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.models
+ * @since     1.0
  */
 class FieldLayoutModel extends BaseModel
 {
-	private $_tabs;
-	private $_fields;
+	// Properties
+	// =========================================================================
 
 	/**
-	 * @access protected
-	 * @return array
+	 * @var
 	 */
-	protected function defineAttributes()
-	{
-		return array(
-			'id'   => AttributeType::Number,
-			'type' => AttributeType::ClassName,
-		);
-	}
+	private $_tabs;
+
+	/**
+	 * @var
+	 */
+	private $_fields;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns the layout's tabs.
@@ -98,6 +94,8 @@ class FieldLayoutModel extends BaseModel
 	 * Sets the layout's tabs.
 	 *
 	 * @param array $tabs
+	 *
+	 * @return null
 	 */
 	public function setTabs($tabs)
 	{
@@ -119,6 +117,8 @@ class FieldLayoutModel extends BaseModel
 	 * Sets the layout's fields.
 	 *
 	 * @param array $fields
+	 *
+	 * @return null
 	 */
 	public function setFields($fields)
 	{
@@ -134,5 +134,19 @@ class FieldLayoutModel extends BaseModel
 			$field->setLayout($this);
 			$this->_fields[] = $field;
 		}
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array(
+			'id'   => AttributeType::Number,
+			'type' => AttributeType::ClassName,
+		);
 	}
 }

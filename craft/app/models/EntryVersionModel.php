@@ -1,42 +1,28 @@
 <?php
 namespace Craft;
 
-/**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
 craft()->requireEdition(Craft::Client);
 
 /**
  * Class EntryVersionModel
  *
- * @package craft.app.models
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.models
+ * @since     1.0
  */
 class EntryVersionModel extends BaseEntryRevisionModel
 {
-	/**
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineAttributes()
-	{
-		return array_merge(parent::defineAttributes(), array(
-			'versionId'   => AttributeType::Number,
-			'num'         => AttributeType::Number,
-		));
-	}
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Populates a new model instance with a given set of attributes.
 	 *
-	 * @static
 	 * @param mixed $attributes
+	 *
 	 * @return EntryVersionModel
 	 */
 	public static function populateModel($attributes)
@@ -67,5 +53,19 @@ class EntryVersionModel extends BaseEntryRevisionModel
 		}
 
 		return $version;
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array_merge(parent::defineAttributes(), array(
+			'versionId'   => AttributeType::Number,
+			'num'         => AttributeType::Number,
+		));
 	}
 }

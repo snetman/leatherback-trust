@@ -2,23 +2,27 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Multi-select option field data class.
  *
- * @package craft.app.fieldtypes
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.fieldtypes
+ * @since     1.0
  */
 class MultiOptionsFieldData extends \ArrayObject
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private $_options;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns the options.
@@ -42,6 +46,7 @@ class MultiOptionsFieldData extends \ArrayObject
 
 	/**
 	 * @param mixed $value
+	 *
 	 * @return bool
 	 */
 	public function contains($value)

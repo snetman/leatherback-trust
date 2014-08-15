@@ -2,42 +2,26 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class StructureElementRecord
  *
- * @package craft.app.records
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.records
+ * @since     2.0
  */
 class StructureElementRecord extends BaseRecord
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * @return string
 	 */
 	public function getTableName()
 	{
 		return 'structureelements';
-	}
-
-	/**
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineAttributes()
-	{
-		return array(
-			'root'  => array(AttributeType::Number, 'column' => ColumnType::Int,      'unsigned' => true),
-			'lft'   => array(AttributeType::Number, 'column' => ColumnType::Int,      'unsigned' => true, 'null' => false),
-			'rgt'   => array(AttributeType::Number, 'column' => ColumnType::Int,      'unsigned' => true, 'null' => false),
-			'level' => array(AttributeType::Number, 'column' => ColumnType::SmallInt, 'unsigned' => true, 'null' => false),
-		);
 	}
 
 	/**
@@ -72,6 +56,22 @@ class StructureElementRecord extends BaseRecord
 	{
 		return array(
 			'nestedSet' => 'app.extensions.NestedSetBehavior',
+		);
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array(
+			'root'  => array(AttributeType::Number, 'column' => ColumnType::Int,      'unsigned' => true),
+			'lft'   => array(AttributeType::Number, 'column' => ColumnType::Int,      'unsigned' => true, 'null' => false),
+			'rgt'   => array(AttributeType::Number, 'column' => ColumnType::Int,      'unsigned' => true, 'null' => false),
+			'level' => array(AttributeType::Number, 'column' => ColumnType::SmallInt, 'unsigned' => true, 'null' => false),
 		);
 	}
 }

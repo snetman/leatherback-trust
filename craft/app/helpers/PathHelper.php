@@ -2,26 +2,25 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class PathHelper
  *
- * @package craft.app.helpers
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.helpers
+ * @since     1.0
  */
 class PathHelper
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Ensures that a relative path never goes deeper than its root directory.
 	 *
 	 * @param string $path
+	 *
 	 * @return bool
 	 */
 	public static function ensurePathIsContained($path)

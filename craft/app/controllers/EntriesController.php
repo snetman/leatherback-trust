@@ -2,29 +2,50 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
+ * The EntriesController class is a controller that handles various entry related tasks such as retrieving, saving,
+ * swapping between entry types, previewing, deleting and sharing entries.
  *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
+ * Note that all actions in the controller except {@link actionViewSharedEntry} require an authenticated Craft session
+ * via {@link BaseController::allowAnonymous}.
+ *
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
  * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
- * Handles entry tasks.
- *
- * @package craft.app.controllers
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.controllers
+ * @since     1.0
  */
 class EntriesController extends BaseEntriesController
 {
-	protected $allowAnonymous = array('actionViewSharedEntry');
+	// Properties
+	// =========================================================================
 
 	/**
-	 * Edit an entry.
+	 * If set to false, you are required to be logged in to execute any of the given controller's actions.
+	 *
+	 * If set to true, anonymous access is allowed for all of the given controller's actions.
+	 *
+	 * If the value is an array of action names, then you must be logged in for any action method except for the ones in
+	 * the array list.
+	 *
+	 * If you have a controller that where the majority of action methods will be anonymous, but you only want require
+	 * login on a few, it's best to use {@link UserSessionService::requireLogin() craft()->userSession->requireLogin()}
+	 * in the individual methods.
+	 *
+	 * @var bool
+	 */
+	protected $allowAnonymous = array('actionViewSharedEntry');
+
+	// Public Methods
+	// =========================================================================
+
+	/**
+	 * Called when a user beings up an entry for editing before being displayed.
 	 *
 	 * @param array $variables
+	 *
 	 * @throws HttpException
+	 * @return null
 	 */
 	public function actionEditEntry(array $variables = array())
 	{
@@ -55,6 +76,7 @@ class EntriesController extends BaseEntriesController
 
 			$authorOptionCriteria = craft()->elements->getCriteria(ElementType::User);
 			$authorOptionCriteria->can = 'editEntries'.$variables['permissionSuffix'];
+			$authorOptionCriteria->limit = null;
 
 			if ($variables['entry']->authorId)
 			{
@@ -281,7 +303,8 @@ class EntriesController extends BaseEntriesController
 			{
 				$classHandle = $variables['entry']->getClassHandle();
 
-				// If we're looking at the live version of an entry, just use the entry's main URL as its share URL
+				// If we're looking at the live version of an entry, just use
+				// the entry's main URL as its share URL
 				if ($classHandle == 'Entry' && $variables['entry']->getStatus() == EntryModel::LIVE)
 				{
 					$variables['shareUrl'] = $variables['entry']->getUrl();
@@ -317,7 +340,8 @@ class EntriesController extends BaseEntriesController
 		}
 
 		// Set the base CP edit URL
-		// - Can't just use the entry's getCpEditUrl() because that might include the locale ID when we don't want it
+
+		// Can't just use the entry's getCpEditUrl() because that might include the locale ID when we don't want it
 		$variables['baseCpEditUrl'] = 'entries/'.$variables['section']->handle.'/{id}';
 
 		// Set the "Continue Editing" URL
@@ -340,7 +364,9 @@ class EntriesController extends BaseEntriesController
 	}
 
 	/**
+	 * Switches between two entry types.
 	 *
+	 * @return null
 	 */
 	public function actionSwitchEntryType()
 	{
@@ -369,6 +395,9 @@ class EntriesController extends BaseEntriesController
 
 	/**
 	 * Previews an entry.
+	 *
+	 * @throws HttpException
+	 * @return null
 	 */
 	public function actionPreviewEntry()
 	{
@@ -400,6 +429,8 @@ class EntriesController extends BaseEntriesController
 
 	/**
 	 * Saves an entry.
+	 *
+	 * @return null
 	 */
 	public function actionSaveEntry()
 	{
@@ -410,12 +441,13 @@ class EntriesController extends BaseEntriesController
 		// Permission enforcement
 		$this->enforceEditEntryPermissions($entry);
 		$userSessionService = craft()->userSession;
+		$currentUser = $userSessionService->getUser();
 
 		if ($entry->id)
 		{
 			// Is this another user's entry (and it's not a Single)?
 			if (
-				$entry->authorId != $userSessionService->getUser()->id &&
+				$entry->authorId != $currentUser->id &&
 				$entry->getSection()->type != SectionType::Single
 			)
 			{
@@ -433,7 +465,14 @@ class EntriesController extends BaseEntriesController
 		// Even more permission enforcement
 		if ($entry->enabled)
 		{
-			$userSessionService->requirePermission('publishEntries:'.$entry->sectionId);
+			if ($entry->id)
+			{
+				$userSessionService->requirePermission('publishEntries:'.$entry->sectionId);
+			}
+			else if (!$currentUser->can('publishEntries:'.$entry->sectionId))
+			{
+				$entry->enabled = false;
+			}
 		}
 
 		// Save the entry (finally!)
@@ -484,6 +523,8 @@ class EntriesController extends BaseEntriesController
 
 	/**
 	 * Deletes an entry.
+	 *
+	 * @return null
 	 */
 	public function actionDeleteEntry()
 	{
@@ -536,11 +577,13 @@ class EntriesController extends BaseEntriesController
 	/**
 	 * Redirects the client to a URL for viewing an entry/draft/version on the front end.
 	 *
-	 * @throws HttpException
 	 * @param mixed $entryId
 	 * @param mixed $locale
 	 * @param mixed $draftId
 	 * @param mixed $versionId
+	 *
+	 * @throws HttpException
+	 * @return null
 	 */
 	public function actionShareEntry($entryId = null, $locale = null, $draftId = null, $versionId = null)
 	{
@@ -600,11 +643,13 @@ class EntriesController extends BaseEntriesController
 	/**
 	 * Shows an entry/draft/version based on a token.
 	 *
-	 * @throws HttpException
 	 * @param mixed $entryId
 	 * @param mixed $locale
 	 * @param mixed $draftId
 	 * @param mixed $versionId
+	 *
+	 * @throws HttpException
+	 * @return null
 	 */
 	public function actionViewSharedEntry($entryId = null, $locale = null, $draftId = null, $versionId = null)
 	{
@@ -631,13 +676,16 @@ class EntriesController extends BaseEntriesController
 		$this->_showEntry($entry);
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * Preps entry edit variables.
 	 *
-	 * @access private
 	 * @param array &$variables
-	 * @throws HttpException
-	 * @throws Exception
+	 *
+	 * @throws HttpException|Exception
+	 * @return null
 	 */
 	private function _prepEditEntryVariables(&$variables)
 	{
@@ -669,7 +717,7 @@ class EntriesController extends BaseEntriesController
 
 		if (!$variables['localeIds'])
 		{
-			throw new HttpException(404);
+			throw new HttpException(403, Craft::t('Your account doesn’t have permission to edit any of this section’s locales.'));
 		}
 
 		if (empty($variables['localeId']))
@@ -786,7 +834,6 @@ class EntriesController extends BaseEntriesController
 	/**
 	 * Fetches or creates an EntryModel.
 	 *
-	 * @access private
 	 * @throws Exception
 	 * @return EntryModel
 	 */
@@ -821,8 +868,9 @@ class EntriesController extends BaseEntriesController
 	/**
 	 * Populates an EntryModel with post data.
 	 *
-	 * @access private
 	 * @param EntryModel $entry
+	 *
+	 * @return null
 	 */
 	private function _populateEntryModel(EntryModel $entry)
 	{
@@ -847,9 +895,10 @@ class EntriesController extends BaseEntriesController
 	/**
 	 * Displays an entry.
 	 *
-	 * @access private
-	 * @throws HttpException
 	 * @param EntryModel $entry
+	 *
+	 * @throws HttpException
+	 * @return null
 	 */
 	private function _showEntry(EntryModel $entry)
 	{

@@ -2,25 +2,37 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class DbBackup
  *
- * @package craft.app.etc.db
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.db
+ * @since     1.0
  */
 class DbBackup
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private $_constraints;
+
+	/**
+	 * @var
+	 */
 	private $_currentVersion;
+
+	/**
+	 * @var string
+	 */
 	private $_filePath;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Dump all tables
@@ -50,6 +62,7 @@ class DbBackup
 	 * @param $filePath
 	 *
 	 * @throws Exception
+	 * @return null
 	 */
 	public function restore($filePath)
 	{
@@ -77,12 +90,22 @@ class DbBackup
 
 	/**
 	 * @param $value
+	 *
+	 * @return null
 	 */
 	public function trimValue(&$value)
 	{
 		$value = trim($value);
 	}
 
+	// Private Methods
+	// =========================================================================
+
+	/**
+	 * @param array $sql
+	 *
+	 * @return array
+	 */
 	private function _buildSQLStatements($sql)
 	{
 		$statementArray = array();
@@ -118,7 +141,7 @@ class DbBackup
 	}
 
 	/**
-	 *
+	 * @return null
 	 */
 	private function _nukeDb()
 	{
@@ -146,7 +169,7 @@ class DbBackup
 	/**
 	 * Generate the foreign key constraints for all tables
 	 *
-	 * @return string
+	 * @return null
 	 */
 	private function _processConstraints()
 	{
@@ -192,7 +215,8 @@ class DbBackup
 
 	/**
 	 * Set sql file header
-	 * @return string
+	 *
+	 * @return null
 	 */
 	private function _processHeader()
 	{
@@ -209,7 +233,8 @@ class DbBackup
 
 	/**j
 	 * Set sql file footer
-	 * @return string
+	 *
+	 * @return null
 	 */
 	private function _processFooter()
 	{
@@ -221,7 +246,8 @@ class DbBackup
 	 * Create the SQL for a table dump
 	 *
 	 * @param $tableName
-	 * @return mixed
+	 *
+	 * @return null
 	 */
 	private function _processTable($tableName)
 	{
@@ -241,10 +267,12 @@ class DbBackup
 		$createQuery = preg_replace($pattern, '', $createQuery);
 
 		$removed = false;
+
 		foreach ($createQuery as $key => $statement)
 		{
 			// Stupid PHP.
 			$temp = trim($createQuery[$key]);
+
 			if (empty($temp))
 			{
 				unset($createQuery[$key]);
@@ -272,6 +300,7 @@ class DbBackup
 
 		// See if we have any data.
 		$totalRows =  $db->createCommand('SELECT count(*) FROM '.$db->quoteTableName($tableName).';')->queryScalar();
+
 		if ($totalRows == 0)
 		{
 			return;

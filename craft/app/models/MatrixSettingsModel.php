@@ -2,46 +2,43 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Matrix block model class.
  *
- * @package craft.app.models
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.models
+ * @since     1.3
  */
 class MatrixSettingsModel extends BaseModel
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var FieldModel|null
+	 */
 	private $_matrixField;
+
+	/**
+	 * @var
+	 */
 	private $_blockTypes;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Constructor
 	 *
 	 * @param FieldModel|null $matrixField
+	 *
+	 * @return MatrixSettingsModel
 	 */
-	function __construct(FieldModel $matrixField = null)
+	public function __construct(FieldModel $matrixField = null)
 	{
 		$this->_matrixField = $matrixField;
-	}
-
-	/**
-	 * Defines this model's attributes.
-	 *
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineAttributes()
-	{
-		return array(
-			'maxBlocks' => AttributeType::Number,
-		);
 	}
 
 	/**
@@ -80,6 +77,8 @@ class MatrixSettingsModel extends BaseModel
 	 * Sets the block types.
 	 *
 	 * @param array $blockTypes
+	 *
+	 * @return null
 	 */
 	public function setBlockTypes($blockTypes)
 	{
@@ -90,7 +89,8 @@ class MatrixSettingsModel extends BaseModel
 	 * Validates the block type settings.
 	 *
 	 * @param array|null $attributes
-	 * @param bool $clearErrors
+	 * @param bool       $clearErrors
+	 *
 	 * @return bool
 	 */
 	public function validate($attributes = null, $clearErrors = true)
@@ -104,5 +104,20 @@ class MatrixSettingsModel extends BaseModel
 		}
 
 		return $validates;
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * Defines this model's attributes.
+	 *
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array(
+			'maxBlocks' => AttributeType::Number,
+		);
 	}
 }

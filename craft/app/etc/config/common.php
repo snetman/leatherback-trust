@@ -1,15 +1,5 @@
 <?php
 
-/**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
 // Initially set it here.  WebApp->init() will check devMode and override appropriately.
 error_reporting(E_ALL & ~E_STRICT);
 ini_set('display_errors', 1);
@@ -75,6 +65,7 @@ $configArray = array(
 		'app.elementtypes.MatrixBlockElementType',
 		'app.elementtypes.TagElementType',
 		'app.elementtypes.UserElementType',
+		'app.enums.AssetConflictResolution',
 		'app.enums.AttributeType',
 		'app.enums.BaseEnum',
 		'app.enums.CacheMethod',
@@ -91,7 +82,6 @@ $configArray = array(
 		'app.enums.PatchManifestFileAction',
 		'app.enums.PeriodType',
 		'app.enums.PluginVersionUpdateStatus',
-		'app.enums.PtAccountCredentialStatus',
 		'app.enums.RequirementResult',
 		'app.enums.SectionType',
 		'app.enums.TaskStatus',
@@ -496,9 +486,8 @@ $configArray = array(
 	)
 );
 
-// -------------------------------------------
-//  CP routes
-// -------------------------------------------
+// CP routes
+// ----------------------------------------------------------------------------
 
 $cpRoutes['categories/(?P<groupHandle>{handle})'] = 'categories';
 
@@ -580,9 +569,8 @@ $cpRoutes['editionRoutes'][2]['settings/users']                                 
 $cpRoutes['editionRoutes'][2]['settings/users/groups/new']                                                        = 'settings/users/groups/_settings';
 $cpRoutes['editionRoutes'][2]['settings/users/groups/(?P<groupId>\d+)']                                           = 'settings/users/groups/_settings';
 
-// -------------------------------------------
 //  Component config
-// -------------------------------------------
+// ----------------------------------------------------------------------------
 
 $components['users']['class']                = 'Craft\UsersService';
 $components['assets']['class']               = 'Craft\AssetsService';

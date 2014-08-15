@@ -2,22 +2,20 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Update functions.
  *
- * @package craft.app.validators
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.variables
+ * @since     1.0
  */
 class UpdatesVariable
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * Returns whether the update info is cached.
 	 *
@@ -50,6 +48,7 @@ class UpdatesVariable
 
 	/**
 	 * @param bool $forceRefresh
+	 *
 	 * @return mixed
 	 */
 	public function getUpdates($forceRefresh = false)
@@ -58,7 +57,7 @@ class UpdatesVariable
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getManualUpdateDisplayName()
 	{
@@ -66,16 +65,20 @@ class UpdatesVariable
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getManualUpdateHandle()
 	{
 		return $this->_getManualUpdateInfo('handle');
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
-	 * @param $type
-	 * @return null|string
+	 * @param string $type
+	 *
+	 * @return string|null
 	 */
 	private function _getManualUpdateInfo($type)
 	{

@@ -2,24 +2,28 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
+ * The SectionsController class is a controller that handles various section and entry type related tasks such as
+ * displaying, saving, deleting and reordering them in the control panel.
  *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
+ * Note that all actions in this controller require administrator access in order to execute.
+ *
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
  * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
- * Handles section management tasks.
- *
- * @package craft.app.controllers
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.controllers
+ * @since     1.0
  */
 class SectionsController extends BaseController
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
-	 * Init
+	 * Initializes the controller.  This method is called by the Craft before the controller starts to execute.
+	 *
+	 * @throws HttpException
+	 * @return null
 	 */
 	public function init()
 	{
@@ -28,7 +32,11 @@ class SectionsController extends BaseController
 	}
 
 	/**
-	 * Sections index
+	 * Sections index.
+	 *
+	 * @param array $variables
+	 *
+	 * @return null
 	 */
 	public function actionIndex(array $variables = array())
 	{
@@ -52,8 +60,9 @@ class SectionsController extends BaseController
 	 * Edit a section.
 	 *
 	 * @param array $variables
-	 * @throws HttpException
-	 * @throws Exception
+	 *
+	 * @throws HttpException|Exception
+	 * @return null
 	 */
 	public function actionEditSection(array $variables = array())
 	{
@@ -87,8 +96,8 @@ class SectionsController extends BaseController
 		$types = array(SectionType::Single, SectionType::Channel, SectionType::Structure);
 		$variables['typeOptions'] = array();
 
-		/* Get these strings to be caught by our translation util:
-		   Craft::t("Channel") Craft::t("Structure") Craft::t("Single") */
+		// Get these strings to be caught by our translation util:
+		// Craft::t("Channel") Craft::t("Structure") Craft::t("Single")
 
 		foreach ($types as $type)
 		{
@@ -132,7 +141,9 @@ class SectionsController extends BaseController
 	}
 
 	/**
-	 * Saves a section
+	 * Saves a section.
+	 *
+	 * @return null
 	 */
 	public function actionSaveSection()
 	{
@@ -218,6 +229,8 @@ class SectionsController extends BaseController
 
 	/**
 	 * Deletes a section.
+	 *
+	 * @return null
 	 */
 	public function actionDeleteSection()
 	{
@@ -236,7 +249,9 @@ class SectionsController extends BaseController
 	 * Entry types index
 	 *
 	 * @param array $variables
+	 *
 	 * @throws HttpException
+	 * @return null
 	 */
 	public function actionEntryTypesIndex(array $variables = array())
 	{
@@ -267,7 +282,9 @@ class SectionsController extends BaseController
 	 * Edit an entry type
 	 *
 	 * @param array $variables
+	 *
 	 * @throws HttpException
+	 * @return null
 	 */
 	public function actionEditEntryType(array $variables = array())
 	{
@@ -319,7 +336,9 @@ class SectionsController extends BaseController
 	}
 
 	/**
-	 * Saves an entry type
+	 * Saves an entry type.
+	 *
+	 * @return null
 	 */
 	public function actionSaveEntryType()
 	{
@@ -360,6 +379,8 @@ class SectionsController extends BaseController
 
 	/**
 	 * Reorders entry types.
+	 *
+	 * @return null
 	 */
 	public function actionReorderEntryTypes()
 	{
@@ -374,6 +395,8 @@ class SectionsController extends BaseController
 
 	/**
 	 * Deletes an entry type.
+	 *
+	 * @return null
 	 */
 	public function actionDeleteEntryType()
 	{

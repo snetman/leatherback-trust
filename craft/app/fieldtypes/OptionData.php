@@ -2,25 +2,37 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class OptionData
  *
- * @package craft.app.fieldtypes
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.fieldtypes
+ * @since     1.0
  */
 class OptionData
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var string
+	 */
 	public $label;
+
+	/**
+	 * @var string
+	 */
 	public $value;
+
+	/**
+	 * @var
+	 */
 	public $selected;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Constructor
@@ -28,8 +40,10 @@ class OptionData
 	 * @param string $label
 	 * @param string $value
 	 * @param        $selected
+	 *
+	 * @return OptionData
 	 */
-	function __construct($label, $value, $selected)
+	public function __construct($label, $value, $selected)
 	{
 		$this->label    = $label;
 		$this->value    = $value;

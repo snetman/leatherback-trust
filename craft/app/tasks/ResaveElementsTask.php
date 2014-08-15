@@ -2,25 +2,37 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Resave Elements Task
  *
- * @package craft.app.tasks
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.tasks
+ * @since     2.0
  */
 class ResaveElementsTask extends BaseTask
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private $_elementType;
+
+	/**
+	 * @var
+	 */
 	private $_localeId;
+
+	/**
+	 * @var
+	 */
 	private $_elementIds;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Returns the default description for this task.
@@ -34,20 +46,6 @@ class ResaveElementsTask extends BaseTask
 		return Craft::t('Resaving {type}', array(
 			'type' => StringHelper::toLowerCase($elementType->getName())
 		));
-	}
-
-	/**
-	 * Defines the settings.
-	 *
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineSettings()
-	{
-		return array(
-			'elementType' => AttributeType::String,
-			'criteria'    => AttributeType::Mixed,
-		);
 	}
 
 	/**
@@ -79,6 +77,7 @@ class ResaveElementsTask extends BaseTask
 	 * Runs a task step.
 	 *
 	 * @param int $step
+	 *
 	 * @return bool
 	 */
 	public function runStep($step)
@@ -100,5 +99,21 @@ class ResaveElementsTask extends BaseTask
 
 			return $error;
 		}
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * Defines the settings.
+	 *
+	 * @return array
+	 */
+	protected function defineSettings()
+	{
+		return array(
+			'elementType' => AttributeType::String,
+			'criteria'    => AttributeType::Mixed,
+		);
 	}
 }

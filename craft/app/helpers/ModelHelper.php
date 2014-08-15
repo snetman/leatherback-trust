@@ -2,26 +2,23 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class ModelHelper
  *
- * @package craft.app.helpers
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.helpers
+ * @since     1.0
  */
 class ModelHelper
 {
+	// Properties
+	// =========================================================================
+
 	/**
-	 * Default attribute configs
+	 * The default attribute configs.
 	 *
-	 * @static
 	 * @var array
 	 */
 	public static $attributeTypeDefaults = array(
@@ -41,6 +38,22 @@ class ModelHelper
 	);
 
 	/**
+	 * Integer column sizes.
+	 *
+	 * @var array
+	 */
+	private static $_intColumnSizes = array(
+		ColumnType::TinyInt   => 128,
+		ColumnType::SmallInt  => 32768,
+		ColumnType::MediumInt => 8388608,
+		ColumnType::Int       => 2147483648,
+		ColumnType::BigInt    => 9223372036854775808
+	);
+
+	// Public Methods
+	// =========================================================================
+
+	/**
 	 * Normalizes an attribute's config.
 	 *
 	 * Attributes can be defined in 3 ways:
@@ -49,10 +62,11 @@ class ModelHelper
 	 * 2. array(AttributeType::TypeName [, 'other' => 'settings' ... ] )
 	 * 3. array('type' => AttributeType::TypeName [, 'other' => 'settings' ... ] )
 	 *
-	 * This function normalizes on the 3rd, and merges in the default config settings for the attribute type,
-	 * merges in the default column settings if 'column' is set, and sets the 'unsigned', 'min', and 'max' values for integers.
+	 * This function normalizes on the 3rd, and merges in the default config settings for the attribute type, merges in
+	 * the default column settings if 'column' is set, and sets the 'unsigned', 'min', and 'max' values for integers.
 	 *
 	 * @param string|array $config
+	 *
 	 * @return array
 	 */
 	public static function normalizeAttributeConfig($config)
@@ -125,10 +139,10 @@ class ModelHelper
 	/**
 	 * Returns a number attribute config, taking the min, max, and number of decimal points into account.
 	 *
-	 * @static
-	 * @param number $min
-	 * @param number $max
+	 * @param int $min
+	 * @param int $max
 	 * @param int $decimals
+	 *
 	 * @return array
 	 */
 	public static function getNumberAttributeConfig($min = null, $max = null, $decimals = null)
@@ -181,25 +195,11 @@ class ModelHelper
 	}
 
 	/**
-	 * Integer column sizes
-	 *
-	 * @static
-	 * @access private
-	 * @var array
-	 */
-	private static $_intColumnSizes = array(
-		ColumnType::TinyInt   => 128,
-		ColumnType::SmallInt  => 32768,
-		ColumnType::MediumInt => 8388608,
-		ColumnType::Int       => 2147483648,
-		ColumnType::BigInt    => 9223372036854775808
-	);
-
-	/**
 	 * Populates any default values that are defined for a model.
 	 *
-	 * @static
 	 * @param \CModel $model
+	 *
+	 * @return null
 	 */
 	public static function populateAttributeDefaults(\CModel $model)
 	{
@@ -215,8 +215,8 @@ class ModelHelper
 	/**
 	 * Returns the rules array used by CModel.
 	 *
-	 * @static
 	 * @param \CModel $model
+	 *
 	 * @return array
 	 */
 	public static function getRules(\CModel $model)
@@ -373,8 +373,8 @@ class ModelHelper
 			}
 		}
 
-		// If this is a BaseRecord instance, catch any unique/required indexes
-		//  - We don't validate required BELONGS_TO relations because they might not get set until after validation.
+		// If this is a BaseRecord instance, catch any unique/required indexes. We don't validate required BELONGS_TO
+		// relations because they mightnot get set until after validation.
 		if ($model instanceof BaseRecord)
 		{
 			foreach ($model->defineIndexes() as $config)
@@ -481,8 +481,8 @@ class ModelHelper
 	/**
 	 * Returns the attribute labels.
 	 *
-	 * @static
 	 * @param \CModel $model
+	 *
 	 * @return array
 	 */
 	public static function getAttributeLabels(\CModel $model)
@@ -501,12 +501,12 @@ class ModelHelper
 	}
 
 	/**
-	 * Takes an attribute's config and value and "normalizes" them either for saving to db or sending across a web service.
+	 * Takes an attribute's config and value and "normalizes" them either for saving to db or sending across a web
+	 * service.
 	 *
-	 * @static
-	 * @param      $value
-	 * @param bool $jsonEncodeArrays
-	 * @internal param $storedValue
+	 * @param mixed $value
+	 * @param bool  $jsonEncodeArrays
+	 *
 	 * @return int|mixed|null|string
 	 */
 	public static function packageAttributeValue($value, $jsonEncodeArrays = false)
@@ -561,8 +561,8 @@ class ModelHelper
 	/**
 	 * Searches an array for any flattened models, and expands them back to models.
 	 *
-	 * @static
 	 * @param array $arr
+	 *
 	 * @return array|BaseModel
 	 */
 	public static function expandModelsInArray($arr)
@@ -590,11 +590,4 @@ class ModelHelper
 
 		return $arr;
 	}
-
-	/**
-	 * @static
-	 * @access private
-	 * @var array
-	 */
-	private static $_comparisonOperators = array('==|=|!=|>=|>|<=|<');
 }

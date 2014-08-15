@@ -2,39 +2,26 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Field layout record class
  *
- * @package craft.app.records
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.records
+ * @since     1.0
  */
 class FieldLayoutRecord extends BaseRecord
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
 	 * @return string
 	 */
 	public function getTableName()
 	{
 		return 'fieldlayouts';
-	}
-
-	/**
-	 * @access protected
-	 * @return array
-	 */
-	protected function defineAttributes()
-	{
-		return array(
-			'type' => array(AttributeType::ClassName, 'required' => true),
-		);
 	}
 
 	/**
@@ -55,6 +42,19 @@ class FieldLayoutRecord extends BaseRecord
 	{
 		return array(
 			array('columns' => array('type')),
+		);
+	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
+	protected function defineAttributes()
+	{
+		return array(
+			'type' => array(AttributeType::ClassName, 'required' => true),
 		);
 	}
 }

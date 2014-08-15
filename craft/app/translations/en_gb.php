@@ -1,15 +1,5 @@
 <?php
 
-/**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
 return array(
 	'"{filename}" is not allowed in this field.' => '"{filename}" is not allowed in this field.',
 	'$_SERVER Variable' => '$_SERVER Variable',

@@ -2,32 +2,40 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class MigrationsService
  *
- * @package craft.app.services
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.services
+ * @since     1.0
  */
 class MigrationsService extends BaseApplicationComponent
 {
+	// Properties
+	// =========================================================================
+
 	/**
-	 * @var string the default command action. It defaults to 'up'.
+	 * The default command action. It defaults to 'up'.
+	 *
+	 * @var string
 	 */
 	public $defaultAction = 'up';
 
+	/**
+	 * @var
+	 */
 	private $_migrationTable;
 
+	// Public Methods
+	// =========================================================================
+
 	/**
+	 * Init
+	 *
 	 * @throws Exception
-	 * @return bool|void
+	 * @return bool|null
 	 */
 	public function init()
 	{
@@ -36,7 +44,8 @@ class MigrationsService extends BaseApplicationComponent
 	}
 
 	/**
-	 * @param null $plugin
+	 * @param BasePlugin|null $plugin
+	 *
 	 * @return mixed
 	 */
 	public function runToTop($plugin = null)
@@ -115,6 +124,7 @@ class MigrationsService extends BaseApplicationComponent
 	/**
 	 * @param      $class
 	 * @param null $plugin
+	 *
 	 * @return bool|null
 	 */
 	public function migrateUp($class, $plugin = null)
@@ -171,6 +181,7 @@ class MigrationsService extends BaseApplicationComponent
 	/**
 	 * @param       $class
 	 * @param  null $plugin
+	 *
 	 * @throws Exception
 	 * @return mixed
 	 */
@@ -196,6 +207,7 @@ class MigrationsService extends BaseApplicationComponent
 	/**
 	 * @param null $plugin
 	 * @param null $limit
+	 *
 	 * @return mixed
 	 */
 	public function getMigrationHistory($plugin = null, $limit = null)
@@ -222,8 +234,9 @@ class MigrationsService extends BaseApplicationComponent
 	/**
 	 * Returns whether a given migration has been run.
 	 *
-	 * @param string $version
+	 * @param string      $version
 	 * @param string|null $plugin
+	 *
 	 * @return bool
 	 */
 	public function hasRun($version, $plugin = null)
@@ -297,8 +310,9 @@ class MigrationsService extends BaseApplicationComponent
 
 	/**
 	 * @param null $plugin
-	 * @return string
+	 *
 	 * @throws Exception
+	 * @return string
 	 */
 	public function getMigrationPath($plugin = null)
 	{
@@ -322,11 +336,14 @@ class MigrationsService extends BaseApplicationComponent
 		return file_get_contents(Craft::getPathOfAlias('app.etc.updates.migrationtemplate').'.php');
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * Returns a DbCommand object prepped for retrieving migrations.
 	 *
-	 * @access private
 	 * @param string|null $plugin
+	 *
 	 * @return DbCommand
 	 */
 	private function _createMigrationQuery($plugin = null)

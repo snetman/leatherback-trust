@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2014, Pixel & Tonic, Inc.
  @license   http://buildwithcraft.com/license Craft License Agreement
- @link      http://buildwithcraft.com
+ @see       http://buildwithcraft.com
+ @package   craft.app.resources
 */
 (function(c){Craft.MatrixInput=Garnish.Base.extend({id:null,blockTypes:null,blockTypesByHandle:null,inputNamePrefix:null,inputIdPrefix:null,maxBlocks:null,$container:null,$blockContainer:null,$addBlockBtnContainer:null,$addBlockBtnGroup:null,$addBlockBtnGroupBtns:null,blockSort:null,totalNewBlocks:0,init:function(a,b,d,g){this.id=a;this.blockTypes=b;this.inputNamePrefix=d;this.inputIdPrefix=Craft.formatInputId(this.inputNamePrefix);this.maxBlocks=g;this.$container=c("#"+this.id);this.$blockContainer=
 this.$container.children(".blocks");this.$addBlockBtnContainer=this.$container.children(".buttons");this.$addBlockBtnGroup=this.$addBlockBtnContainer.children(".btngroup");this.$addBlockBtnGroupBtns=this.$addBlockBtnGroup.children(".btn");this.$addBlockMenuBtn=this.$addBlockBtnContainer.children(".menubtn");this.setNewBlockBtn();this.blockTypesByHandle={};for(b=0;b<this.blockTypes.length;b++)a=this.blockTypes[b],this.blockTypesByHandle[a.handle]=a;d=this.$blockContainer.children();g=Craft.MatrixInput.getCollapsedBlockIds();

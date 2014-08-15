@@ -2,28 +2,26 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class ArrayHelper
  *
- * @package craft.app.helpers
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.helpers
+ * @since     1.0
  */
 class ArrayHelper
 {
+	// Public Methods
+	// =========================================================================
+
 	/**
-	 * Flattens a multi-dimensional array into a single-dimensional array
+	 * Flattens a multi-dimensional array into a single-dimensional array.
 	 *
-	 * @static
 	 * @param        $arr
 	 * @param string $prefix
+	 *
 	 * @return array
 	 */
 	public static function flattenArray($arr, $prefix = null)
@@ -53,8 +51,8 @@ class ArrayHelper
 	/**
 	 * Expands a flattened array back into its original form
 	 *
-	 * @static
-	 * @param $arr
+	 * @param array $arr
+	 *
 	 * @return array
 	 */
 	public static function expandArray($arr)
@@ -66,7 +64,7 @@ class ArrayHelper
 			// is this an array element?
 			if (preg_match('/^(\w+)(\[.*)/', $key, $m))
 			{
-				$key = '$expanded["'.$m[1].'"]' . preg_replace('/\[([a-zA-Z]\w*?)\]/', "[\"$1\"]", $m[2]);
+				$key = '$expanded["'.$m[1].'"]'.preg_replace('/\[([a-zA-Z]\w*?)\]/', "[\"$1\"]", $m[2]);
 				eval($key.' = "'.addslashes($value).'";');
 			}
 			else
@@ -79,8 +77,8 @@ class ArrayHelper
 	}
 
 	/**
-	 * @static
 	 * @param $settings
+	 *
 	 * @return array
 	 */
 	public static function expandSettingsArray($settings)
@@ -96,11 +94,12 @@ class ArrayHelper
 	}
 
 	/**
-	 * Converts a comma-delimited string into a trimmed array
-	 * ex: ArrayHelper::stringToArray('one, two, three') => array('one', 'two', 'three')
+	 * Converts a comma-delimited string into a trimmed array, ex:
 	 *
-	 * @static
+	 *     ArrayHelper::stringToArray('one, two, three') => array('one', 'two', 'three')
+	 *
 	 * @param mixed $str The string to convert to an array
+	 *
 	 * @return array The trimmed array
 	 */
 	public static function stringToArray($str)
@@ -130,9 +129,9 @@ class ArrayHelper
 	/**
 	 * Prepends or appends a value to an array.
 	 *
-	 * @static
 	 * @param array &$arr
 	 * @param mixed $value
+	 *
 	 * @param bool  $prepend
 	 */
 	public static function prependOrAppend(&$arr, $value, $prepend)
@@ -150,8 +149,8 @@ class ArrayHelper
 	/**
 	 * Filters empty strings from an array.
 	 *
-	 * @static
 	 * @param array $arr
+	 *
 	 * @return array
 	 */
 	public static function filterEmptyStringsFromArray($arr)
@@ -162,8 +161,8 @@ class ArrayHelper
 	/**
 	 * Returns the first value in a given array.
 	 *
-	 * @static
 	 * @param array $arr
+	 *
 	 * @return mixed|null
 	 */
 	public function getFirstValue($arr)
@@ -181,12 +180,14 @@ class ArrayHelper
 		}
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * The array_filter() callback function for filterEmptyStringsFromArray().
 	 *
-	 * @static
-	 * @access private
-	 * @param $val
+	 * @param string $val
+	 *
 	 * @return bool
 	 */
 	private function _isNotAnEmptyString($val)

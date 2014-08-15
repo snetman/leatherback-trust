@@ -2,16 +2,6 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * The class name is the UTC timestamp in the format of mYYMMDD_HHMMSS_migrationName
  */
 class m140716_000001_allow_temp_source_transforms_again extends BaseMigration

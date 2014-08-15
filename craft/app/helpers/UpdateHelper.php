@@ -2,27 +2,32 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class UpdateHelper
  *
- * @package craft.app.helpers
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.helpers
+ * @since     1.0
  */
 class UpdateHelper
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var
+	 */
 	private static $_manifestData;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * @param $manifestData
-	 * @return void
+	 *
+	 * @return null
 	 */
 	public static function rollBackFileChanges($manifestData)
 	{
@@ -67,7 +72,7 @@ class UpdateHelper
 
 	/**
 	 * @param $backupPath
-	 * @return void
+	 * @return null
 	 */
 	public static function rollBackDatabaseChanges($backupPath)
 	{
@@ -77,11 +82,9 @@ class UpdateHelper
 	}
 
 	/**
-	 * @static
-	 *
 	 * @param $manifestData
 	 * @param $sourceTempFolder
-	 * @return bool
+	 *
 	 * @return bool
 	 */
 	public static function doFileUpdate($manifestData, $sourceTempFolder)
@@ -152,8 +155,8 @@ class UpdateHelper
 	}
 
 	/**
-	 * @static
 	 * @param $line
+	 *
 	 * @return bool
 	 */
 	public static function isManifestVersionInfoLine($line)
@@ -170,6 +173,7 @@ class UpdateHelper
 	 * Returns the local build number from the given manifest file.
 	 *
 	 * @param $manifestData
+	 *
 	 * @return bool|string
 	 */
 	public static function getLocalBuildFromManifest($manifestData)
@@ -189,6 +193,7 @@ class UpdateHelper
 	 * Returns the local version number from the given manifest file.
 	 *
 	 * @param $manifestData
+	 *
 	 * @return bool|string
 	 */
 	public static function getLocalVersionFromManifest($manifestData)
@@ -198,6 +203,7 @@ class UpdateHelper
 			$parts = explode(';', $manifestData[0]);
 			$index = mb_strrpos($parts[0], '.');
 			$build = mb_substr($parts[0], 2, $index - 2);
+
 			return $build;
 		}
 
@@ -205,7 +211,6 @@ class UpdateHelper
 	}
 
 	/**
-	 * @static
 	 * @param $line
 	 * @return bool
 	 */
@@ -222,8 +227,8 @@ class UpdateHelper
 	/**
 	 * Returns the relevant lines from the update manifest file starting with the current local version/build.
 	 *
-	 * @static
 	 * @param $manifestDataPath
+	 *
 	 * @throws Exception
 	 * @return array
 	 */
@@ -269,6 +274,7 @@ class UpdateHelper
 
 	/**
 	 * @param $uid
+	 *
 	 * @return string
 	 */
 	public static function getUnzipFolderFromUID($uid)
@@ -278,6 +284,7 @@ class UpdateHelper
 
 	/**
 	 * @param $uid
+	 *
 	 * @return string
 	 */
 	public static function getZipFileFromUID($uid)
@@ -287,6 +294,7 @@ class UpdateHelper
 
 	/**
 	 * @param $line
+	 *
 	 * @return bool
 	 */
 	public static function isManifestLineAFolder($line)
@@ -301,6 +309,7 @@ class UpdateHelper
 
 	/**
 	 * @param $line
+	 *
 	 * @return string
 	 */
 	public static function cleanManifestFolderLine($line)

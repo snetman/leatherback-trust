@@ -2,26 +2,24 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class ProfileLogRoute
  *
- * @package craft.app.etc.logging
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.logging
+ * @since     1.0
  */
 class ProfileLogRoute extends \CProfileLogRoute
 {
+	// Protected Methods
+	// =========================================================================
+
 	/**
-	 * @access protected
 	 * @param $view
 	 * @param $data
+	 *
 	 * @return mixed
 	 */
 	protected function render($view, $data)
