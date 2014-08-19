@@ -2,22 +2,23 @@
 namespace Craft;
 
 /**
- * Craft by Pixel & Tonic
- *
- * @package   Craft
- * @author    Pixel & Tonic, Inc.
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @link      http://buildwithcraft.com
- */
-
-/**
  * Class Requirements
  *
- * @package craft.app.etc.requirements
+ * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
+ * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
+ * @package   craft.app.etc.requirements
+ * @since     1.2
  */
 class Requirements
 {
+	// Public Methods
+	// =========================================================================
+
+	/**
+	 * @return array
+	 */
 	public static function getRequirements()
 	{
 		$requiredMysqlVersion = '5.1.0';
@@ -139,8 +140,10 @@ class Requirements
 		);
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
-	 * @access private
 	 * @return string
 	 */
 	private static function _checkServerVar()
@@ -177,7 +180,6 @@ class Requirements
 	/**
 	 * Checks to see if the MySQL InnoDB storage engine is installed and enabled.
 	 *
-	 * @access private
 	 * @return bool
 	 */
 	private function _isInnoDbEnabled()
@@ -203,12 +205,41 @@ class Requirements
  */
 class Requirement extends \CComponent
 {
+	// Properties
+	// =========================================================================
+
+	/**
+	 * @var null|string
+	 */
 	private $_name;
+
+	/**
+	 * @var bool|null
+	 */
 	private $_condition;
+
+	/**
+	 * @var null|string
+	 */
 	private $_requiredBy;
+
+	/**
+	 * @var null|string
+	 */
 	private $_notes;
+
+	/**
+	 * @var bool|null
+	 */
 	private $_required;
+
+	/**
+	 * @var
+	 */
 	private $_result;
+
+	// Public Methods
+	// =========================================================================
 
 	/**
 	 * Constructor
@@ -218,36 +249,16 @@ class Requirement extends \CComponent
 	 * @param bool|null   $required
 	 * @param string|null $requiredBy
 	 * @param string|null $notes
+	 *
+	 * @return Requirement
 	 */
-	function __construct($name = null, $condition = null, $required = true, $requiredBy = null, $notes = null)
+	public function __construct($name = null, $condition = null, $required = true, $requiredBy = null, $notes = null)
 	{
 		$this->_name = $name;
 		$this->_condition = $condition;
 		$this->_required = $required;
 		$this->_requiredBy = $requiredBy;
 		$this->_notes = $notes;
-	}
-
-	/**
-	 * Calculates the result of this requirement.
-	 *
-	 * @access protected
-	 * @return string
-	 */
-	protected function calculateResult()
-	{
-		if ($this->_condition)
-		{
-			return RequirementResult::Success;
-		}
-		else if ($this->_required)
-		{
-			return RequirementResult::Failed;
-		}
-		else
-		{
-			return RequirementResult::Warning;
-		}
 	}
 
 	/**
@@ -294,6 +305,30 @@ class Requirement extends \CComponent
 	{
 		return $this->_notes;
 	}
+
+	// Protected Methods
+	// =========================================================================
+
+	/**
+	 * Calculates the result of this requirement.
+	 *
+	 * @return string
+	 */
+	protected function calculateResult()
+	{
+		if ($this->_condition)
+		{
+			return RequirementResult::Success;
+		}
+		else if ($this->_required)
+		{
+			return RequirementResult::Failed;
+		}
+		else
+		{
+			return RequirementResult::Warning;
+		}
+	}
 }
 
 /**
@@ -303,12 +338,18 @@ class Requirement extends \CComponent
  */
 class PhpVersionRequirement extends Requirement
 {
+	// Constants
+	// =========================================================================
+
 	const REQUIRED_PHP_VERSION = '5.3.0';
 
+	// Protected Methods
+	// =========================================================================
+
 	/**
-	 *
+	 * @return PhpVersionRequirement
 	 */
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct(
 			Craft::t('PHP Version'),
@@ -338,10 +379,12 @@ class PhpVersionRequirement extends Requirement
 		}
 	}
 
+	// Protected Methods
+	// =========================================================================
+
 	/**
 	 * Calculates the result of this requirement.
 	 *
-	 * @access protected
 	 * @return string
 	 */
 	protected function calculateResult()
@@ -365,10 +408,12 @@ class PhpVersionRequirement extends Requirement
 		}
 	}
 
+	// Private Methods
+	// =========================================================================
+
 	/**
 	 * Returns whether this is past the min PHP version.
 	 *
-	 * @access private
 	 * @return bool
 	 */
 	private function _doesMinVersionPass()
@@ -379,7 +424,6 @@ class PhpVersionRequirement extends Requirement
 	/**
 	 * Returns whether this is one of the bad PHP versions.
 	 *
-	 * @access private
 	 * @return bool
 	 */
 	private function _isBadPhpVersion()

@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2014, Pixel & Tonic, Inc.
  @license   http://buildwithcraft.com/license Craft License Agreement
- @link      http://buildwithcraft.com
+ @see       http://buildwithcraft.com
+ @package   craft.app.resources
 */
 (function(b){var f=Garnish.Base.extend({$alerts:null,$header:null,$headerActionsList:null,$siteName:null,$nav:null,$overflowNavMenuItem:null,$overflowNavMenuBtn:null,$overflowNavMenu:null,$overflowNavMenuList:null,$notificationWrapper:null,$notificationContainer:null,$main:null,$content:null,$collapsibleTables:null,navItems:null,totalNavItems:null,visibleNavItems:null,totalNavWidth:null,showingOverflowNavMenu:!1,fixedNotifications:!1,runningTaskInfo:null,trackTaskProgressTimeout:null,taskProgressIcon:null,
 $upgradePromo:null,upgradeModal:null,init:function(){this.$alerts=b("#alerts");this.$header=b("#header");this.$headerActionsList=this.$header.find("#header-actions");this.$siteName=this.$header.find("h2");this.$nav=b("#nav");this.$notificationWrapper=b("#notifications-wrapper");this.$notificationContainer=b("#notifications");this.$main=b("#main");this.$content=b("#content");this.$collapsibleTables=this.$content.find("table.collapsible");this.$upgradePromo=b("#upgradepromo > a");this.onActionItemListResize();
