@@ -10,7 +10,8 @@
 return array(
     '*' => array(
         'omitScriptNameInUrls' => true,
-        'defaultImageQuality' => '65'
+        'defaultImageQuality' => '65',
+        'useEmailAsUsername' => true,
     ),
 
     // Local
