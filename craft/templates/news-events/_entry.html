@@ -62,7 +62,7 @@
       {% set postAuthor = entry.author %}
     {% endif %}
       <div class="b-figure">
-        <img class="img-bordered img-round" alt="{{ postAuthor.fullName }}" src="{{ postAuthor.photoUrl }}" />
+        <img class="img-bordered img-round" alt="{{ postAuthor.fullName }}" src="{% if postAuthor.photoUrl %}{{ postAuthor.photoUrl }}{% else %}/public/images/turtle-avatar.jpg{% endif %}" />
       </div>
       <div class="b-body">
         <h4 class="name">{{ postAuthor.fullName }}</h4>

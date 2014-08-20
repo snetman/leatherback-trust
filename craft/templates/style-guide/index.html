@@ -1,0 +1,27 @@
+{% extends "_layout" %}
+{% set title = "Style Guide"|translate %}
+{% set bodyClass = 'l-1col l-1col-narrow theme-gray' %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<div class="l-main">
+
+  <h1 class="display">{{ title }}</h1>
+
+  {% if entry.pageIntro %}
+    {{ entry.pageIntro }}
+  {% endif %}
+
+  {{ entry.htmlDump|raw }}
+
+</div>
+<!--/.l-main-->
+{% endblock %}
+
+{% block aside %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
