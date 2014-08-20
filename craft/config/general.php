@@ -12,7 +12,7 @@ return array(
         'omitScriptNameInUrls' => true,
         'defaultImageQuality' => '65',
         'useEmailAsUsername' => true,
-        'devMode' => true,
+        // 'devMode' => true,
     ),
 
     // Local
