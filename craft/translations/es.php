@@ -19,6 +19,7 @@ return array(
   "Contact" => "Contacto",
   "Site Terms" => "Condiciones",
   "Privacy" => "Privacidad",
+  "Style Guide" => "Guía de Estilo",
   "Back to top" => "Volver al comienzo",
 
   // Mobile nav, but hidden via css
